@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新闻早报 - 2026年5月23日</title>
+<style>
+  :root {
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6c757d;
+    --accent: #2563eb;
+    --border: #e9ecef;
+    --tag-intl: #dc2626;
+    --tag-cn: #16a34a;
+    --tag-tech: #7c3aed;
+    --tag-market: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 20px;
+  }
+  .container { max-width: 680px; margin: 0 auto; }
+
+  /* header */
+  .header {
+    text-align: center;
+    padding: 30px 0 20px;
+  }
+  .header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .header .date {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .header .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    margin-top: 8px;
+  }
+
+  /* summary box */
+  .summary {
+    background: #eef2ff;
+    border-left: 4px solid var(--accent);
+    padding: 14px 16px;
+    border-radius: 8px;
+    margin: 20px 0;
+    font-size: 14px;
+    color: #1e40af;
+  }
+
+  /* section */
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    padding: 20px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .icon { font-size: 22px; }
+
+  /* news card */
+  .card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+  }
+  .card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .card p {
+    font-size: 14px;
+    color: #374151;
+    margin-bottom: 8px;
+  }
+  .card .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 500;
+  }
+  .tag-intl { background: var(--tag-intl); }
+  .tag-cn { background: var(--tag-cn); }
+  .tag-tech { background: var(--tag-tech); }
+  .tag-market { background: var(--tag-market); }
+
+  .card .link {
+    font-size: 12px;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .card .link:hover { text-decoration: underline; }
+
+  /* market table */
+  .market-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .market-item {
+    background: var(--card);
+    border-radius: 8px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .market-item .name { font-size: 13px; color: var(--muted); }
+  .market-item .val { font-size: 14px; font-weight: 600; }
+  .market-item .up { color: #dc2626; }
+  .market-item .down { color: #16a34a; }
+
+  /* divider */
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 24px 0;
+  }
+
+  /* footer */
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    padding: 30px 0 20px;
+  }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 480px) {
+    body { padding: 12px; }
+    .header h1 { font-size: 20px; }
+    .market-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>📰 新闻早报</h1>
+    <div class="date">2026年5月23日 · 星期六</div>
+    <div class="badge">Hermes 自动整理</div>
+  </div>
+
+  <div class="summary">
+    📌 特朗普召集国安团队讨论对伊战争；Anthropic 融资300亿美元估值超9000亿；老虎证券被罚3亿；神舟二十三号明日发射；三大运营商推"词元套餐"
+  </div>
+
+  <!-- 国际 -->
+  <div class="section-title"><span class="icon">🌍</span> 国际要闻</div>
+
+  <div class="card">
+    <h3>美伊局势：特朗普急返白宫筹备新军事打击</h3>
+    <p>特朗普因"特殊政府事务"取消出席儿子婚礼，5月22日召集副总统万斯、国防部长赫格塞思等高级国安团队会议，<strong>认真考虑对伊朗发动新一轮打击</strong>。国防和情报官员已开始更新海外军事基地紧急召回名册，中东部分美军分批轮换撤离以降低报复风险。</p>
+    <p>特朗普在纽约讲话中强调：<strong>"伊朗绝不会拥有核武器，此事很快就会结束。"</strong> 伊朗方面称分歧依然严重，谈判草案"每天来回传递"却无实质进展。巴基斯坦持续斡旋，陆军参谋长和三军情报局局长已抵达伊朗推动谈判。</p>
+    <div class="meta">
+      <span class="tag tag-intl">国际</span>
+      <a class="link" href="https://www.163.com/dy/article/KTJMHPOH05568W0A.html" target="_blank">查看原文 →</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>美联储换帅：沃什宣誓就任第17任主席</h3>
+    <p>凯文·沃什在白宫宣誓就任美联储主席，特朗普主持仪式。沃什称将领导"以改革为导向"的美联储，强调独立性、清晰判断与坚定立场，并表示"通胀水平能够回落"。特朗普称沃什将缩减前瞻性指引操作。</p>
+    <div class="meta">
+      <span class="tag tag-intl">国际</span>
+      <a class="link" href="https://www.163.com/dy/article/KTJMHPOH05568W0A.html" target="_blank">查看原文 →</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Anthropic 完成300亿美元融资，估值超9000亿</h3>
+    <p>知情人士称AI初创公司 Anthropic 最快下周完成逾300亿美元融资，<strong>估值将超9000亿美元，超越OpenAI成为全球估值最高AI公司</strong>。红杉资本、Dragoneer等机构领投，公司预计下月收入年化超500亿美元。</p>
+    <div class="meta">
+      <span class="tag tag-tech">科技</span>
+      <a class="link" href="https://www.163.com/dy/article/KTJMHPOH05568W0A.html" target="_blank">查看原文 →</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>SpaceX 星舰第12次试飞成功</h3>
+    <p>美东时间5月22日18:30，SpaceX 升级版星舰从得克萨斯州发射升空，最终成功溅落印度洋。</p>
+    <div class="meta">
+      <span class="tag tag-tech">科技</span>
+      <a class="link" href="https://www.163.com/dy/article/KTJMHPOH05568W0A.html" target="_blank">查看原文 →</a>
+    </div>
+  </div>
+
+  <!-- 市场 -->
+  <div class="section-title"><span class="icon">📈</span> 市场速览</div>
+
+  <div class="market-grid">
+    <div class="market-item"><span class="name">道指</span><span class="val up">+0.58%</span></div>
+    <div class="market-item"><span class="name">标普500</span><span class="val up">+0.37%</span></div>
+    <div class="market-item"><span class="name">纳指</span><span class="val up">+0.20%</span></div>
+    <div class="market-item"><span class="name">中概金龙</span><span class="val down">-2.22%</span></div>
+    <div class="market-item"><span class="name">黄金</span><span class="val down">-0.95%</span></div>
+    <div class="market-item"><span class="name">比特币</span><span class="val down">-2.21%</span></div>
+    <div class="market-item"><span class="name">布伦特原油</span><span class="val down">-1.23%</span></div>
+    <div class="market-item"><span class="name">白银</span><span class="val down">-2.13%</span></div>
+  </div>
+
+  <!-- 国内 -->
+  <div class="section-title"><span class="icon">🇨🇳</span> 国内要闻</div>
+
+  <div class="card">
+    <h3>神舟二十三号明日发射</h3>
+    <p>乘组由朱杨柱（指令长）、张志远、黎家盈3名航天员组成，瞄准<strong>5月24日23时08分</strong>发射。3名航天员今日已与中外媒体见面。</p>
+    <div class="meta">
+      <span class="tag tag-cn">国内</span>
+      <span class="tag tag-tech">科技</span>
+      <a class="link" href="http://finance.people.com.cn" target="_blank">查看原文 →</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>老虎证券被重罚3亿元</h3>
+    <p>因涉嫌非法从事证券、基金及期货业务，老虎证券被北京证监局处以合计约<strong>3.081亿元行政罚款</strong>，没收约1.031亿元违法所得。CEO巫天华被警告并罚款125万元。截至2025年末，中国内地零售客户资产约占公司客户资产总额的10%。老虎证券公告称诚恳接受处罚。</p>
+    <div class="meta">
+      <span class="tag tag-cn">国内</span>
+      <a class="link" href="https://www.163.com/dy/article/KTJMHPOH05568W0A.html" target="_blank">查看原文 →</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>三大运营商推出"词元套餐"</h3>
+    <p>中国电信、中国移动、中国联通齐推Token套餐，最低<strong>9.9元可获得1000万词元</strong>额度。这标志着AI算力开始像流量一样计费，运营商正式进入AI基础设施赛道。</p>
+    <div class="meta">
+      <span class="tag tag-cn">国内</span>
+      <span class="tag tag-tech">科技</span>
+      <a class="link" href="http://finance.people.com.cn" target="_blank">查看原文 →</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>上海科技节今日开幕</h3>
+    <p>焕新升级的上海科技馆正式开放。同日，2026年国际生物多样性日宣传活动在崇明举行，《中国生物物种名录2026版》发布，新增6154个物种。我国200多种珍稀濒危野生动物进入恢复性增长阶段。</p>
+    <div class="meta">
+      <span class="tag tag-cn">国内</span>
+      <a class="link" href="http://finance.people.com.cn" target="_blank">查看原文 →</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>其他短讯</h3>
+    <p>• 黄百鸣涉内幕交易罪名成立，此前套现4.86亿港元<br>
+    • 马英九76岁发表亲笔信，驳斥失智谣言<br>
+    • 特朗普访华后续：中美元首中南海茶叙，习近平称安排"极为罕见"</p>
+    <div class="meta">
+      <span class="tag tag-cn">国内</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="footer">
+    <p>📡 新闻来源：网易财经、人民网、BBC中文、VOA</p>
+    <p>🤖 由 Hermes Agent 自动整理 · 每日更新</p>
+    <p style="margin-top:8px"><a href="/daily-news/">← 查看往期</a></p>
+  </div>
+
+</div>
+</body>
+</html>
