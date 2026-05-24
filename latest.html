@@ -15,7 +15,7 @@
     --tag-intl: #dc2626;
     --tag-cn: #16a34a;
     --tag-tech: #7c3aed;
-    --tag-market: #f59e0b;
+    --tag-industry: #0891b2;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -30,30 +30,23 @@
   .header h1 { font-size: 24px; font-weight: 700; letter-spacing: 1px; }
   .header .date { font-size: 14px; color: var(--muted); margin-top: 4px; }
   .header .badge { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; padding: 2px 10px; border-radius: 10px; margin-top: 8px; }
-  .summary { background: #eef2ff; border-left: 4px solid var(--accent); padding: 14px 16px; border-radius: 8px; margin: 20px 0; font-size: 14px; color: #1e40af; }
   .section-title { font-size: 18px; font-weight: 700; padding: 20px 0 12px; display: flex; align-items: center; gap: 8px; }
   .section-title .icon { font-size: 22px; }
   .card { background: var(--card); border-radius: 12px; padding: 16px 18px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border); }
   .card h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; line-height: 1.5; }
-  .card h3 .source { font-size: 12px; font-weight: 400; color: var(--muted); }
   .card p { font-size: 14px; color: #374151; margin-bottom: 8px; }
-  .card .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; align-items: center; }
+  .card .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
   .tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; color: #fff; font-weight: 500; }
-  .tag-ai { background: #7c3aed; }
-  .tag-product { background: #0891b2; }
-  .tag-industry { background: #dc2626; }
-  .tag-paper { background: #d97706; }
-  .tag-tip { background: #059669; }
-  .tag-cn { background: var(--tag-cn); }
   .tag-intl { background: var(--tag-intl); }
+  .tag-cn { background: var(--tag-cn); }
+  .tag-tech { background: var(--tag-tech); }
+  .tag-industry { background: var(--tag-industry); }
   .card .link { font-size: 12px; color: var(--accent); text-decoration: none; }
   .card .link:hover { text-decoration: underline; }
-  .card .source-label { font-size: 11px; color: var(--muted); }
-  .card .num { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; min-width: 20px; height: 20px; line-height: 20px; text-align: center; border-radius: 10px; margin-right: 6px; font-weight: 600; }
+  .card .source { font-size: 12px; color: var(--muted); }
   hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
   .footer { text-align: center; font-size: 12px; color: var(--muted); padding: 30px 0 20px; }
   .footer a { color: var(--accent); text-decoration: none; }
-  .sub-section { font-size: 14px; font-weight: 600; color: var(--muted); padding: 10px 0 6px; }
   @media (max-width: 480px) { body { padding: 12px; } .header h1 { font-size: 20px; } }
 </style>
 </head>
@@ -62,312 +55,127 @@
   <div class="header">
     <h1>📰 新闻早报</h1>
     <div class="date">2026年5月24日 · 星期日</div>
-    <div class="badge">Hermes 自动整理 · 共 28 条</div>
+    <div class="badge">数据来源：AI HOT · 腾讯新闻</div>
   </div>
 
-  <!-- ============ AI 圈动态 ============ -->
   <div class="section-title"><span class="icon">🤖</span> AI 圈动态</div>
 
-  <div class="sub-section">📦 模型发布/更新</div>
-
   <div class="card">
-    <h3><span class="num">1</span>StepAudio 2.5实时语音发布：副语言感知与人格化交互</h3>
-    <p>StepAudio 2.5 Realtime是一款实时语音模型，能够深度理解用户语音中的语气、语速、停顿乃至微表情等副语言特征。它支持通过API接入自定义人格，允许设定个性、背景故事和语言风格，并提供了上万种原生人格选项，可组合出数百万种特征。产品内置5个可直接体验的预设人格，经过RLHF调优，确保复杂的角色扮演压力测试中保持角色一致性。支持中英文。</p>
-    <div class="meta">
-      <span class="tag tag-product">产品</span>
-      <span class="source-label">阶跃星辰 StepFun (@StepFun_ai)</span>
-      <a class="link" href="https://x.com/StepFun_ai/status/2058303294544425197" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3><span class="num">2</span>Models.dev：AI模型规格、定价和功能开源数据库</h3>
-    <p>近期发布的开源数据库Models.dev，专门收录人工智能模型的各项规格、定价及功能信息。项目在GitHub公开，便于开发者查询和比较不同AI模型。在Hacker News社区获得101点关注度，显示出技术社区对集中化、透明化的模型信息资源的较大兴趣。</p>
-    <div class="meta">
-      <span class="tag tag-product">产品</span>
-      <span class="source-label">Hacker News 热门</span>
-      <a class="link" href="https://github.com/anomalyco/models.dev" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3><span class="num">3</span>Replit Agent与Squidler集成，实现全自动化AI质量保障</h3>
-    <p>Replit Agent与Squidler完成集成，形成完整的AI驱动质量保障闭环。用户通过自然语言描述应用功能，由Replit Agent构建后，Squidler像真实用户一样对线上应用进行自动化测试，无需编写测试脚本。发现的问题自动反馈给Replit Agent修复。已通过Squidler加入Replit的MCP库正式上线。</p>
-    <div class="meta">
-      <span class="tag tag-product">产品</span>
-      <span class="source-label">Replit (@Replit)</span>
-      <a class="link" href="https://x.com/Replit/status/2058261705998602548" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3><span class="num">4</span>Claude Code v2.1.150版本更新</h3>
-    <p>v2.1.150版本包含内部基础设施优化。此次更新主要聚焦于后台系统的改进，未引入任何用户可见的功能、界面或体验变更。</p>
-    <div class="meta">
-      <span class="tag tag-product">产品</span>
-      <span class="source-label">Claude Code GitHub Releases (RSS)</span>
-      <a class="link" href="https://github.com/anthropics/claude-code/releases/tag/v2.1.150" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="sub-section">🏢 行业动态</div>
-
-  <div class="card">
-    <h3><span class="num">5</span>微软称使用AI的成本高于支付人工工资</h3>
-    <p>微软发布报告指出，在特定工作场景中，部署和使用AI的成本目前已高于支付相应的人工工资。报告分析了基于"tokens"和"agents"的AI使用模式，发现其综合开销超过雇佣人类员工完成同类任务的费用。这一发现揭示了当前企业应用AI技术面临的现实经济挑战。</p>
+    <h3>Anthropic 最快下周完成逾300亿美元融资，估值超9000亿</h3>
+    <p>据彭博社报道，Anthropic即将完成一轮超300亿美元融资，最快下周敲定。此轮融资将使其估值突破9000亿美元，正式超越OpenAI成为全球估值最高AI初创企业。公司营收高速增长，预计第二季度营收将达109亿美元，有望迎来首个盈利季度。</p>
     <div class="meta">
       <span class="tag tag-industry">行业</span>
-      <span class="source-label">Hacker News 热门</span>
-      <a class="link" href="https://fortune.com/2026/05/22/microsoft-ai-cost-problem-tokens-agents" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3><span class="num">6</span>Anthropic最快下周完成逾300亿美元融资，估值有望超越OpenAI</h3>
-    <p>据彭博社报道，Anthropic即将完成一轮超300亿美元的融资，最快下周敲定。此轮融资将使其估值突破9000亿美元，正式超越OpenAI，成为全球估值最高的AI初创企业。公司营收高速增长，预计第二季度营收将达109亿美元，环比增长超一倍，有望迎来首个盈利季度。</p>
-    <div class="meta">
-      <span class="tag tag-industry">行业</span>
-      <span class="source-label">IT之家 (RSS)</span>
+      <span class="source">IT之家</span>
       <a class="link" href="https://www.ithome.com/0/954/452.htm" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <div class="card">
-    <h3><span class="num">7</span>AI替代入门级工作：74% CEO冻结或缩减招聘</h3>
-    <p>奥纬咨询研究发现，AI工具被广泛用于入门级任务，导致企业招聘重心转向高级岗位，年轻人求职难度加大。科技行业受冲击最重，74%的CEO已冻结或缩减招聘。计划削减初级岗位的比例从17%跃升至43%，招聘转向中层岗位的比例升至30%。报告警告，过快裁员或忽视初级人才储备，可能对人才梯队造成长远风险。</p>
+    <h3>StepAudio 2.5 实时语音发布：副语言感知与人格化交互</h3>
+    <p>阶跃星辰发布StepAudio 2.5 Realtime实时语音模型，能深度理解语气、语速、停顿等副语言特征。支持通过API接入自定义人格，提供上万种原生人格选项可组合出数百万种特征。内置5个预设人格，经RLHF调优确保角色一致性，支持中英文。</p>
     <div class="meta">
-      <span class="tag tag-industry">行业</span>
-      <span class="source-label">IT之家 (RSS)</span>
-      <a class="link" href="https://www.ithome.com/0/954/235.htm" target="_blank">查看原文 →</a>
+      <span class="tag tag-tech">产品</span>
+      <span class="source">X：StepFun</span>
+      <a class="link" href="https://x.com/StepFun_ai/status/2058303294544425197" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <div class="card">
-    <h3><span class="num">8</span>Mistral AI加倍投入科学以赢得工业AI领域</h3>
-    <p>Mistral AI宣布与物理AI先驱Emmi AI达成最终收购协议，加强其在工业AI领域的领导地位。通过整合Emmi AI在物理仿真与数字孪生方面的专长，提升工程解决方案能力。Emmi AI的30余名研究员与工程师将加入Mistral AI团队。此次合作为航空航天、汽车等高风险行业提供实时仿真与复杂问题解决平台。</p>
+    <h3>Replit Agent 与 Squidler 集成，实现全自动化AI质量保障</h3>
+    <p>Replit Agent与Squidler完成集成，形成AI驱动质量保障闭环：用户自然语言描述功能→Replit Agent构建→Squidler自动化测试→发现问题自动反馈修复，无需编写任何测试脚本。已通过Squidler加入Replit MCP库正式上线。</p>
+    <div class="meta">
+      <span class="tag tag-tech">产品</span>
+      <span class="source">X：Replit</span>
+      <a class="link" href="https://x.com/Replit/status/2058261705998602548" target="_blank">查看原文 →</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Mistral AI 收购 Emmi AI，加码工业AI</h3>
+    <p>Mistral AI宣布收购物理AI先驱Emmi AI，整合其在物理仿真与数字孪生方面的专长，加强工业AI领导地位。Emmi AI的30余名研究员与工程师将加入，为航空航天、汽车等行业提供实时仿真与复杂问题解决平台。</p>
     <div class="meta">
       <span class="tag tag-industry">行业</span>
-      <span class="source-label">Mistral AI News</span>
+      <span class="source">Mistral AI</span>
       <a class="link" href="https://mistral.ai/news/science-to-win-industrial-ai" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <div class="card">
-    <h3><span class="num">9</span>Kling AI亮相戛纳，推动AI赋能电影制作</h3>
-    <p>Kling AI在戛纳电影市场举办官方会议，首次登上世界顶级电影舞台。会议汇集全球电影专业人士，共同探讨AI如何融入实际电影制作流程。Kling AI已证明其能力可服务于动画长片、好莱坞剧集、实验短片及影院电影等多种创作形式，将继续推进电影级AI影像技术。</p>
+    <h3>微软：特定场景中AI成本已高于人工工资</h3>
+    <p>微软发布报告指出，在特定工作场景中，部署和使用AI的成本目前已高于支付相应的人工工资。</p>
     <div class="meta">
       <span class="tag tag-industry">行业</span>
-      <span class="source-label">可灵 Kling AI (@Kling_ai)</span>
-      <a class="link" href="https://x.com/Kling_ai/status/2058013861404684739" target="_blank">查看原文 →</a>
+      <span class="source">Fortune / Hacker News</span>
+      <a class="link" href="https://fortune.com/2026/05/22/microsoft-ai-cost-problem-tokens-agents" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <div class="card">
-    <h3><span class="num">10</span>Google DeepMind扩大与新加坡合作，推动AI安全规模化部署</h3>
-    <p>Google DeepMind正在扩大与新加坡的合作，帮助安全地大规模部署AI。新项目将重点加速科学发现、加强大流行病防范并改善医疗保健。</p>
+    <h3>飞书-Claude Code 桥接开源项目发布</h3>
+    <p>feishu-claude-code-bridge开源项目上线，实现飞书与本机Claude Code CLI的双向连接。可从飞书消息直接指挥Claude Code执行任务，Claude也能读取飞书上下文并创建文档。其模式可扩展连接Codex等其他本地工具。</p>
     <div class="meta">
-      <span class="tag tag-industry">行业</span>
-      <span class="source-label">Google DeepMind (@GoogleDeepMind)</span>
-      <a class="link" href="https://x.com/GoogleDeepMind/status/2057985225100235022" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="sub-section">📄 论文研究</div>
-
-  <div class="card">
-    <h3><span class="num">11</span>Nemotron-Labs扩散语言模型实现光速级文本生成</h3>
-    <p>NVIDIA在Hugging Face发布关于Nemotron-Labs扩散语言模型的技术博客。该研究聚焦于通过扩散语言模型架构大幅提升文本生成速度，逼近"光速级"生成效率，相较于传统自回归模型在延迟和吞吐量方面具有显著性能优势。</p>
-    <div class="meta">
-      <span class="tag tag-paper">论文</span>
-      <span class="source-label">Hugging Face Blog (RSS)</span>
-      <a class="link" href="https://huggingface.co/blog/nvidia/nemotron-labs-diffusion" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="sub-section">💡 技巧与观点</div>
-
-  <div class="card">
-    <h3><span class="num">12</span>飞书-Claude Code桥接开源项目</h3>
-    <p>feishu-claude-code-bridge是一个开源项目，实现飞书与本机Claude Code CLI的双向连接。用户可从飞书消息中直接指挥Claude Code执行任务，Claude也能读取飞书中的工作上下文并创建、编辑飞书文档。其工作原理是将飞书消息转为Prompt通过命令行调用Claude CLI，并将流式输出实时同步回飞书。</p>
-    <div class="meta">
-      <span class="tag tag-tip">观点</span>
-      <span class="source-label">宝玉 (@dotey)</span>
+      <span class="tag tag-tech">产品</span>
+      <span class="source">X：宝玉</span>
       <a class="link" href="https://x.com/dotey/status/2058084478459826432" target="_blank">查看原文 →</a>
     </div>
   </div>
 
-  <hr>
-
-  <!-- ============ 今日要闻 ============ -->
   <div class="section-title"><span class="icon">📰</span> 今日要闻</div>
 
   <div class="card">
-    <h3><span class="num">1</span>特朗普称美伊协议基本谈成 内容包括开放霍尔木兹海峡</h3>
-    <p>美国总统特朗普23日表示，美国与伊朗已基本谈成一份协议。他已与沙特、以色列等多方领导人通话讨论，协议涉及霍尔木兹海峡开放等内容，目前正敲定细节，将于近期公布。</p>
+    <h3>特朗普：美伊协议基本谈成，涉及开放霍尔木兹海峡</h3>
+    <p>特朗普23日表示，美伊已基本谈成一份协议。他已与沙特、以色列等多方领导人通话讨论，协议涉及霍尔木兹海峡开放等内容，目前正敲定细节，将于近期公布。伊朗方面称正处于备忘录最终敲定阶段。</p>
     <div class="meta">
       <span class="tag tag-intl">国际</span>
-      <span class="source-label">腾讯新闻</span>
+      <span class="source">腾讯新闻</span>
       <a class="link" href="https://view.inews.qq.com/a/20260524A01R4J00?scene=news-skill" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <div class="card">
-    <h3><span class="num">2</span>山西留神峪煤矿爆炸事故已致82人遇难</h3>
-    <p>5月23日22时30分，山西长治召开留神峪煤矿瓦斯爆炸事故发布会。全体起立向遇难者默哀。截至目前，事故已致82人遇难，2人失联，128人受伤。沁源县长称企业对作业人数统计不清，导致一开始通报人数不准确。涉事煤矿企业有重大违法行为。</p>
+    <h3>山西长治煤矿瓦斯爆炸致82人遇难，市长鞠躬致歉</h3>
+    <p>5月22日，长治市沁源县留神峪煤矿发生瓦斯爆炸，事故已致82人遇难，2人失联，128人受伤。沁源县长称企业对作业人数统计不清，导致初报人数不准确，涉事企业有重大违法行为。长治市长陈向阳鞠躬致歉，表示"极为痛心、万分自责"。国务院事故调查组已介入。</p>
     <div class="meta">
       <span class="tag tag-cn">国内</span>
-      <span class="source-label">腾讯新闻</span>
+      <span class="source">腾讯新闻</span>
       <a class="link" href="https://view.inews.qq.com/a/20260523A0A9S600?scene=news-skill" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <div class="card">
-    <h3><span class="num">3</span>国务院事故调查组：将较真碰硬开展事故调查</h3>
-    <p>针对山西通洲集团留神峪煤矿瓦斯爆炸事故，国务院事故调查组将较真碰硬开展事故调查，查清查透事故原因，依法依规严厉惩处。重拳出击"打非治违"，严查严惩煤矿隐蔽工作面作业、安全监控造假、下井作业人数不清、违规分包转包等问题。</p>
+    <h3>徐留平被查，全国总工会表态</h3>
+    <p>中华全国总工会党组书记、副主席徐留平涉嫌严重违纪违法，目前正接受中央纪委国家监委纪律审查和监察调查。全国总工会党组召开会议，与会同志一致表示坚决拥护党中央决定。</p>
     <div class="meta">
       <span class="tag tag-cn">国内</span>
-      <span class="source-label">腾讯新闻</span>
-      <a class="link" href="https://view.inews.qq.com/a/20260523A08XHS00?scene=news-skill" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3><span class="num">4</span>长治市市长现场鞠躬致歉</h3>
-    <p>山西长治召开留神峪煤矿瓦斯爆炸事故发布会。市长陈向阳介绍事故已致82人遇难，2人失联，128人受伤。陈向阳说"极为痛心、万分自责"，代表市政府向遇难者、家属、受伤人员及全社会诚恳道歉，并起立鞠躬。</p>
-    <div class="meta">
-      <span class="tag tag-cn">国内</span>
-      <span class="source-label">腾讯新闻</span>
-      <a class="link" href="https://view.inews.qq.com/a/20260523A0A9TS00?scene=news-skill" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3><span class="num">5</span>伊朗说伊美正处于谅解备忘录最终敲定阶段</h3>
-    <p>伊朗外交部发言人巴加埃23日表示，经过数周对话，"伊美双方的观点正朝着更加一致的方向发展"，双方目前正处于一份谅解备忘录的最终敲定阶段。</p>
-    <div class="meta">
-      <span class="tag tag-intl">国际</span>
-      <span class="source-label">腾讯新闻</span>
-      <a class="link" href="https://view.inews.qq.com/a/20260523A09WRB00?scene=news-skill" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3><span class="num">6</span>徐留平被查，全国总工会表态</h3>
-    <p>中华全国总工会党组书记、副主席、书记处第一书记徐留平被查。全国总工会党组召开会议通报，徐留平涉嫌严重违纪违法，目前正接受中央纪委国家监委纪律审查和监察调查。与会同志一致表示坚决拥护党中央决定。</p>
-    <div class="meta">
-      <span class="tag tag-cn">国内</span>
-      <span class="source-label">腾讯新闻</span>
+      <span class="source">腾讯新闻</span>
       <a class="link" href="https://view.inews.qq.com/a/20260523A099W100?scene=news-skill" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <div class="card">
-    <h3><span class="num">7</span>留神峪煤矿图纸与实际不符，总台记者探访救援现场</h3>
-    <p>5月22日19时29分，长治市沁源县留神峪煤矿发生瓦斯爆炸致重大伤亡。目前爆炸点附近积水，救援人员紧急制定新方案。留神峪煤矿图纸与实际不符，只能逐个巷道搜救。部分矿工未带定位卡。</p>
+    <h3>老虎证券、富途控股被重罚，非法跨境证券业务整治升级</h3>
+    <p>5月22日，八部门联合印发方案严厉打击非法跨境证券业务。同日，证监会对老虎证券、富途控股、长桥证券立案调查并行政处罚。老虎证券被罚约3.08亿元，香港证监会同步收紧开户管控。</p>
     <div class="meta">
       <span class="tag tag-cn">国内</span>
-      <span class="source-label">腾讯新闻</span>
-      <a class="link" href="https://view.inews.qq.com/a/20260523A07UQQ00?scene=news-skill" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3><span class="num">8</span>"东北超"在四省份同步开赛</h3>
-    <p>5月23日晚，首届东北地区城市足球联赛（东北超）在四省区省会同步开赛。辽宁省副省长楚天运表示："我们不管比赛是不是第一，反正友谊肯定第一。"赛事突破行政区划限制，沈阳、大连、长春、延边、哈尔滨、鸡西、呼和浩特、通辽八市州组队参赛。</p>
-    <div class="meta">
-      <span class="tag tag-cn">国内</span>
-      <span class="source-label">腾讯新闻</span>
-      <a class="link" href="https://view.inews.qq.com/a/20260523A09HSH00?scene=news-skill" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3><span class="num">9</span>老虎、富途等跨境券商罚单落地</h3>
-    <p>5月22日，八部门联合印发《综合整治非法跨境证券期货基金经营活动实施方案》，严厉打击非法跨境证券业务。同日，证监会宣布对老虎证券、富途控股、长桥证券立案调查并作出行政处罚。香港证监会同步收紧开户管控，将跨境投资"灰色地带"置于有效监督之下。</p>
-    <div class="meta">
-      <span class="tag tag-cn">国内</span>
-      <span class="source-label">腾讯新闻</span>
+      <span class="source">腾讯新闻</span>
       <a class="link" href="https://view.inews.qq.com/a/20260523A07SNK00?scene=news-skill" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <div class="card">
-    <h3><span class="num">10</span>长安汽车内幕交易案：双方员工精准买入被罚1669万</h3>
-    <p>官方5月22日披露，2023年11月26日，长安汽车与华为签署《投资合作备忘录》前，双方多名员工利用内幕信息大量买入"长安汽车"股票，获利400余万元。最终证监会罚没超2000万元并移送公安，暴露企业内幕信息管理疏漏与合规教育缺失。</p>
+    <h3>首届"东北超"足球联赛四省同步开赛</h3>
+    <p>5月23日晚，首届东北地区城市足球联赛在沈阳、大连、长春、延边、哈尔滨、鸡西、呼和浩特、通辽八市同步开赛。辽宁省副省长表示："不管比赛是不是第一，反正友谊肯定第一。"</p>
     <div class="meta">
       <span class="tag tag-cn">国内</span>
-      <span class="source-label">腾讯新闻</span>
-      <a class="link" href="https://view.inews.qq.com/a/20260523A08II400?scene=news-skill" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3><span class="num">11</span>日本50年的牛奶糖没了——石脑油危机扩散</h3>
-    <p>霍尔木兹海峡的动荡，正在日本引发连锁反应。畅销多年的零食停售，医用手套动用国家储备。石脑油这一石油衍生品的短缺，正在日本演变成一场事关日常生活与政府信誉的双重危机。伊朗战事持续延宕，霍尔木兹海峡航运受阻，高度依赖进口能源的日本遭遇明显冲击。</p>
-    <div class="meta">
-      <span class="tag tag-intl">国际</span>
-      <span class="source-label">腾讯新闻</span>
-      <a class="link" href="https://view.inews.qq.com/a/20260523A09DBB00?scene=news-skill" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3><span class="num">12</span>SpaceX第三代星舰成功发射</h3>
-    <p>5月22日，星舰V3在多次推迟后，从星舰基地新建的2号发射台起飞，部署了20颗下一代星链模拟器，以及2颗用于回拍隔热瓦的改装测试卫星。再入大气层时未出现近期常见的隔热瓦烧穿，最终在印度洋受控溅落。</p>
-    <div class="meta">
-      <span class="tag tag-intl">国际</span>
-      <span class="tag tag-tech">科技</span>
-      <span class="source-label">腾讯新闻</span>
-      <a class="link" href="https://view.inews.qq.com/a/20260523A09GPV00?scene=news-skill" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3><span class="num">13</span>国产自研600公斤推力级涡扇发动机首飞成功</h3>
-    <p>5月23日，内蒙古锡林郭勒盟上空，由我国自主研制的600公斤推力级F406涡扇发动机，双发配装先进气象无人机圆满完成首次飞行试验验证。飞行期间发动机工作正常、状态稳定，无人机完成全部预定科目后顺利返航着陆。</p>
-    <div class="meta">
-      <span class="tag tag-cn">国内</span>
-      <span class="tag tag-tech">科技</span>
-      <span class="source-label">腾讯新闻</span>
-      <a class="link" href="https://view.inews.qq.com/a/20260523A099LW00?scene=news-skill" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3><span class="num">14</span>三星李在镕秘访联发科，用存储芯片换代工订单</h3>
-    <p>据台媒报道，韩国三星电子会长李在镕于5月21日率领高层团队秘密拜访联发科总部，与联发科董事长蔡明介、CEO蔡力行等会面。此行主要目的是争取联发科的晶圆代工订单，三星正祭出极具吸引力的策略，拟向联发科提供存储芯片资源。</p>
-    <div class="meta">
-      <span class="tag tag-intl">国际</span>
-      <span class="tag tag-market">市场</span>
-      <span class="source-label">腾讯新闻</span>
-      <a class="link" href="https://view.inews.qq.com/a/20260523A02T7B00?scene=news-skill" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3><span class="num">15</span>法国禁止以色列国家安全部长入境</h3>
-    <p>法国外交部长巴罗23日在社交媒体发文说，自即日起，以色列国家安全部长本-格维尔被禁止进入法国领土。巴罗还呼吁欧盟也对本-格维尔采取制裁措施。</p>
-    <div class="meta">
-      <span class="tag tag-intl">国际</span>
-      <span class="source-label">腾讯新闻</span>
-      <a class="link" href="https://view.inews.qq.com/a/20260523A09J9Z00?scene=news-skill" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3><span class="num">16</span>山西留神峪矿难背后：高瓦斯矿井的三亿年地质风险</h3>
-    <p>5月22日，山西沁源县通洲集团留神峪煤矿发生瓦斯爆炸，截至23日13时已造成82人遇难。该矿2021年投产，年产120万吨，2024年被鉴定为高瓦斯矿井，高瓦斯源于约三亿年前的地质形成，开采深度增加导致瓦斯涌出，叠加煤层自燃等风险。</p>
-    <div class="meta">
-      <span class="tag tag-cn">国内</span>
-      <span class="source-label">腾讯新闻</span>
-      <a class="link" href="https://view.inews.qq.com/a/20260523A09E0S00?scene=news-skill" target="_blank">查看原文 →</a>
+      <span class="source">腾讯新闻</span>
+      <a class="link" href="https://view.inews.qq.com/a/20260523A09HSH00?scene=news-skill" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <hr>
 
   <div class="footer">
-    <p>📡 新闻来源：AI HOT (aihot.virxact.com) · 腾讯新闻</p>
+    <p>📡 数据来源：<a href="https://aihot.virxact.com">AI HOT</a> · <a href="https://news.qq.com">腾讯新闻</a></p>
     <p>🤖 由 Hermes Agent 自动整理 · 每日 08:00 更新</p>
     <p style="margin-top:8px"><a href="/daily-news/">← 返回首页 · 查看往期</a></p>
   </div>
