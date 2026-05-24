@@ -26,145 +26,39 @@
     padding: 20px;
   }
   .container { max-width: 680px; margin: 0 auto; }
-
-  /* header */
-  .header {
-    text-align: center;
-    padding: 30px 0 20px;
-  }
-  .header h1 {
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: 1px;
-  }
-  .header .date {
-    font-size: 14px;
-    color: var(--muted);
-    margin-top: 4px;
-  }
-  .header .badge {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    font-size: 11px;
-    padding: 2px 10px;
-    border-radius: 10px;
-    margin-top: 8px;
-  }
-
-  /* summary box */
-  .summary {
-    background: #eef2ff;
-    border-left: 4px solid var(--accent);
-    padding: 14px 16px;
-    border-radius: 8px;
-    margin: 20px 0;
-    font-size: 14px;
-    color: #1e40af;
-  }
-
-  /* section */
-  .section-title {
-    font-size: 18px;
-    font-weight: 700;
-    padding: 20px 0 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  .header { text-align: center; padding: 30px 0 20px; }
+  .header h1 { font-size: 24px; font-weight: 700; letter-spacing: 1px; }
+  .header .date { font-size: 14px; color: var(--muted); margin-top: 4px; }
+  .header .badge { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; padding: 2px 10px; border-radius: 10px; margin-top: 8px; }
+  .summary { background: #eef2ff; border-left: 4px solid var(--accent); padding: 14px 16px; border-radius: 8px; margin: 20px 0; font-size: 14px; color: #1e40af; }
+  .section-title { font-size: 18px; font-weight: 700; padding: 20px 0 12px; display: flex; align-items: center; gap: 8px; }
   .section-title .icon { font-size: 22px; }
-
-  /* news card */
-  .card {
-    background: var(--card);
-    border-radius: 12px;
-    padding: 16px 18px;
-    margin-bottom: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    border: 1px solid var(--border);
-  }
-  .card h3 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 6px;
-    line-height: 1.5;
-  }
-  .card p {
-    font-size: 14px;
-    color: #374151;
-    margin-bottom: 8px;
-  }
-  .card .meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 8px;
-  }
-  .tag {
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 4px;
-    color: #fff;
-    font-weight: 500;
-  }
+  .card { background: var(--card); border-radius: 12px; padding: 16px 18px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border); }
+  .card h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; line-height: 1.5; }
+  .card p { font-size: 14px; color: #374151; margin-bottom: 8px; }
+  .card .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; color: #fff; font-weight: 500; }
   .tag-intl { background: var(--tag-intl); }
   .tag-cn { background: var(--tag-cn); }
   .tag-tech { background: var(--tag-tech); }
   .tag-market { background: var(--tag-market); }
-
-  .card .link {
-    font-size: 12px;
-    color: var(--accent);
-    text-decoration: none;
-  }
+  .card .link { font-size: 12px; color: var(--accent); text-decoration: none; }
   .card .link:hover { text-decoration: underline; }
-
-  /* market table */
-  .market-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  .market-item {
-    background: var(--card);
-    border-radius: 8px;
-    padding: 10px 12px;
-    border: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  .break { display: inline-block; background: #fef3c7; color: #92400e; font-size: 11px; padding: 1px 8px; border-radius: 4px; font-weight: 600; margin-left: 4px; }
+  .market-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .market-item { background: var(--card); border-radius: 8px; padding: 10px 12px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
   .market-item .name { font-size: 13px; color: var(--muted); }
   .market-item .val { font-size: 14px; font-weight: 600; }
   .market-item .up { color: #dc2626; }
   .market-item .down { color: #16a34a; }
-
-  /* divider */
-  hr {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 24px 0;
-  }
-
-  /* footer */
-  .footer {
-    text-align: center;
-    font-size: 12px;
-    color: var(--muted);
-    padding: 30px 0 20px;
-  }
+  hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+  .footer { text-align: center; font-size: 12px; color: var(--muted); padding: 30px 0 20px; }
   .footer a { color: var(--accent); text-decoration: none; }
-
-  @media (max-width: 480px) {
-    body { padding: 12px; }
-    .header h1 { font-size: 20px; }
-    .market-grid { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 480px) { body { padding: 12px; } .header h1 { font-size: 20px; } .market-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 <div class="container">
-
   <div class="header">
     <h1>📰 新闻早报</h1>
     <div class="date">2026年5月24日 · 星期日</div>
@@ -172,191 +66,104 @@
   </div>
 
   <div class="summary">
-    📌 美伊周日下午宣布和平协议；神舟二十三号今晚23:08发射；山西煤矿瓦斯爆炸致90死；道指再创历史新高；戛纳金棕榈奖揭晓；三星工会罢工危机解除
+    🚨 白宫附近传出约30声枪响，特朗普正在屋内召开伊朗紧急会议；美伊谈判现转机，伊朗欲以开放海峡换赔偿；神舟二十三号今晚发射；APEC贸易部长会议在苏州举行；德国经济部长下周访华
   </div>
 
   <!-- 国际 -->
   <div class="section-title"><span class="icon">🌍</span> 国际要闻</div>
 
   <div class="card">
-    <h3>突发：美伊将于周日下午宣布和平协议</h3>
-    <p>据《华盛顿邮报》独家报道，美国与伊朗经过多轮谈判后，<strong>将于周日下午（美东时间5月24日）正式宣布一项最终和平协议</strong>。特朗普此前表示达成协议的几率约为"五五开"，并称最快周日决定是否签署。</p>
-    <p>此前美伊停火协议已延长多轮，特朗普一度距离下令打击伊朗"只有一小时"。巴基斯坦持续担任中间人角色，陆军参谋长穆尼尔元帅从中斡旋。协议若达成，<strong>霍尔木兹海峡重新开放有望缓解全球能源紧张</strong>。</p>
+    <h3>🚨 突发：白宫附近传出枪声，特朗普正在屋内</h3>
+    <p>当地时间5月23日，白宫附近17街与宾夕法尼亚大道交叉口传出约30声枪响。<strong>特朗普当时正在白宫内召开伊朗紧急会议</strong>。美国特勤局火速封锁现场，记者被紧急疏散至新闻简报室。FBI已介入调查。据《纽约邮报》报道，枪手可能开了约3枪，其余为特勤局回击及回声。枪手已被制服，暂无人员伤亡通报。</p>
     <div class="meta">
       <span class="tag tag-intl">国际</span>
-      <a class="link" href="https://www.aboluowang.com/2026/0524/2387269.html" target="_blank">查看原文 →</a>
+      <span class="break">突发</span>
+      <a class="link" href="https://www.ntdtv.com/gb/2026/05/23/a104099447.html" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <div class="card">
-    <h3>道琼斯指数再创历史新高，标普500八周连阳</h3>
-    <p>5月22日美股三大指数全线上涨，道琼斯指数以历史新高收盘，<strong>标普500录得连续第8周上涨</strong>。特朗普与伊朗达成和平协议的前景推动市场情绪。美债收益率上行，4月CPI超预期至3.8%，市场对降息预期延后但风险偏好改善。</p>
+    <h3>美伊谈判现转机：伊朗提两方案，开放海峡换赔偿</h3>
+    <p>沙特媒体阿拉比亚电视台报道，伊朗已向巴基斯坦调解方提交了两份方案，提出<strong>以开放霍尔木兹海峡换取美国赔偿</strong>，并要求在签署协议前先讨论制裁和被冻结资金问题。美国国务卿鲁比奥表示谈判取得"些许进展"，伊朗外交部称正处于谅解备忘录最终敲定阶段。与此同时，特朗普22日召集国安团队会议后表示愿给外交谈判"更多时间"。</p>
     <div class="meta">
       <span class="tag tag-intl">国际</span>
-      <span class="tag tag-market">市场</span>
-      <a class="link" href="https://www.investopedia.com/stock-market-today-dow-jones-s-and-p-500-05222026-11982006" target="_blank">查看原文 →</a>
+      <a class="link" href="https://cj.sina.cn/articles/view/7857201856/1d45362c001905ukt0" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <div class="card">
-    <h3>第79届戛纳电影节闭幕，《峡湾》摘金棕榈</h3>
-    <p>第79届戛纳电影节落下帷幕，罗马尼亚导演克里斯蒂安·蒙吉执导的<strong>《峡湾》（The Fjord）荣获金棕榈大奖</strong>。尼泊尔导演阿比纳什·比克拉姆·沙阿作品《大象在尼泊尔》获一种关注单元评审团奖。</p>
+    <h3>俄称乌无人机袭击卢甘斯克学校，18人死亡</h3>
+    <p>俄罗斯紧急情况部通报称，遭乌方无人机袭击的斯塔罗比尔斯克职业学院死亡人数升至18人。袭击发生时校内86名14至18岁未成年人。普京表示附近无军事设施，已责成国防部提交报复方案。</p>
     <div class="meta">
       <span class="tag tag-intl">国际</span>
-      <a class="link" href="https://www.rfi.fr/cn" target="_blank">查看原文 →</a>
+      <a class="link" href="https://cj.sina.cn/articles/view/7857201856/1d45362c001905ukt0" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <div class="card">
-    <h3>美国参议院通过法案限制总统对伊朗动武权力</h3>
-    <p>美国参议院通过了一项法案，试图迫使总统在对德黑兰采取进一步军事行动之前寻求国会批准。此举反映出国会两党在伊朗问题上对行政权力的制衡意图。</p>
+    <h3>印度遭遇极端热浪，全球最热50城全在印度</h3>
+    <p>印度多地创高温纪录：北方邦班达地区48.2℃打破73年记录；拉贾斯坦邦珀洛迪镇51℃刷新70年纪录。全国气温普遍40-48℃，印度气象局已发布红色预警。</p>
     <div class="meta">
       <span class="tag tag-intl">国际</span>
-      <a class="link" href="https://www.voachinese.com/z/1739" target="_blank">查看原文 →</a>
+      <a class="link" href="https://cj.sina.cn/articles/view/7857201856/1d45362c001905ukt0" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <div class="card">
-    <h3>SpaceX 星舰试飞成功，为IPO造势</h3>
-    <p>SpaceX 星舰最新试飞成功，<strong>飞行任务达成大部分目标</strong>。分析人士指出这次成功试飞时机微妙，正值SpaceX IPO预期升温之际，可能推动公司估值进一步走高。</p>
+    <h3>硅谷大佬叫停特朗普AI监管行政令</h3>
+    <p>特朗普原计划签署AI监管行政令，白宫前加密货币和AI主管萨克斯紧急致电警告将拖慢美国AI产业、导致输给中国。随后特朗普与马斯克、扎克伯格通话，决定暂缓该行政令。</p>
     <div class="meta">
       <span class="tag tag-intl">国际</span>
       <span class="tag tag-tech">科技</span>
-      <a class="link" href="https://timesofindia.indiatimes.com/world" target="_blank">查看原文 →</a>
+      <a class="link" href="https://cj.sina.cn/articles/view/7857201856/1d45362c001905ukt0" target="_blank">查看原文 →</a>
     </div>
-  </div>
-
-  <div class="card">
-    <h3>三星工会罢工危机解除，劳资达成13%奖金协议</h3>
-    <p>三星集团工会此前威胁5月21日至6月7日举行总罢工，要求加薪7%及提高奖金。经密集谈判，<strong>双方最终就13%的营业利润奖金分配达成一致</strong>，避免了可能造成69亿至177亿美元损失的罢工事件。</p>
-    <div class="meta">
-      <span class="tag tag-intl">国际</span>
-      <a class="link" href="https://finance.sina.cn/stock/jdts/2026-05-13/detail-inhxteiv4674491.d.html" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <!-- 市场 -->
-  <div class="section-title"><span class="icon">📈</span> 市场速览</div>
-
-  <div class="market-grid">
-    <div class="market-item"><span class="name">道指</span><span class="val up">+0.56%</span></div>
-    <div class="market-item"><span class="name">标普500</span><span class="val up">+0.33%</span></div>
-    <div class="market-item"><span class="name">纳斯达克</span><span class="val up">+0.20%</span></div>
-    <div class="market-item"><span class="name">中概金龙</span><span class="val down">-2.22%</span></div>
-    <div class="market-item"><span class="name">伦敦金</span><span class="val down">-0.95%</span></div>
-    <div class="market-item"><span class="name">比特币</span><span class="val down">-2.21%</span></div>
-    <div class="market-item"><span class="name">布伦特原油</span><span class="val down">-1.23%</span></div>
-    <div class="market-item"><span class="name">白银</span><span class="val down">-2.13%</span></div>
   </div>
 
   <!-- 国内 -->
   <div class="section-title"><span class="icon">🇨🇳</span> 国内要闻</div>
 
   <div class="card">
-    <h3>神舟二十三号今晚23:08发射！香港首位太空人出征</h3>
-    <p>中国载人航天工程办公室宣布，<strong>神舟二十三号载人飞船瞄准今晚23:08发射</strong>。乘组由朱杨柱（指令长）、张志远、黎家盈3名航天员组成。其中，<strong>黎家盈来自香港，入选前在香港警务处工作</strong>，系香港首位执行太空飞行任务的航天员。</p>
-    <p>此次任务是空间站应用与发展阶段第7次载人飞行任务，也是载人航天工程第40次飞行任务。按计划将采用自主快速交会对接模式，对接于天和核心舱径向端口。值得注意的是，<strong>乘组1名航天员将开展1年期在轨驻留试验</strong>。</p>
+    <h3>🚀 神舟二十三号今晚发射</h3>
+    <p>乘组由朱杨柱（指令长）、张志远、黎家盈3名航天员组成，瞄准<strong>5月24日23时08分</strong>从酒泉发射。这是中国空间站应用与发展阶段的关键任务。</p>
     <div class="meta">
       <span class="tag tag-cn">国内</span>
       <span class="tag tag-tech">科技</span>
-      <a class="link" href="https://www.news.cn/tech/20260523/587408414de1479b94fe33f5de39f896/c.html" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <div class="card">
-    <h3>山西煤矿瓦斯爆炸致90死，习近平作重要指示</h3>
-    <p>5月22日19时29分，山西省沁源县通洲集团留神峪煤矿发生瓦斯爆炸事故，事发时井下247人。截至最新通报，<strong>事故已造成90人死亡</strong>，156人获救（123人送医）。习近平作出重要指示，要求全力救治伤员、科学组织搜救、坚决防范遏制重特大事故发生。</p>
-    <p>据悉，该矿为高瓦斯矿井，涉事企业负责人已被依法控制。应急管理部调派6支国家矿山应急救援队伍共345人赶赴现场。国家矿山安全监察局曾发布涉事煤矿高瓦斯风险预警。</p>
+    <h3>APEC贸易部长会议在苏州举行</h3>
+    <p>APEC贸易部长会议5月23日在苏州开幕，国务院副总理何立峰表示"中国是各国的贸易伙伴，而不是对手"。今年是中国加入APEC 35周年，本次围绕"建设亚太共同体"主题，讨论区域经济一体化、数字合作和绿色经济。</p>
     <div class="meta">
       <span class="tag tag-cn">国内</span>
-      <span class="tag tag-intl">国际</span>
-      <a class="link" href="https://sputniknews.cn/20260523/1071475003.html" target="_blank">查看原文 →</a>
+      <a class="link" href="https://cj.sina.cn/articles/view/7857201856/1d45362c001905ukt0" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <div class="card">
-    <h3>前4个月我国高技术产业实际使用外资同比增长20.3%</h3>
-    <p>商务部数据显示，今年前4个月我国高技术产业实际使用外资同比增长20.3%，延续了良好增势。同期，全国邮政行业寄递业务量达701.6亿件。2025年北斗时空产业产值已超1.3万亿元。</p>
+    <h3>德国经济部长赖歇下周访华</h3>
+    <p>德国经济与能源部长卡特琳娜·赖歇将于5月26-29日首次访华，包括巴斯夫、西门子能源在内的40家德企高管随行。这是半年内第四位访华的德国内阁要员，中德交往密度近年罕见。</p>
     <div class="meta">
       <span class="tag tag-cn">国内</span>
-      <a class="link" href="https://tv.cctv.com/lm/xwlb" target="_blank">查看原文 →</a>
+      <a class="link" href="https://cj.sina.cn/articles/view/7857201856/1d45362c001905ukt0" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <div class="card">
-    <h3>中国兵器装备集团前总经理徐留平被查</h3>
-    <p>据官方通报，中国兵器装备集团有限公司前总经理徐留平涉嫌严重违纪违法，目前正接受纪律审查和监察调查。</p>
+    <h3>长治市长就事故鞠躬致歉</h3>
+    <p>长治市市长在新闻发布会上就近期事故现场鞠躬致歉，称"极为痛心、万分自责"，承诺给遇难者家属和公众一个负责任的交代。</p>
     <div class="meta">
       <span class="tag tag-cn">国内</span>
-      <a class="link" href="https://www.rfi.fr/cn" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>日经产相与王文涛接触，要求确保在华日本公民安全</h3>
-    <p>日本经济产业大臣赤泽亮正与中国商务部长王文涛举行会谈。日方同时对华提出要求，确保在华日本公民的安全。此前日本外务副大臣堀井岩也就此表态。</p>
-    <div class="meta">
-      <span class="tag tag-cn">国内</span>
-      <a class="link" href="https://www.rfi.fr/cn" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <!-- 科技 -->
-  <div class="section-title"><span class="icon">💻</span> 科技前沿</div>
-
-  <div class="card">
-    <h3>内存价格失控波及全球：手机、PC、游戏机全线上涨</h3>
-    <p>AI服务器HBM需求暴增导致全球内存供应紧张，三星和SK海力士产能倾斜至HBM。<strong>iPhone 18、华为Pura 90、Switch 2等产品均受波及</strong>涨价或减配。SK海力士员工今年人均奖金预计达1400万韩元（约9.5万美元）。内存涨价正在重塑消费电子行业格局。</p>
-    <div class="meta">
-      <span class="tag tag-tech">科技</span>
-      <a class="link" href="https://finance.sina.cn/stock/jdts/2026-05-13/detail-inhxteiv4674491.d.html" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>华为Pura X Max阔折叠屏10天激活20万台</h3>
-    <p>华为新款阔折叠Pura X Max开售后表现强劲，<strong>10天激活数突破20万台</strong>，比华为Mate X6同期高50%。苹果、小米、三星也加速布局阔折叠赛道，苹果首款折叠iPhone Ultra预计今秋发布，定价或超15000元人民币。</p>
-    <div class="meta">
-      <span class="tag tag-tech">科技</span>
-      <a class="link" href="https://news.mydrivers.com/1/1121/1121851.htm" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>Nvidia今年已承诺投入400亿美元进行AI股权投资</h3>
-    <p>Nvidia继续大举投资AI生态系统，今年已承诺投入400亿美元进行AI股权交易，从硬件供应商向AI全产业链投资者转变。同时，Intel股价在过去一年暴涨490%，华尔街押注其战略转型前景。</p>
-    <div class="meta">
-      <span class="tag tag-tech">科技</span>
-      <a class="link" href="https://juejin.cn/post/7637911111837777929" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>Cloudflare因AI裁员1100人：营收创新高仍裁减岗位</h3>
-    <p>Cloudflare宣布首次大规模裁员，CEO表示<strong>AI效率提升使1100个工作岗位"变得多余"</strong>。即使公司营收创新高仍需裁员，这成为AI替代人工岗位的标志性事件，引发对就业市场冲击的广泛讨论。</p>
-    <div class="meta">
-      <span class="tag tag-tech">科技</span>
-      <a class="link" href="https://juejin.cn/post/7637911111837777929" target="_blank">查看原文 →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>研究：中国官方媒体内容大规模渗透全球AI训练数据</h3>
-    <p>《自然》杂志最新研究发现，中国官方媒体宣传内容已大规模进入全球主流AI聊天机器人的训练数据。用中文提问时，这些系统倾向于给出符合北京官方立场的回答。研究人员称，国家支持叙事可通过互联网文本进入训练数据。</p>
-    <div class="meta">
-      <span class="tag tag-tech">科技</span>
-      <a class="link" href="https://www.voachinese.com/z/1763" target="_blank">查看原文 →</a>
     </div>
   </div>
 
   <hr>
 
   <div class="footer">
-    <p>📡 新闻来源：新华社、人民网、央视新闻、BBC中文、VOA、法广、华盛顿邮报</p>
-    <p>🤖 由 Hermes Agent 自动整理 · 每日更新</p>
-    <p style="margin-top:8px"><a href="/daily-news/">← 查看往期</a></p>
+    <p>📡 新闻来源：新浪国际、观察者网、新华社、新唐人、VOA</p>
+    <p>🤖 由 Hermes Agent 自动整理 · 每日 07:00 更新</p>
+    <p style="margin-top:8px"><a href="/daily-news/">← 返回首页 · 查看往期</a></p>
   </div>
-
 </div>
 </body>
 </html>
