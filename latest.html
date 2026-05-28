@@ -3,43 +3,440 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>每日早报 - 2026-05-28</title>
+<title>新闻早报 - 2026年5月28日</title>
 <style>
-:root { --bg: #f8f9fa; --card: #ffffff; --text: #1a1a2e; --accent: #2563eb; --border: #e5e7eb; }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 20px; }
-.container { max-width: 800px; margin: 0 auto; }
-.header { text-align: center; padding: 30px 0 20px; }
-.header h1 { font-size: 24px; font-weight: 700; }
-.header .date { color: #6b7280; font-size: 14px; margin-top: 5px; }
-.section { margin: 20px 0; }
-.section h2 { font-size: 18px; font-weight: 600; margin-bottom: 12px; padding-left: 12px; border-left: 4px solid var(--accent); }
-.cards { display: flex; flex-direction: column; gap: 12px; }
-.card { background: var(--card); border-radius: 12px; padding: 16px 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-.card h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
-.card h3 a { color: var(--text); text-decoration: none; }
-.card h3 a:hover { color: var(--accent); }
-.card p { font-size: 13px; color: #6b7280; margin-bottom: 8px; }
-.card .link { font-size: 12px; color: var(--accent); text-decoration: none; }
-.footer { text-align: center; padding: 30px 0; color: #9ca3af; font-size: 12px; }
-.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-right: 4px; }
-.badge-ai { background: #ede9fe; color: #6d28d9; }
-.badge-news { background: #dbeafe; color: #1d4ed8; }
-.badge-star { background: #fef3c7; color: #d97706; }
+  :root {
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6c757d;
+    --accent: #2563eb;
+    --border: #e9ecef;
+    --tag-intl: #dc2626;
+    --tag-cn: #16a34a;
+    --tag-tech: #7c3aed;
+    --tag-industry: #0891b2;
+    --tag-star: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 20px;
+  }
+  .container { max-width: 680px; margin: 0 auto; }
+  .header { text-align: center; padding: 30px 0 20px; }
+  .header h1 { font-size: 24px; font-weight: 700; letter-spacing: 1px; }
+  .header .date { font-size: 14px; color: var(--muted); margin-top: 4px; }
+  .header .badge { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; padding: 2px 10px; border-radius: 10px; margin-top: 8px; }
+  .section-title { font-size: 18px; font-weight: 700; padding: 20px 0 12px; display: flex; align-items: center; gap: 8px; }
+  .section-title .icon { font-size: 22px; }
+  .card { background: var(--card); border-radius: 12px; padding: 16px 18px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid var(--border); }
+  .card h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; line-height: 1.5; }
+  .card h3 a { color: inherit; text-decoration: none; }
+  .card h3 a:hover { color: var(--accent); }
+  .card p { font-size: 14px; color: #374151; margin-bottom: 8px; }
+  .card .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; align-items: center; }
+  .tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; color: #fff; font-weight: 500; }
+  .tag-intl { background: var(--tag-intl); }
+  .tag-cn { background: var(--tag-cn); }
+  .tag-tech { background: var(--tag-tech); }
+  .tag-industry { background: var(--tag-industry); }
+  .tag-star { background: var(--tag-star); }
+  .card .link { font-size: 12px; color: var(--accent); text-decoration: none; font-weight: 500; }
+  .card .link:hover { text-decoration: underline; }
+  .card .source { font-size: 12px; color: var(--muted); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+  .footer { text-align: center; font-size: 12px; color: var(--muted); padding: 30px 0 20px; }
+  .footer a { color: var(--accent); text-decoration: none; }
+  .back-link { display: inline-block; margin-bottom: 16px; font-size: 13px; color: var(--accent); text-decoration: none; }
+  .back-link:hover { text-decoration: underline; }
+  .summary-box { background: #eff6ff; border-left: 4px solid var(--accent); border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; font-size: 14px; color: #1e40af; }
+  @media (max-width: 480px) { body { padding: 12px; } .header h1 { font-size: 20px; } }
 </style>
 </head>
 <body>
 <div class="container">
-<div class="header">
-<h1>📰 每日早报</h1>
-<div class="date">2026-05-28</div>
-</div>
-<section class="section"><h2>⭐ 本周热门 AI 项目</h2><div class="cards"><div class="card"><h3><a href="https://github.com/study8677/awesome-architecture" target="_blank">study8677/awesome-architecture</a></h3><p>⭐563 (Vue</p><a class="link" href="https://github.com/study8677/awesome-architecture" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://github.com/UditAkhourii/adhd" target="_blank">UditAkhourii/adhd</a></h3><p>⭐347 (TypeScript</p><a class="link" href="https://github.com/UditAkhourii/adhd" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://github.com/FlashML-org/flashlib" target="_blank">FlashML-org/flashlib</a></h3><p>⭐244 (Python</p><a class="link" href="https://github.com/FlashML-org/flashlib" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://github.com/realrossmanngroup/no_ai_slop_writing_rules" target="_blank">realrossmanngroup/no_ai_slop_writing_rules</a></h3><p>⭐240 (N/A</p><a class="link" href="https://github.com/realrossmanngroup/no_ai_slop_writing_rules" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://github.com/mikaeldengale-cloud/Deepseek-v4-Pro-App" target="_blank">mikaeldengale-cloud/Deepseek-v4-Pro-App</a></h3><p>⭐234 (TypeScript</p><a class="link" href="https://github.com/mikaeldengale-cloud/Deepseek-v4-Pro-App" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://github.com/OpenBMB/PilotDeck" target="_blank">OpenBMB/PilotDeck</a></h3><p>⭐200 (TypeScript</p><a class="link" href="https://github.com/OpenBMB/PilotDeck" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://github.com/Astraltenprosper/uncensored-ai-image-video-generator" target="_blank">Astraltenprosper/uncensored-ai-image-video-generator</a></h3><p>⭐179 (Python</p><a class="link" href="https://github.com/Astraltenprosper/uncensored-ai-image-video-generator" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://github.com/testerlingcodo/gemini-antigravity-cli" target="_blank">testerlingcodo/gemini-antigravity-cli</a></h3><p>⭐172 (TypeScript</p><a class="link" href="https://github.com/testerlingcodo/gemini-antigravity-cli" target="_blank">查看原文 →</a></div></div></section>
-<section class="section"><h2>🤖 AI 资讯</h2><div class="cards"><div class="card"><h3><a href="https://www.contentplatform.info/articles/470338/2026%E5%B9%B45%E6%9C%8825%E6%97%A5%E5%85%A8%E7%90%83ai%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%BA%94%E5%A4%A7%E7%84%A6%E9%BB%9E%E9%A0%AD%E6%A2%9D%EF%BC%9A%E5%BE%9E%E3%80%8C%E5%A4%A9%E8%8A%B1%E6%9D%BF" target="_blank">2026年5月25日全球AI人工智能五大焦點頭條：從「天花板突破」到 ...</a></h3><p># 2026年5月25日全球AI人工智能五大焦點頭條：從「天花板突破」到「底層翻車」. 2026年5月25日，全球人工智慧領域迎來近年罕見的「多重事件重疊」時刻——既有足以改寫產業天花板的巔峰突破，也有被一句話擊潰的底層荒謬。以下是當天流量與討論度最高的五則AI新聞。. OpenAI內部推理模型在本</p><a class="link" href="https://www.contentplatform.info/articles/470338/2026%E5%B9%B45%E6%9C%8825%E6%97%A5%E5%85%A8%E7%90%83ai%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%BA%94%E5%A4%A7%E7%84%A6%E9%BB%9E%E9%A0%AD%E6%A2%9D%EF%BC%9A%E5%BE%9E%E3%80%8C%E5%A4%A9%E8%8A%B1%E6%9D%BF" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://k.sina.cn/article_7857201856_1d45362c001905awna.html?from=tech" target="_blank">新浪AI热点小时报丨2026年05月10日16时_今日实时AI热点速递</a></h3><p>每日新闻摘录 · 1、如何促进人工智能与能源双向赋能？ · 2、全球“Token工厂”，崛起！ · 3、恶意仅退款平台岂能拉偏架 · 4、英伟达今年已向AI企业投资超400亿美元，</p><a class="link" href="https://k.sina.cn/article_7857201856_1d45362c001905awna.html?from=tech" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://juejin.cn/post/7633625645960364083" target="_blank">2026年4月28日AI重要新闻 - 稀土掘金</a></h3><p>### 一、国际 AI 重要新闻. Musk and Altman face off in trial that will determine OpenAI's future. EU tells Google to open up AI on Android; Google says that's </p><a class="link" href="https://juejin.cn/post/7633625645960364083" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://gitcode.csdn.net/6a027a380a2f6a37c5a96085.html" target="_blank">人工智能日报每日AI新闻（2026年5月12日） - AtomGit开源社区</a></h3><p># logo AtomGit开源社区. ## 登录社区云. ### AtomGit开源社区. # 人工智能日报 每日AI新闻（2026年5月12日）. ### 知识浅谈. 大家早上好，这里是今天的 AI 新闻速览。今天这几条信息里，能明显看到一个共同点：AI 不只是继续卷模型能力，已经越来越多地卷到</p><a class="link" href="https://gitcode.csdn.net/6a027a380a2f6a37c5a96085.html" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://www.youtube.com/watch?v=DRGTZ5qqI3Y" target="_blank">AI新闻简报：2026年5月12日 - YouTube</a></h3><p>[1:02:23 西方為何害怕中國治沙？專家揭露中國治沙真相：他們真正害怕的根本不是沙漠消失，而是中國這張王牌！#圆桌派 #许子东 #马家辉 #梁文道 #锵锵行天下 #观复嘟嘟 #马未都 纪实Talk 195K views • 10 days ago Live Playlist ()Mix (50+</p><a class="link" href="https://www.youtube.com/watch?v=DRGTZ5qqI3Y" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://coaio.com/zh/news/2026/05/breaking-tech-news-on-may-3-2026-ai-innovations-cybersecurity-threats-2osc" target="_blank">2026年5月3日重大科技新闻：人工智能创新、网络安全威胁和行业转变</a></h3><p># 2026年5月3日重大科技新闻：人工智能创新、网络安全威胁和行业转变. 随着科技世界以惊人的速度不断演变，2026年5月3日带来了人工智能、交通、网络安全等领域的一系列发展。从Uber雄心勃勃的计划，将其司机转变为自驾技术庞大传感器网络，到涉及行业巨头的激烈法律争端，当天的头条新闻突显了塑造我们</p><a class="link" href="https://coaio.com/zh/news/2026/05/breaking-tech-news-on-may-3-2026-ai-innovations-cybersecurity-threats-2osc" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://www.news.cn/world/20260203/a173cb66c98a4b1bb551d588fd2f0209/c.html" target="_blank">特稿丨人工智能促变革美企滥用引风波——2026年首月全球AI产业动态</a></h3><p># 特稿丨人工智能促变革 美企滥用引风波——2026年首月全球AI产业动态. 2026-02-03 12:36:32  来源：新华网. 新华社北京2月3日电　**特稿｜人工智能促变革 美企滥用引风波——2026年首月全球AI产业动态**. 今年首月，人工智能（AI）进一步展现对生活、科研等多个领域的</p><a class="link" href="https://www.news.cn/world/20260203/a173cb66c98a4b1bb551d588fd2f0209/c.html" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://www.tsinghua.edu.cn/info/1182/124190.htm" target="_blank">2026年中国AI发展趋势前瞻 - 清华大学</a></h3><p>来源：新华社 1-28 熊争艳 龙盼 吴雨 宋晨 刘祯 龚雯 周闻韬. 人工智能（AI）企业数量超过6000家，AI核心产业规模预计突破1.2万亿元，同比增长近30%；. 这些数据勾勒出2025年中国AI发展的图景。一边是AI技术突破，走出一条不同于美国硅谷的“开源创新”之路，另一边是AI与经济社会</p><a class="link" href="https://www.tsinghua.edu.cn/info/1182/124190.htm" target="_blank">查看原文 →</a></div></div></section>
-<section class="section"><h2>📰 今日要闻</h2><div class="cards"><div class="card"><h3><a href="https://www.voachinese.com/z/1763" target="_blank">科技相关报道- 美国之音中文网</a></h3><p>## 无障碍链接. 中国时间 5:28 2026年5月28日 星期四. # 科技. * 英伟达首席执行官黄仁勋参加中国国家主席习近平在北京人民大会堂广场为美国总统唐纳德·特朗普举行的欢迎仪式，站在他身旁的是黑石集团首席执行官苏市民(Stephen Schwarzman)。(2026年5月14日). </p><a class="link" href="https://www.voachinese.com/z/1763" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://cn.wsj.com/zh-hans/news/archive" target="_blank">华尔街日报中文版2026年05月28日的文章列表</a></h3><p>热门文章 · 中国隐秘储备或是油价未进一步飙升的原因 · 中国工业企业利润逆势增长，顶住经济下行压力 · 伊朗的谈判谋算：既求经济纾困，又防特朗普宣布胜利 · 法拉利首款电动车首</p><a class="link" href="https://cn.wsj.com/zh-hans/news/archive" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://www.youtube.com/@voachinese" target="_blank">美国之音中文网 - YouTube</a></h3><p>VOA今日焦点(2026年5月28日) · 卢比奥：只要特朗普总统在任，伊朗就不会拥有核武器 · 特朗普总统说2026世界杯将是“有史以来最成功的一届”.</p><a class="link" href="https://www.youtube.com/@voachinese" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://www.ncsti.gov.cn/kjdt" target="_blank">科技动态</a></h3><p>请使用您的北京市统一身份认证账号和密码登录本平台，如果您在登录过程中遇到任何问题，请及时与我们联系，联系电话：13581953095。. 习近平在北京考察科技创新工作 9日上午，习近平总书记来到位于北京亦庄的国家信创园，了解信息技术应用创新和北京加快建设国际科技创新中心情况，察看代表性科技创新成果展</p><a class="link" href="https://www.ncsti.gov.cn/kjdt" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://www.chinanews.com.cn/cj/2026/03-06/10582565.shtml" target="_blank">事关AI，中国首次超越美国-中新网</a></h3><p>安徽|北京|重庆|福建|甘肃| 贵州|广东|广西|海南|河北| 河南| 湖北|湖南|黑龙江|江苏|江西| 吉林| 辽宁|内蒙古|宁夏|青海|山东| 山西| 陕西|上海|四川|天津|新疆| 兵团| 云南|浙江. 高层*|* 人事*|* 反腐*|* 深度*|* 两岸*|* 科教*|* 军事. 中外对话*</p><a class="link" href="https://www.chinanews.com.cn/cj/2026/03-06/10582565.shtml" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://cn.chinausfocus.com/news" target="_blank">热点新闻_中美聚焦- 专注中美关系的评论网站</a></h3><p>首页 外交策略 经济金融 军事安全 能源环境 社会发展 文化历史 视频 专栏作家 来稿选登 新闻. 【热点话题】：中美关系 全球治理 气候变化 脱钩 关税. 据朝中社20日报道，朝鲜导弹总局19日试射改良版“火星炮-11丁”型地对地战术弹道导弹，朝鲜劳动党总书记、国务委员长金正恩观摩试射。. * 伊</p><a class="link" href="https://cn.chinausfocus.com/news" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://www.bbc.com/zhongwen/topics/cjnz1d6kj2jt/trad" target="_blank">印度- BBC News 中文</a></h3><p>一家四口死亡原因仍令人困惑. 2026年5月14日. 圖為2020年移工團體遊行的資料圖片 ... 尼帕病毒可以從動物傳播給人類。 印度爆發尼帕病毒疫情，亞洲機場加强篩檢. 2026年1月28</p><a class="link" href="https://www.bbc.com/zhongwen/topics/cjnz1d6kj2jt/trad" target="_blank">查看原文 →</a></div><div class="card"><h3><a href="https://news.google.com/home?hl=zh-TW&gl=TW&ceid=TW%3Azh-Hant" target="_blank">Google 新聞</a></h3><p>這些新聞報導依據多項因素進行排名，包括關聯性、重要性、公信力、時效性和實用性。此外，在取得允許的情況下，也會根據 Google 產品的設定和興趣 (由你指定或根據 Google 產品的過往活動推論而得)，以及語言和所在位置進行排名。Google 可能與其中一些發布者訂有授權協議，但這不會影響排名結果</p><a class="link" href="https://news.google.com/home?hl=zh-TW&gl=TW&ceid=TW%3Azh-Hant" target="_blank">查看原文 →</a></div></div></section>
-<div class="footer">
-<p>每日自动整理 | 数据来源: GitHub API / AI HOT / 腾讯新闻</p>
-</div>
+
+  <a class="back-link" href="index.html">← 返回首页</a>
+
+  <div class="header">
+    <h1>📰 新闻早报</h1>
+    <div class="date">2026年5月28日 · 星期四 · 农历四月十二</div>
+    <div class="badge">数据来源：AI HOT · GitHub Trending · 腾讯新闻</div>
+  </div>
+
+  <div class="summary-box">
+    <strong>📌 今日速览：</strong> Cognition 估值达 260 亿美元成全球最大独立 Agent 实验室 · OpenAI 产品支持私有 MCP 服务器 · 高通与字节跳动达成 AI ASIC 芯片合作 · Runway 推出 MCP 服务器 · 教皇发布 AI 通谕 · 美伊谈判持续油价重返 100 美元 · 三星工会通过薪酬协议
+  </div>
+
+  <!-- ============ ⭐ GitHub AI 热门项目 ============ -->
+  <div class="section-title"><span class="icon">⭐</span> 本周热门 AI 项目</div>
+
+  <div class="card">
+    <h3><a href="https://github.com/study8677/awesome-architecture" target="_blank">1. study8677/awesome-architecture</a> ⭐563</h3>
+    <div class="meta"><span class="tag tag-star">Vue</span><span class="tag tag-tech">架构</span></div>
+    <p>Think like a software architect, not just a coder — 21 architecture maps (incl. AI gateway, RAG, agents, inference serving, vector DB) 帮助开发者建立架构思维。</p>
+    <div class="meta"><a class="link" href="https://github.com/study8677/awesome-architecture" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3><a href="https://github.com/UditAkhourii/adhd" target="_blank">2. UditAkhourii/adhd</a> ⭐347</h3>
+    <div class="meta"><span class="tag tag-star">TypeScript</span><span class="tag tag-tech">Agent</span></div>
+    <p>ADHD — 面向编码智能体的 Skill。基于 Claude Agent SDK 实现了思维树（Tree-of-Thought）剪枝，可并行发散不同方向的思考并在不同约束下优化。</p>
+    <div class="meta"><a class="link" href="https://github.com/UditAkhourii/adhd" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3><a href="https://github.com/FlashML-org/flashlib" target="_blank">3. FlashML-org/flashlib</a> ⭐244</h3>
+    <div class="meta"><span class="tag tag-star">Python</span><span class="tag tag-tech">ML</span></div>
+    <p>快速且内存高效的经典机器学习算子库。</p>
+    <div class="meta"><a class="link" href="https://github.com/FlashML-org/flashlib" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3><a href="https://github.com/realrossmanngroup/no_ai_slop_writing_rules" target="_blank">4. realrossmanngroup/no_ai_slop_writing_rules</a> ⭐240</h3>
+    <div class="meta"><span class="tag tag-star">N/A</span><span class="tag tag-tech">写作</span></div>
+    <p>Claude Code 参考：以 Louis Rossmann 的语调写作，拒绝 AI 味。包含可移植的 CLAUDE.md 及 skills。</p>
+    <div class="meta"><a class="link" href="https://github.com/realrossmanngroup/no_ai_slop_writing_rules" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3><a href="https://github.com/mikaeldengale-cloud/Deepseek-v4-Pro-App" target="_blank">5. mikaeldengale-cloud/Deepseek-v4-Pro-App</a> ⭐234</h3>
+    <div class="meta"><span class="tag tag-star">TypeScript</span><span class="tag tag-tech">桌面端</span></div>
+    <p>DeepSeek V4 Flash Pro Chat API 的 Windows 11 桌面客户端，开源 AI 聊天机器人/编码智能体，支持 MoE 模型 1.6T 参数及免费 API。</p>
+    <div class="meta"><a class="link" href="https://github.com/mikaeldengale-cloud/Deepseek-v4-Pro-App" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3><a href="https://github.com/OpenBMB/PilotDeck" target="_blank">6. OpenBMB/PilotDeck</a> ⭐199</h3>
+    <div class="meta"><span class="tag tag-star">TypeScript</span><span class="tag tag-tech">Agent</span></div>
+    <p>任务导向的 AI Agent 生产力平台。</p>
+    <div class="meta"><a class="link" href="https://github.com/OpenBMB/PilotDeck" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3><a href="https://github.com/Astraltenprosper/uncensored-ai-image-video-generator" target="_blank">7. Astraltenprosper/uncensored-ai-image-video-generator</a> ⭐179</h3>
+    <div class="meta"><span class="tag tag-star">Python</span><span class="tag tag-tech">图像</span></div>
+    <p>AI 工具，用于生成无审查的图像和视频（18+）。</p>
+    <div class="meta"><a class="link" href="https://github.com/Astraltenprosper/uncensored-ai-image-video-generator" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3><a href="https://github.com/testerlingcodo/gemini-antigravity-cli" target="_blank">8. testerlingcodo/gemini-antigravity-cli</a> ⭐172</h3>
+    <div class="meta"><span class="tag tag-star">TypeScript</span><span class="tag tag-tech">CLI 工具</span></div>
+    <p>Gemini Antigravity 2.0 CLI — Google 终端 AI Agent 工具，支持 MCP 服务器、插件、斜杠命令及 Gemini 3.5 Flash 编码智能体。</p>
+    <div class="meta"><a class="link" href="https://github.com/testerlingcodo/gemini-antigravity-cli" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <hr>
+
+  <!-- ============ 🤖 AI 资讯 ============ -->
+  <div class="section-title"><span class="icon">🤖</span> AI 资讯</div>
+
+  <!-- 行业动态 -->
+  <div><span class="tag tag-industry" style="margin-bottom:8px;display:inline-block">行业动态</span></div>
+
+  <div class="card">
+    <h3>1. Cognition 成为全球最大独立智能体实验室</h3>
+    <p>Cognition 完成超 10 亿美元融资，估值达 260 亿美元，由 Lux Capital、General Catalyst 等领投。企业使用量自年初增长超 10 倍，年化收入增至 4.92 亿美元。公司推出首位 AI 软件工程师 Devin，并获 Peter Thiel 重大投资。</p>
+    <div class="meta"><span class="source">X：swyx (@swyx)</span><a class="link" href="https://x.com/swyx/status/2059717021944926238" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>2. 黄仁勋展示英伟达台湾新园区</h3>
+    <p>黄仁勋展示了新的台湾园区，英伟达计划每年在台湾投资约 1500 亿美元。此举发生在竞争对手 AMD 宣布将向台湾 AI 领域投资超 100 亿美元之后。</p>
+    <div class="meta"><span class="source">X：Rohan Paul (@rohanpaul_ai)</span><a class="link" href="https://x.com/rohanpaul_ai/status/2059689400267939925" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>3. Replit 入选 Redpoint 2026 InfraRed 100 榜单</h3>
+    <p>Replit 被列入 Redpoint 的 2026 InfraRed 100 榜单，与 Stripe、Snowflake 和 HashiCorp 等往届入选者并列。</p>
+    <div class="meta"><span class="source">X：Replit (@Replit)</span><a class="link" href="https://x.com/Replit/status/2059688584899154134" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>4. 教皇发布 AI 通谕《Magnifica Humanitas》</h3>
+    <p>教皇 Leo XIV 发布题为《Magnifica Humanitas》的通谕，警告 AI 使用绝非纯粹技术问题，当进入影响人类生活的过程时，便触及权利、机会、地位与自由。Anthropic 联合创始人 Christopher Olah 出席发布。</p>
+    <div class="meta"><span class="source">The Verge</span><a class="link" href="https://www.theverge.com/ai-artificial-intelligence/937933/pope-ai-encyclical-tech-industry-reactions" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>5. 思科与 OpenAI 携手 Codex 重新定义企业工程</h3>
+    <p>思科正与 OpenAI 合作，利用 Codex 重新定义企业工程实践，旨在扩展 AI 原生开发能力、加速 AI Defense 安全工作，并实现缺陷修复流程的自动化。</p>
+    <div class="meta"><span class="source">OpenAI 官网</span><a class="link" href="https://openai.com/index/cisco" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>6. 阿里云入选 Omdia 智能体 AI 市场雷达领导者</h3>
+    <p>阿里云在 Omdia 的智能体 AI 市场雷达中被评为领导者。Omdia 强调了阿里云在每一层的全栈能力，是首个将整个平台围绕智能体范式进行构建的云服务商。</p>
+    <div class="meta"><span class="source">X：阿里云</span><a class="link" href="https://x.com/alibaba_cloud/status/2059509714854007181" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>7. 我国将加快研究推进 AI 健康发展综合性立法、低空经济立法</h3>
+    <div class="meta"><span class="source">IT之家（RSS）</span><a class="link" href="https://www.ithome.com/0/955/758.htm" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>8. 阿里云成为 PyTorch 基金会白金会员</h3>
+    <p>阿里云以白金会员身份加入 PyTorch 基金会。作为 AI 基础设施全球领导者及 Qwen 模型缔造方，将为社区带来生产级工程经验。</p>
+    <div class="meta"><span class="source">X：阿里云</span><a class="link" href="https://x.com/alibaba_cloud/status/2059453607075004835" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>9. 消息称高通与字节跳动达成 AI ASIC 芯片合作，采购量在数百万颗级别</h3>
+    <div class="meta"><span class="source">IT之家（RSS）</span><a class="link" href="https://www.ithome.com/0/955/674.htm" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <!-- 产品发布/更新 -->
+  <div style="margin-top:16px"><span class="tag tag-tech" style="display:inline-block">产品发布/更新</span></div>
+
+  <div class="card">
+    <h3>10. Midjourney Web 更新：对话模式改进</h3>
+    <p>对话模式在文本和语音输入方面进行了改进。语音会话时可访问用户图像提示、风格参考、侧边栏设置和最近任务。图像提示功能可从托盘和侧边栏直接使用。</p>
+    <div class="meta"><span class="source">Midjourney Updates</span><a class="link" href="https://updates.midjourney.com/web-updates-5" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>11. OpenAI 产品支持私有 MCP 服务器安全连接</h3>
+    <p>团队可在内部网络中保留 MCP 服务器，同时 ChatGPT、Codex 和 Responses API 通过仅出站 HTTPS 进行连接。</p>
+    <div class="meta"><span class="source">X：OpenAI Developers</span><a class="link" href="https://x.com/OpenAIDevs/status/2059703536825565499" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>12. OpenCode x MiMo V2.5 限时免费开放</h3>
+    <p>1M 上下文 · 推理 · 文本 · 图像，限时免费使用。</p>
+    <div class="meta"><span class="source">X：opencode</span><a class="link" href="https://x.com/opencode/status/2059696100626297225" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>13. 开源 FastVideo Dreamverse 实时视频生成工具</h3>
+    <p>仅需 7 秒即可生成 30 秒 1080p 视频！基于单张 NVIDIA B200 GPU 和 LTX-2 模型，实现实时视频生成。</p>
+    <div class="meta"><span class="source">X：Sky Computing Lab</span><a class="link" href="https://x.com/haoailab/status/2059695648103112946" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>14. Google Pay 向"智能体商务"演进</h3>
+    <p>Google Pay 推出通用商务协议和新 MCP 服务器，允许 AI 智能体管理集成与分析趋势。Android 动态回调支持快速结账，通过 WebView 将支付功能扩展至社交媒体应用。</p>
+    <div class="meta"><span class="source">Google Developers Blog</span><a class="link" href="https://developers.googleblog.com/the-latest-updates-to-google-pay" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>15. Grok 编程智能体登陆 Kilo IDE 平台</h3>
+    <p>使用 SuperGrok 或 X Premium+ 订阅在 Kilo IDE 中使用 grok-build-0.1，享受高速智能体编程。</p>
+    <div class="meta"><span class="source">X：xAI</span><a class="link" href="https://x.com/xai/status/2059666227115819149" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>16. Perplexity 开源 Unigram 分词器，CPU 占用降低 5-6 倍</h3>
+    <p>Perplexity 开源了重新构建的 Unigram 分词器，可将 CPU 占用降低 5-6 倍。小型重排序器和嵌入模型在 GPU 上运行仅为个位数毫秒。</p>
+    <div class="meta"><span class="source">X：Perplexity</span><a class="link" href="https://x.com/perplexity_ai/status/2059664738087469511" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>17. Claude Marketplace 新增五家合作伙伴</h3>
+    <p>新增 @augmentcode、@boltdotnew、@coderabbitai、@hebbia 和 @WeAreLegora，现有 Anthropic 消费承诺可用于购买其 Claude 驱动的产品。</p>
+    <div class="meta"><span class="source">X：Claude</span><a class="link" href="https://x.com/claudeai/status/2059662933924123044" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>18. Krea 2 API 发布，支持多平台与智能体</h3>
+    <p>Krea 2 的 API 现已在 fal、ComfyUI 等平台可用，支持通过 Hermes 等智能体使用，全面支持 Claude、Codex 或 OpenClaw。</p>
+    <div class="meta"><span class="source">X：Krea AI</span><a class="link" href="https://x.com/krea_ai/status/2059650622203515143" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>19. Runway 推出 MCP 服务器</h3>
+    <p>Runway MCP 服务器允许任何兼容 MCP 的 AI 智能体在对话界面中直接生成图像与视频，接入 Gen-4.5、Seedance 2.0、GPT Image 2、Kling 3.0 等多款 SOTA 模型。</p>
+    <div class="meta"><span class="source">Runway News</span><a class="link" href="https://runwayml.com/news/mcp" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>20. Qoder 平台限时半价使用 Qwen3.7-Max 模型</h3>
+    <p>Qwen3.7-Max 在 Qoder 上半价提供，新用户每天还有 100 次免费模型调用，覆盖桌面端、JetBrains 插件、CLI 等。</p>
+    <div class="meta"><span class="source">X：通义千问</span><a class="link" href="https://x.com/Alibaba_Qwen/status/2059586373456380225" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>21. Claude Code v2.1.152 更新发布</h3>
+    <p>核心改进：/code-review --fix 可将审查建议直接应用于工作目录；新增 /reload-skills 命令；SessionStart 钩子可返回 reloadSkills: true 等。修复了终端样式退化、沙箱警告显示、连接卡顿等问题。</p>
+    <div class="meta"><span class="source">Claude Code GitHub Releases</span><a class="link" href="https://github.com/anthropics/claude-code/releases/tag/v2.1.152" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <!-- 论文研究 -->
+  <div style="margin-top:16px"><span class="tag tag-cn" style="display:inline-block">论文研究</span></div>
+
+  <div class="card">
+    <h3>22. 社会科学中的编码智能体</h3>
+    <p>Anthropic 针对 1260 名定量社会科学家的调查显示，81% 用过 AI 聊天机器人，仅 20% 将编码智能体常规应用于工作。以男性名字命名的研究者使用率是女性研究者的两倍；顶尖大学研究者可能性高出 40%。</p>
+    <div class="meta"><span class="source">Anthropic Research</span><a class="link" href="https://www.anthropic.com/research/coding-agents-social-sciences" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>23. 通过零信任聚合实现的隐私分析</h3>
+    <p>Google Research 推出新隐私分析方案，结合密码学安全聚合协议与可信执行环境（TEE），基于零信任原则确保仅获取匿名化聚合洞察。</p>
+    <div class="meta"><span class="source">Google Research Blog</span><a class="link" href="https://research.google/blog/private-analytics-via-zero-trust-aggregation" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>24. ITBench-AA：前沿大模型在智能体企业 IT 任务基准测试中均低于 50%</h3>
+    <p>由 Artificial Analysis 和 IBM 推出的 ITBench-AA SRE 基准测试显示，Claude Opus 4.7（47%）领先，GPT-5.5（46%）和 Qwen3.7 Max（42%）紧随其后。Gemma 4 31B 以每任务 $0.14 成本获 37% 得分，性价比最优。</p>
+    <div class="meta"><span class="source">Hugging Face Blog</span><a class="link" href="https://huggingface.co/blog/ibm-research/itbench-aa" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>25. Qwen3.5 创纪录 580 tps 智能体工作负载速度</h3>
+    <p>Qwen3.5 在 TokenSpeed 推理引擎上达到创纪录的 580 tps，由通义千问、TokenSpeed、NVIDIA 及 Mooncake 团队共同实现，采用 FlashAttention-4 优化。</p>
+    <div class="meta"><span class="source">X：通义千问</span><a class="link" href="https://x.com/Alibaba_Qwen/status/2059674574397313277" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <!-- 技巧与观点 -->
+  <div style="margin-top:16px"><span class="tag tag-intl" style="display:inline-block">技巧与观点</span></div>
+
+  <div class="card">
+    <h3>26. 用好 Coding Agent，重点是两头</h3>
+    <p>用好 Coding Agent 的关键在于初始规划：先用最强模型在多个平台生成设计方案，选择最优方案并借鉴其他版本。复杂计划拆分为多个 Phases，最后用 GPT-5.5 做代码审核。应避免让多个智能体交叉 Review。</p>
+    <div class="meta"><span class="source">X：宝玉 (@dotey)</span><a class="link" href="https://x.com/dotey/status/2059773942500298934" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>27. 使用 LLM 保障源代码安全</h3>
+    <p>Claude Blog 分享使用 Opus 构建威胁模型、发现漏洞的最佳实践，六步循环：威胁建模→沙箱隔离→漏洞发现→验证→分类→修复。截至 5 月 22 日已披露 1,596 个漏洞，97 个已修补。</p>
+    <div class="meta"><span class="source">Claude Blog</span><a class="link" href="https://claude.com/blog/using-llms-to-secure-source-code" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>28. AI 智能体的零信任安全框架</h3>
+    <p>Anthropic 发布针对企业部署自主 AI 智能体的安全框架，提出三层零信任架构及八阶段实施流程，涵盖提示注入、工具投毒、记忆投毒等特有威胁。</p>
+    <div class="meta"><span class="source">Claude Blog</span><a class="link" href="https://claude.com/blog/zero-trust-for-ai-agents" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>29. Anthropic 和 OpenAI 找到了产品市场契合点</h3>
+    <p>两家公司通过编程智能体找到 PMF，企业客户成本显著上升。企业套餐从高额折扣改为与 API 用量挂钩，GPT-5.5 和 Opus 4.7 的 API 定价显著高于前代。</p>
+    <div class="meta"><span class="source">Simon Willison 博客</span><a class="link" href="https://simonwillison.net/2026/May/27/product-market-fit" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>30. 与 Google 搜索产品副总裁的访谈：AI 原生搜索时代</h3>
+    <p>探讨 Google Search 向 AI 原生模式的重大转变，包括 AI Mode 是进化还是重塑、AI 搜索的高运行成本、Google TPU 优势、搜索量不减反增的原因等核心问题。</p>
+    <div class="meta"><span class="source">X：Kim (@kimmonismus)</span><a class="link" href="https://x.com/kimmonismus/status/2059668961181004275" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>31. 藏师傅发布小红书图文排版 AI Skill</h3>
+    <p>guizang-social-card-skill 针对小红书图文常见类别优化，为旅行博主集成地图组件，AI 自动在底图上标记并嵌入图片，不会被平台标注为 AI 生成。</p>
+    <div class="meta"><span class="source">X：歸藏</span><a class="link" href="https://x.com/op7418/status/2059587983289016348" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>32. OpenAI 奥尔特曼称 AI 对白领冲击不如预期般严重</h3>
+    <p>奥尔特曼表示自己很高兴当时错了，AI 对白领工作的影响并未如预期般严重。</p>
+    <div class="meta"><span class="source">IT之家（RSS）</span><a class="link" href="https://www.ithome.com/0/956/021.htm" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>33. 使用 Codex 构建自改进税务智能体</h3>
+    <p>OpenAI、Thrive 与 Crete 合作，使用 Codex 构建自改进税务智能体，自动处理报税流程，提升准确率并加速工作流。</p>
+    <div class="meta"><span class="source">OpenAI 官网</span><a class="link" href="https://openai.com/index/building-self-improving-tax-agents-with-codex" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <hr>
+
+  <!-- ============ 📰 今日要闻 ============ -->
+  <div class="section-title"><span class="icon">📰</span> 今日要闻</div>
+
+  <!-- 国际 -->
+  <div><span class="tag tag-intl" style="margin-bottom:8px;display:inline-block">国际</span></div>
+
+  <div class="card">
+    <h3>1. 美伊谈判持续：卢比奥称协议或需数日，油价重返 100 美元</h3>
+    <p>美国国务卿卢比奥表示与伊朗就协议措辞进行谈判可能还需要数天时间，呼吁迅速重开霍尔木兹海峡。此前美军对伊朗船只和导弹阵地发动了新一轮自卫性打击。油价重返 100 美元关口，分析人士警告全球能源市场恐已回不了头。</p>
+    <div class="meta"><span class="source">美国之音 / 华尔街日报</span><a class="link" href="https://www.voachinese.com/z/1748" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>2. 特朗普称将与赖清德通话，中国表示坚决反对</h3>
+    <p>特朗普接连表态将与台湾总统赖清德通话。台湾方面表示非常乐意但未接到通话讯息。中国政府则对美台领导人可能通话表示坚决反对。</p>
+    <div class="meta"><span class="source">美国之音</span><a class="link" href="https://www.voachinese.com/z/1739" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>3. 三星工会投票通过薪酬协议，全球芯片供应链避开大乱</h3>
+    <p>三星电子工会投票通过薪酬协议，全球芯片供应链惊险避开潜在的大规模混乱。</p>
+    <div class="meta"><span class="source">世界新聞網</span><a class="link" href="https://www.worldjournal.com/wj/story/121209/9527993" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>4. NASA 计划 2032 年前建半永久月面基地</h3>
+    <p>面临中国日益增长的压力，NASA 制定目标在 2032 年前建成半永久性月球表面基地。</p>
+    <div class="meta"><span class="source">世界新聞網</span><a class="link" href="https://www.worldjournal.com/wj/story/121172/9528023" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>5. 日美将携手构筑军民两用技术企业合作框架</h3>
+    <p>日美两国政府最快年内将构筑官民框架，第一批项目是在日本生产美国初创企业设计的小型无人机，旨在与中国在无人机市场分庭抗礼。</p>
+    <div class="meta"><span class="source">共同社</span><a class="link" href="https://china.kyodonews.net/articles/-/9683" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <!-- 国内 -->
+  <div style="margin-top:16px"><span class="tag tag-cn" style="display:inline-block">国内</span></div>
+
+  <div class="card">
+    <h3>6. 中国工业企业利润逆势增长，顶住经济下行压力</h3>
+    <p>中国工业企业利润逆势增长，一季度进口增速达 19.6%，展现了中国外贸的强劲韧性和中国市场的巨大潜力。</p>
+    <div class="meta"><span class="source">华尔街日报 / 商务部</span><a class="link" href="https://cn.wsj.com/zh-hans/news/archive" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>7. 四川"人工智能+"工程提速，短期聚焦重点领域融合应用</h3>
+    <p>四川省发布《加快推进"人工智能+"一号创新工程实施方案》，短期聚焦重点领域融合应用，推动 AI 赋能千行百业。</p>
+    <div class="meta"><span class="source">中国新闻网</span><a class="link" href="https://www.chinanews.com.cn/business" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>8. 公募基金总规模近 40 万亿元创历史新高</h3>
+    <p>截至 2026 年 4 月底，公募基金总规模为 39.36 万亿元，较 3 月底增长约 1.82 万亿元，规模创下历史新高。</p>
+    <div class="meta"><span class="source">中国新闻网</span><a class="link" href="https://www.chinanews.com.cn/business" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>9. 2026 金砖新工业革命展览会在厦门开幕</h3>
+    <p>以"共筑智能化制造生态 加速新工业革命进程"为主题，来自 10 个国家的 120 多家龙头企业推出工业大模型等创新成果。</p>
+    <div class="meta"><span class="source">中国新闻网</span><a class="link" href="https://www.chinanews.com.cn/business" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>10. 广东用电负荷创历史新高，突破 1.65 亿千瓦</h3>
+    <p>5 月 27 日 13 时 44 分，广东电网用电负荷今年第一次创新高，达 1.6593 亿千瓦，较往年首次峰值时间提前近两个月。</p>
+    <div class="meta"><span class="source">中国新闻网</span><a class="link" href="https://www.chinanews.com.cn/business" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <!-- 财经 -->
+  <div style="margin-top:16px"><span class="tag tag-industry" style="display:inline-block">财经</span></div>
+
+  <div class="card">
+    <h3>11. 油价重返 100 美元，分析师警告全球能源市场已回不了头</h3>
+    <p>受伊朗战事影响，布伦特原油价格波动剧烈。美国汽油价格自战事爆发以来暴涨近 50%，普通标号汽油均价达每加仑 4.45 美元。</p>
+    <div class="meta"><span class="source">世界新聞網 / 中央社</span><a class="link" href="https://www.worldjournal.com/wj/story/121209/9527847" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>12. 特朗普宣布对欧盟汽车关税提高至 25%</h3>
+    <p>特朗普宣布将把对欧盟汽车与卡车的进口关税提高至 25%，若欧洲车厂在美国本土设厂生产则可免除，推动制造业回流美国。</p>
+    <div class="meta"><span class="source">鉅亨網</span><a class="link" href="https://news.cnyes.com/news/id/6439899" target="_blank">查看原文 →</a></div>
+  </div>
+
+  <hr>
+
+  <div class="footer">
+    <p>🤖 由 Hermes Agent 自动整理 · 数据来源：AI HOT & GitHub Trending & 腾讯新闻</p>
+    <p>每日 08:00 北京时间更新 · <a href="index.html">返回首页</a></p>
+  </div>
+
 </div>
 </body>
 </html>
