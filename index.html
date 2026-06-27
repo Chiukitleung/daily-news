@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>每日早报归档</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:720px;margin:0 auto;padding:20px;background:#f5f5f5;color:#333}
+h1{font-size:24px;text-align:center;margin-bottom:8px}
+.subtitle{text-align:center;color:#888;font-size:14px;margin-bottom:24px}
+.list{background:#fff;border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.item{display:flex;justify-content:space-between;align-items:center;padding:12px 8px;border-bottom:1px solid #f0f0f0}
+.item:last-child{border-bottom:none}
+.date{font-size:16px;font-weight:600;color:#1a1a1a}
+.latest{background:#667eea;color:#fff;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600}
+a{color:#667eea;text-decoration:none;font-size:14px;font-weight:500}
+a:hover{text-decoration:underline}
+.empty{text-align:center;color:#999;padding:20px}
+.footer{text-align:center;padding:20px;font-size:12px;color:#999}
+</style>
+</head>
+<body>
+<h1>📰 每日早报</h1>
+<p class="subtitle">AI + 科技 + 时事 · 每日更新</p>
+<div class="list" id="list">
+</div>
+<p class="footer"><a href="https://github.com/Chiukitleung/daily-news">GitHub 仓库</a></p>
+<script>
+const files = [
+  {date:"2026-06-27",label:"2026年6月27日 · 星期六"}
+];
+const list = document.getElementById('list');
+files.forEach(f => {
+  const div = document.createElement('div'); div.className='item';
+  const isLatest = f.date === files[0].date;
+  div.innerHTML = '<span class="date">'+f.label+(isLatest?' <span class="latest">最新</span>':'')+'</span><a href="'+f.date+'.html">查看 →</a>';
+  list.appendChild(div);
+});
+</script>
+</body>
+</html>
