@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>截码战 · 推理记词板</title>
+<style>
+  :root {
+    --red: #ff4d5e; --red-dark: #2a0f14; --red-glow: rgba(255,77,94,.35);
+    --blue: #3ea6ff; --blue-dark: #0d1826; --blue-glow: rgba(62,166,255,.35);
+    --bg: #0d0f1a; --card: #161a2b; --line: #262c45; --text: #e8ecf8; --dim: #8b93b5;
+    --ok: #2ecc71; --warn: #f1c40f; --bad: #e74c3c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; min-height: 100vh; }
+
+  header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+  header h1 { font-size: 20px; letter-spacing: 2px; font-weight: 800; }
+  header h1 span { color: var(--red); } header h1 em { color: var(--blue); font-style: normal; }
+  .btn { border: none; border-radius: 10px; padding: 8px 14px; font-size: 14px; font-weight: 600; cursor: pointer; color: var(--text); background: #222842; }
+  .btn:hover { filter: brightness(1.2); }
+
+  main { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 14px; }
+  @media (max-width: 760px) { main { grid-template-columns: 1fr; } }
+
+  .team { border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 12px; border: 2px solid transparent; }
+  .team.red  { background: var(--red-dark); border-color: var(--red-glow); }
+  .team.blue { background: var(--blue-dark); border-color: var(--blue-glow); }
+
+  .team-name { font-size: 18px; font-weight: 800; letter-spacing: 1px; outline: none; border-bottom: 1px dashed transparent; padding-bottom: 4px; }
+  .team.red .team-name { color: var(--red); } .team.blue .team-name { color: var(--blue); }
+  .team-name:focus { border-bottom-color: var(--dim); }
+
+  /* 词卡 */
+  .words { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .word { position: relative; background: rgba(255,255,255,.07); border-radius: 10px; padding: 12px 8px 8px; text-align: center; cursor: pointer; user-select: none; border: 1px solid transparent; }
+  .word:hover { border-color: rgba(255,255,255,.25); }
+  .word input { width: 100%; background: transparent; border: none; color: var(--text); font-size: 17px; font-weight: 700; text-align: center; outline: none; }
+  .word .tag { position: absolute; top: 3px; left: 6px; font-size: 10px; color: var(--dim); }
+  .word.hidden { background: repeating-linear-gradient(45deg, #222842, #222842 8px, #1b2034 8px, #1b2034 16px); }
+  .word.hidden::after { content: "🔒"; font-size: 22px; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+
+  /* 推理对照表 */
+  .deduce { background: rgba(255,255,255,.04); border-radius: 12px; padding: 10px; }
+  .deduce h3 { font-size: 13px; color: var(--dim); margin-bottom: 8px; letter-spacing: 1px; }
+  .d-row { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px dashed rgba(255,255,255,.07); }
+  .d-row:last-child { border-bottom: none; }
+  .d-kw { flex: 0 0 90px; font-weight: 700; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .d-kw i { font-style: normal; color: var(--dim); font-size: 11px; margin-right: 3px; }
+  .d-hints { flex: 1; display: flex; flex-wrap: wrap; gap: 4px; }
+  .chip { font-size: 12px; background: #222842; border-radius: 6px; padding: 2px 7px; color: var(--dim); }
+
+  /* 新增轮次 */
+  .add-round { background: rgba(255,255,255,.05); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .add-round .row1 { display: flex; gap: 8px; align-items: center; }
+  .add-round label { font-size: 12px; color: var(--dim); flex-shrink: 0; }
+  .code-input { flex: 0 0 84px; background: #0e1120; border: 1px solid var(--line); border-radius: 8px; color: var(--text); font-size: 20px; font-weight: 800; letter-spacing: 6px; text-align: center; padding: 6px; outline: none; }
+  .hint-input { flex: 1; background: #0e1120; border: 1px solid var(--line); border-radius: 8px; color: var(--text); font-size: 15px; padding: 7px 10px; outline: none; }
+  .add-round .row3 { display: flex; gap: 6px; }
+  .add-round .row3 .hint-input { flex: 1; }
+  .add-round .go { background: var(--ok); color: #06120a; border: none; border-radius: 8px; font-size: 15px; font-weight: 800; padding: 8px; cursor: pointer; }
+  .dup-warn { display: none; font-size: 12px; color: var(--warn); }
+  .dup-warn.show { display: block; }
+
+  /* 轮次记录 */
+  .rounds { display: flex; flex-direction: column; gap: 8px; max-height: 42vh; overflow-y: auto; }
+  .round { background: rgba(255,255,255,.05); border-radius: 10px; padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; }
+  .r-top { display: flex; align-items: center; justify-content: space-between; }
+  .r-no { font-size: 12px; color: var(--dim); font-weight: 700; }
+  .r-code { font-size: 18px; font-weight: 900; letter-spacing: 3px; }
+  .r-code em { font-style: normal; color: var(--dim); font-size: 11px; font-weight: 400; }
+  .r-hint-row { display: flex; align-items: center; gap: 6px; }
+  .r-hint-row .h { flex: 1; font-size: 14px; }
+  .r-hint-row .h b.dup { color: var(--warn); text-decoration: underline wavy var(--warn); }
+  .kw-tags { display: flex; gap: 4px; }
+  .kw-tags button { border: 1px solid var(--line); background: transparent; color: var(--dim); border-radius: 6px; width: 26px; height: 24px; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .kw-tags button.on { background: var(--ok); border-color: var(--ok); color: #06120a; }
+  .r-del { border: none; background: transparent; color: var(--dim); cursor: pointer; font-size: 14px; }
+  .empty { color: var(--dim); font-size: 13px; text-align: center; padding: 10px; }
+  footer { text-align: center; color: var(--dim); font-size: 12px; padding: 12px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><span>截码战</span> · <em>推理记词板</em></h1>
+  <button class="btn" onclick="resetAll()">🔄 重置</button>
+</header>
+
+<main>
+  <!-- 红队 -->
+  <section class="team red">
+    <div class="team-name" contenteditable="true" onblur="saveName('red', this.textContent)">🔴 红队</div>
+    <div class="words" id="red-words"></div>
+    <div class="deduce"><h3>🧠 推理对照（提示 → 关键词）</h3><div id="red-deduce"></div></div>
+    <div class="add-round">
+      <div class="row1">
+        <label>本轮密码</label>
+        <input class="code-input" id="red-code" maxlength="3" inputmode="numeric" placeholder="421">
+        <button class="go" onclick="addRound('red')">＋ 记录</button>
+      </div>
+      <input class="hint-input" id="red-h1" placeholder="提示 ①（对应第1位）">
+      <input class="hint-input" id="red-h2" placeholder="提示 ②（对应第2位）">
+      <input class="hint-input" id="red-h3" placeholder="提示 ③（对应第3位）">
+      <div class="dup-warn" id="red-dup">⚠️ 提示与之前轮次重复（规则不允许），确认还要记录？</div>
+    </div>
+    <div class="rounds" id="red-rounds"><div class="empty">还没有轮次记录</div></div>
+  </section>
+
+  <!-- 蓝队 -->
+  <section class="team blue">
+    <div class="team-name" contenteditable="true" onblur="saveName('blue', this.textContent)">🔵 蓝队</div>
+    <div class="words" id="blue-words"></div>
+    <div class="deduce"><h3>🧠 推理对照（提示 → 关键词）</h3><div id="blue-deduce"></div></div>
+    <div class="add-round">
+      <div class="row1">
+        <label>本轮密码</label>
+        <input class="code-input" id="blue-code" maxlength="3" inputmode="numeric" placeholder="421">
+        <button class="go" onclick="addRound('blue')">＋ 记录</button>
+      </div>
+      <input class="hint-input" id="blue-h1" placeholder="提示 ①（对应第1位）">
+      <input class="hint-input" id="blue-h2" placeholder="提示 ②（对应第2位）">
+      <input class="hint-input" id="blue-h3" placeholder="提示 ③（对应第3位）">
+      <div class="dup-warn" id="blue-dup">⚠️ 提示与之前轮次重复（规则不允许），确认还要记录？</div>
+    </div>
+    <div class="rounds" id="blue-rounds"><div class="empty">还没有轮次记录</div></div>
+  </section>
+</main>
+
+<footer>记录密码+提示 → 点提示旁的 ①②③④ 标注对应关键词 → 自动生成推理对照表 · 词卡点击 🔒 遮挡</footer>
+
+<script>
+const KEY = "jiemazhan-deduce-v1";
+const DEFAULT_WORDS = ["黑色", "蜻蜓", "鸡尾酒", "墨西哥帽"];
+const S = {
+  red:  { name: "🔴 红队", words: [...DEFAULT_WORDS], hidden: [false,false,false,false], rounds: [] },
+  blue: { name: "🔵 蓝队", words: [...DEFAULT_WORDS], hidden: [false,false,false,false], rounds: [] }
+};
+
+function load() {
+  try { const d = JSON.parse(localStorage.getItem(KEY)); if (d && d.red && d.blue) { S.red = d.red; S.blue = d.blue; } } catch (e) {}
+}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+function resetAll() {
+  if (!confirm("确定重置全部数据？词卡和轮次记录都会清空。")) return;
+  S.red = { name: "🔴 红队", words: [...DEFAULT_WORDS], hidden: [false,false,false,false], rounds: [] };
+  S.blue = { name: "🔵 蓝队", words: [...DEFAULT_WORDS], hidden: [false,false,false,false], rounds: [] };
+  save(); renderAll();
+}
+function saveName(t, txt) { S[t].name = txt.trim() || (t === "red" ? "🔴 红队" : "🔵 蓝队"); save(); renderAll(); }
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+
+/* 词卡 */
+function renderWords(t) {
+  const team = S[t];
+  const el = document.getElementById(t + "-words");
+  el.innerHTML = "";
+  team.words.forEach((w, i) => {
+    const d = document.createElement("div");
+    d.className = "word" + (team.hidden[i] ? " hidden" : "");
+    d.innerHTML = `<span class="tag">${i + 1}</span><input value="${esc(w)}" maxlength="12">`;
+    d.onclick = (e) => { if (e.target.tagName === "INPUT") return; team.hidden[i] = !team.hidden[i]; save(); renderAll(); };
+    d.querySelector("input").oninput = (e) => { team.words[i] = e.target.value; save(); renderAll(); };
+    el.appendChild(d);
+  });
+}
+
+/* 新增轮次 */
+function addRound(t) {
+  const team = S[t];
+  const code = document.getElementById(t + "-code").value.trim();
+  const hs = [1, 2, 3].map(i => document.getElementById(t + "-h" + i).value.trim());
+  if (!/^\d{3}$/.test(code)) { alert("密码必须是 3 位数字，如 421"); return; }
+  if (hs.some(h => !h)) { alert("3 个提示都要填"); return; }
+  const used = new Set();
+  team.rounds.forEach(r => r.hints.forEach(x => used.add(x)));
+  const dups = hs.filter(x => used.has(x));
+  if (dups.length && !confirm("⚠️ 提示「" + dups.join("、") + "」与之前轮次重复，规则不允许。仍要记录？")) return;
+  team.rounds.unshift({ code, hints: hs, dups, tags: [0, 0, 0] });
+  document.getElementById(t + "-code").value = "";
+  [1, 2, 3].forEach(i => document.getElementById(t + "-h" + i).value = "");
+  save(); renderAll();
+}
+
+/* 标注：该提示对应哪个关键词（1-4），0=未标 */
+function tagHint(t, rIdx, hIdx, kw) {
+  const r = S[t].rounds[rIdx];
+  r.tags[hIdx] = (r.tags[hIdx] === kw) ? 0 : kw;
+  save(); renderAll();
+}
+function delRound(t, rIdx) { S[t].rounds.splice(rIdx, 1); save(); renderAll(); }
+
+/* 轮次列表 */
+function renderRounds(t) {
+  const team = S[t];
+  const el = document.getElementById(t + "-rounds");
+  el.innerHTML = "";
+  if (!team.rounds.length) { el.innerHTML = '<div class="empty">还没有轮次记录</div>'; return; }
+  team.rounds.forEach((r, i) => {
+    const d = document.createElement("div");
+    d.className = "round";
+    const hintsHtml = r.hints.map((h, j) => `
+      <div class="r-hint-row">
+        <span class="h">${r.dups && r.dups.includes(h) ? `<b class="dup">${esc(h)}</b>` : esc(h)}</span>
+        <span class="kw-tags">${[1, 2, 3, 4].map(k => `<button class="${r.tags[j] === k ? 'on' : ''}" onclick="tagHint('${t}',${i},${j},${k})">${k}</button>`).join("")}</span>
+      </div>`).join("");
+    d.innerHTML = `
+      <div class="r-top">
+        <span class="r-no">第 ${team.rounds.length - i} 轮</span>
+        <span class="r-code">${esc(r.code)} <em>密码</em></span>
+        <button class="r-del" onclick="delRound('${t}',${i})">🗑</button>
+      </div>
+      ${hintsHtml}`;
+    el.appendChild(d);
+  });
+}
+
+/* 推理对照表：每个关键词下聚集指向它的提示 */
+function renderDeduce(t) {
+  const team = S[t];
+  const el = document.getElementById(t + "-deduce");
+  el.innerHTML = "";
+  let any = false;
+  team.words.forEach((w, k) => {
+    const hits = [];
+    team.rounds.forEach(r => {
+      r.hints.forEach((h, j) => { if (r.tags[j] === k + 1) hits.push(h); });
+    });
+    if (hits.length) { any = true; }
+    el.innerHTML += `<div class="d-row">
+      <span class="d-kw"><i>${k + 1}</i>${esc(w) || "（空）"}</span>
+      <span class="d-hints">${hits.length ? hits.map(h => `<span class="chip">${esc(h)}</span>`).join("") : `<span class="chip" style="opacity:.4">未指向</span>`}</span>
+    </div>`;
+  });
+  if (!any) el.innerHTML = '<div style="color:var(--dim);font-size:12px;padding:4px 0">在轮次里点提示旁的 ①②③④ 标注，这里自动汇总</div>';
+}
+
+function renderAll() {
+  ["red", "blue"].forEach(t => {
+    renderWords(t); renderRounds(t); renderDeduce(t);
+    document.querySelector(`.team.${t} .team-name`).textContent = S[t].name;
+  });
+}
+
+load(); renderAll();
+</script>
+</body>
+</html>
