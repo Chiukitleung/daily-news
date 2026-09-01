@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BOSS直聘监控 · AI音乐/广州</title>
+<style>
+  :root { --bg:#0f1115; --card:#171a21; --line:#262b36; --txt:#e8eaf0; --sub:#8a90a0; --new:#ffd166; --del:#ff6b6b; --ok:#4ec9a0; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--txt); font:15px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif; padding:24px; max-width:860px; margin:0 auto; }
+  h1 { font-size:22px; margin-bottom:4px; }
+  .sub { color:var(--sub); font-size:13px; margin-bottom:18px; }
+  .bar { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; display:flex; gap:18px; align-items:center; flex-wrap:wrap; margin-bottom:18px; position:sticky; top:8px; z-index:10; }
+  .bar b { color:var(--new); }
+  .bar .stat { color:var(--sub); font-size:13px; }
+  .btn { background:#313a49; border:0; color:var(--txt); padding:7px 14px; border-radius:8px; cursor:pointer; font-size:13px; }
+  .btn:hover { background:#3d4a5e; }
+  .job { background:var(--card); border:1px solid var(--line); border-left:3px solid transparent; border-radius:10px; padding:14px 16px; margin-bottom:12px; }
+  .job.new { border-left-color:var(--new); }
+  .job.del { opacity:.4; }
+  .job.del .del { background:#3a2a2a; color:var(--sub); }
+  .jh { display:flex; justify-content:space-between; gap:10px; }
+  .jt a { color:var(--txt); text-decoration:none; font-size:16px; font-weight:600; }
+  .jt a:hover { color:var(--new); }
+  .js { color:var(--new); font-weight:600; white-space:nowrap; }
+  .jc { margin-top:4px; color:var(--txt); }
+  .meta { color:var(--sub); font-size:12.5px; margin-left:8px; }
+  .jm { color:var(--sub); font-size:13px; margin-top:2px; }
+  .tl { margin-top:6px; }
+  .tag { display:inline-block; background:#232a36; color:var(--sub); font-size:12px; padding:2px 9px; border-radius:20px; margin-right:6px; }
+  .skill { color:var(--sub); font-size:12.5px; margin-top:6px; }
+  .jb { display:flex; justify-content:space-between; align-items:center; margin-top:10px; }
+  .boss { color:var(--sub); font-size:12.5px; }
+  .actions { display:flex; gap:10px; align-items:center; }
+  .detected { color:var(--new); font-size:12px; }
+  .del { background:transparent; border:1px solid var(--del); color:var(--del); border-radius:8px; padding:4px 12px; cursor:pointer; font-size:12.5px; }
+  .del:hover { background:var(--del); color:#fff; }
+  .badge-new { background:var(--new); color:#1a1a1a; font-size:11.5px; font-weight:700; padding:1px 8px; border-radius:6px; margin-right:8px; vertical-align:2px; }
+  .foot { color:var(--sub); font-size:12px; text-align:center; margin:28px 0 12px; }
+  .empty { text-align:center; color:var(--sub); padding:40px 0; }
+  #toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#2b3544; color:var(--txt); padding:10px 20px; border-radius:10px; display:none; font-size:13px; }
+</style>
+</head>
+<body>
+<h1>🎯 BOSS直聘岗位监控</h1>
+<div class="sub">关键词 <b>AI音乐</b> · 城市 <b>广州</b> · 平台共 450 条 · 本页 90 条（已剔除 0 条） · 更新于 2026-09-01 09:44:59</div>
+
+<div class="bar">
+  <span class="stat">🆕 新岗位 <b>8</b> 条</span>
+  <span class="stat">📋 共 <b>90</b> 条</span>
+  <button class="btn" onclick="copyIgnore()">📤 复制剔除清单（发给我）</button>
+  <button class="btn" onclick="resetLocal()">↺ 恢复本地剔除</button>
+</div>
+<div id="list">
+  
+<article class="job new" data-id="ccc5cbd3afbc47a50nJ92N65EVtT">
+  <div class="jh">
+    <div class="jt"><span class="badge-new">🆕 新</span><a href="https://www.zhipin.com/job_detail/ccc5cbd3afbc47a50nJ92N65EVtT.html" target="_blank" rel="noopener">AI 音频标注质检｜团队骨干岗|双休五险一金</a></div>
+    <div class="js">7-8K</div>
+  </div>
+  <div class="jc">位来小猎<span class=meta>互联网 · 500-999人 · A轮</span></div>
+  <div class="jm">番禺区 大石<span class=meta>本科 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>本科</span></div>
+  <div class="skill">不接受居家办公, 录音, AI音频, 音视频标注, 播音, 音乐</div>
+  <div class="jb">
+    <div class="boss">向女士 · 招聘者</div>
+    <div class="actions"><span class=detected>发现于 2026-09-01 08:53:56</span><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job new" data-id="6714470f28e3ad010nJ82Ni8EFJV">
+  <div class="jh">
+    <div class="jt"><span class="badge-new">🆕 新</span><a href="https://www.zhipin.com/job_detail/6714470f28e3ad010nJ82Ni8EFJV.html" target="_blank" rel="noopener">AI音乐评分员（线上兼职）</a></div>
+    <div class="js">40-60元/时</div>
+  </div>
+  <div class="jc">广州动态音乐工作室<span class=meta>文化艺术/娱乐 · 20-99人 · 未融资</span></div>
+  <div class="jm">番禺区 南村<span class=meta>学历不限 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>学历不限</span></div>
+  
+  <div class="jb">
+    <div class="boss">叶紫威 · 招聘者</div>
+    <div class="actions"><span class=detected>发现于 2026-09-01 08:53:56</span><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job new" data-id="9dc1be815ab977d60nFy2dq5EVBU">
+  <div class="jh">
+    <div class="jt"><span class="badge-new">🆕 新</span><a href="https://www.zhipin.com/job_detail/9dc1be815ab977d60nFy2dq5EVBU.html" target="_blank" rel="noopener">YY-AI音乐制作</a></div>
+    <div class="js">120-150元/天</div>
+  </div>
+  <div class="jc">百度<span class=meta>互联网 · 10000人以上 · 已上市</span></div>
+  <div class="jm">番禺区 市桥<span class=meta>本科 · </span></div>
+  <div class="tl"><span class=tag>4天/周</span><span class=tag>4个月</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">孙女士 · HR</div>
+    <div class="actions"><span class=detected>发现于 2026-09-01 08:53:56</span><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job new" data-id="92898a82156d86c00nN62NW-EVpU">
+  <div class="jh">
+    <div class="jt"><span class="badge-new">🆕 新</span><a href="https://www.zhipin.com/job_detail/92898a82156d86c00nN62NW-EVpU.html" target="_blank" rel="noopener">运营实习生（AI音乐） (MJ004498)</a></div>
+    <div class="js">110-120元/天</div>
+  </div>
+  <div class="jc">趣丸<span class=meta>互联网 · 1000-9999人 · 不需要融资</span></div>
+  <div class="jm">天河区 棠下<span class=meta>本科 · </span></div>
+  <div class="tl"><span class=tag>4天/周</span><span class=tag>4个月</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">刘先生 · 招聘专员</div>
+    <div class="actions"><span class=detected>发现于 2026-09-01 08:53:56</span><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job new" data-id="939f1ce919a535e303Z529i9F1pX">
+  <div class="jh">
+    <div class="jt"><span class="badge-new">🆕 新</span><a href="https://www.zhipin.com/job_detail/939f1ce919a535e303Z529i9F1pX.html" target="_blank" rel="noopener">AI歌曲创作（词曲创作）</a></div>
+    <div class="js">6-9K</div>
+  </div>
+  <div class="jc">宏燊文化<span class=meta>社交网络与媒体 · 0-20人 · 未融资</span></div>
+  <div class="jm">白云区 三元里<span class=meta>大专 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>大专</span></div>
+  <div class="skill">全职, 编曲, 音乐专业, AI工具使用, 词曲创作</div>
+  <div class="jb">
+    <div class="boss">邓女士 · 招聘人员</div>
+    <div class="actions"><span class=detected>发现于 2026-09-01 08:53:56</span><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job new" data-id="de2e05def2be1ff603x63Nq0FlVR">
+  <div class="jh">
+    <div class="jt"><span class="badge-new">🆕 新</span><a href="https://www.zhipin.com/job_detail/de2e05def2be1ff603x63Nq0FlVR.html" target="_blank" rel="noopener">音乐A&amp;R</a></div>
+    <div class="js">11-20K</div>
+  </div>
+  <div class="jc">汇鸿商务<span class=meta>广告/公关/会展 · 20-99人 · 未融资</span></div>
+  <div class="jm">越秀区 东风中路<span class=meta>本科 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">周女士 · 人事</div>
+    <div class="actions"><span class=detected>发现于 2026-09-01 08:53:56</span><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job new" data-id="e8b2b3c55b273c560nN72Ni9GFNW">
+  <div class="jh">
+    <div class="jt"><span class="badge-new">🆕 新</span><a href="https://www.zhipin.com/job_detail/e8b2b3c55b273c560nN72Ni9GFNW.html" target="_blank" rel="noopener">AI短视频编导</a></div>
+    <div class="js">9-14K</div>
+  </div>
+  <div class="jc">广州鲸度科技有限公司<span class=meta>电子商务 · 100-499人 · 不需要融资</span></div>
+  <div class="jm">番禺区 广州南站<span class=meta>学历不限 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>学历不限</span></div>
+  <div class="skill">短视频, AI, 直播, 内裤, 内衣</div>
+  <div class="jb">
+    <div class="boss">李先生 · HR</div>
+    <div class="actions"><span class=detected>发现于 2026-09-01 08:53:56</span><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job new" data-id="9ae015e0ec44cbf20nJ82di6E1JY">
+  <div class="jh">
+    <div class="jt"><span class="badge-new">🆕 新</span><a href="https://www.zhipin.com/job_detail/9ae015e0ec44cbf20nJ82di6E1JY.html" target="_blank" rel="noopener">音乐教学主播</a></div>
+    <div class="js">10-15K</div>
+  </div>
+  <div class="jc">广州第六科技有限公司<span class=meta>互联网 · 20-99人 · </span></div>
+  <div class="jm">天河区 棠下<span class=meta>本科 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>本科</span></div>
+  <div class="skill">教育主播, 接受无教育行业经验, 普通话标准, 直播不多于6小时, 需要露脸, 月结</div>
+  <div class="jb">
+    <div class="boss">陈先生 · 运营总监</div>
+    <div class="actions"><span class=detected>发现于 2026-09-01 08:53:56</span><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="e2f5ef48f17e24240nJz3dm7GFtW">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/e2f5ef48f17e24240nJz3dm7GFtW.html" target="_blank" rel="noopener">AI音乐-标注/评测-线上（实习/兼职）Mureka</a></div>
+    <div class="js">150-300元/天</div>
+  </div>
+  <div class="jc">天工智力-天工大模型<span class=meta>互联网 · 100-499人 · </span></div>
+  <div class="jm"><span class=meta>高中 · </span></div>
+  <div class="tl"><span class=tag>3天/周</span><span class=tag>6个月</span><span class=tag>高中</span></div>
+  
+  <div class="jb">
+    <div class="boss">杨女士 · 人力资源HRBP</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="efabdaa79d2112a00nJ-2dq8EVVU">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/efabdaa79d2112a00nJ-2dq8EVVU.html" target="_blank" rel="noopener">音乐教学演唱-手播</a></div>
+    <div class="js">10-15K</div>
+  </div>
+  <div class="jc">明镜<span class=meta>互联网 · 20-99人 · 不需要融资</span></div>
+  <div class="jm">天河区 车陂<span class=meta>本科 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>本科</span></div>
+  <div class="skill">线上教育, 不坐班, 大班教学（25人以上）, 成人, 声乐培训, K歌速成</div>
+  <div class="jb">
+    <div class="boss">吴先生 · 运营总监</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="ff0e0213725665e70nFy2Nq0F1VU">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/ff0e0213725665e70nFy2Nq0F1VU.html" target="_blank" rel="noopener">AI作曲（Suno热歌旋律改编）</a></div>
+    <div class="js">6-8K</div>
+  </div>
+  <div class="jc">跳乐互娱<span class=meta>文化艺术/娱乐 · 100-499人 · 不需要融资</span></div>
+  <div class="jm">黄埔区 鱼珠<span class=meta>大专 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>大专</span></div>
+  <div class="skill">全职</div>
+  <div class="jb">
+    <div class="boss">王女士 · 人力资源经理</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="529d06ebdfa73e2c0nd43N6_ElVS">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/529d06ebdfa73e2c0nd43N6_ElVS.html" target="_blank" rel="noopener">音乐制作人（含编曲+AI音乐能力）</a></div>
+    <div class="js">8-11K·13薪</div>
+  </div>
+  <div class="jc">大酱音乐<span class=meta>文化艺术/娱乐 · 0-20人 · 未融资</span></div>
+  <div class="jm">越秀区 大新<span class=meta>本科 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>本科</span></div>
+  <div class="skill">编曲, 全职</div>
+  <div class="jb">
+    <div class="boss">邹女士 · 总经理</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="33bf5e04110256600nN609u8FVFU">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/33bf5e04110256600nN609u8FVFU.html" target="_blank" rel="noopener">音频评测，音乐，播音主持相关专业</a></div>
+    <div class="js">8-9K</div>
+  </div>
+  <div class="jc">重庆思诚者信息技...<span class=meta>咨询 · 0-20人 · 未融资</span></div>
+  <div class="jm">番禺区 大石<span class=meta>本科 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">张瑞喜 · HR</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="12183cca5eaa55060nN72927GFZZ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/12183cca5eaa55060nN72927GFZZ.html" target="_blank" rel="noopener">音乐学、音乐制作、音乐表演&amp;音频评测</a></div>
+    <div class="js">7-9K</div>
+  </div>
+  <div class="jc">重庆智慧芒果科技<span class=meta>财务/审计/税务 · 100-499人 · 未融资</span></div>
+  <div class="jm">番禺区 大石<span class=meta>本科 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>本科</span></div>
+  <div class="skill">音乐相关专业, AI音频评测, 早九晚六, 五险一金</div>
+  <div class="jb">
+    <div class="boss">张凡 · 人事招聘专员</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="0b04a62179a536d60nJz2t69GFBY">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/0b04a62179a536d60nJz2t69GFBY.html" target="_blank" rel="noopener">AI音乐制作</a></div>
+    <div class="js">6-7K</div>
+  </div>
+  <div class="jc">广州极近<span class=meta>计算机软件 · 20-99人 · 不需要融资</span></div>
+  <div class="jm">海珠区 客村<span class=meta>本科 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">梁女士 · 招聘者</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="5c809528748d31960nJ80tS_E1dT">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/5c809528748d31960nJ80tS_E1dT.html" target="_blank" rel="noopener">头部MCN音乐达人（时间自由）</a></div>
+    <div class="js">20-30K</div>
+  </div>
+  <div class="jc">浙江无忧娱乐有限公司<span class=meta>广播/影视 · 1000-9999人 · 未融资</span></div>
+  <div class="jm">天河区 棠下<span class=meta>大专 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>大专</span></div>
+  <div class="skill">娱乐主播, 普通话标准, 直播不多于6小时, 带教培训, 流量扶持, 无违约金</div>
+  <div class="jb">
+    <div class="boss">孜女士 · 主播经纪人</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="d9b68b4920e6cd9b0nN62Ny5GFNU">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/d9b68b4920e6cd9b0nN62Ny5GFNU.html" target="_blank" rel="noopener">AI素材制作师</a></div>
+    <div class="js">8-10K·15薪</div>
+  </div>
+  <div class="jc">上海天码形空科技<span class=meta>互联网 · 20-99人 · A轮</span></div>
+  <div class="jm">海珠区 琶洲<span class=meta>大专 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>大专</span></div>
+  
+  <div class="jb">
+    <div class="boss">杜先生 · HRBP</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="45f7a5f8555ce4630nJ93ti7FVZS">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/45f7a5f8555ce4630nJ93ti7FVZS.html" target="_blank" rel="noopener">抖音电商主播（音乐背景、吉他演奏）</a></div>
+    <div class="js">8-12K</div>
+  </div>
+  <div class="jc">奇奏科技<span class=meta>智能硬件/消费电子 · 20-99人 · 天使轮</span></div>
+  <div class="jm">海珠区 琶洲<span class=meta>本科 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>本科</span></div>
+  <div class="skill">需要带货主播相关经验, 直播不多于6小时, 不需要坐班, 坐播, 分场次直播, 无责底薪</div>
+  <div class="jb">
+    <div class="boss">郑女士 · HRBP</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="3632a83604687acd0nN60tm-GFBZ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/3632a83604687acd0nN60tm-GFBZ.html" target="_blank" rel="noopener">音乐Caption/ai方向</a></div>
+    <div class="js">6-8K</div>
+  </div>
+  <div class="jc">位来无忧<span class=meta>人力资源服务 · 500-999人 · A轮</span></div>
+  <div class="jm">番禺区 大石<span class=meta>本科 · 1年以内</span></div>
+  <div class="tl"><span class=tag>1年以内</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">青女士 · 人事主管</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="2528619dc40cc55b0nJz3dy9EVRU">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/2528619dc40cc55b0nJz3dy9EVRU.html" target="_blank" rel="noopener">音乐评测标注（音乐大厂/稳定 周末双休）</a></div>
+    <div class="js">7-8K</div>
+  </div>
+  <div class="jc">武汉佰钧成技术<span class=meta>计算机软件 · 1000-9999人 · 不需要融资</span></div>
+  <div class="jm">天河区 棠下<span class=meta>大专 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>大专</span></div>
+  <div class="skill">全职, MuseScore, Cubase, 扒谱经验, 音乐标注, 六险一金</div>
+  <div class="jb">
+    <div class="boss">陈女士 · 人事经理</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="564cbd79d9746c300nJy09q-ElJV">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/564cbd79d9746c300nJy09q-ElJV.html" target="_blank" rel="noopener">音乐才艺主播</a></div>
+    <div class="js">6-11K</div>
+  </div>
+  <div class="jc">广州熠星佳韵文化传媒<span class=meta>文化艺术/娱乐 · 20-99人 · 不需要融资</span></div>
+  <div class="jm">黄埔区 科学城<span class=meta>中专/中技 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>中专/中技</span></div>
+  
+  <div class="jb">
+    <div class="boss">程女士 · 人事</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="7019c6e3bbcdf86a0nR939u1EVpR">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/7019c6e3bbcdf86a0nR939u1EVpR.html" target="_blank" rel="noopener">音乐标注（互联网大厂+双休）</a></div>
+    <div class="js">7-8K</div>
+  </div>
+  <div class="jc">中软国际<span class=meta>计算机软件 · 10000人以上 · 已上市</span></div>
+  <div class="jm">天河区 棠下<span class=meta>大专 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>大专</span></div>
+  <div class="skill">扒谱, 全职</div>
+  <div class="jb">
+    <div class="boss">倪先生 · 招聘组长</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="57b9276c579613da0nN62dq9ElBS">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/57b9276c579613da0nN62dq9ElBS.html" target="_blank" rel="noopener">ai音乐制作助理</a></div>
+    <div class="js">6-7K</div>
+  </div>
+  <div class="jc">广州斯歌科技有限公司<span class=meta>互联网金融 · 0-20人 · </span></div>
+  <div class="jm">黄埔区 南岗<span class=meta>学历不限 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>学历不限</span></div>
+  
+  <div class="jb">
+    <div class="boss">徐杨 · hr</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="223f2a019b3e24631XF-0ty0E1BX">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/223f2a019b3e24631XF-0ty0E1BX.html" target="_blank" rel="noopener">策划推广（讯飞音乐旗下厂牌公司）</a></div>
+    <div class="js">8-12K</div>
+  </div>
+  <div class="jc">科大讯飞<span class=meta>互联网 · 10000人以上 · 已上市</span></div>
+  <div class="jm">番禺区 大石<span class=meta>大专 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>大专</span></div>
+  <div class="skill">音乐推广, 内容营销, 资源拓展</div>
+  <div class="jb">
+    <div class="boss">赵女士 · HRBP</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="b22b844c1dba53000nB92NS0EldR">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/b22b844c1dba53000nB92NS0EldR.html" target="_blank" rel="noopener">AI人工智能资深/高级销售</a></div>
+    <div class="js">20-35K</div>
+  </div>
+  <div class="jc">聚焦网络<span class=meta>互联网 · 500-999人 · 不需要融资</span></div>
+  <div class="jm">海珠区 琶洲<span class=meta>大专 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>大专</span></div>
+  <div class="skill">对企业/机构（To B）销售经验, 电话销售经验, 面销/陌拜经验, 企业（To B）, 互联网/科技, 企业服务</div>
+  <div class="jb">
+    <div class="boss">何女士 · 高级HRBP</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="f35016d15bbaa1840nJ_09i4ElpZ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/f35016d15bbaa1840nJ_09i4ElpZ.html" target="_blank" rel="noopener">音乐</a></div>
+    <div class="js">35-65K·13薪</div>
+  </div>
+  <div class="jc">广州某大型游戏公司<span class=meta>游戏 · 1000-9999人 · D轮及以上</span></div>
+  <div class="jm"><span class=meta>本科 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">樊女士 · 猎头顾问</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="579dd5223f87db780nB70tm5FlZX">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/579dd5223f87db780nB70tm5FlZX.html" target="_blank" rel="noopener">音乐教务顾问/续费增购/不用早起</a></div>
+    <div class="js">10-15K</div>
+  </div>
+  <div class="jc">简知科技<span class=meta>互联网 · 1000-9999人 · B轮</span></div>
+  <div class="jm"><span class=meta>大专 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>大专</span></div>
+  <div class="skill">大学/大专生, 熟练使用办公软件, 小班教学（3-25人）, 培训机构, 家教, 线下教育</div>
+  <div class="jb">
+    <div class="boss">许先生 · 招聘主管</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="3aeb763fbcd1ca390nN62N-9FlVY">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/3aeb763fbcd1ca390nN62N-9FlVY.html" target="_blank" rel="noopener">AI外呼产品经理</a></div>
+    <div class="js">15-25K</div>
+  </div>
+  <div class="jc">某大型运营商公司<span class=meta>运营商/增值服务 · 100-499人 · </span></div>
+  <div class="jm"><span class=meta>大专 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>大专</span></div>
+  <div class="skill">智能客服, AI外呼, 对话, AI语音</div>
+  <div class="jb">
+    <div class="boss">黄女士 · 猎头顾问</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="d24bdc535865c2cb0nV-3tu1GVVZ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/d24bdc535865c2cb0nV-3tu1GVVZ.html" target="_blank" rel="noopener">【琴行急招】音乐沙龙活动策划执行（全职）</a></div>
+    <div class="js">6-8K</div>
+  </div>
+  <div class="jc">星城钢琴艺术中心<span class=meta>批发/零售 · 0-20人 · 未融资</span></div>
+  <div class="jm">天河区 珠江新城<span class=meta>本科 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>本科</span></div>
+  <div class="skill">音乐表演, 艺人管理, 新媒体运营经验, 线上活动, 企业品牌方, 线下活动</div>
+  <div class="jb">
+    <div class="boss">陈东鸿 · 总经理</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="5ab453451b01fd5c0nJ-3ti_FFJV">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/5ab453451b01fd5c0nJ-3ti_FFJV.html" target="_blank" rel="noopener">音乐老师</a></div>
+    <div class="js">12-20K</div>
+  </div>
+  <div class="jc">乐喵<span class=meta>互联网 · 20-99人 · 未融资</span></div>
+  <div class="jm">天河区 东圃<span class=meta>大专 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>大专</span></div>
+  <div class="skill">培训机构, 线上教育, 器乐培训, 声乐培训, 艺考培训, 成人声乐</div>
+  <div class="jb">
+    <div class="boss">吴先生 · 人事主管</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="177205cf4423e4710nZ93dS6GVtU">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/177205cf4423e4710nZ93dS6GVtU.html" target="_blank" rel="noopener">ai算法工程师-音乐</a></div>
+    <div class="js">40-60K·15薪</div>
+  </div>
+  <div class="jc">某知名互联网公司<span class=meta>互联网 · 1000-9999人 · 不需要融资</span></div>
+  <div class="jm"><span class=meta>本科 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">钟先生 · 猎头顾问</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="59683be88102798a0nJz0ti1FFVW">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/59683be88102798a0nJz0ti1FFVW.html" target="_blank" rel="noopener">音乐数据标注</a></div>
+    <div class="js">7-8K</div>
+  </div>
+  <div class="jc">杭州佰钧成<span class=meta>互联网 · 10000人以上 · </span></div>
+  <div class="jm">天河区 棠下<span class=meta>大专 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>大专</span></div>
+  <div class="skill">数据标注, 语音标注, 数据分析能力强, 音乐, 歌曲</div>
+  <div class="jb">
+    <div class="boss">刘女士 · 招聘经理</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="3e04f7d272ef4d680nN72966EFFU">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/3e04f7d272ef4d680nN72966EFFU.html" target="_blank" rel="noopener">AI音频制作人</a></div>
+    <div class="js">5-7K</div>
+  </div>
+  <div class="jc">广州松炎文化传媒<span class=meta>广播/影视 · 0-20人 · </span></div>
+  <div class="jm">黄埔区 大沙<span class=meta>大专 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>大专</span></div>
+  
+  <div class="jb">
+    <div class="boss">游先生 · 招聘者</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="9d00b824846d91df0nJz3dm6FFpT">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/9d00b824846d91df0nJz3dm6FFpT.html" target="_blank" rel="noopener">音乐标注</a></div>
+    <div class="js">7-8K</div>
+  </div>
+  <div class="jc">中电金信<span class=meta>计算机软件 · 10000人以上 · 不需要融资</span></div>
+  <div class="jm">天河区 棠下<span class=meta>本科 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>本科</span></div>
+  <div class="skill">电影/电视剧, 编曲, 游戏音频制作, Sound Forge, 声音剪辑, MuseScore</div>
+  <div class="jb">
+    <div class="boss">胡平娜 · 招聘顾问</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="bce51046ab069f3c0nN62Nu4FVFV">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/bce51046ab069f3c0nN62Nu4FVFV.html" target="_blank" rel="noopener">AI产品负责人</a></div>
+    <div class="js">25-30K</div>
+  </div>
+  <div class="jc">某大型人工智能公司<span class=meta>人工智能 · 100-499人 · A轮</span></div>
+  <div class="jm"><span class=meta>本科 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">申茂林 · 猎头顾问</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="620fb7581b78526b0nJ90ty-FlJQ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/620fb7581b78526b0nJ90ty-FlJQ.html" target="_blank" rel="noopener">游戏音乐</a></div>
+    <div class="js">35-50K·16薪</div>
+  </div>
+  <div class="jc">广州某大型游戏公司<span class=meta>游戏 · 1000-9999人 · D轮及以上</span></div>
+  <div class="jm"><span class=meta>本科 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">洪先生 · 猎头顾问</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="bd95130009d1672e0nJ_3d-4F1JX">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/bd95130009d1672e0nJ_3d-4F1JX.html" target="_blank" rel="noopener">国内/海外ai真人剧组长</a></div>
+    <div class="js">13-20K</div>
+  </div>
+  <div class="jc">嘉兴九州文化传媒<span class=meta>社交网络与媒体 · 1000-9999人 · A轮</span></div>
+  <div class="jm">番禺区 大石<span class=meta>学历不限 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>学历不限</span></div>
+  <div class="skill">导演, 制作组长, ai短剧, ai真人, 短剧</div>
+  <div class="jb">
+    <div class="boss">陈先生 · 招聘者</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="ff00a6d6cdbeff970nF-29i6FlRQ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/ff00a6d6cdbeff970nF-29i6FlRQ.html" target="_blank" rel="noopener">游戏音乐设计师（重返未来：1999）</a></div>
+    <div class="js">15-23K·13薪</div>
+  </div>
+  <div class="jc">深蓝互动<span class=meta>游戏 · 500-999人 · 不需要融资</span></div>
+  <div class="jm"><span class=meta>学历不限 · 3-5年</span></div>
+  <div class="tl"><span class=tag>3-5年</span><span class=tag>学历不限</span></div>
+  <div class="skill">编曲, 游戏, 游戏音乐作曲, 配乐设计, 音乐设计, 二次元</div>
+  <div class="jb">
+    <div class="boss">卢女士 · 招聘者</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="4b13b6f8069cb3410nJ-09-4GFRY">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/4b13b6f8069cb3410nJ-09-4GFRY.html" target="_blank" rel="noopener">音乐运营实习生</a></div>
+    <div class="js">100-140元/天</div>
+  </div>
+  <div class="jc">优创合影/影视传媒<span class=meta>广播/影视 · 20-99人 · 不需要融资</span></div>
+  <div class="jm"><span class=meta>本科 · </span></div>
+  <div class="tl"><span class=tag>5天/周</span><span class=tag>6个月</span><span class=tag>本科</span></div>
+  <div class="skill">有内容运营经验, 文化娱乐, 创意策划, 数据分析, 活动策划, 抖音</div>
+  <div class="jb">
+    <div class="boss">张女士 · 招聘者</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="433fcc03cab0f3b20nJ439i7FlJV">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/433fcc03cab0f3b20nJ439i7FlJV.html" target="_blank" rel="noopener">AI漫剧制作</a></div>
+    <div class="js">4-9K</div>
+  </div>
+  <div class="jc">金斗云传媒<span class=meta>互联网 · 20-99人 · 天使轮</span></div>
+  <div class="jm">黄埔区 大沙<span class=meta>大专 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>大专</span></div>
+  <div class="skill">MG/3D动画, 短视频, 网剧, 网大, 三维, 剪辑</div>
+  <div class="jb">
+    <div class="boss">王慧 · 招聘者</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="f5eae9fdfb04225c0nJ92N-_EVFZ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/f5eae9fdfb04225c0nJ92N-_EVFZ.html" target="_blank" rel="noopener">AI客服产品经理</a></div>
+    <div class="js">18-25K</div>
+  </div>
+  <div class="jc">东风日产数据服务<span class=meta>电子商务 · 500-999人 · 未融资</span></div>
+  <div class="jm">花都区 铁路西<span class=meta>大专 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>大专</span></div>
+  
+  <div class="jb">
+    <div class="boss">黄女士 · 招聘专员</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="40522857d260e45d0nJz0t27ElFU">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/40522857d260e45d0nJz0t27ElFU.html" target="_blank" rel="noopener">AI数据产品运营</a></div>
+    <div class="js">20-35K</div>
+  </div>
+  <div class="jc">兴趣岛<span class=meta>互联网 · 1000-9999人 · B轮</span></div>
+  <div class="jm">天河区 车陂<span class=meta>本科 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">陈女士 · 招聘者</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="d2b1776c35944ce00nF629q1FlpV">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/d2b1776c35944ce00nF629q1FlpV.html" target="_blank" rel="noopener">AI漫剧/短剧制作</a></div>
+    <div class="js">4-9K</div>
+  </div>
+  <div class="jc">好书文化<span class=meta>广告/公关/会展 · 100-499人 · 未融资</span></div>
+  <div class="jm">天河区 黄村<span class=meta>大专 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>大专</span></div>
+  <div class="skill">达芬奇, 三维, 合成, AE, Premiere, 网剧</div>
+  <div class="jb">
+    <div class="boss">王女士 · 人事主管</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="39fea70a1cc531270nJz3N-0FFVS">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/39fea70a1cc531270nJz3N-0FFVS.html" target="_blank" rel="noopener">AI短剧剪辑</a></div>
+    <div class="js">6-10K</div>
+  </div>
+  <div class="jc">HippoJoy<span class=meta>游戏 · 100-499人 · A轮</span></div>
+  <div class="jm">海珠区 琶洲<span class=meta>大专 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>大专</span></div>
+  
+  <div class="jb">
+    <div class="boss">陶文婷 · HR</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="c961ef7ad661953c0nJ609W7GVJR">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/c961ef7ad661953c0nJ609W7GVJR.html" target="_blank" rel="noopener">音乐视频制作人</a></div>
+    <div class="js">8-13K</div>
+  </div>
+  <div class="jc">广州盈睿企业管理<span class=meta>文化艺术/娱乐 · 0-20人 · </span></div>
+  <div class="jm">海珠区 琶洲<span class=meta>大专 · 3-5年</span></div>
+  <div class="tl"><span class=tag>3-5年</span><span class=tag>大专</span></div>
+  <div class="skill">MV, 音乐人, 短视频</div>
+  <div class="jb">
+    <div class="boss">谢女士 · 招聘经理</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="c900bbf4bd8e7f780nBz2di1ElFR">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/c900bbf4bd8e7f780nBz2di1ElFR.html" target="_blank" rel="noopener">Java开发 （AI/全栈）HSBC</a></div>
+    <div class="js">15-23K·13薪</div>
+  </div>
+  <div class="jc">北京软通动力云计...<span class=meta>互联网 · 10000人以上 · </span></div>
+  <div class="jm">天河区 石牌<span class=meta>本科 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">黄女士 · 高级招聘</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="3b23904f8d39c28a0nJ62dS5FlJU">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/3b23904f8d39c28a0nJ62dS5FlJU.html" target="_blank" rel="noopener">AI影视大模型标注（低阶）</a></div>
+    <div class="js">4-6K</div>
+  </div>
+  <div class="jc">广州玉团网络科技<span class=meta>休闲/娱乐 · 0-20人 · 未融资</span></div>
+  <div class="jm">黄埔区 大沙<span class=meta>本科 · 1年以内</span></div>
+  <div class="tl"><span class=tag>1年以内</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">赵玉团 · 招聘总监</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="55f76f62c1f66ebb0nF-0t20E1dV">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/55f76f62c1f66ebb0nF-0t20E1dV.html" target="_blank" rel="noopener">【海外短剧】AI导演</a></div>
+    <div class="js">10-15K</div>
+  </div>
+  <div class="jc">麦芽传媒<span class=meta>互联网 · 1000-9999人 · 不需要融资</span></div>
+  <div class="jm">天河区 体育中心<span class=meta>本科 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>本科</span></div>
+  <div class="skill">视觉感/审美好, 深厚的美术功底, 短剧, 网感好, 多年分镜经验, Maya</div>
+  <div class="jb">
+    <div class="boss">汪女士 · hr</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="bb3fd5b661fabb190nJ509u0F1FT">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/bb3fd5b661fabb190nJ509u0F1FT.html" target="_blank" rel="noopener">AI 开发工程师（Vibe Coding 方向）</a></div>
+    <div class="js">15-30K</div>
+  </div>
+  <div class="jc">前实科技<span class=meta>互联网 · 100-499人 · A轮</span></div>
+  <div class="jm">白云区 白云大道<span class=meta>本科 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>本科</span></div>
+  <div class="skill">全栈无侧重, PHP, 全栈项目经验, 前端开发经验, 后端开发经验, vibe coding</div>
+  <div class="jb">
+    <div class="boss">陈女士 · HRBP</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="c487c3796a0953090nZz09m8FVVT">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/c487c3796a0953090nZz09m8FVVT.html" target="_blank" rel="noopener">ai产品总监</a></div>
+    <div class="js">15-30K</div>
+  </div>
+  <div class="jc">广州赢远<span class=meta>计算机软件 · 0-20人 · </span></div>
+  <div class="jm">黄埔区 科学城<span class=meta>本科 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">李淑怡 · 招聘者</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="c29f8e117e5a39f00nd53Nq5E1tS">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/c29f8e117e5a39f00nd53Nq5E1tS.html" target="_blank" rel="noopener">音乐工程师助理（电声乐器类）</a></div>
+    <div class="js">6-9K</div>
+  </div>
+  <div class="jc">广州科纳电子科技<span class=meta>电子/硬件开发 · 0-20人 · 不需要融资</span></div>
+  <div class="jm">南沙区 金洲<span class=meta>大专 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>大专</span></div>
+  
+  <div class="jb">
+    <div class="boss">李女士 · 行政人事主管</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="ae448da4937996c70nN729--ElNT">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/ae448da4937996c70nN729--ElNT.html" target="_blank" rel="noopener">兼职音乐老师</a></div>
+    <div class="js">150-200元/时</div>
+  </div>
+  <div class="jc">泉艺艺术中心<span class=meta>培训/辅导机构 · 0-20人 · </span></div>
+  <div class="jm"><span class=meta>大专 · 1年以内</span></div>
+  <div class="tl"><span class=tag>1年以内</span><span class=tag>大专</span></div>
+  
+  <div class="jb">
+    <div class="boss">叶小泉 · 教务老师</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="be3ef55bbe7687b80nFz09i6FVtZ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/be3ef55bbe7687b80nFz09i6FVtZ.html" target="_blank" rel="noopener">音乐 APP 测试工程师</a></div>
+    <div class="js">14-19K</div>
+  </div>
+  <div class="jc">广州恩雅创新科技<span class=meta>互联网 · 20-99人 · 未融资</span></div>
+  <div class="jm">海珠区 琶洲<span class=meta>本科 · 3-5年</span></div>
+  <div class="tl"><span class=tag>3-5年</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">梁女士 · 招聘者</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="e09612020500886e0nV-2dm4FFdZ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/e09612020500886e0nV-2dm4FFdZ.html" target="_blank" rel="noopener">营销中心-音乐(A220639)</a></div>
+    <div class="js">30-50K·16薪</div>
+  </div>
+  <div class="jc">库洛<span class=meta>游戏 · 1000-9999人 · D轮及以上</span></div>
+  <div class="jm">天河区 小新塘<span class=meta>本科 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>本科</span></div>
+  <div class="skill">电影/电视剧, 声音设计, 声音剪辑, 编曲</div>
+  <div class="jb">
+    <div class="boss">万先生 · TA</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="0cafd2fcf3c1ab340nN72dW-E1pW">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/0cafd2fcf3c1ab340nN72dW-E1pW.html" target="_blank" rel="noopener">AI编程工程师</a></div>
+    <div class="js">28-35K</div>
+  </div>
+  <div class="jc">传思科技<span class=meta>互联网 · 20-99人 · 未融资</span></div>
+  <div class="jm">海珠区 琶洲<span class=meta>本科 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>本科</span></div>
+  <div class="skill">AI工具开发, AI工作流搭建, 大模型应用</div>
+  <div class="jb">
+    <div class="boss">杨女士 · HRBP</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="8c2fefcd8d0c18710nB439y1FVdY">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/8c2fefcd8d0c18710nB439y1FVdY.html" target="_blank" rel="noopener">AI液晶电视机外贸市场招商策划师</a></div>
+    <div class="js">8-12K</div>
+  </div>
+  <div class="jc">广州潮鼎电子制造<span class=meta>计算机/通信/其他电子设备 · 0-20人 · 未融资</span></div>
+  <div class="jm">花都区 花山<span class=meta>大专 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>大专</span></div>
+  <div class="skill">信息流投放经验, 新媒体平台营销经验, 新媒体运营经验, 客户开发, 短视频/直播策划及执行能力, 跨界营销经验</div>
+  <div class="jb">
+    <div class="boss">邱庆如 · 经理</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="07d9f9ba5fc69df30nB93tq0GFNV">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/07d9f9ba5fc69df30nB93tq0GFNV.html" target="_blank" rel="noopener">AI制作岗位</a></div>
+    <div class="js">4-8K</div>
+  </div>
+  <div class="jc">后浪<span class=meta>广告营销 · 20-99人 · 未融资</span></div>
+  <div class="jm">海珠区 琶洲<span class=meta>大专 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>大专</span></div>
+  
+  <div class="jb">
+    <div class="boss">徐怀石 · 招聘者</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="06ca008ec97b58340nN629m1FlJY">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/06ca008ec97b58340nN629m1FlJY.html" target="_blank" rel="noopener">AI短剧 OPC人才招募（剧本+制作）---广州</a></div>
+    <div class="js">8-13K</div>
+  </div>
+  <div class="jc">广州优客科技服务<span class=meta>企业服务 · 0-20人 · 不需要融资</span></div>
+  <div class="jm">黄埔区 科学城<span class=meta>学历不限 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>学历不限</span></div>
+  <div class="skill">合成, 网剧, 剪辑, 音乐</div>
+  <div class="jb">
+    <div class="boss">丘海芬 · 人事</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="bea07c31b32765ad0nN609m5EFdQ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/bea07c31b32765ad0nN609m5EFdQ.html" target="_blank" rel="noopener">AI短视频剪辑（双休/五险一金/近地铁）</a></div>
+    <div class="js">6-11K·14薪</div>
+  </div>
+  <div class="jc">广州快创<span class=meta>互联网 · 500-999人 · 不需要融资</span></div>
+  <div class="jm">天河区 棠下<span class=meta>大专 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>大专</span></div>
+  <div class="skill">短视频, Premiere, 达芬奇, AE, 剪辑, 音乐</div>
+  <div class="jb">
+    <div class="boss">谢女士 · 招聘专员</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="bca1729297957ee80nB92N21GVNY">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/bca1729297957ee80nB92N21GVNY.html" target="_blank" rel="noopener">AI产品经理（海外+双休）</a></div>
+    <div class="js">20-30K</div>
+  </div>
+  <div class="jc">安悦科技<span class=meta>互联网 · 100-499人 · 未融资</span></div>
+  <div class="jm">海珠区 琶洲<span class=meta>大专 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>大专</span></div>
+  <div class="skill">机器翻译, 版权, AI语言, AIGC技术</div>
+  <div class="jb">
+    <div class="boss">蓝女士 · HR.招聘专员</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="2c9f480448f71dba0nBy39u_EldU">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/2c9f480448f71dba0nBy39u_EldU.html" target="_blank" rel="noopener">AI平台全栈工程师</a></div>
+    <div class="js">20-40K</div>
+  </div>
+  <div class="jc">岸边科技<span class=meta>互联网 · 100-499人 · 不需要融资</span></div>
+  <div class="jm">天河区 珠江新城<span class=meta>大专 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>大专</span></div>
+  
+  <div class="jb">
+    <div class="boss">戴女士 · HR</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="4f454d46aa1ef5f20nN62Nq-FVZS">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/4f454d46aa1ef5f20nN62Nq-FVZS.html" target="_blank" rel="noopener">财务主管(AI赛道）</a></div>
+    <div class="js">9-12K</div>
+  </div>
+  <div class="jc">广州登甲人工智能科技<span class=meta>人工智能 · 0-20人 · 天使轮</span></div>
+  <div class="jm">海珠区 琶洲<span class=meta>本科 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">周女士 · HRM</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="7e34e12d5d899f4e0nF40ti0EFJW">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/7e34e12d5d899f4e0nF40ti0EFJW.html" target="_blank" rel="noopener">AI 短视频生成优化师</a></div>
+    <div class="js">5-10K</div>
+  </div>
+  <div class="jc">白魔方文化传媒<span class=meta>广播/影视 · 0-20人 · 未融资</span></div>
+  <div class="jm">番禺区 市桥<span class=meta>学历不限 · 1年以内</span></div>
+  <div class="tl"><span class=tag>1年以内</span><span class=tag>学历不限</span></div>
+  <div class="skill">广告片, 特效, 合成, AI短视频优化师, 电商视频, 宣传片</div>
+  <div class="jb">
+    <div class="boss">徐盼志 · 老板</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="471e0234382f9e4c0nF72dy0FlZV">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/471e0234382f9e4c0nF72dy0FlZV.html" target="_blank" rel="noopener">AIGC视频制作（12K无责底+月休6天）</a></div>
+    <div class="js">12-17K</div>
+  </div>
+  <div class="jc">脸萌科技<span class=meta>电子商务 · 0-20人 · </span></div>
+  <div class="jm">白云区 嘉禾<span class=meta>学历不限 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>学历不限</span></div>
+  <div class="skill">短视频, 电商视频, 网剧, 广告片, 剪辑, 特效</div>
+  <div class="jb">
+    <div class="boss">张先生 · 人事</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="bb27992462436eca0nB92925F1RQ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/bb27992462436eca0nB92925F1RQ.html" target="_blank" rel="noopener">AI漫剧红果短剧剪辑经验优先【抖音广告AI】</a></div>
+    <div class="js">5-10K</div>
+  </div>
+  <div class="jc">果润公司<span class=meta>日化 · 100-499人 · 不需要融资</span></div>
+  <div class="jm">白云区 白云大道<span class=meta>本科 · 1年以内</span></div>
+  <div class="tl"><span class=tag>1年以内</span><span class=tag>本科</span></div>
+  <div class="skill">电商视频, AI漫剧短剧经验优先, 接受应届有点经验, AI广告短视频</div>
+  <div class="jb">
+    <div class="boss">冯女士 · 人事经理</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="624c751afb70e4570nN609y5F1NQ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/624c751afb70e4570nN609y5F1NQ.html" target="_blank" rel="noopener">AI产品经理（AI Coding搭建·模型应用方向）</a></div>
+    <div class="js">10-15K</div>
+  </div>
+  <div class="jc">亿鲸数智<span class=meta>人工智能 · 0-20人 · 未融资</span></div>
+  <div class="jm">海珠区 琶洲<span class=meta>本科 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>本科</span></div>
+  <div class="skill">用户/功能产品, G端产品/政务产品, B端产品, 中后台产品, 用增产品, AI产品</div>
+  <div class="jb">
+    <div class="boss">李女士 · HR</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="2eef38c20605ef6a0nV83dq6GFtW">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/2eef38c20605ef6a0nV83dq6GFtW.html" target="_blank" rel="noopener">AI音乐创作（实习生/应届生/爱好者）</a></div>
+    <div class="js">4-6K</div>
+  </div>
+  <div class="jc">星戈音乐服务平台<span class=meta>社交网络与媒体 · 20-99人 · 未融资</span></div>
+  <div class="jm">番禺区 南村<span class=meta>学历不限 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>学历不限</span></div>
+  <div class="skill">AI音乐</div>
+  <div class="jb">
+    <div class="boss">李先生 · 经理</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="62236de7a86063ed0nJ-2t60EFFW">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/62236de7a86063ed0nJ-2t60EFFW.html" target="_blank" rel="noopener">抖音AI视频/视频剪辑</a></div>
+    <div class="js">7-12K</div>
+  </div>
+  <div class="jc">广州锐泽<span class=meta>服装/纺织 · 100-499人 · </span></div>
+  <div class="jm">番禺区 大石<span class=meta>学历不限 · 1年以内</span></div>
+  <div class="tl"><span class=tag>1年以内</span><span class=tag>学历不限</span></div>
+  <div class="skill">电商视频, 剪辑, 合成, 特效, 调色, 音乐</div>
+  <div class="jb">
+    <div class="boss">杨女士 · 招聘者</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="ed2e4328543bf8240ndy29u_F1dX">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/ed2e4328543bf8240ndy29u_F1dX.html" target="_blank" rel="noopener">AI呼叫中心产品经理</a></div>
+    <div class="js">12-20K</div>
+  </div>
+  <div class="jc">广东超腾<span class=meta>计算机软件 · 20-99人 · A轮</span></div>
+  <div class="jm">天河区 石牌<span class=meta>大专 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>大专</span></div>
+  <div class="skill">ASR, B端产品, TTS, AI, LLM</div>
+  <div class="jb">
+    <div class="boss">钟女士 · 人事专员</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="51819d5e3512172c0nJ8392_GVVV">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/51819d5e3512172c0nJ8392_GVVV.html" target="_blank" rel="noopener">抖音AI剪辑</a></div>
+    <div class="js">6-10K</div>
+  </div>
+  <div class="jc">广州靓知渝贸易<span class=meta>电子商务 · 20-99人 · 不需要融资</span></div>
+  <div class="jm">白云区 嘉禾<span class=meta>学历不限 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>学历不限</span></div>
+  <div class="skill">特效, 电商视频, 短视频, 剪辑, 调色, 音乐</div>
+  <div class="jb">
+    <div class="boss">叶世涛 · 人事</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="f3c18d57566b36090nB93Ni1EFBX">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/f3c18d57566b36090nB93Ni1EFBX.html" target="_blank" rel="noopener">AI漫剧/真人短剧制作师（Seedance2.0方向）</a></div>
+    <div class="js">4-8K</div>
+  </div>
+  <div class="jc">广州市云迹航端科技<span class=meta>互联网 · 20-99人 · </span></div>
+  <div class="jm">天河区 龙洞<span class=meta>本科 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>本科</span></div>
+  <div class="skill">合成, 网剧, 短视频, 剪辑, 电视剧, 音乐</div>
+  <div class="jb">
+    <div class="boss">胡先生 · 总经理</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="ad1663e8d819a1e30nN62d28FVRX">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/ad1663e8d819a1e30nN62d28FVRX.html" target="_blank" rel="noopener">AI漫剧短剧制作</a></div>
+    <div class="js">20-30K</div>
+  </div>
+  <div class="jc">优居集团<span class=meta>广告营销 · 100-499人 · 未融资</span></div>
+  <div class="jm">海珠区 琶洲<span class=meta>本科 · 3-5年</span></div>
+  <div class="tl"><span class=tag>3-5年</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">陈国策 · 产品技术总监</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="ecdeb0d365eaf1d10nJ92d26GFtX">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/ecdeb0d365eaf1d10nJ92d26GFtX.html" target="_blank" rel="noopener">AI 音频评测专家（音乐方向）</a></div>
+    <div class="js">4-6K</div>
+  </div>
+  <div class="jc">广州吉飞<span class=meta>计算机软件 · 20-99人 · </span></div>
+  <div class="jm">黄埔区 大沙<span class=meta>本科 · 1年以内</span></div>
+  <div class="tl"><span class=tag>1年以内</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">陈女士 · 招聘者</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="144a1d8b49156b2b0nF909u_E1ZY">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/144a1d8b49156b2b0nF909u_E1ZY.html" target="_blank" rel="noopener">AI 视频创作师【双休】</a></div>
+    <div class="js">13-18K</div>
+  </div>
+  <div class="jc">SPLAN<span class=meta>电子商务 · 100-499人 · 未融资</span></div>
+  <div class="jm">天河区 棠下<span class=meta>大专 · 3-5年</span></div>
+  <div class="tl"><span class=tag>3-5年</span><span class=tag>大专</span></div>
+  <div class="skill">特效, 合成, 电商视频, 短视频, 剪辑, 音乐</div>
+  <div class="jb">
+    <div class="boss">谢先生 · 经理</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="14b624f5522c09ec0nd42965EltV">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/14b624f5522c09ec0nd42965EltV.html" target="_blank" rel="noopener">项目经理（音乐演出活动）</a></div>
+    <div class="js">8-13K</div>
+  </div>
+  <div class="jc">恰比海外空间设计<span class=meta>建筑设计 · 100-499人 · 天使轮</span></div>
+  <div class="jm">天河区 珠江新城<span class=meta>大专 · 3-5年</span></div>
+  <div class="tl"><span class=tag>3-5年</span><span class=tag>大专</span></div>
+  <div class="skill">策划统筹, 音乐演出, 大型音乐活动, 音乐节策划</div>
+  <div class="jb">
+    <div class="boss">梁女士 · HR</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="ebe5161f69d9778f0nJ73d25GVNR">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/ebe5161f69d9778f0nJ73d25GVNR.html" target="_blank" rel="noopener">AI舞曲音乐制作人（base深圳 短视频BGM）</a></div>
+    <div class="js">12-20K</div>
+  </div>
+  <div class="jc">星耀原创文化<span class=meta>互联网 · 100-499人 · 不需要融资</span></div>
+  <div class="jm">天河区 天河北<span class=meta>大专 · 3-5年</span></div>
+  <div class="tl"><span class=tag>3-5年</span><span class=tag>大专</span></div>
+  <div class="skill">全职, 短视频, 抖音, Suno, Udio, AIVA</div>
+  <div class="jb">
+    <div class="boss">钟先生 · 招聘经理</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="5643c1ba27f285c70nZ_0tW5GVBZ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/5643c1ba27f285c70nZ_0tW5GVBZ.html" target="_blank" rel="noopener">音乐老师（音乐剧表演方向）</a></div>
+    <div class="js">8-13K</div>
+  </div>
+  <div class="jc">广州市汇高教育培...<span class=meta>培训/辅导机构 · 0-20人 · 未融资</span></div>
+  <div class="jm">越秀区 五羊新城<span class=meta>本科 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>本科</span></div>
+  <div class="skill">培训机构, 线下教育, 坐班, 一对一教学, 小班教学（3-25人）, 可英文授课</div>
+  <div class="jb">
+    <div class="boss">姜女士 · 人事总监</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="cf0cf3a84e96c7600nFz0924FFRX">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/cf0cf3a84e96c7600nFz0924FFRX.html" target="_blank" rel="noopener">AI短剧制作</a></div>
+    <div class="js">4-9K</div>
+  </div>
+  <div class="jc">好量网络科技有限公司<span class=meta>文化艺术/娱乐 · 0-20人 · </span></div>
+  <div class="jm">天河区 棠下<span class=meta>高中 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>高中</span></div>
+  <div class="skill">AI, 短剧, 漫剧, 仿真人</div>
+  <div class="jb">
+    <div class="boss">谢先生 · 招聘专员</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="cbc0a65038ec11340nJ_3tq_FVdT">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/cbc0a65038ec11340nJ_3tq_FVdT.html" target="_blank" rel="noopener">AI Agent开发工程师（抖音服务架构）</a></div>
+    <div class="js">25-35K·15薪</div>
+  </div>
+  <div class="jc">字节跳动<span class=meta>互联网 · 10000人以上 · D轮及以上</span></div>
+  <div class="jm">海珠区 琶洲<span class=meta>本科 · 在校/应届</span></div>
+  <div class="tl"><span class=tag>在校/应届</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">吴女士 · 招聘者</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="8c82496f9653eb480nJ82d64EldQ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/8c82496f9653eb480nJ82d64EldQ.html" target="_blank" rel="noopener">AI视频制作</a></div>
+    <div class="js">10-15K</div>
+  </div>
+  <div class="jc">广州小城有风文化<span class=meta>文化艺术/娱乐 · 0-20人 · 不需要融资</span></div>
+  <div class="jm">海珠区 琶洲<span class=meta>本科 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>本科</span></div>
+  <div class="skill">三维, 合成, 可愛, MG/3D动画, 短视频, 剪辑</div>
+  <div class="jb">
+    <div class="boss">谈先生 · 招聘者</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="e8947ceef4e47bbd0nF93dW7F1ZU">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/e8947ceef4e47bbd0nF93dW7F1ZU.html" target="_blank" rel="noopener">AI Agent 负责人</a></div>
+    <div class="js">20-21K</div>
+  </div>
+  <div class="jc">头文科技<span class=meta>互联网 · 100-499人 · A轮</span></div>
+  <div class="jm">番禺区 大石<span class=meta>本科 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>本科</span></div>
+  <div class="skill">AI Agent深度实践者, Agent, B端产品, Claude Code, Hermes, OpenClaw</div>
+  <div class="jb">
+    <div class="boss">植先生 · 招聘总监</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="3bc6d5a5207c94e60nJy09W9FlJZ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/3bc6d5a5207c94e60nJy09W9FlJZ.html" target="_blank" rel="noopener">AI电影创作者 / AI视觉导演</a></div>
+    <div class="js">4-9K</div>
+  </div>
+  <div class="jc">广州离鼎智能科技<span class=meta>广播/影视 · 0-20人 · 不需要融资</span></div>
+  <div class="jm">海珠区 琶洲<span class=meta>大专 · 1年以内</span></div>
+  <div class="tl"><span class=tag>1年以内</span><span class=tag>大专</span></div>
+  
+  <div class="jb">
+    <div class="boss">庄先生 · 高级人事专员</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="94dc85c5ba5ad4680nZ80tW7GVFQ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/94dc85c5ba5ad4680nZ80tW7GVFQ.html" target="_blank" rel="noopener">AI广告产品/业务负责人</a></div>
+    <div class="js">20-40K</div>
+  </div>
+  <div class="jc">原象i2mago<span class=meta>互联网 · 100-499人 · 不需要融资</span></div>
+  <div class="jm"><span class=meta>本科 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">李女士 · HRBP经理</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="2bf91d1906ffc8110nJ52t-_GVNQ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/2bf91d1906ffc8110nJ52t-_GVNQ.html" target="_blank" rel="noopener">AI 应用落地专家</a></div>
+    <div class="js">15-25K</div>
+  </div>
+  <div class="jc">山水比德<span class=meta>建筑设计 · 1000-9999人 · 已上市</span></div>
+  <div class="jm">海珠区 琶洲<span class=meta>本科 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>本科</span></div>
+  
+  <div class="jb">
+    <div class="boss">黄先生 · 招聘经理</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="ea68d1a40a9e213b0nF53t21FFFS">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/ea68d1a40a9e213b0nF53t21FFFS.html" target="_blank" rel="noopener">AI智能体开发</a></div>
+    <div class="js">11-18K</div>
+  </div>
+  <div class="jc">拓保软件<span class=meta>计算机软件 · 1000-9999人 · 不需要融资</span></div>
+  <div class="jm">黄埔区 大沙<span class=meta>本科 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>本科</span></div>
+  <div class="skill">智能体, Agent, 算法, Django, MySQL, Python</div>
+  <div class="jb">
+    <div class="boss">彭女士 · 高级招聘顾问</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="4ac8438f59cd6d1e0nJ90tW6F1FQ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/4ac8438f59cd6d1e0nJ90tW6F1FQ.html" target="_blank" rel="noopener">AI 短剧剪辑制作</a></div>
+    <div class="js">5-7K</div>
+  </div>
+  <div class="jc">指针科技<span class=meta>计算机软件 · 100-499人 · 未融资</span></div>
+  <div class="jm">天河区 员村<span class=meta>大专 · 经验不限</span></div>
+  <div class="tl"><span class=tag>经验不限</span><span class=tag>大专</span></div>
+  <div class="skill">漫剧, 推文, AI 漫剧, 网剧, 即梦</div>
+  <div class="jb">
+    <div class="boss">莫女士 · 人事专员</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="60eb4c1d955c3d8e0nJy2dW4FVpV">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/60eb4c1d955c3d8e0nJy2dW4FVpV.html" target="_blank" rel="noopener">AI视频创作师</a></div>
+    <div class="js">11-17K·13薪</div>
+  </div>
+  <div class="jc">usmile<span class=meta>智能硬件/消费电子 · 1000-9999人 · 不需要融资</span></div>
+  <div class="jm">天河区 天河北<span class=meta>大专 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>大专</span></div>
+  <div class="skill">MG/3D动画, 短视频, 剪辑</div>
+  <div class="jb">
+    <div class="boss">张女士 · HRBP</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="9e7c252d8018fa340nZy09i0FFZY">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/9e7c252d8018fa340nZy09i0FFZY.html" target="_blank" rel="noopener">动作TA（AI工具方向）</a></div>
+    <div class="js">20-40K·16薪</div>
+  </div>
+  <div class="jc">网易<span class=meta>互联网 · 10000人以上 · 已上市</span></div>
+  <div class="jm">天河区 龙洞<span class=meta>大专 · 5-10年</span></div>
+  <div class="tl"><span class=tag>5-10年</span><span class=tag>大专</span></div>
+  
+  <div class="jb">
+    <div class="boss">黄文文 · 高级招聘HR</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="21d1f9633db67d7b0nJ90t--EVZQ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/21d1f9633db67d7b0nJ90t--EVZQ.html" target="_blank" rel="noopener">AI视频生成\电商信息流\按条结算\远程居家</a></div>
+    <div class="js">50-100元/时</div>
+  </div>
+  <div class="jc">川上品牌营销<span class=meta>广告/公关/会展 · 100-499人 · 不需要融资</span></div>
+  <div class="jm">海珠区 江南大道<span class=meta>学历不限 · 1年以内</span></div>
+  <div class="tl"><span class=tag>1年以内</span><span class=tag>学历不限</span></div>
+  <div class="skill">电商视频, 合成, 音乐, 调色, 剪辑, AI视频生成</div>
+  <div class="jb">
+    <div class="boss">方女士 · 人事总监</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+<article class="job " data-id="44538d74adc8b0fe0nJ93dy5E1VQ">
+  <div class="jh">
+    <div class="jt"><a href="https://www.zhipin.com/job_detail/44538d74adc8b0fe0nJ93dy5E1VQ.html" target="_blank" rel="noopener">AI漫剧制作师（双休）</a></div>
+    <div class="js">8-13K</div>
+  </div>
+  <div class="jc">广州威城科技有限公司<span class=meta>互联网 · 20-99人 · </span></div>
+  <div class="jm">天河区 体育中心<span class=meta>大专 · 1-3年</span></div>
+  <div class="tl"><span class=tag>1-3年</span><span class=tag>大专</span></div>
+  <div class="skill">特效, 三维, 合成, Houdini, AE, 宣传片</div>
+  <div class="jb">
+    <div class="boss">陈晓泺 · 人事</div>
+    <div class="actions"><button class="del" onclick="delJob(this)">✕ 剔除</button></div>
+  </div>
+</article>
+</div>
+<div class="foot">💡 点"✕ 剔除"标记不要的岗位 → 点顶部"复制剔除清单" → 粘贴发到飞书，我会记住，之后不再显示/汇报。<br>生成于 2026-09-01 09:44:59</div>
+<div id="toast"></div>
+<script>
+function delJob(btn) {
+  var card = btn.closest('.job');
+  var id = card.getAttribute('data-id');
+  btn.textContent = '✓ 已剔';
+  card.classList.add('del');
+  var arr = JSON.parse(localStorage.getItem('boss_ignore') || '[]');
+  if (arr.indexOf(id) < 0) arr.push(id);
+  localStorage.setItem('boss_ignore', JSON.stringify(arr));
+  toast('已剔除，记得最后点上方按钮复制清单给我');
+}
+function copyIgnore() {
+  var arr = JSON.parse(localStorage.getItem('boss_ignore') || '[]');
+  if (!arr.length) { toast('还没有剔除任何岗位'); return; }
+  var txt = 'BOSS剔除清单:\n' + arr.join('\n');
+  navigator.clipboard.writeText(txt).then(function(){
+    toast('已复制 ' + arr.length + ' 条，直接粘贴到飞书发给我');
+  }, function(){
+    prompt('复制以下内容发给我:', txt);
+  });
+}
+function resetLocal() {
+  localStorage.removeItem('boss_ignore');
+  document.querySelectorAll('.job.del').forEach(function(c){
+    c.classList.remove('del');
+    var b = c.querySelector('.del'); if (b) b.textContent = '✕ 剔除';
+  });
+  toast('本机剔除记录已清空');
+}
+function toast(m) {
+  var t = document.getElementById('toast');
+  t.textContent = m; t.style.display = 'block';
+  clearTimeout(t._h); t._h = setTimeout(function(){ t.style.display='none'; }, 2600);
+}
+// 页面加载时恢复本地已剔除状态
+(function(){
+  var arr = JSON.parse(localStorage.getItem('boss_ignore') || '[]');
+  var s = new Set(arr);
+  document.querySelectorAll('.job').forEach(function(c){
+    if (s.has(c.getAttribute('data-id'))) { c.classList.add('del'); var b=c.querySelector('.del'); if(b) b.textContent='✓ 已剔'; }
+  });
+})();
+</script>
+</body>
+</html>
