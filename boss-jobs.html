@@ -1,73 +1,73 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BOSS直聘监控 · AI音乐/广州</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOSS直聘岗位监控 · AI音乐/广州</title>
 <style>
-  :root { --bg:#0f1115; --card:#171a21; --line:#262b36; --txt:#e8eaf0; --sub:#8a90a0; --new:#ffd166; --del:#ff6b6b; --ok:#4ec9a0; --pend:#6fb6ff; --follow:#ffb347; }
-  * { box-sizing:border-box; margin:0; padding:0; }
-  body { background:var(--bg); color:var(--txt); font:15px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif; padding:24px; max-width:900px; margin:0 auto; }
-  h1 { font-size:22px; margin-bottom:4px; }
-  .sub { color:var(--sub); font-size:13px; margin-bottom:16px; }
-  .bar { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 16px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:16px; position:sticky; top:8px; z-index:10; }
-  .bar .stat { color:var(--sub); font-size:13px; margin-right:6px; }
-  .bar b { color:var(--new); }
-  .btn { background:#313a49; border:0; color:var(--txt); padding:7px 13px; border-radius:8px; cursor:pointer; font-size:13px; }
-  .btn:hover { background:#3d4a5e; }
-  .btn.f { color:var(--follow); } .btn.p { color:var(--pend); } .btn.d { color:var(--del); }
-  .sec { font-size:16px; margin:20px 0 10px; display:flex; align-items:center; gap:8px; }
-  .sec .cnt { background:#232a36; color:var(--sub); font-size:12px; padding:1px 10px; border-radius:20px; }
-  .zone { margin-bottom:6px; }
-  .zone-follow .job { border-left-color:var(--follow); }
-  .zone-pending .job { border-left-color:var(--pend); }
-  .job { background:var(--card); border:1px solid var(--line); border-left:3px solid transparent; border-radius:10px; padding:14px 16px; margin-bottom:10px; }
-  .job.new { border-left-color:var(--new); }
-  .job.del { display:none; }
-  .jh { display:flex; justify-content:space-between; gap:10px; }
-  .jt a { color:var(--txt); text-decoration:none; font-size:15.5px; font-weight:600; }
-  .jt a:hover { color:var(--new); }
-  .js { color:var(--new); font-weight:600; white-space:nowrap; }
-  .jc { margin-top:4px; }
-  .meta { color:var(--sub); font-size:12.5px; margin-left:8px; }
-  .jm { color:var(--sub); font-size:13px; margin-top:2px; }
-  .tl { margin-top:6px; }
-  .tag { display:inline-block; background:#232a36; color:var(--sub); font-size:12px; padding:2px 9px; border-radius:20px; margin-right:6px; }
-  .skill { color:var(--sub); font-size:12.5px; margin-top:6px; }
-  .jb { display:flex; justify-content:space-between; align-items:center; margin-top:10px; flex-wrap:wrap; gap:6px; }
-  .boss { color:var(--sub); font-size:12.5px; }
-  .actions { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-  .detected { color:var(--new); font-size:12px; }
-  .bf,.bp,.bd { background:transparent; border-radius:8px; padding:4px 11px; cursor:pointer; font-size:12.5px; }
-  .bf { border:1px solid var(--follow); color:var(--follow); }
-  .bf:hover { background:var(--follow); color:#222; }
-  .bp { border:1px solid var(--pend); color:var(--pend); }
-  .bp:hover { background:var(--pend); color:#222; }
-  .bd { border:1px solid var(--del); color:var(--del); }
-  .bd:hover { background:var(--del); color:#fff; }
-  .badge-new { background:var(--new); color:#1a1a1a; font-size:11px; font-weight:700; padding:1px 7px; border-radius:6px; margin-right:8px; vertical-align:2px; }
-  .foot { color:var(--sub); font-size:12px; text-align:center; margin:28px 0 12px; }
-  .empty { text-align:center; color:var(--sub); padding:30px 0; }
-  #toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#2b3544; color:var(--txt); padding:10px 20px; border-radius:10px; display:none; font-size:13px; z-index:99; }
-  .expand { margin:6px 0 14px; cursor:pointer; user-select:none; }
+*{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:#f6f7fb;color:#1f2937} .wrap{max-width:860px;margin:0 auto;padding:20px 16px 50px}
+.hero{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;border-radius:18px;padding:24px 22px;margin:10px 0 18px}
+.hero h1{margin:0;font-size:24px;font-weight:800}
+.hero .sub{opacity:.9;font-size:13.5px;margin-top:6px}
+.hero .stats{display:flex;gap:14px;margin-top:12px;flex-wrap:wrap;font-size:13px;font-weight:600}
+.hero .stats span{background:rgba(255,255,255,.16);padding:3px 12px;border-radius:999px}
+.stick{position:sticky;top:10px;z-index:50}
+.bar{background:#fff;border-radius:14px;padding:12px 16px;box-shadow:0 1px 4px rgba(0,0,0,.06);display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.bar .hint{color:#6b7280;font-size:12.5px;flex:1;min-width:200px}
+.copyall{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:0;padding:9px 18px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer}
+.copyall:hover{opacity:.92}
+.panel{background:#fff;border-radius:16px;padding:18px;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:16px}
+.sec{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:800;margin:2px 0 12px}
+.sec .cnt{font-size:12px;font-weight:600;padding:1px 10px;border-radius:999px;background:#eef2f7;color:#6b7280}
+.sec-follow{color:#4338ca} .sec-pending{color:#047857} .sec-new{color:#b45309} .sec-all{color:#374151}
+.sec-empty{color:#6b7280;font-size:13.5px;text-align:center;padding:14px}
+.job{border:1px solid #eceef5;border-radius:12px;padding:13px 15px;margin-bottom:10px;background:#fafbff;border-left:3px solid #c7d2fe}
+.zone-follow .job{border-left-color:#4338ca} .zone-pending .job{border-left-color:#059669}
+.job.new{border-left-color:#d97706}
+.job.hide{display:none}
+.jh{display:flex;justify-content:space-between;gap:10px}
+.jt a{color:#111827;text-decoration:none;font-size:15px;font-weight:700}
+.jt a:hover{color:#4338ca}
+.js{color:#b45309;font-weight:700;white-space:nowrap}
+.jc{margin-top:4px;font-weight:600;font-size:14px}
+.meta{color:#6b7280;font-size:12px;font-weight:400;margin-left:8px}
+.jm{color:#6b7280;font-size:12.5px;margin-top:2px}
+.tl{margin-top:7px}
+.tag{display:inline-block;background:#eef2f7;color:#4b5563;font-size:12px;padding:2px 10px;border-radius:999px;margin-right:6px}
+.skill{color:#6b7280;font-size:12.5px;margin-top:6px}
+.jb{display:flex;justify-content:space-between;align-items:center;margin-top:10px;flex-wrap:wrap;gap:6px}
+.boss{color:#6b7280;font-size:12.5px}
+.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.detected{color:#b45309;font-size:12px}
+.bf,.bp,.bd{background:#fff;border-radius:999px;padding:4px 13px;cursor:pointer;font-size:12.5px;font-weight:600}
+.bf{border:1px solid #4338ca;color:#4338ca} .bf:hover{background:#4338ca;color:#fff}
+.bp{border:1px solid #059669;color:#047857} .bp:hover{background:#059669;color:#fff}
+.bd{border:1px solid #e11d48;color:#e11d48} .bd:hover{background:#e11d48;color:#fff}
+.badge-new{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;margin-right:8px;vertical-align:2px}
+.foot{color:#6b7280;font-size:12px;text-align:center;margin:24px 0 8px}
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#1f2937;color:#fff;padding:11px 22px;border-radius:12px;display:none;font-size:13.5px;z-index:99;box-shadow:0 6px 18px rgba(0,0,0,.25)}
 </style>
 </head>
-<body>
-<h1>🎯 BOSS直聘岗位监控</h1>
-<div class="sub">关键词 <b>AI音乐</b> · 城市 <b>广州</b> · 平台共 450 条 · 本页 90 条（已剔 0）· 更新 2026-09-01 10:01:10</div>
-
-<div class="bar">
-  <span class="stat">⭐ <b>0</b> 关注</span>
-  <span class="stat">⏸ <b>0</b> 待定</span>
-  <span class="stat">🆕 <b>8</b> 新</span>
-  <button class="btn f" onclick="copyList('follow')">📤 复制关注清单</button>
-  <button class="btn p" onclick="copyList('pending')">📤 复制待定清单</button>
-  <button class="btn d" onclick="copyList('ignore')">📤 复制剔除清单</button>
-  <button class="btn" onclick="resetLocal()">↺ 恢复本地</button>
+<body><div class="wrap">
+<div class="hero">
+  <h1>🎯 BOSS直聘岗位监控</h1>
+  <div class="sub">关键词 <b>AI音乐</b> · 城市 <b>广州</b> · 新岗位自动置顶 · 你的分类自动归位</div>
+  <div class="stats">
+    <span>⭐ 关注 0</span>
+    <span>⏸ 待定 0</span>
+    <span>🆕 新增 8</span>
+    <span>📋 共 90 条</span>
+    <span>🚫 已剔 0</span>
+  </div>
 </div>
 
-<div class="empty">⭐ 持续关注区：点卡片上的"⭐ 关注"按钮加入这里</div>
-<h2 class="sec zone-new">🆕 新岗位 <span class="cnt">8</span></h2><div class="zone zone-new">
+<div class="stick"><div class="bar">
+  <button class="copyall" onclick="copyAll()">📤 复制我的全部操作</button>
+  <div class="hint">操作完点一下 → 粘贴发到飞书，即可同步关注/待定/剔除三份清单</div>
+</div></div>
+
+<div class="panel sec-empty">⭐ 持续关注区 · 点卡片上"关注"按钮，感兴趣的岗位会固定在这里</div>
+<div class="panel"><div class="sec sec-new"><span class="sec-ic">🆕</span> 新岗位 <span class="cnt">8</span></div>
 <article class="job new" data-id="ccc5cbd3afbc47a50nJ92N65EVtT">
   <div class="jh">
     <div class="jt"><span class="badge-new">🆕 新</span><a href="https://www.zhipin.com/job_detail/ccc5cbd3afbc47a50nJ92N65EVtT.html" target="_blank" rel="noopener">AI 音频标注质检｜团队骨干岗|双休五险一金</a></div>
@@ -212,8 +212,8 @@
     </div>
   </div>
 </article></div>
-<div class="empty" style="padding:14px 0">⏸ 待定区：兼职备用等"不时之需"的岗位放这里</div>
-<h2 class="sec zone-all">📋 全部岗位 <span class="cnt">82</span></h2><div class="zone zone-all">
+<div class="panel sec-empty">⏸ 待定区 · 兼职、备用"不时之需"的岗位放这里</div>
+<div class="panel"><div class="sec sec-all"><span class="sec-ic">📋</span> 全部岗位 <span class="cnt">82</span></div>
 <article class="job " data-id="e2f5ef48f17e24240nJz3dm7GFtW">
   <div class="jh">
     <div class="jt"><a href="https://www.zhipin.com/job_detail/e2f5ef48f17e24240nJz3dm7GFtW.html" target="_blank" rel="noopener">AI音乐-标注/评测-线上（实习/兼职）Mureka</a></div>
@@ -1691,40 +1691,38 @@
   </div>
 </article></div>
 
-<div class="foot">💡 三区操作：<b>⭐ 关注</b> = 感兴趣常看 ｜ <b>⏸ 待定</b> = 备用不时之需 ｜ <b>✕ 剔除</b> = 不要。<br>每个区操作完点顶部对应"📤 复制清单"→ 粘贴发到飞书，我会记住，网页下次更新自动归位。</div>
+<div class="foot">💡 每条岗位三个按钮：<b>⭐ 关注</b>（感兴趣固定展示）｜ <b>⏸ 待定</b>（兼职备用）｜ <b>✕ 剔除</b>（不再显示/汇报）。<br>所有操作完成后点上方 <b>"📤 复制我的全部操作"</b>，粘贴发到飞书即可一键同步 · 更新于 2026-09-01 10:06:56</div>
 <div id="toast"></div>
 <script>
-var KEY = {follow:'boss_follow', pending:'boss_pending', ignore:'boss_ignore'};
-function read(k) { return JSON.parse(localStorage.getItem(KEY[k]) || '[]'); }
-function write(k, arr) { localStorage.setItem(KEY[k], JSON.stringify(arr)); }
-function mark(btn, kind) {
-  var card = btn.closest('.job');
-  var id = card.getAttribute('data-id');
-  // 从其他两类移除（互斥）
-  ['follow','pending','ignore'].forEach(function(k) {
-    if (k !== kind) write(k, read(k).filter(function(x){ return x !== id; }));
+var KEY={follow:'boss_follow',pending:'boss_pending',ignore:'boss_ignore'};
+function read(k){var a=[];try{a=JSON.parse(localStorage.getItem(KEY[k])||'[]')}catch(e){}return a}
+function write(k,a){localStorage.setItem(KEY[k],JSON.stringify(a))}
+function mark(btn,kind){
+  var card=btn.closest('.job'),id=card.getAttribute('data-id');
+  ['follow','pending','ignore'].forEach(function(k){if(k!==kind)write(k,read(k).filter(function(x){return x!==id}))});
+  var arr=read(kind);if(arr.indexOf(id)<0)arr.push(id);write(kind,arr);
+  card.classList.add('hide');
+  var msg=kind==='follow'?'⭐ 已加入持续关注':kind==='pending'?'⏸ 已加入待定':'✕ 已剔除';
+  toast(msg+'，最后点上方按钮一次复制全部');
+}
+function copyAll(){
+  var out=[];
+  [['follow','BOSS关注清单'],['pending','BOSS待定清单'],['ignore','BOSS剔除清单']].forEach(function(p){
+    var k=p[0],arr=read(k);
+    if(arr.length)out.push(p[1]+':\n'+arr.join('\n'));
   });
-  var arr = read(kind);
-  if (arr.indexOf(id) < 0) arr.push(id);
-  write(kind, arr);
-  if (kind === 'ignore') { card.style.display = 'none'; toast('已剔除 ✓ 记得复制剔除清单发我'); }
-  else if (kind === 'follow') { card.style.display = 'none'; toast('⭐ 已加入持续关注，复制关注清单发我'); }
-  else { card.style.display = 'none'; toast('⏸ 已加入待定，复制待定清单发我'); }
+  if(!out.length){toast('还没操作任何岗位，先点卡片上的按钮');return}
+  var txt=out.join('\n\n');
+  navigator.clipboard.writeText(txt).then(function(){toast('✅ 已复制，直接粘贴发到飞书')},
+    function(){prompt('复制以下内容发到飞书:',txt)});
 }
-function copyList(kind) {
-  var arr = read(kind);
-  if (!arr.length) { toast('该清单还是空的'); return; }
-  var label = kind === 'follow' ? 'BOSS关注清单' : kind === 'pending' ? 'BOSS待定清单' : 'BOSS剔除清单';
-  var txt = label + ':\n' + arr.join('\n');
-  navigator.clipboard.writeText(txt).then(function(){
-    toast('已复制 ' + arr.length + ' 条，粘贴发到飞书即可');
-  }, function(){ prompt('复制以下内容发给我:', txt); });
-}
-function resetLocal() {
-  ['follow','pending','ignore'].forEach(function(k){ localStorage.removeItem(KEY[k]); });
-  document.querySelectorAll('.job').forEach(function(c){ c.style.display = ''; });
-  toast('本地三清单已清空');
-}
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(function(){t.style.display='none'},3000)}
+(function(){
+  ['follow','pending','ignore'].forEach(function(k){
+    var s=new Set(read(k));
+    document.querySelectorAll('.job').forEach(function(c){if(s.has(c.getAttribute('data-id')))c.classList.add('hide')});
+  });
+})();
 </script>
-</body>
+</div></body>
 </html>
