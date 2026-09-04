@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 工作台 UI 设计参考 · 4 套成熟系统可直接复用</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ 主题 1: Linear（暗色工作台） ============ */
+[data-theme="linear"]{
+  --bg:#08090a; --panel:#0f1011; --surface:#191a1b; --surface2:#28282c;
+  --text:#f7f8f8; --text2:#d0d6e0; --text3:#8a8f98; --text4:#62666d;
+  --accent:#5e6ad2; --accent2:#7170ff; --accent3:#828fff;
+  --border:rgba(255,255,255,.08); --border2:rgba(255,255,255,.05);
+  --radius:8px; --radius2:12px;
+  --font:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  --btn-bg:rgba(255,255,255,.03); --btn-hover:rgba(255,255,255,.06);
+  --card-bg:rgba(255,255,255,.02); --input-bg:rgba(255,255,255,.02);
+  --tag-bg:transparent; --tag-border:#23252a;
+  --shadow:0 8px 30px rgba(0,0,0,.4);
+  --hero-font-size:44px; --letter:-1.056px;
+}
+/* ============ 主题 2: Vercel（黑白极简） ============ */
+[data-theme="vercel"]{
+  --bg:#ffffff; --panel:#ffffff; --surface:#fafafa; --surface2:#f5f5f5;
+  --text:#171717; --text2:#4d4d4d; --text3:#666666; --text4:#808080;
+  --accent:#171717; --accent2:#0072f5; --accent3:#0a72ef;
+  --border:rgba(0,0,0,.08); --border2:rgba(0,0,0,.06);
+  --radius:6px; --radius2:8px;
+  --font:'Geist','Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  --btn-bg:#171717; --btn-hover:#000;
+  --card-bg:#fff; --input-bg:#fff;
+  --tag-bg:#f5f5f5; --tag-border:transparent;
+  --shadow:0 0 0 1px rgba(0,0,0,.06),0 2px 8px rgba(0,0,0,.05);
+  --hero-font-size:44px; --letter:-2.2px;
+}
+/* ============ 主题 3: Claude（温暖纸感 AI） ============ */
+[data-theme="claude"]{
+  --bg:#f5f4ed; --panel:#faf9f5; --surface:#faf9f5; --surface2:#fff;
+  --text:#141413; --text2:#4d4c48; --text3:#5e5d59; --text4:#87867f;
+  --accent:#c96442; --accent2:#d97757; --accent3:#b53333;
+  --border:#f0eee6; --border2:#e8e6dc;
+  --radius:8px; --radius2:12px;
+  --font:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  --btn-bg:#e8e6dc; --btn-hover:#dedc01;
+  --card-bg:#faf9f5; --input-bg:#fff;
+  --tag-bg:#e8e6dc; --tag-border:transparent;
+  --shadow:rgba(0,0,0,.05) 0 4px 24px;
+  --hero-font-size:44px; --letter:0px;
+}
+/* ============ 主题 4: Cursor（暖色 AI 编码台） ============ */
+[data-theme="cursor"]{
+  --bg:#f2f1ed; --panel:#f2f1ed; --surface:#e6e5e0; --surface2:#ebeae5;
+  --text:#26251e; --text2:rgba(38,37,30,.75); --text3:rgba(38,37,30,.55); --text4:rgba(38,37,30,.4);
+  --accent:#f54e00; --accent2:#26251e; --accent3:#cf2d56;
+  --border:rgba(38,37,30,.1); --border2:rgba(38,37,30,.2);
+  --radius:8px; --radius2:10px;
+  --font:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  --btn-bg:#ebeae5; --btn-hover:#e1e0db;
+  --card-bg:#e6e5e0; --input-bg:#fff;
+  --tag-bg:#e6e5e0; --tag-border:transparent;
+  --shadow:rgba(0,0,0,.14) 0 14px 32px;
+  --hero-font-size:44px; --letter:-0.72px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);transition:background .3s,color .3s;padding-bottom:80px}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 20px}
+
+/* 顶部主题切换 */
+.theme-bar{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);backdrop-filter:blur(10px);padding:12px 0}
+.theme-bar .inner{max-width:1000px;margin:0 auto;padding:0 20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.theme-btn{border:1px solid var(--border);background:var(--surface);color:var(--text);padding:7px 16px;border-radius:999px;font-size:13px;cursor:pointer;font-family:var(--font);transition:.2s}
+.theme-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.theme-label{font-size:13px;color:var(--text3);margin-right:6px}
+
+/* Hero */
+.hero{padding:60px 0 40px;border-bottom:1px solid var(--border);margin-bottom:40px}
+.hero .eyebrow{font:500 12px var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--accent2);margin-bottom:14px}
+.hero h1{font-size:var(--hero-font-size);line-height:1.1;letter-spacing:var(--letter);font-weight:600;margin-bottom:16px}
+.hero p{font-size:17px;line-height:1.7;color:var(--text2);max-width:640px}
+.hero .cta{display:flex;gap:10px;margin-top:24px}
+
+/* 按钮 */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:var(--radius);font-size:14px;font-weight:500;cursor:pointer;border:1px solid var(--border);font-family:var(--font);transition:.2s}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-primary:hover{opacity:.9}
+.btn-ghost{background:var(--btn-bg);color:var(--text)}
+.btn-ghost:hover{background:var(--btn-hover)}
+.btn-dark{background:var(--text);color:var(--bg)}
+.btn-pill{border-radius:999px;padding:8px 18px;background:var(--tag-bg);border:1px solid var(--tag-border);color:var(--text)}
+
+/* 区块 */
+.section{margin-bottom:48px}
+.section h2{font-size:22px;font-weight:600;margin-bottom:8px;letter-spacing:-.3px}
+.section .desc{color:var(--text3);font-size:14px;margin-bottom:20px}
+.grid{display:grid;gap:14px}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+
+/* 卡片 */
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius2);padding:20px;box-shadow:var(--shadow)}
+.card h3{font-size:16px;margin-bottom:6px}
+.card p{color:var(--text3);font-size:13.5px;line-height:1.6}
+.card .price{font-size:26px;font-weight:700;margin:10px 0 4px}
+.card .tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.tag{background:var(--tag-bg);border:1px solid var(--tag-border);color:var(--text2);font-size:12px;padding:3px 10px;border-radius:999px}
+.tag-new{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+
+/* 输入 */
+.input-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.input{background:var(--input-bg);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;color:var(--text);font-size:14px;font-family:var(--font);min-width:220px}
+.input:focus{outline:none;border-color:var(--accent2)}
+
+/* AI 时间线（Cursor 风格） */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-step{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border2)}
+.tl-step:last-child{border-bottom:none}
+.tl-dot{width:10px;height:10px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.tl-body{flex:1}
+.tl-body .tl-label{font:500 12px var(--mono);text-transform:uppercase;letter-spacing:1px}
+.tl-body .tl-text{font-size:14px;color:var(--text2);margin-top:3px}
+.tl-time{color:var(--text4);font-size:12px;font-family:var(--mono)}
+
+/* 侧边栏工作台布局 */
+.workspace{display:grid;grid-template-columns:200px 1fr;gap:14px;border:1px solid var(--border);border-radius:var(--radius2);overflow:hidden;background:var(--panel)}
+.ws-sidebar{background:var(--surface);padding:16px 0;border-right:1px solid var(--border)}
+.ws-item{display:flex;align-items:center;gap:10px;padding:9px 16px;font-size:13.5px;color:var(--text2);cursor:pointer}
+.ws-item.active{background:var(--btn-bg);color:var(--text);font-weight:500;border-left:2px solid var(--accent2)}
+.ws-item .dot{width:6px;height:6px;border-radius:50%;background:var(--accent2)}
+.ws-main{padding:20px;min-height:260px}
+.ws-main h4{font-size:16px;margin-bottom:4px}
+.ws-main .sub{color:var(--text3);font-size:13px;margin-bottom:16px}
+
+/* 色板 */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+.swatch{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
+.swatch .color{height:52px}
+.swatch .name{font-size:11.5px;padding:6px 8px;color:var(--text3);font-family:var(--mono);word-break:break-all}
+
+/* 代码块 */
+.token-block{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius2);padding:16px;margin-top:14px}
+.token-block pre{font:400 12px/1.7 var(--mono);color:var(--text2);white-space:pre-wrap;word-break:break-all;padding-right:60px}
+.copy-btn{position:absolute;top:10px;right:10px;background:var(--btn-bg);border:1px solid var(--border);color:var(--text);font-size:12px;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:var(--font)}
+.copy-btn:hover{background:var(--btn-hover)}
+
+/* 导航 */
+.nav{display:flex;align-items:center;gap:20px;border:1px solid var(--border);border-radius:var(--radius2);padding:10px 18px;background:var(--panel)}
+.nav .logo{font-weight:700;font-size:16px}
+.nav a{color:var(--text2);text-decoration:none;font-size:13.5px}
+.nav a:hover{color:var(--text)}
+.nav .spacer{flex:1}
+.navbar-btn{background:var(--accent);color:#fff;border:none;border-radius:var(--radius);padding:7px 14px;font-size:13px;cursor:pointer;font-family:var(--font)}
+
+.foot{margin-top:60px;padding-top:24px;border-top:1px solid var(--border);color:var(--text4);font-size:12.5px;text-align:center}
+@media(max-width:720px){.workspace{grid-template-columns:1fr}.hero h1{font-size:32px}}
+</style>
+</head>
+<body data-theme="linear">
+
+<div class="theme-bar"><div class="inner">
+  <span class="theme-label">◆ 主题切换</span>
+  <button class="theme-btn active" onclick="setTheme('linear')">Linear · 暗色工作台</button>
+  <button class="theme-btn" onclick="setTheme('vercel')">Vercel · 黑白极简</button>
+  <button class="theme-btn" onclick="setTheme('claude')">Claude · 温暖纸感</button>
+  <button class="theme-btn" onclick="setTheme('cursor')">Cursor · 暖色 AI 台</button>
+</div></div>
+
+<div class="wrap">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="eyebrow" id="brand-name">LINEAR · WORKSPACE/ISSUE TRACKING</div>
+  <h1>AI 工作台 · 产品级 UI 参考</h1>
+  <p>四套成熟工作台产品的完整设计系统收齐：设计令牌（色板/字体/圆角/阴影）、组件样式（按钮/卡片/输入/导航/状态标签/AI 时间线）、以及工作台标准布局。一键切换主题直接预览，每个主题附可直接复制的 CSS Tokens。</p>
+  <div class="cta">
+    <button class="btn btn-primary" onclick="copyTokens()">复制当前主题 CSS Tokens</button>
+    <button class="btn btn-ghost" onclick="setTheme('vercel')">看 Vercel 主题 →</button>
+  </div>
+</div>
+
+<!-- 导航 -->
+<div class="section">
+  <h2>01 · 顶部导航</h2>
+  <div class="desc">logo + 产品导航 + CTA，主题切换时同步变化</div>
+  <div class="nav">
+    <div class="logo" id="nav-logo">◆ Product</div>
+    <a href="#tokens">设计令牌</a>
+    <a href="#work">工作台</a>
+    <a href="#ai">AI 时间线</a>
+    <span class="spacer"></span>
+    <button class="navbar-btn" id="nav-cta">立即开始</button>
+  </div>
+</div>
+
+<!-- 工作台布局 -->
+<div class="section" id="work">
+  <h2>02 · 工作台主布局</h2>
+  <div class="desc">左侧导航 + 主内容区——AI 工作台最通用的骨架，可直接套用</div>
+  <div class="workspace">
+    <div class="ws-sidebar">
+      <div class="ws-item active"><span class="dot"></span>对话工作区</div>
+      <div class="ws-item"><span class="dot"></span>项目/任务</div>
+      <div class="ws-item"><span class="dot"></span>数据看板</div>
+      <div class="ws-item"><span class="dot"></span>知识库</div>
+      <div class="ws-item"><span class="dot"></span>设置</div>
+    </div>
+    <div class="ws-main">
+      <h4 id="ws-title">对话工作区</h4>
+      <div class="sub">当前主题：<span id="ws-sub">暗色 · Linear 风格</span> · 新会话自动归档</div>
+      <div class="input-row">
+        <input class="input" placeholder="向 AI 提问…（Cmd+K 快捷唤起）" id="ws-input">
+        <button class="btn btn-primary">发送</button>
+        <button class="btn btn-ghost">＋ 新对话</button>
+      </div>
+      <div class="tag-row" style="margin-top:14px">
+        <span class="tag tag-new">运行中</span>
+        <span class="tag">模型：默认</span>
+        <span class="tag">上下文 32K</span>
+        <span class="tag">历史 12 条</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 组件 -->
+<div class="section">
+  <h2>03 · 核心组件</h2>
+  <div class="desc">按钮体系 · 卡片 · 表单输入 · 状态标签——各主题差异全部实时呈现</div>
+  <div class="grid grid-3">
+    <div class="card">
+      <h3>按钮体系</h3>
+      <p>主按钮 / 幽灵按钮 / 胶囊筛选</p>
+      <div class="tag-row">
+        <button class="btn btn-primary">开始使用</button>
+        <button class="btn btn-ghost">次要操作</button>
+      </div>
+      <div class="tag-row">
+        <button class="btn btn-pill">全部</button>
+        <button class="btn btn-pill">运行中</button>
+        <button class="btn btn-pill">已归档</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>数据卡片</h3>
+      <p>指标、定价、列表项通用容器</p>
+      <div class="price" id="price-demo">¥ 0</div>
+      <p>个人版 · 无限对话与工作区</p>
+      <div class="tag-row">
+        <span class="tag">月付</span><span class="tag-new">推荐</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>表单输入</h3>
+      <p>输入框 · 状态标签组合</p>
+      <div class="input-row" style="flex-wrap:wrap">
+        <input class="input" placeholder="搜索岗位、任务、知识…" style="min-width:160px">
+      </div>
+      <div class="tag-row">
+        <span class="tag-new">● 在线</span>
+        <span class="tag">● 处理中</span>
+        <span class="tag" style="opacity:.6">● 离线</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AI 时间线 -->
+<div class="section" id="ai">
+  <h2>04 · AI 任务时间线（Cursor 风格）</h2>
+  <div class="desc">AI 工作台展示"思考/检索/阅读/修改"过程的经典组件</div>
+  <div class="card">
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-dot" style="background:#dfa88f"></div>
+        <div class="tl-body"><div class="tl-label" style="color:#b0805e">Thinking</div><div class="tl-text">分析任务需求，规划执行步骤</div></div>
+        <div class="tl-time">0.8s</div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot" style="background:#9fc9a2"></div>
+        <div class="tl-body"><div class="tl-label" style="color:#5f8f63">Grep 检索</div><div class="tl-text">在工作区搜索相关文件与上下文</div></div>
+        <div class="tl-time">1.2s</div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot" style="background:#9fbbe0"></div>
+        <div class="tl-body"><div class="tl-label" style="color:#5f7fa8">Read 阅读</div><div class="tl-text">读取 3 个文件 · 共 2412 行</div></div>
+        <div class="tl-time">2.5s</div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot" style="background:#c0a8dd"></div>
+        <div class="tl-body"><div class="tl-label" style="color:#8a6bb0">Edit 修改</div><div class="tl-text">完成 2 处修改，建议运行验证</div></div>
+        <div class="tl-time">4.1s</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 色板 -->
+<div class="section">
+  <h2>05 · 色板（当前主题）</h2>
+  <div class="desc">背景 / 面板 / 强调色 / 文字层级 / 边框——下方色块由当前主题实时驱动</div>
+  <div class="grid grid-2">
+    <div>
+      <div class="swatches" id="swatches-bg"></div>
+      <div style="margin-top:10px" class="desc">背景、面板、表面、文字四种层级</div>
+    </div>
+    <div>
+      <div class="swatches" id="swatches-accent"></div>
+      <div style="margin-top:10px" class="desc">品牌强调色系（CTA/链接/状态）</div>
+    </div>
+  </div>
+</div>
+
+<!-- Tokens -->
+<div class="section" id="tokens">
+  <h2>06 · CSS Tokens（可直接复制）</h2>
+  <div class="desc">一套 CSS 变量覆盖全部设计令牌，粘贴到项目 <code style="font-family:var(--mono);font-size:12px;background:var(--tag-bg);padding:2px 6px;border-radius:4px">:root</code> 即可复用当前主题</div>
+  <div class="token-block">
+    <pre id="token-pre"></pre>
+    <button class="copy-btn" onclick="copyTokens()">📋 复制</button>
+  </div>
+</div>
+
+<div class="foot">
+  AI 工作台 UI 设计参考 · 设计系统来源：Linear / Vercel / Claude / Cursor · 由 popular-web-designs 技能驱动生成 · 可直接复用任意一套
+</div>
+</div>
+
+<script>
+const THEMES = {
+  linear:{name:'Linear',eyebrow:'LINEAR · WORKSPACE / ISSUE TRACKING',ws:'暗色 · Linear 风格',sub:'产品级敏捷工作台'},
+  vercel:{name:'Vercel',eyebrow:'VERCEL · DEPLOYMENT PLATFORM',ws:'黑白 · Vercel 风格',sub:'开发者基础设施控制台'},
+  claude:{name:'Claude',eyebrow:'CLAUDE · ANTHROPIC AI',ws:'纸感 · Claude 风格',sub:'AI 对话与知识工作台'},
+  cursor:{name:'Cursor',eyebrow:'CURSOR · AI CODE EDITOR',ws:'暖色 · Cursor 风格',sub:'AI 编码工作台'}
+};
+const SWATCH_GROUPS = {
+  linear:{bg:['#08090a','#0f1011','#191a1b','#28282c'],
+          accent:['#5e6ad2','#7170ff','#828fff','#27a644']},
+  vercel:{bg:['#ffffff','#fafafa','#f5f5f5','#ebebeb'],
+          accent:['#171717','#0072f5','#de1d8d','#ff5b4f']},
+  claude:{bg:['#f5f4ed','#faf9f5','#ffffff','#e8e6dc'],
+          accent:['#c96442','#d97757','#141413','#b53333']},
+  cursor:{bg:['#f2f1ed','#f7f7f4','#ebeae5','#e6e5e0'],
+          accent:['#f54e00','#26251e','#cf2d56','#1f8a65']}
+};
+const TOKENS = {
+  linear:`--bg:#08090a; --panel:#0f1011; --surface:#191a1b; --surface2:#28282c;
+--text:#f7f8f8; --text2:#d0d6e0; --text3:#8a8f98; --text4:#62666d;
+--accent:#5e6ad2; --accent2:#7170ff; --accent3:#828fff; --success:#27a644;
+--border:rgba(255,255,255,.08); --border2:rgba(255,255,255,.05);
+--radius:6px; --radius2:8px; --radius3:12px;
+font-family:'Inter',system-ui,sans-serif; font-feature-settings:'cv01','ss03';
+// 按钮背景用半透明白: rgba(255,255,255,.02~.05)；主文本用 #f7f8f8 而非纯白；
+// 品牌紫仅用于 CTA/激活态；层级靠背景亮度递进，不用投影（深色上投影不可见）`,
+  vercel:`--bg:#ffffff; --panel:#ffffff; --surface:#fafafa; --surface2:#f5f5f5;
+--text:#171717; --text2:#4d4d4d; --text3:#666666; --text4:#808080;
+--accent:#171717; --accent2:#0072f5; --accent3:#0a72ef;
+--border:rgba(0,0,0,.08); --border2:rgba(0,0,0,.06);
+--radius:6px; --radius2:8px;
+font-family:'Geist','Inter',system-ui,sans-serif; letter-spacing:-.02em;
+// 边界用 shadow-as-border: box-shadow:0 0 0 1px rgba(0,0,0,.08)；
+// 三档字重 400/500/600；工作流三色: Develop #0a72ef / Preview #de1d8d / Ship #ff5b4f；
+// 卡片 shadow 栈: 0 0 0 1px rgba(0,0,0,.08), 0 2px 2px rgba(0,0,0,.04), #fafafa 0 0 0 1px`,
+  claude:`--bg:#f5f4ed; --panel:#faf9f5; --surface:#faf9f5; --surface2:#ffffff;
+--text:#141413; --text2:#4d4c48; --text3:#5e5d59; --text4:#87867f;
+--accent:#c96442; --accent2:#d97757; --accent3:#b53333; --focus:#3898ec;
+--border:#f0eee6; --border2:#e8e6dc;
+--radius:8px; --radius2:12px; --radius3:24px;
+font-family:'Inter',system-ui,sans-serif;
+// 全暖色调——任何灰色都带黄棕底；衬线标题(Georgia)权重恒 500；
+// 阴影用环式 0 0 0 1px 而非投影；无渐变；陶土色 #c96442 仅用于主 CTA；
+// 正文行高 1.6，营造书刊阅读感`,
+  cursor:`--bg:#f2f1ed; --panel:#f2f1ed; --surface:#e6e5e0; --surface2:#ebeae5;
+--text:#26251e; --text2:rgba(38,37,30,.75); --text3:rgba(38,37,30,.55);
+--accent:#f54e00; --accent2:#cf2d56; --success:#1f8a65;
+--border:rgba(38,37,30,.1); --border2:rgba(38,37,30,.2);
+--radius:8px; --radius2:10px;
+font-family:'Inter',system-ui,sans-serif;
+// 暖奶油底 #f2f1ed + 暖近黑 #26251e；橙色 #f54e00 为品牌强调；
+// hover 文本变绯红 #cf2d56 是标志性交互；AI 时间线四色：
+// thinking #dfa88f / grep #9fc9a2 / read #9fbbe0 / edit #c0a8dd；
+// 投影用大模糊值(14~32px)营造弥散氛围感`
+};
+
+function setTheme(t){
+  document.body.dataset.theme=t;
+  document.querySelectorAll('.theme-btn').forEach((b,i)=>{
+    b.classList.toggle('active',['linear','vercel','claude','cursor'][i]===t);
+  });
+  const info=THEMES[t];
+  document.getElementById('brand-name').textContent=info.eyebrow;
+  document.getElementById('ws-title').textContent=info.name+' 风格 · '+info.ws;
+  document.getElementById('ws-sub').textContent=info.sub;
+  renderSwatches(t);
+  renderTokens(t);
+  // 价格演示色
+  document.getElementById('price-demo').style.color=getComputedStyle(document.body).getPropertyValue('--accent');
+}
+function renderSwatches(t){
+  const g=SWATCH_GROUPS[t];
+  const el=document.getElementById('swatches-bg');
+  const el2=document.getElementById('swatches-accent');
+  el.innerHTML=g.bg.map(c=>`<div class="swatch"><div class="color" style="background:${c}"></div><div class="name">${c}</div></div>`).join('');
+  el2.innerHTML=g.accent.map(c=>`<div class="swatch"><div class="color" style="background:${c}"></div><div class="name">${c}</div></div>`).join('');
+}
+function renderTokens(t){
+  document.getElementById('token-pre').textContent=TOKENS[t];
+}
+function copyTokens(){
+  const t=document.body.dataset.theme;
+  const txt=':root{\n'+TOKENS[t]+'\n}';
+  navigator.clipboard.writeText(txt).then(()=>{
+    const b=document.querySelector('.copy-btn');b.textContent='✓ 已复制';setTimeout(()=>b.textContent='📋 复制',1800);
+  }).catch(()=>{prompt('复制以下内容:',txt)});
+}
+setTheme('linear');
+</script>
+</body>
+</html>
