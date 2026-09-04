@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>手机自动打卡教程 · 苹果 / 安卓</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f7fb; --panel:#ffffff; --surface:#fafafa;
+  --text:#171717; --text2:#4d4d4d; --text3:#666666; --text4:#808080;
+  --primary:#667eea; --primary2:#5a67d8; --green:#059669; --red:#dc2626; --amber:#d97706;
+  --border:rgba(0,0,0,.08); --border2:rgba(0,0,0,.06);
+  --radius:8px; --radius2:12px;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 4px 12px rgba(0,0,0,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding-bottom:60px}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+
+/* 头部 */
+.hero{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:56px 20px 48px;text-align:center;margin-bottom:40px}
+.hero h1{font-size:34px;font-weight:800;letter-spacing:-.5px;margin-bottom:10px}
+.hero p{font-size:16px;opacity:.92;max-width:640px;margin:0 auto}
+.hero .tag{display:inline-block;margin-top:16px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);padding:4px 14px;border-radius:999px;font-size:12.5px;font-weight:500}
+
+/* 平台切换 */
+.plat-switch{display:flex;gap:10px;justify-content:center;margin:-22px 0 36px;position:relative;z-index:5}
+.plat-btn{flex:1;max-width:280px;background:#fff;border:1px solid var(--border);border-radius:var(--radius2);padding:14px 20px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:600;box-shadow:var(--shadow);transition:.2s;color:var(--text2)}
+.plat-btn .sub{display:block;font-size:12px;font-weight:400;color:var(--text4);margin-top:2px}
+.plat-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.plat-btn.active .sub{color:rgba(255,255,255,.85)}
+
+/* 区块 */
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius2);padding:26px 28px;margin-bottom:22px;box-shadow:var(--shadow)}
+.h2{font-size:21px;font-weight:700;margin-bottom:6px}
+.h2 .num{color:var(--primary);margin-right:8px;font-family:'JetBrains Mono',monospace;font-size:17px}
+.lead{color:var(--text3);font-size:14px;margin-bottom:18px}
+h3{font-size:16px;font-weight:600;margin:22px 0 10px}
+h3:first-child{margin-top:0}
+
+/* 提示条 */
+.note{border-radius:var(--radius);padding:14px 16px;margin:14px 0;font-size:14px}
+.note-green{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}
+.note-amber{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+.note-red{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+.note-blue{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af}
+.note b{font-weight:600}
+
+/* 步骤 */
+.step{display:flex;gap:14px;margin:10px 0;align-items:flex-start}
+.step .idx{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-top:2px}
+.step .body{flex:1}
+.step .body .t{font-weight:600;font-size:14.5px}
+.step .body .d{color:var(--text2);font-size:13.5px}
+.step .body .d code{background:var(--surface);border:1px solid var(--border);padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px}
+
+/* 表格 */
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
+th{background:var(--surface);text-align:left;padding:10px 12px;font-weight:600;border-bottom:2px solid var(--border2)}
+td{padding:10px 12px;border-bottom:1px solid var(--border2);color:var(--text2);vertical-align:top}
+td b{color:var(--text)}
+.badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:11.5px;font-weight:600}
+.badge-g{background:#ecfdf5;color:#059669;border:1px solid #a7f3d0}
+.badge-a{background:#fffbeb;color:#d97706;border:1px solid #fde68a}
+.badge-r{background:#fef2f2;color:#dc2626;border:1px solid #fecaca}
+.badge-b{background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe}
+
+/* 代码块 */
+.code{background:#0f1115;color:#e2e8f0;border-radius:var(--radius);padding:14px 16px;font:400 13px/1.7 'JetBrains Mono',monospace;margin:12px 0;overflow-x:auto}
+.code .c{color:#7dd3fc}.code .k{color:#c4b5fd}.code .s{color:#86efac}
+
+/* 链接 */
+a{color:var(--primary2);text-decoration:none}
+a:hover{text-decoration:underline}
+
+.foot{margin-top:44px;text-align:center;color:var(--text4);font-size:12.5px}
+.foot a{color:var(--text4);text-decoration:underline}
+
+@media(max-width:600px){
+  .hero h1{font-size:26px}
+  .panel{padding:20px 16px}
+  .plat-switch{flex-direction:column;align-items:center}
+  .plat-btn{max-width:100%;width:100%}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>📱 手机自动打卡 · 保姆级教程</h1>
+  <p>把一部手机放在公司，到点自动帮你打卡（钉钉 / 企业微信 / 飞书通用）<br>苹果篇 + 安卓篇，按需选择，全程无需改定位、无需越狱（安卓）/免越狱（苹果）</p>
+  <span class="tag">前提：手机常驻公司 · 定位天然真实 · 纯本地自动化</span>
+</div>
+
+<div class="wrap">
+
+<div class="plat-switch">
+  <button class="plat-btn" onclick="show('ios')">🍎 苹果篇<span class="sub">iPhone · 快捷指令自动化</span></button>
+  <button class="plat-btn active" onclick="show('android')">🤖 安卓篇<span class="sub">Android · Auto.js / ADB 自动化</span></button>
+</div>
+
+<!-- ============ 平台判断 ============ -->
+<div class="panel" id="intro-panel">
+  <div class="h2"><span class="num">00</span>先搞清楚一个关键点</div>
+  <div class="lead">不同平台的自动化能力差别很大，方向选错会白折腾。</div>
+  <table>
+    <tr><th>能力</th><th>🍎 iPhone</th><th>🤖 Android</th></tr>
+    <tr><td>程序化模拟点击（不越狱/不 root）</td><td><span class="badge badge-r">不支持</span> 系统封闭</td><td><span class="badge badge-g">支持</span> 无障碍服务即可</td></tr>
+    <tr><td>定时自动打开打卡 App</td><td><span class="badge badge-g">支持</span> 快捷指令</td><td><span class="badge badge-g">支持</span> 多种方式</td></tr>
+    <tr><td>最省事的"极速打卡"</td><td colspan="2"><span class="badge badge-g">两边都支持</span> 到公司范围自动打卡（前提：公司开启了该功能）</td></tr>
+    <tr><td>全自动（打开+点击）</td><td><span class="badge badge-a">部分</span> 需配合极速打卡</td><td><span class="badge badge-g">完全</span> 脚本全流程</td></tr>
+  </table>
+  <div class="note note-blue"><b>💡 先查这个：</b>不管安卓还是苹果，先看你公司打卡 App 有没有开「极速打卡 / 快捷打卡」——钉钉、企业微信、飞书都有这个功能。开着的话，手机放公司 <b>什么教程都不用看，到点自动就打上了</b>。下面的教程是"没开极速打卡 / 想 100% 按点打"的完整方案。</div>
+</div>
+
+<!-- ============ iOS 篇 ============ -->
+<div id="ios-view" style="display:none">
+
+  <div class="panel">
+    <div class="h2"><span class="num">01</span>苹果方案总览</div>
+    <div class="lead">iPhone 系统封闭，不能像安卓那样模拟点击。靠谱路线只有一条：<b>快捷指令在固定时间打开打卡页 → 页面自动完成打卡（极速打卡）或你手动点一下</b>。锁屏状态下无法自动打开 App（系统硬限制），所以手机要设成<b>充电时保持亮屏 / 不锁屏</b>。</div>
+    <table>
+      <tr><th>方案</th><th>难度</th><th>效果</th><th>适用</th></tr>
+      <tr><td><b>A. 快捷指令 + 极速打卡</b></td><td><span class="badge badge-g">简单</span></td><td><b>全自动</b>（到点开 App 即自动打卡）</td><td>公司开了极速打卡 → <b>首选</b></td></tr>
+      <tr><td><b>B. 快捷指令定时唤起打卡页</b></td><td><span class="badge badge-g">简单</span></td><td>到点自动打开打卡页，<b>需手动点一下</b>「打卡」</td><td>公司没开极速打卡 → 保底方案</td></tr>
+      <tr><td>C. 越狱 + AutoTouch 录制点击</td><td><span class="badge badge-r">高</span></td><td>全自动真点击</td><td>不推荐：失去保修、易失效、有封号风险</td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <div class="h2"><span class="num">02</span>准备工作（一次搞定）</div>
+    <div class="lead">以下 3 件事是苹果方案的前提，做完就不用再管。</div>
+    <div class="step"><div class="idx">1</div><div class="body"><div class="t">手机设置：关闭自动锁屏 / 充电时保持亮屏</div><div class="d">设置 → 显示与亮度 → 自动锁定 → 选「永不」（或「充电时保持唤醒」）。<b>锁屏状态下快捷指令无法打开 App</b>，这是苹果方案的唯一硬条件。</div></div></div>
+    <div class="step"><div class="idx">2</div><div class="body"><div class="t">打卡 App 里开启「极速打卡」（能开就开）</div><div class="d">钉钉：考勤打卡 → 右上角设置 → 开启「极速打卡」；企业微信：工作台 → 打卡 → 右上角「...」→ 上下班打卡设置 → 开「快捷打卡」；飞书：工作台 → 勤假 → 打卡设置 → 开「自动打卡」。开启后，手机到公司范围且打卡页在前台时自动完成打卡。</div></div></div>
+    <div class="step"><div class="idx">3</div><div class="body"><div class="t">复制打卡页的应用链接（URL）</div><div class="d">打开打卡 App → 工作台 → 找到「打卡 / 考勤 / 勤假」→ <b>长按该图标 → 分享 → 复制链接</b>（或选「应用链接」）。这个链接就是一会儿快捷指令要打开的地址，先粘贴到备忘录存好。</div></div></div>
+  </div>
+
+  <div class="panel">
+    <div class="h2"><span class="num">03</span>创建快捷指令自动化（10 分钟）</div>
+    <div class="step"><div class="idx">1</div><div class="body"><div class="t">打开「快捷指令」App → 底部「自动化」标签</div><div class="d">iPhone 自带应用，无需安装任何东西。</div></div></div>
+    <div class="step"><div class="idx">2</div><div class="body"><div class="t">点右上角「＋」→「创建个人自动化」→ 选「特定时间」</div><div class="d">时间设为<b>上班打卡前 5 分钟</b>（如 8:55），重复选「每天」。</div></div></div>
+    <div class="step"><div class="idx">3</div><div class="body"><div class="t">添加操作：搜索「打开 URL」或「在 Safari 中打开」</div><div class="d">把第 02 步复制的打卡页链接粘贴进去。</div></div></div>
+    <div class="step"><div class="idx">4</div><div class="body"><div class="t">关掉「运行前询问」⚠️ 关键一步</div><div class="d">保存时的开关页里，把 <b>「运行前询问」关掉</b>（会弹"不询问"确认点掉）。不关的话到点不会自动跑，会停下来等你确认，就失去意义了。</div></div></div>
+    <div class="step"><div class="idx">5</div><div class="body"><div class="t">保存，再建一个「下班」的自动化</div><div class="d">同样流程再建一条 18:00（或你下班时间）的。想模拟随机延迟防"每天同一秒"：自动化的操作里先加「随机数」1–180，再加「等待」该秒数，再打开 URL。</div></div></div>
+    <div class="note note-green"><b>✅ 做成什么样：</b>每天 8:55 手机自动亮起并打开打卡页。如果公司开了极速打卡，打开页面瞬间已自动打卡成功；没开的话，页面已停在你面前，点一下「打卡」即可（这是苹果能做到的最好程度）。</div>
+  </div>
+
+  <div class="panel">
+    <div class="h2"><span class="num">04</span>注意事项</div>
+    <div class="note note-amber"><b>⚠️ 锁屏限制：</b>快捷指令自动化在<b>锁屏状态无法打开 App</b>（苹果系统限制，无解）。所以手机必须保持亮屏（充电常亮 / 永不锁屏），屏幕长期亮着记得给手机配个定时息屏保护或放在不显眼处。</div>
+    <div class="note note-red"><b>⚠️ 越狱方案不建议：</b>网上有"越狱 + AutoTouch"全自动版，但越狱后打卡 App 可能检测环境风险、系统更新易失效，为了打卡不值得。</div>
+    <div class="note note-blue"><b>💡 通知亮屏辅助：</b>如果嫌屏幕常亮费电，可在「自动化」里加一步「打开 App 前先发一条通知」配合系统「通知亮屏」——但稳定性不如直接常亮，日常使用推荐充电常亮（手机放公司充电就行）。</div>
+  </div>
+
+</div>
+
+<!-- ============ Android 篇 ============ -->
+<div id="android-view">
+
+  <div class="panel">
+    <div class="h2"><span class="num">01</span>安卓方案总览</div>
+    <div class="lead">安卓开放生态，免 root 就能做到<b>全自动</b>（定时打开 App + 自动点击打卡按钮 + 失败通知）。三条路线任选，推荐 A。</div>
+    <table>
+      <tr><th>方案</th><th>难度</th><th>效果</th><th>适用</th></tr>
+      <tr><td><b>A. Auto.js 本地定时脚本</b></td><td><span class="badge badge-g">简单</span></td><td><b>全自动</b>，手机本地跑，不依赖网络</td><td><b>首选</b>：主流可靠，社区案例多</td></tr>
+      <tr><td>B. 电脑/服务器 ADB 远程驱动</td><td><span class="badge badge-a">中等</span></td><td>全自动，可远程操控、截图验证</td><td>已有 Linux/Windows 常开机器的人</td></tr>
+      <tr><td>C. 现成打卡 App（如 DailyTask）</td><td><span class="badge badge-g">简单</span></td><td>全自动 + 远程指令</td><td>不想碰脚本：装 App 填时间即用</td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <div class="h2"><span class="num">02</span>方案 A · Auto.js 脚本自动打卡（推荐）</div>
+    <div class="lead">Auto.js 是安卓上的自动化脚本引擎，通过「无障碍服务」模拟点击，<b>不需要 root</b>。GitHub 上有大量现成打卡脚本可直接抄。</div>
+    <h3>① 安装与授权（一次搞定）</h3>
+    <div class="step"><div class="idx">1</div><div class="body"><div class="t">安装 Auto.js 或 AutoX.js（开源版）</div><div class="d">AutoX.js 可直接从 GitHub 下载 APK（搜索 <code>AutoX.js github</code>）。安装后打开，它需要「无障碍服务」权限：系统设置 → 无障碍 → Auto.js → 开启。<b>晚上台手机也可以，Android 8~16 都支持。</b></div></div></div>
+    <div class="step"><div class="idx">2</div><div class="body"><div class="t">防止被杀后台：电池白名单 + 自启动</div><div class="d">设置 → 应用 → Auto.js → 电池 →「无限制」；允许自启动。否则系统省电机制会杀掉定时任务。</div></div></div>
+    <div class="step"><div class="idx">3</div><div class="body"><div class="t">锁屏策略：滑动解锁 / 无密码锁</div><div class="d">脚本要能点亮屏幕，锁屏设成<b>滑动解锁（无密码）</b>最简单；或开启「通知亮屏」。有密码锁的话脚本解不开。</div></div></div>
+
+    <h3>② 打卡脚本（核心）</h3>
+    <div class="d" style="color:var(--text2);font-size:13.5px;margin-bottom:8px">以下为通用脚本骨架，把 App 包名和打卡按钮文字换成你实际的（钉钉包名 <code>com.alibaba.android.rimet</code>，企业微信 <code>com.tencent.wework</code>，飞书 <code>com.ss.android.lark</code>）：</div>
+    <div class="code"><span class="c">// 上班自动打卡（Auto.js）</span>
+<span class="k">var</span> pkg = <span class="s">"com.alibaba.android.rimet"</span>;  <span class="c">// 换成你的打卡App包名</span>
+<span class="k">var</span> btnText = <span class="s">"打卡"</span>;                <span class="c">// 打卡按钮上的文字</span>
+
+device.wakeUpIfNeeded();                 <span class="c">// 点亮屏幕</span>
+sleep(<span class="s">500</span>);
+app.launchPackage(pkg);                  <span class="c">// 打开打卡App</span>
+sleep(<span class="s">6000</span>);                        <span class="c">// 等页面加载（低端机调到8000）</span>
+
+<span class="k">if</span> (text(btnText).findOne(<span class="s">10000</span>)) { <span class="c">// 按文字找按钮，10秒超时</span>
+  text(btnText).findOne().click();       <span class="c">// 点击打卡按钮</span>
+  toastLog(<span class="s">"打卡成功 ✅"</span>);
+} <span class="k">else</span> {
+  toastLog(<span class="s">"没找到打卡按钮 ❌"</span>);       <span class="c">// 可加截图保存，方便排查</span>
+}
+home();                                  <span class="c">// 退回桌面</span></div>
+
+    <h3>③ 定时执行（两步）</h3>
+    <div class="step"><div class="idx">1</div><div class="body"><div class="t">在 Auto.js 里运行脚本一次，确认能正常打卡</div><div class="d">先手动跑通再交给定时。识别不到按钮时：用 Auto.js 的「布局分析」看按钮真实文字，或改成 <code>desc(btnText)</code> / <code>id(...)</code>。</div></div></div>
+    <div class="step"><div class="idx">2</div><div class="body"><div class="t">用 Tasker 或 Auto.js 定时任务绑定脚本</div><div class="d">Auto.js 内置「定时任务」：把脚本设为每天 8:55 / 18:00 执行；或用 Tasker 的「时间」触发器调用脚本。加 1–3 分钟随机延迟可避免每天同一秒打卡（写脚本时在点击前 <code>sleep(随机数)</code> 即可）。</div></div></div>
+
+    <div class="note note-green"><b>✅ 完成效果：</b>手机放公司充电，每天到点自动亮屏 → 打开钉钉 → 自动点打卡 → 退回桌面。全本地运行，断网也能打。</div>
+    <div class="note note-blue"><b>💡 现成脚本直接抄：</b>GitHub 搜 <code>AutoDingDing</code>、<code>DingDing-Automatic-Clock-in</code>、<code>AutoCheckinPlugin</code>（企业微信）——都是免 root 的成熟打卡项目，下载脚本改下配置就能用。</div>
+  </div>
+
+  <div class="panel">
+    <div class="h2"><span class="num">03</span>方案 B · 电脑 ADB 远程驱动（进阶）</div>
+    <div class="lead">手机开「无线调试」，电脑（或任何常开机器）通过 adb 连接后定时跑 Python 脚本。好处：<b>远程可控、打卡截图可验证、失败可通知</b>。</div>
+    <h3>① 手机开启无线调试</h3>
+    <div class="step"><div class="idx">1</div><div class="body"><div class="t">开发者选项 → 无线调试 → 开启</div><div class="d">设置 → 关于手机 → 连点「版本号」7 次打开开发者选项。无线调试里能看到「IP 地址:端口」。</div></div></div>
+    <div class="step"><div class="idx">2</div><div class="body"><div class="t">首次配对</div><div class="d">电脑执行 <code>adb pair 手机IP:配对端口</code> 输入配对码（无线调试详情页有六位码），再 <code>adb connect 手机IP:连接端口</code>。<b>授权一次性，之后永久有效</b>；手机重启后端口会变，需重新 connect（放公司的手机不常重启，影响很小）。</div></div></div>
+    <h3>② Python + uiautomator2 打卡脚本</h3>
+    <div class="code"><span class="k">import</span> uiautomator2 <span class="k">as</span> u2
+<span class="k">import</span> datetime
+
+d = u2.connect(<span class="s">"手机IP:端口"</span>)       <span class="c"># 无线调试的地址</span>
+d.wakeup()                              <span class="c"># 点亮屏幕</span>
+d.app_start(<span class="s">"com.alibaba.android.rimet"</span>, use_monkey=True)
+d.app_wait(<span class="s">"com.alibaba.android.rimet"</span>, timeout=<span class="s">15</span>)
+
+<span class="k">if</span> d(text=<span class="s">"打卡"</span>).exists(timeout=<span class="s">10</span>):
+    d(text=<span class="s">"打卡"</span>).click()
+    d.screenshot(<span class="s">f"clock_{datetime.date.today()}.png"</span>)  <span class="c"># 截图存证</span>
+    print(<span class="s">"✅ 打卡成功，截图已保存"</span>)
+<span class="k">else</span>:
+    print(<span class="s">"❌ 没找到打卡按钮"</span>)</div>
+    <div class="step"><div class="idx">3</div><div class="body"><div class="t">定时执行</div><div class="d">Windows 用「任务计划程序」每天 8:55 跑 <code>python clock_in.py</code>；Linux 用 <code>crontab</code>：<code>55 8 * * * python3 /path/clock_in.py</code>。脚本里加失败判断 + 企业微信/Server酱推送通知即可远程感知。</div></div></div>
+    <div class="note note-green"><b>✅ 适用：</b>你已经有一台常开的电脑/服务器（本教程作者就是把这套跑在服务器上，还能顺便每天生成打卡截图）。手机不需要 root，连接授权一次搞定。</div>
+  </div>
+
+  <div class="panel">
+    <div class="h2"><span class="num">04</span>方案 C · 现成打卡 App（零脚本）</div>
+    <div class="lead">不想碰任何代码的话，有开源 App 装好填时间就能用。</div>
+    <div class="step"><div class="idx">1</div><div class="body"><div class="t"><b>DailyTask</b>（GitHub 搜索 <code>AndroidCoderPeng/DailyTask</code>）</div><div class="d">定位就是「备用手机放公司工位，设好上下班时间自动打卡」。免 root、不改 GPS、本地运行；支持微信小号远程指令触发。兼容 Android 8~16 和鸿蒙 4.0。</div></div></div>
+    <div class="step"><div class="idx">2</div><div class="body"><div class="t">按 App 引导授权无障碍服务 → 设置打卡时间 → 放公司</div><div class="d">这类 App 本质也是无障碍自动点击，把包名/时间填对即可。注意同样要加电池白名单防杀。</div></div></div>
+  </div>
+
+  <div class="panel">
+    <div class="h2"><span class="num">05</span>安卓注意事项</div>
+    <div class="note note-amber"><b>⚠️ 杀后台：</b>90% 的"定时没跑"问题都是脚本进程被系统杀掉了。Auto.js / Tasker 都要：电池无限制 + 自启动 + 最近任务里加锁，个别用小米澎湃系统的可能还要额外设置。</div>
+    <div class="note note-amber"><b>⚠️ 锁屏：</b>用滑动解锁（无密码），或开「通知亮屏」。有 PIN/图案锁的话，点亮屏幕后脚本点击会被锁屏拦截。</div>
+    <div class="note note-red"><b>⚠️ 检测风险：</b>root 过的手机用打卡 App 可能提示「设备风险」，需要 Magisk DenyList 隐藏——所以<b>没 root 的普通手机反而最干净</b>。免 root 方案不存在这个问题。</div>
+    <div class="note note-blue"><b>💡 蓝牙考勤机：</b>如果公司用蓝牙考勤机，手机保持蓝牙常开即可，脚本流程不变（有现成项目支持）。</div>
+  </div>
+
+</div>
+
+<div class="panel" id="risk-panel">
+  <div class="h2"><span class="num">99</span>最后：所有平台通用提醒</div>
+  <div class="lead">这页不讲技术，讲边界。</div>
+  <div class="note note-red"><b>⚠️ 合规：</b>自动打卡本质是"手机在、人可能不在"。公司考勤规则通常要求本人到岗，被查到可能算违纪。手机放在公司、定位真实，但操作者不是本人——<b>用之前自己掂量，出了事自己负责</b>。本教程仅供技术交流。</div>
+  <div class="note note-green"><b>✅ 最优先方案永远是官方功能：</b>钉钉/企业微信/飞书的<b>极速打卡</b>（到公司范围自动打卡）＋手机放公司＝零折腾零风险。教程里所有自动化都只是这个功能的补充和兜底。先问公司 HR 有没有开极速打卡！</div>
+  <div class="note note-blue"><b>💡 贴心建议：</b>手机放公司记得插着充电器、开勿扰模式、放包里或抽屉里（亮屏状态屏幕朝下）。下班自动化同理，一条指令复用就行。</div>
+</div>
+
+<div class="foot">
+  手机自动打卡教程 · 苹果篇（快捷指令自动化） / 安卓篇（Auto.js · ADB · 现成 App）· 仅供技术交流<br>
+  参考项目：AutoDingDing / DingDing-Automatic-Clock-in / AutoCheckinPlugin / DailyTask / AutoDingCheck
+</div>
+</div>
+
+<script>
+function show(plat){
+  const ios=document.getElementById('ios-view'),and=document.getElementById('android-view');
+  const btns=document.querySelectorAll('.plat-btn');
+  if(plat==='ios'){ios.style.display='';and.style.display='none';btns[0].classList.add('active');btns[1].classList.remove('active');}
+  else{and.style.display='';ios.style.display='none';btns[1].classList.add('active');btns[0].classList.remove('active');}
+}
+show('android');
+</script>
+</body>
+</html>
