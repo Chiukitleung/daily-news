@@ -6,308 +6,349 @@
 <title>广州 → 昆明 · 沿途心动征集</title>
 <style>
   :root{
-    --paper:#faf6ee; --ink:#2b2620; --sub:#6f6a5e;
+    --paper:#f6f2ea; --ink:#26221c; --sub:#726a5b;
     --gold:#b98a3e; --gold-deep:#8a6423; --tea:#3e5c4b; --tea-deep:#2f4a3c;
-    --mist:#7f8f92; --rose:#e2545b; --rose-deep:#c13e45;
-    --line:#e8e0d0; --card:#fffdf8;
+    --rose:#e2545b; --rose-deep:#c13e45; --nope:#5b6472;
+    --line:#e6ddc9; --card:#fffdf8;
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  html{scroll-behavior:smooth}
-  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--paper);color:var(--ink);line-height:1.75}
-  .serif{font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--paper);color:var(--ink);line-height:1.7}
 
-  .lovebar{position:sticky;top:0;z-index:50;background:rgba(250,246,238,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
-    display:flex;align-items:center;justify-content:space-between;padding:9px 16px;font-size:13px}
-  .lovebar .name{font-weight:700;letter-spacing:.5px}
-  .lovebar .name small{color:var(--sub);font-weight:400;margin-left:6px}
-  .lovebar .count{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #f0dcd1;border-radius:20px;padding:3px 12px;color:var(--rose);font-weight:700}
-  .lovebar .count .n{min-width:18px;text-align:center}
+  .lovebar{position:sticky;top:0;z-index:50;background:rgba(246,242,234,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:12.5px}
+  .lovebar .name{font-weight:800;flex:0 0 auto;letter-spacing:.3px}
+  .lovebar .stats{display:flex;gap:6px;flex:1;overflow:hidden}
+  .lovebar .stats b{font-weight:700}
+  .lovebar .lik{color:var(--rose)} .lovebar .nol{color:var(--nope)}
+  .copybtn{flex:0 0 auto;background:linear-gradient(135deg,#3e5c4b,#2f4a3c);color:#fff;border:none;border-radius:18px;
+    padding:7px 14px;font-size:12.5px;font-weight:800;cursor:pointer;box-shadow:0 2px 8px rgba(47,74,60,.35)}
+  .copybtn:active{transform:scale(.96)}
 
-  .hero{position:relative;min-height:64vh;display:flex;align-items:flex-end;color:#fff;
-    background:linear-gradient(180deg,rgba(20,16,8,.15) 0%,rgba(20,16,8,.72) 100%),linear-gradient(135deg,#4a6b5a,#2f4a3c 45%,#8a6423)}
-  .hero .inner{width:100%;max-width:760px;margin:0 auto;padding:26px 20px 30px}
-  .hero .tag{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:3px 12px;font-size:12px;letter-spacing:1px;margin-bottom:12px}
-  .hero h1{font-size:clamp(28px,7vw,42px);font-weight:800;line-height:1.25;text-shadow:0 2px 18px rgba(0,0,0,.35)}
-  .hero .sub{margin-top:8px;font-size:14.5px;opacity:.95;max-width:36em}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-  .chips span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:4px 11px;font-size:12.5px}
+  .hero{position:relative;color:#fff;padding:46px 20px 30px;
+    background:linear-gradient(160deg,#4a6b5a 0%,#2f4a3c 45%,#7a5a28 100%)}
+  .hero .tag{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:2px 12px;font-size:11.5px;letter-spacing:1.5px;margin-bottom:10px}
+  .hero h1{font-size:26px;font-weight:800;line-height:1.3}
+  .hero .sub{margin-top:8px;font-size:13.5px;opacity:.95;max-width:34em}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+  .chips span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);border-radius:8px;padding:3px 10px;font-size:11.5px}
 
-  main{max-width:760px;margin:0 auto;padding:0 16px 60px}
-  section{margin-top:44px}
-  .sechead{margin-bottom:14px}
-  .sechead .kicker{font-size:12px;letter-spacing:3px;color:var(--gold-deep);font-weight:700}
-  .sechead h2{font-size:24px;font-weight:800;margin-top:2px}
-  .sechead .note{font-size:13.5px;color:var(--sub);margin-top:6px}
-
-  .howto{background:linear-gradient(135deg,#f7f0e0,#fdf9ee);border:1px solid #eadfc4;border-radius:14px;padding:13px 16px;font-size:13.5px;color:#5a4a26}
+  main{max-width:680px;margin:0 auto;padding:0 14px 60px}
+  .howto{margin-top:16px;background:#fdf9ee;border:1px solid #ecdfc2;border-radius:14px;padding:12px 15px;font-size:13px;color:#5a4a26}
   .howto b{color:var(--gold-deep)}
 
-  .seglabel{display:flex;align-items:center;gap:10px;margin:26px 0 12px}
-  .seglabel .bar{width:4px;height:20px;border-radius:2px;background:var(--gold)}
-  .seglabel h3{font-size:17px;font-weight:800}
-  .seglabel span{font-size:12px;color:var(--sub)}
+  .feed{margin-top:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:16px;box-shadow:0 2px 8px rgba(60,45,20,.05)}
+  .card .ph{position:relative;aspect-ratio:16/10;background:#eae4d4}
+  .phhold{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    background:repeating-linear-gradient(135deg,#efe8d5,#e3dabf 14px,#efe8d5 28px);color:#a08a54}
+  .phhold .big{font-size:16px;font-weight:800;color:#8a7040}
+  .phhold small{font-size:11px;letter-spacing:1px}
+  .typeb{position:absolute;left:10px;top:10px;background:rgba(20,16,8,.6);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:8px;z-index:3;backdrop-filter:blur(3px)}
+  .typeb.food{background:rgba(180,110,30,.85)}
+  .hotstar{position:absolute;right:10px;top:10px;background:rgba(230,84,70,.93);color:#fff;font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:8px;z-index:3}
+  .jump{display:block;color:inherit;text-decoration:none}
+  .jump .ph .loc{position:absolute;left:10px;bottom:10px;background:rgba(20,16,8,.55);color:#fff;font-size:11px;padding:2px 9px;border-radius:7px;backdrop-filter:blur(4px);z-index:3}
+  .body{padding:13px 15px 15px}
+  .body h3{font-size:17px;font-weight:800;display:flex;align-items:center;gap:7px}
+  .body h3 .n{font-size:11px;color:var(--gold-deep);background:#f3ead7;border-radius:6px;padding:1px 7px;flex:0 0 auto}
+  .body .txt{margin-top:7px;font-size:14px;color:#463f34}
+  .body .txt .tagline{display:block;margin-top:6px;font-size:12.5px;color:var(--gold-deep)}
+  .dpbadge{display:inline-block;margin-top:9px;background:#f5b50f;color:#3a2e00;font-size:11px;font-weight:800;padding:2px 10px;border-radius:9px}
+  .actions{display:flex;gap:10px;padding:0 15px 15px}
+  .actions button{flex:1;border-radius:22px;padding:9px 0;font-size:14px;font-weight:800;border:1.5px solid var(--line);background:#fff;cursor:pointer;color:#7a7262;transition:all .15s}
+  .actions .like.on{background:var(--rose);border-color:var(--rose);color:#fff}
+  .actions .nope.on{background:var(--nope);border-color:var(--nope);color:#fff}
+  .actions button:active{transform:scale(.97)}
 
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  @media(max-width:460px){.grid{grid-template-columns:1fr}}
-  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 2px 6px rgba(50,40,20,.06)}
-  .card .ph{position:relative;aspect-ratio:4/3;background:#eae4d4}
-  .phhold{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-    background:repeating-linear-gradient(135deg,#eee7d4,#e2d9c0 14px,#eee7d4 28px);color:#a08a54;font-size:12px;letter-spacing:1px}
-  .phhold .big{font-size:15px;font-weight:800;color:#8a7040}
-  .card .loc{position:absolute;left:8px;bottom:8px;background:rgba(20,16,8,.55);color:#fff;font-size:11px;padding:2px 8px;border-radius:6px;backdrop-filter:blur(4px);z-index:3}
-  .card .body{padding:11px 13px 13px}
-  .card h3{font-size:15px;font-weight:800;display:flex;align-items:center;gap:6px}
-  .card h3 .n{font-size:11px;font-weight:700;color:var(--gold-deep);background:#f3ead7;border-radius:6px;padding:1px 6px}
-  .card .det{font-size:11px;color:var(--mist);margin-top:3px}
-  .card .det i{font-style:normal}
-  .card .det .off{color:#b0601f;background:#fde8d6;padding:0 6px;border-radius:6px;margin-left:4px}
-  .card .txt{font-size:12.6px;color:#4a453c;margin-top:5px}
-  .card .txt .tagline{display:block;font-size:11.5px;color:var(--gold-deep);margin-top:3px;letter-spacing:.3px}
-  .card .hotstar{position:absolute;left:8px;top:8px;background:rgba(230,84,70,.92);color:#fff;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:8px;z-index:3;letter-spacing:.5px}
+  .sendbox{margin-top:8px;text-align:center;background:linear-gradient(135deg,#3e5c4b,#2f4a3c);border-radius:20px;padding:24px 18px;color:#fff}
+  .sendbox h3{font-size:17px}
+  .sendbox p{font-size:12.5px;opacity:.85;margin:6px 0 14px}
+  .bigcopy{display:inline-block;background:#fff;color:var(--tea-deep);border:none;border-radius:28px;padding:13px 30px;font-size:15.5px;font-weight:800;cursor:pointer}
+  .bigcopy:active{transform:scale(.97)}
 
-  .lbtn{position:absolute;right:10px;top:10px;width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;z-index:8;
-    background:rgba(255,255,255,.9);box-shadow:0 2px 10px rgba(0,0,0,.18);font-size:20px;line-height:40px;text-align:center;color:#d8d2c2;transition:all .18s ease;}
-  .lbtn.on{color:#fff;background:var(--rose);transform:scale(1.06)}
-  .lbtn .fly{position:absolute;inset:0;pointer-events:none}
-  .lbtn .fly i{position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;background:var(--rose);opacity:0}
-  .lbtn.pop .fly i{animation:burst .6s ease-out forwards}
-  @keyframes burst{
-    0%{transform:translate(-50%,-50%) scale(1);opacity:1}
-    100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(0);opacity:0}}
-  .lbtn.pop{animation:pop .35s ease}
-  @keyframes pop{30%{transform:scale(1.25)}}
-  .popmsg{position:fixed;left:50%;bottom:70px;transform:translateX(-50%);background:var(--tea-deep);color:#fff;padding:8px 18px;border-radius:20px;font-size:13px;z-index:99;opacity:0;transition:opacity .3s;pointer-events:none;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+  .popmsg{position:fixed;left:50%;bottom:70px;transform:translateX(-50%);background:var(--tea-deep);color:#fff;padding:9px 20px;border-radius:22px;font-size:13.5px;z-index:99;opacity:0;transition:opacity .3s;pointer-events:none;box-shadow:0 4px 16px rgba(0,0,0,.25);max-width:86vw;text-align:center}
   .popmsg.show{opacity:1}
 
-  .sendbox{margin-top:30px;text-align:center;background:linear-gradient(135deg,#3e5c4b,#2f4a3c);border-radius:18px;padding:26px 20px;color:#fff}
-  .sendbox h3{font-size:18px}
-  .sendbox p{font-size:13px;opacity:.85;margin:6px 0 14px}
-  .sendbtn{display:inline-block;background:#fff;color:var(--tea-deep);border:none;border-radius:26px;padding:11px 26px;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.22)}
-  .sendbtn:active{transform:scale(.97)}
-  .sendstate{font-size:12px;margin-top:10px;opacity:.8;min-height:1.2em}
-
-  footer{margin-top:34px;border-top:1px solid var(--line);padding:16px 0 30px}
-  footer p{font-size:11px;color:#98917f;text-align:center;line-height:1.8}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding:14px 0 26px}
+  footer p{font-size:11px;color:#a09685;text-align:center;line-height:1.9}
 </style>
 </head>
 <body>
 
 <div class="lovebar">
-  <div class="name">广州 → 昆明 <small>沿途心动征集</small></div>
-  <div class="count">💗 心动 <span class="n">0</span></div>
+  <div class="name">广州→昆明</div>
+  <div class="stats"><span class="lik">❤ 喜欢 <b id="cntL">0</b></span><span class="nol">👎 不喜欢 <b id="cntN">0</b></span></div>
+  <button class="copybtn" id="copyTop">📋 复制</button>
 </div>
 
 <header class="hero">
-  <div class="inner">
-    <span class="tag">2026 国庆 · 自驾征集</span>
-    <h1 class="serif">这一路 1400 公里<br>哪里让你心动</h1>
-    <p class="sub">不预设终点附近的景点——把广州到昆明沿途风景好、网红、出片的都摆出来。你点多少颗♥，我们就把多少颗心动的风景排进国庆的路线里。</p>
-    <div class="chips">
-      <span>🚗 广州 → 昆明 · 约 1400km</span>
-      <span>🛣️ 建议分两天在路上</span>
-      <span>📍 广东段已剔除</span>
-      <span>💗 不限数量，全部可点</span>
-    </div>
+  <div class="tag">2026 国庆 · 自驾征集</div>
+  <h1>广州 → 昆明 · 沿途心动大扫荡</h1>
+  <p class="sub">不预设终点,把一路 1400km 的风景和吃食都摆出来。看中就 ❤️ 喜欢,看不中 👎 不喜欢,最后把清单复制发回来,按你的口味排路线。</p>
+  <div class="chips">
+    <span>🚗 约 1400km · 建议两天</span>
+    <span>📍 广东段已剔除</span>
+    <span>🏞 21 个景点 · 🍜 15 道吃食</span>
+    <span>无上下限,随意标记</span>
   </div>
 </header>
 
 <main>
-  <section>
-    <div class="howto">
-      <b>怎么玩：</b>往下滑，看到想去的地方就点一下 ♥（再点取消）。<b>不限数量</b>，点得越多越好——最后哪里的 ♥ 最多，就优先排进国庆行程。
-    </div>
-  </section>
+  <div class="howto">
+    <b>怎么用：</b>像刷小红书一样往下滑。每一条都可以点「❤️ 喜欢」或「👎 不喜欢」,互斥、随意、不限数量。<b>刷完点右上角或底部的「📋 复制」,把结果粘贴回对话发给我</b>,我按你的口味来定稿配图。
+  </div>
 
-  <section id="love">
-    <div class="sechead">
-      <div class="kicker">心 动 清 单</div>
-      <h2>沿途的风景，点到哪颗心动哪颗</h2>
-      <p class="note">按「出广州 → 广西 → 云南」顺序排，图片位置已经留好，配图进行中。</p>
-    </div>
-    <div id="lovegrid"></div>
-  </section>
+  <div class="feed" id="feed"></div>
 
   <div class="sendbox">
-    <h3>选好了吗？</h3>
-    <p>把心动清单发送出去，让 TA 按 ♥ 数排路线 👀</p>
-    <button class="sendbtn" id="sendbtn">💌 发送我的心动清单</button>
-    <div class="sendstate" id="sendstate"></div>
+    <h3>刷完了？把你的选择交出来</h3>
+    <p>复制后直接粘贴到对话里发给我,我会按 ♥ 多的优先排路线</p>
+    <button class="bigcopy" id="copyBottom">📋 复制我的选择并提交</button>
   </div>
 </main>
 
 <footer>
-  <p>沿途景点均为真实存在地点，具体开放/票价以现场为准<br>
-  图片配图中：先摆景点，后上照片<br>
+  <p>沿途均为真实地点/当地美食 · 门票价格与营业以现场为准<br>
+  图片配图中:先摆内容,后上照片 · 大众点评链接已附<br>
   2026 国庆 · 给朋友的小旅行清单</p>
 </footer>
 
 <div class="popmsg" id="popmsg"></div>
 
 <script>
-var LINE = 'gzkm';
+var LINE = 'gzkm2';
 var CARDS = [
-  /* ===== 广西段 ===== */
-  {id:'wuzhou', name:'梧州骑楼城', seg:'广西 · 第一站', det:'出广东即到 · 紧邻高速',
-   tagline:'老城骑楼，时光倒流',
-   txt:'岭南百年骑楼老街，糖水、龟苓膏、纸包鸡吃到扶墙。停车歇脚的好地方。',
-   star:0, img:''},
-  {id:'yuntian', name:'玉林云天文化城', seg:'广西 · 高速旁', det:'G80 玉林出口旁',
-   tagline:'被叫「小布达拉宫」的民间魔幻建筑',
-   txt:'一个人花 20 亿建的巨型仿古宫殿群，出片魔幻，话题度拉满。路过值得绕十分钟。',
-   star:0, img:''},
-  {id:'detian', name:'德天跨国瀑布', seg:'广西 · 绕行彩蛋', det:'南宁南下绕行约 3h',
-   tagline:'亚洲第一跨国瀑布',
-   txt:'瀑布从中越边境奔流而下，一半中国一半越南。要绕路，但它是这条线上最值得绕的。',
-   star:1, img:''},
-  {id:'equan', name:'靖西鹅泉', seg:'广西 · 绕行', det:'百色南下约 1.5h',
-   tagline:'泉水晨雾，田园牧歌',
-   txt:'鹅泉的清晨有雾有倒影，桂林山水同款但人少得多，日出档绝美。',
-   star:1, img:''},
-  {id:'tongling', name:'通灵大峡谷', seg:'广西 · 绕行', det:'与鹅泉同向',
-   tagline:'188 米单级瀑布从天而降',
-   txt:'钻进峡谷雨林,走到尽头是大瀑布的水帘洞。凉快、震撼、好出片。',
-   star:0, img:''},
-  {id:'jiuzhou', name:'旧州古镇', seg:'广西 · 绕行', det:'靖西市区旁',
-   tagline:'壮族绣球之乡',
-   txt:'绣球一条街,家家户户挂绣球。小巧安静,适合当鹅泉通灵的中转站。',
-   star:0, img:''},
-
-  /* ===== 云南段 ===== */
-  {id:'puzeihei', name:'普者黑', seg:'云南 · 第一站', det:'砚山出口下高速约 1h',
-   tagline:'喀斯特水上田园',
-   txt:'《三生三世》取景地,孤峰、湖泊、荷塘连成一片,划船穿行在水上峰林之间。',
-   star:1, img:''},
-  {id:'miyue', name:'弥勒东风韵', seg:'云南 · 高速旁', det:'G80 弥勒出口旁',
-   tagline:'红砖万花筒艺术小镇',
-   txt:'设计师罗旭的怪诞红砖建筑群,线条像红酒瓶像火焰,近两年云南最出片的网红地。',
-   star:1, img:''},
-  {id:'shilin', name:'石林', seg:'云南 · 高速旁', det:'G80 石林出口',
-   tagline:'世界自然遗产,石头长成森林',
-   txt:'教科书级景点,人多但值得。拍「阿诗玛」机位,经典永不过时。',
-   star:0, img:''},
-  {id:'fuxian', name:'抚仙湖', seg:'云南 · 高速旁', det:'昆明东南 40km',
-   tagline:'琉璃万顷,云南最清澈的湖',
-   txt:'环湖自驾、日落、湖边民宿。水质清到发蓝,是昆明人私藏的周末后花园。',
-   star:1, img:''},
-  {id:'dounan', name:'斗南花市', seg:'云南 · 昆明', det:'呈贡,市区可达',
-   tagline:'亚洲最大的鲜花市场',
-   txt:'按斤卖的鲜花,几十块抱一大束。晚上 8 点后是夜场,比白天便宜。',
-   star:1, img:''},
-  {id:'haigeng', name:'滇池海埂大坝', seg:'云南 · 昆明', det:'市区可达',
-   tagline:'红嘴鸥的冬天主场',
-   txt:'每年 10 月中下旬起红嘴鸥陆续抵达,国庆能不能看到看运气;看不到也有昆明蓝和湖景。',
-   star:0, img:''},
-  {id:'hongtudi', name:'东川红土地', seg:'云南 · 绕行彩蛋', det:'昆明东北约 150km',
-   tagline:'上帝打翻的调色盘',
-   txt:'红土、麦田、光影,摄影师的圣地。10 月色彩正浓,就是有点远。',
-   star:1, img:''}
+/* ===== 梧州 ===== */
+{id:'wzqilou', type:'spot', name:'梧州骑楼城', det:'出广东第一城 · 紧邻高速',
+ txt:'岭南现存最大的骑楼群之一,骑楼、铁栅窗、老字号招牌层层叠叠,像走进民国电影。顺路逛一小时,吃碗龟苓膏再上路。',
+ tagline:'老城骑楼,时光倒流', star:0, link:'https://www.dianping.com/shop/16705099', img:''},
+{id:'zhijiji', type:'food', name:'纸包鸡(梧州)', det:'梧州名菜 · 沿街饭店都有',
+ txt:'梧州人的待客硬菜,玉扣纸包住鸡肉油炸,汁水全锁在里面,肉嫩到脱骨,酱香带甜。出广西前值得专程停一脚。',
+ tagline:'纸上乾坤,一口爆汁', star:1, img:''},
+{id:'guiling', type:'food', name:'龟苓膏(梧州)', det:'梧州是原乡 · 老字号满街',
+ txt:'黑亮弹滑,苦后回甘,是梧州人从小吃到大的清火甜。加炼奶或蜂蜜,路边老店五块钱一碗。',
+ tagline:'苦中带甘,广西老味道', star:0, img:''},
+/* ===== 玉林 ===== */
+{id:'yuntian', type:'spot', name:'玉林云天文化城', det:'G80 玉林出口旁',
+ txt:'一个人花 20 年建成的巨型仿古宫殿群,被网友戏称「小布达拉宫」。魔幻、争议、上镜,话题度拉满,路过拐十分钟看个稀奇。',
+ tagline:'民间魔幻建筑的巅峰', star:1, link:'https://www.dianping.com/shop/58862165', img:''},
+{id:'niuba', type:'food', name:'玉林牛巴(牛干巴)', det:'玉林特产 · 服务区都能买到',
+ txt:'黄牛肉切片晾晒再卤制,油亮酱色,咸甜耐嚼,越嚼越香。路上零食天花板,买一包能啃到云南。',
+ tagline:'嚼着嚼着就到云南了', star:0, img:''},
+/* ===== 南宁 ===== */
+{id:'laoyoufen', type:'food', name:'老友粉(南宁)', det:'南宁市区 · 主路绕 30 分钟',
+ txt:'南宁的魂。酸笋、豆豉、辣椒爆香后冲汤,酸辣鲜烫一碗下肚,汗一出,人醒了。南宁人一天从它开始。',
+ tagline:'酸辣鲜烫,南宁人的闹钟', star:1, img:''},
+{id:'suanye', type:'food', name:'酸嘢(南宁)', det:'广西之光 · 街头随处可见',
+ txt:'广西人的「水果腌菜」:青芒、番石榴、三华李拌上辣椒盐和酸梅粉,又酸又辣又脆。开胃神器,吃完想打包十斤。',
+ tagline:'水果的另一种打开方式', star:0, img:''},
+/* ===== 德天方向(绕行) ===== */
+{id:'detian', type:'spot', name:'德天跨国瀑布', det:'南宁南下绕行约 3h · 高人气',
+ txt:'亚洲第一跨国瀑布,归春河从中越边境三级跌落,一半中国一半越南。10 月正是丰水期最壮观的时候,竹筏能开到瀑布脚下淋一头水汽。',
+ tagline:'这一路最值得绕的风景', star:1, link:'https://www.dianping.com/shop/2636149', img:''},
+{id:'mingshi', type:'spot', name:'明仕田园', det:'德天顺路 20km',
+ txt:'喀斯特峰林倒进明仕河,《花千骨》的长留仙境取景地。坐竹筏慢游或租自行车晃一圈,像在山水画里穿行。',
+ tagline:'小桂林,大安静', star:1, link:'https://www.dianping.com/shop/3234178', img:''},
+{id:'yuenanwei', type:'food', name:'越南卷筒粉 · 滴漏咖啡', det:'德天/边境小城',
+ txt:'边境的味觉混血:米皮卷肉末木耳,蘸鱼露吃;配一杯越南滴漏咖啡,看它一滴一滴漏完,假装出了趟国。',
+ tagline:'一口到越南', star:0, img:''},
+/* ===== 靖西(绕行) ===== */
+{id:'equan', type:'spot', name:'靖西鹅泉', det:'百色南下约 1.5h · 绕行',
+ txt:'鹅泉的清晨有雾,泉水清到发蓝,亭台竹影倒在水面,比桂林安静、比桂林上镜。日出档是最佳时间,错过会后悔。',
+ tagline:'晨雾里的田园牧歌', star:1, link:'https://www.dianping.com/shop/9312804', img:''},
+{id:'tongling', type:'spot', name:'通灵大峡谷', det:'与鹅泉同方向',
+ txt:'188 米高的单级瀑布从溶洞壁上直落谷底,钻进峡谷像走进绿野仙踪。步道好走,全程两小时,凉快到想加外套。',
+ tagline:'瀑布、溶洞、雨林三合一', star:0, link:'https://www.dianping.com/shop/4086238', img:''},
+{id:'jiuzhou', type:'spot', name:'旧州古镇', det:'靖西市区旁',
+ txt:'壮族绣球之乡,老街挂满手工绣球,五色糯米饭也出自这里。小巧安静,适合当鹅泉和通灵之间的歇脚点。',
+ tagline:'一针一线,绣球之乡', star:0, link:'https://www.dianping.com/shop/28624549', img:''},
+{id:'dashiwei', type:'spot', name:'大石围天坑(深度彩蛋)', det:'百色乐业 · 绕行较远',
+ txt:'世界级天坑群,站山顶看 600 米深的坑底原始森林,恐高慎入,胆大的能玩滑翔伞。离主线远,时间充裕的深度党专属。',
+ tagline:'地球的巨型伤疤', star:1, link:'https://www.dianping.com/shop/44705011', img:''},
+{id:'baisebbq', type:'food', name:'百色烧烤(猎奇档)', det:'百色 · 顺路夜宵',
+ txt:'广西烧烤江湖的传说:烤猪眼、烤猪鞭,全是硬核食材。不敢吃也能围观,敢吃就是朋友圈战神。',
+ tagline:'广西烧烤的尽头在百色', star:0, img:''},
+/* ===== 文山 / 丘北 ===== */
+{id:'puzeihei', type:'spot', name:'普者黑', det:'砚山出口下高速约 1h',
+ txt:'喀斯特峰林泡在万亩荷塘和湿地湖泊里,《三生三世》取景地。划柳叶舟穿行峰林,打水仗是保留节目。10 月荷花谢了,山水和清静还在。',
+ tagline:'水上峰林,青丘之国', star:1, link:'https://www.dianping.com/shop/83206289', img:''},
+{id:'bamei', type:'spot', name:'坝美', det:'文山广南 · 绕行 · 时开时关',
+ txt:'要坐船穿过喀斯特溶洞才能进村,黑到尽头豁然开朗,就是陶渊明写的桃花源本源。注意:景区时开时修,出发前先确认开放。',
+ tagline:'溶洞尽头,别有洞天', star:1, link:'https://www.dianping.com/shop/58866930', img:''},
+/* ===== 弥勒 ===== */
+{id:'dongfengyun', type:'spot', name:'弥勒东风韵', det:'G80 弥勒出口旁 · 主线旁',
+ txt:'红砖砌成的万花筒艺术群,云南怪才罗旭的作品,像红酒瓶、像火焰、像异星建筑。人少景大,怎么拍都出片,弥勒还是葡萄之乡。',
+ tagline:'红砖万花筒,云南最出片', star:1, link:'https://www.dianping.com/shop/66633454', img:''},
+{id:'taiping', type:'spot', name:'太平湖森林公园', det:'东风韵附近 20 分钟',
+ txt:'石漠化山坡改造出的森林花海,仙人掌园、大地艺术、湖景,秋天颜色丰富。和东风韵可以一天串完。',
+ tagline:'石山变花海', star:0, img:''},
+{id:'miluji', type:'food', name:'弥勒卤鸡', det:'弥勒 · 沿街老店',
+ txt:'弥勒人的乡愁。卤汤老到发亮,鸡皮弹、肉不柴,配一碟干蘸水。顺路吃鸡,这一脚不亏。',
+ tagline:'一碗卤汤养一座城', star:1, img:''},
+/* ===== 建水(弥勒南下绕行) ===== */
+{id:'jianshui', type:'spot', name:'建水古城', det:'弥勒南下约 2h · 深度彩蛋',
+ txt:'云南最被低估的古城:西门古井、朱家花园、双龙桥十七孔桥,还有百年米轨小火车。比大理丽江耐逛十倍,就是不在主路上。',
+ tagline:'比大理耐逛十倍的古城', star:1, img:''},
+{id:'doufu', type:'food', name:'建水烤豆腐', det:'建水 · 街头火盆',
+ txt:'西门古井水点的豆腐,炭火烤到鼓包,撕开蘸辣椒面。围着火盆一坐一下午,吃的是时间。',
+ tagline:'围着火盆吃一下午', star:1, img:''},
+{id:'qiguoji', type:'food', name:'汽锅鸡', det:'建水紫陶名菜',
+ txt:'建水紫陶汽锅不放水,全靠蒸汽凝成汤,鸡鲜到极致。原汁原味,云南人的最高礼遇。',
+ tagline:'蒸汽凝成的鲜', star:1, img:''},
+/* ===== 蒙自 ===== */
+{id:'bisaisei', type:'spot', name:'碧色寨', det:'蒙自 · 百年小站',
+ txt:'滇越铁路的百年法式小站,黄墙、米轨、三面钟,《芳华》取景地。站台一坐,时间就停在 1910 年。',
+ tagline:'米轨尽头的法式时光', star:1, link:'https://www.dianping.com/shop/13878783', img:''},
+{id:'guoqiao', type:'food', name:'过桥米线(蒙自)', det:'发源地 · 蒙自',
+ txt:'过桥米线的老家。滚烫鸡汤端上桌,生片现烫,仪式感拉满。在发源地吃一碗,才懂什么叫正宗。',
+ tagline:'发源地的一碗传奇', star:1, img:''},
+/* ===== 元阳 ===== */
+{id:'yuanyang', type:'spot', name:'元阳梯田(看季节)', det:'红河州 · 绕行较远',
+ txt:'哈尼梯田要 11 月到次年 4 月灌水后才是镜面天堂;10 月初刚收割完,风景打七折。想去的话建议放一放,不然容易失望。',
+ tagline:'灌水季才是它的高光', star:0, link:'https://www.dianping.com/shop/17635646', img:''},
+/* ===== 石林 / 九乡 ===== */
+{id:'shilin', type:'spot', name:'石林', det:'G80 石林出口 · 主线旁',
+ txt:'世界自然遗产,石头长成森林。人会多,但「阿诗玛」还是值得亲眼看一下。建议一早进园,赶在人潮前面。',
+ tagline:'教科书里的风景,亲眼见一次', star:1, link:'https://www.dianping.com/shop/9317712', img:''},
+{id:'jiuxiang', type:'spot', name:'九乡溶洞', det:'石林附近',
+ txt:'石林的地下副本:溶洞、地下河、洞中瀑布发育得极其嚣张。和石林安排同一天,地上地下两重世界。',
+ tagline:'地下河与洞中飞瀑', star:0, img:''},
+/* ===== 昆明 ===== */
+{id:'dounan', type:'spot', name:'斗南花市', det:'昆明呈贡 · 市区可达',
+ txt:'亚洲最大的鲜切花市场,玫瑰按斤卖。晚上 8 点后是批发热闹的夜场,几十块抱走一大束,鲜花自由在此实现。',
+ tagline:'按斤卖的鲜花自由', star:1, link:'https://www.dianping.com/shop/11599340', img:''},
+{id:'haigeng', type:'spot', name:'滇池海埂大坝', det:'昆明市区可达',
+ txt:'昆明蓝+滇池风。红嘴鸥每年 10 月中下旬才陆续抵达,国庆能不能看到全看缘分;看不到也有大坝落日兜底。',
+ tagline:'红嘴鸥要再等等', star:0, link:'https://www.dianping.com/shop/4702679', img:''},
+{id:'junzi', type:'food', name:'菌子火锅', det:'昆明 · 10月是菌季尾巴',
+ txt:'云南人拿命换的鲜。10 月是菌子季的尾巴,见手青、牛肝菌、鸡枞下锅,汤鲜到眉毛掉。认准正规店,别自己上山采。',
+ tagline:'一年就等这一锅', star:1, img:''},
+{id:'huahuabing', type:'food', name:'鲜花饼(现烤)', det:'昆明街头现烤店',
+ txt:'现烤的才是灵魂:玫瑰花瓣做馅,酥到掉渣,甜度克制。买手信认准现烤的,比包装的好吃十倍。',
+ tagline:'玫瑰花做的点心', star:1, img:''},
+{id:'shaoerkuai', type:'food', name:'烧饵块', det:'昆明街头早餐',
+ txt:'大米做的饵块烤到鼓泡,抹甜酱辣酱,夹根油条。三块钱的快乐,云南人的早餐日常。',
+ tagline:'三块钱的快乐', star:0, img:''},
+{id:'coffee', type:'food', name:'保山小粒咖啡', det:'沿途咖啡馆 · 10月新豆上市',
+ txt:'云南咖啡之光。10 月正好新豆上市,沿途服务区或昆明咖啡馆都能喝到一杯,顺路提神,顺便支持国产好豆。',
+ tagline:'在云南喝云南咖啡', star:0, img:''},
+/* ===== 抚仙湖 ===== */
+{id:'fuxian', type:'spot', name:'抚仙湖', det:'昆明东南 40 分钟 · 主线旁',
+ txt:'云南最清澈的湖,湖水清到发蓝,湖底还沉着一座古城传说。环湖自驾、帆船、日落,湖边找家店发呆一下午,舒服到不想走。',
+ tagline:'琉璃万顷,发呆圣地', star:1, link:'https://www.dianping.com/shop/28620409', img:''},
+/* ===== 东川 ===== */
+{id:'hongtudi', type:'spot', name:'东川红土地(深度彩蛋)', det:'昆明东北约 150km · 绕行',
+ txt:'上帝打翻的调色盘。红土、麦田、荞麦花、光影,摄影师的圣地。10 月色彩正浓,值得为它拐一脚,但路有点绕。',
+ tagline:'上帝打翻的调色盘', star:1, img:''}
 ];
 
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 
+/* ---------- state ---------- */
+function load(k){try{return JSON.parse(localStorage.getItem('love_'+LINE+'_'+k)||'[]')}catch(e){return []}}
+function save(k,a){localStorage.setItem('love_'+LINE+'_'+k, JSON.stringify(a))}
+var liked = load('L'), disliked = load('N');
+var badgeTxt = {spot:'🏞 景点', food:'🍜 美食'};
+
+/* ---------- render ---------- */
 function render(){
-  var el = document.getElementById('lovegrid'), h = '', curSeg = '';
-  var segs = {};
-  CARDS.forEach(function(c){ segs[c.seg] = (segs[c.seg]||0)+1; });
-  var segOrder = [];
-  CARDS.forEach(function(c){ if(segOrder.indexOf(c.seg)<0) segOrder.push(c.seg); });
-  segOrder.forEach(function(seg){
-    h += '<div class="seglabel"><div class="bar"></div><h3>'+esc(seg)+'</h3><span>'+segs[seg]+' 个心动点</span></div><div class="grid">';
-    CARDS.forEach(function(c){
-      if(c.seg !== seg) return;
-      var pic = '<div class="phhold"><span class="big">'+esc(c.name)+'</span><span>🖼 配图进行中</span></div>';
-      h += '<div class="card" data-id="'+c.id+'">'+
-           '<div class="ph">'+pic+'<span class="loc">'+esc(c.det)+'</span>'+
-           (c.star?'<span class="hotstar">★ 高网红</span>':'')+
-           '<button class="lbtn" data-id="'+c.id+'" aria-label="喜欢 '+esc(c.name)+'"><span class="heart">♥</span><span class="fly"></span></button></div>'+
-           '<div class="body"><h3><span class="n">'+String(CARDS.indexOf(c)+1).padStart(2,'0')+'</span>'+esc(c.name)+'</h3>'+
-           '<div class="txt">'+esc(c.txt)+'<span class="tagline">— '+esc(c.tagline)+'</span></div></div></div>';
-    });
-    h += '</div>';
+  var h = '';
+  CARDS.forEach(function(c,i){
+    var num = String(i+1).padStart(2,'0');
+    var pic = '<div class="phhold"><span class="big">'+esc(c.name)+'</span><small>🖼 配图进行中</small></div>';
+    h += '<div class="card" data-id="'+c.id+'">';
+    if(c.link){
+      h += '<a class="jump" href="'+esc(c.link)+'" target="_blank" rel="noopener">';
+    }
+    h += '<div class="ph">'+pic+
+         '<span class="typeb '+(c.type==='food'?'food':'')+'">'+badgeTxt[c.type]+'</span>'+
+         (c.star?'<span class="hotstar">★ 热门</span>':'')+
+         '<span class="loc">'+esc(c.det)+'</span></div>'+
+         '<div class="body"><h3><span class="n">'+num+'</span>'+esc(c.name)+'</h3>'+
+         '<div class="txt">'+esc(c.txt)+'<span class="tagline">— '+esc(c.tagline)+'</span>'+
+         (c.link?'<span class="dpbadge">大众点评 ↗</span>':'')+
+         '</div></div>';
+    if(c.link){ h += '</a>'; }
+    h += '<div class="actions">'+
+         '<button class="like" data-id="'+c.id+'">❤️ 喜欢</button>'+
+         '<button class="nope" data-id="'+c.id+'">👎 不喜欢</button>'+
+         '</div></div>';
   });
-  el.innerHTML = h;
-  applyState(); refreshCount();
+  document.getElementById('feed').innerHTML = h;
+  applyState();
 }
 
-function load(){try{return JSON.parse(localStorage.getItem('love_'+LINE)||'[]')}catch(e){return []}}
-function save(arr){localStorage.setItem('love_'+LINE, JSON.stringify(arr))}
-var liked = load();
-
-function refreshCount(){
-  document.querySelectorAll('.lovebar .count .n').forEach(function(e){e.textContent = liked.length});
+function refreshStats(){
+  document.getElementById('cntL').textContent = liked.length;
+  document.getElementById('cntN').textContent = disliked.length;
 }
 function applyState(){
-  document.querySelectorAll('.lbtn').forEach(function(b){
-    b.classList.toggle('on', liked.indexOf(b.getAttribute('data-id')) > -1);
+  document.querySelectorAll('.card').forEach(function(card){
+    var id = card.getAttribute('data-id');
+    card.querySelector('.like').classList.toggle('on', liked.indexOf(id)>-1);
+    card.querySelector('.nope').classList.toggle('on', disliked.indexOf(id)>-1);
   });
+  refreshStats();
 }
 function popMsg(t){
   var m = document.getElementById('popmsg'); m.textContent = t; m.classList.add('show');
-  clearTimeout(popMsg._t); popMsg._t = setTimeout(function(){m.classList.remove('show')}, 1500);
+  clearTimeout(popMsg._t); popMsg._t = setTimeout(function(){m.classList.remove('show')}, 2000);
 }
-function burst(btn){
-  btn.classList.remove('pop');
-  var fly = btn.querySelector('.fly'); fly.innerHTML = '';
-  var dirs = [[-26,-20],[-8,-30],[8,-28],[26,-16],[20,-4],[-22,-2]];
-  dirs.forEach(function(d,i){
-    var s = document.createElement('i');
-    s.style.setProperty('--dx', d[0]+'px'); s.style.setProperty('--dy', d[1]+'px');
-    s.style.animationDelay = (i*0.03)+'s';
-    fly.appendChild(s);
-  });
-  void btn.offsetWidth; btn.classList.add('pop');
-}
-function toggle(id, btn){
-  var i = liked.indexOf(id);
-  if(i > -1){ liked.splice(i,1); } else { liked.push(id); burst(btn); }
-  save(liked); applyState(); refreshCount();
-  var card = CARDS.filter(function(c){return c.id===id})[0];
-  if(card) popMsg((i>-1?'取消了':'收藏了')+'「'+card.name+'」');
-  sendSnapshot();
+function mark(id, kind){
+  var arr = kind==='like'?liked:disliked, other = kind==='like'?disliked:liked;
+  var i = arr.indexOf(id);
+  if(i>-1){ arr.splice(i,1); } else { arr.push(id); }
+  var j = other.indexOf(id); if(j>-1) other.splice(j,1);
+  save('L', liked); save('N', disliked);
+  applyState();
+  var c = CARDS.filter(function(x){return x.id===id})[0];
+  var on = arr.indexOf(id)>-1;
+  if(c) popMsg((on?'❤️ 喜欢了 ':'取消了 ')+'「'+c.name+'」');
 }
 
-var LOVE_EMAIL = '';  /* ← 填入收件邮箱后即启用 */
-var _sentCache = null;
+/* ---------- copy & submit ---------- */
 function snapshotText(){
-  var names = CARDS.filter(function(c){return liked.indexOf(c.id)>-1});
-  var rows = names.map(function(c,i){return (i+1)+'. '+c.name+'（'+c.seg+' · '+c.det+'）'});
-  var head = '【广州→昆明 · 沿途心动清单】\n共 ♥ '+liked.length+' 个：\n\n';
-  return {subject:'💗 沿途心动清单（♥'+liked.length+'）', body: head + (rows.join('\n') || '（还没有心动点）')};
-}
-function sendSnapshot(){
-  if(!LOVE_EMAIL) return;
-  var s = snapshotText();
-  if(_sentCache === JSON.stringify(liked)) return;
-  _sentCache = JSON.stringify(liked);
-  post2email(s);
-}
-function post2email(s){
-  var f = document.createElement('form');
-  f.method = 'POST'; f.action = 'https://formsubmit.co/' + encodeURIComponent(LOVE_EMAIL);
-  f.target = 'fsifr'; f.style.display = 'none';
-  var i1 = document.createElement('input'); i1.type='hidden'; i1.name='_subject'; i1.value=s.subject;
-  var i2 = document.createElement('input'); i2.type='hidden'; i2.name='_template'; i2.value='table';
-  var t = document.createElement('textarea'); t.name='message'; t.value=s.body;
-  var ifr = document.createElement('iframe'); ifr.name='fsifr'; ifr.style.display='none';
-  document.body.appendChild(ifr); f.appendChild(i1); f.appendChild(i2); f.appendChild(t);
-  document.body.appendChild(f); f.submit();
-  setTimeout(function(){f.parentNode.removeChild(f); ifr.parentNode.removeChild(ifr)}, 4000);
-}
-
-document.getElementById('sendbtn').addEventListener('click', function(){
-  var st = document.getElementById('sendstate');
-  if(LOVE_EMAIL){
-    st.textContent = '发送中…'; post2email(snapshotText());
-    st.textContent = '已发送 ✓ 记得查收邮箱';
-  }else{
-    st.textContent = '还没接上同步邮箱：先安心点♥收藏，接好后一点就发 ✉️';
+  var lines = [];
+  lines.push('【广州→昆明 · 沿途征集结果】');
+  function blk(title, list){
+    if(!list.length) return;
+    lines.push('');
+    lines.push(title+'（'+list.length+'）:');
+    list.forEach(function(id, i){
+      var c = CARDS.filter(function(x){return x.id===id})[0];
+      if(c) lines.push(String(i+1)+'. '+c.name+(c.type==='food'?'（美食）':''));
+    });
   }
+  blk('❤️ 喜欢', liked);
+  blk('👎 不喜欢', disliked);
+  lines.push('');
+  lines.push('—— 复制自沿途征集页');
+  return lines.join('\n');
+}
+function doCopy(){
+  var txt = snapshotText();
+  function ok(){ popMsg('📋 已复制!粘贴到对话发给我~'); }
+  function fb(){
+    var ta = document.createElement('textarea');
+    ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); ok(); }catch(e){ popMsg('复制失败,长按手动复制吧'); }
+    document.body.removeChild(ta);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(ok).catch(fb);
+  }else{ fb(); }
+}
+
+document.getElementById('copyTop').addEventListener('click', doCopy);
+document.getElementById('copyBottom').addEventListener('click', doCopy);
+document.getElementById('feed').addEventListener('click', function(ev){
+  var b = ev.target.closest('.like') || ev.target.closest('.nope');
+  if(!b) return;
+  ev.preventDefault();
+  mark(b.getAttribute('data-id'), b.classList.contains('like')?'like':'nope');
 });
 
-document.getElementById('lovegrid').addEventListener('click', function(ev){
-  var b = ev.target.closest('.lbtn');
-  if(b) toggle(b.getAttribute('data-id'), b);
-});
 render();
 </script>
 </body>
