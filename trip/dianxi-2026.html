@@ -55,6 +55,8 @@
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:460px){.grid{grid-template-columns:1fr}}
   .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 2px 6px rgba(50,40,20,.06)}
+  .card .jump{display:block;color:inherit;text-decoration:none}
+  .dpbadge{display:inline-block;margin-top:8px;background:#f5b50f;color:#3a2e00;font-size:11px;font-weight:800;padding:2px 10px;border-radius:10px;letter-spacing:.5px}
   .card .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#dcd6c6}
   .card .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
   .card:hover .ph img{transform:scale(1.04)}
@@ -67,7 +69,7 @@
 
   /* love button */
   .lbtn{position:absolute;right:10px;top:10px;width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;
-    background:rgba(255,255,255,.88);box-shadow:0 2px 10px rgba(0,0,0,.18);font-size:20px;line-height:40px;text-align:center;color:#d8d2c2;transition:all .18s ease;z-index:5}
+    background:rgba(255,255,255,.88);box-shadow:0 2px 10px rgba(0,0,0,.18);font-size:20px;line-height:40px;text-align:center;color:#d8d2c2;transition:all .18s ease;z-index:8}
   .lbtn.on{color:#fff;background:var(--rose);transform:scale(1.06)}
   .lbtn .fly{position:absolute;inset:0;pointer-events:none}
   .lbtn .fly i{position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;background:var(--rose);opacity:0}
@@ -148,7 +150,7 @@
   <div class="inner">
     <span class="tag">2026 国庆 · 7 天</span>
     <h1 class="serif">滇西七日<br>火山、温泉与金塔</h1>
-    <p class="sub">去年我们看了大理的洱海和丽江的雪山，今年换一种云南——去国境线边上的小城，泡温泉、等晨雾、看金色的塔尖亮起来。</p>
+    <p class="sub">没有大理丽江的人山人海——只有温泉的蒸汽、晨雾里的稻田，和边境小城金光闪闪的塔尖。这是云南的另一种打开方式。</p>
     <div class="chips">
       <span>🧭 广州出发 · 自驾</span>
       <span>📅 10.1 – 10.7</span>
@@ -237,31 +239,31 @@
 /* ============ 数据 ============ */
 var LINE = 'dianxi';
 var CARDS = [
-  {id:'heshun', name:'和顺古镇', num:'01', loc:'腾冲 · 市区旁 4km',
+  {id:'heshun', name:'和顺古镇', num:'01', loc:'腾冲 · 市区旁 4km', link:'https://www.dianping.com/shop/2873629',
    tagline:'清晨的稻田会起雾，像走在油画里',
    txt:'比丽江安静一百倍的中国十大魅力名镇之首。住在稻田边的民宿，推开窗就是水墨画。',
    img:'img/heshun.jpg'},
-  {id:'rehai', name:'热海大滚锅', num:'02', loc:'腾冲 · 城南 12km',
+  {id:'rehai', name:'热海大滚锅', num:'02', loc:'腾冲 · 城南 12km', link:'https://www.dianping.com/shop/4713213',
    tagline:'整座山谷都在冒烟',
    txt:'98℃ 的大滚锅，蒸汽冲天。温泉水煮出来的鸡蛋，蛋黄是溏心的，全世界独一份。',
    img:'img/rehai.jpg'},
-  {id:'volcano', name:'火山 · 热气球', num:'03', loc:'腾冲 · 火山地质公园',
+  {id:'volcano', name:'火山 · 热气球', num:'03', loc:'腾冲 · 火山地质公园', link:'https://www.dianping.com/shop/75090121',
    tagline:'7 点起床，换 10 分钟上帝视角',
    txt:'坐上热气球俯瞰 97 座火山锥，是腾冲最出片的高光时刻。只在上午飞，能不能坐上全看天气和起床决心。',
    img:'img/volcano.jpg'},
-  {id:'beihai', name:'北海湿地 · 草排', num:'04', loc:'腾冲 · 城北 10km',
+  {id:'beihai', name:'北海湿地 · 草排', num:'04', loc:'腾冲 · 城北 10km', link:'https://www.dianping.com/shop/61543544',
    tagline:'踩在浮动的草地上划船',
    txt:'整片草甸浮在水面上，踩着草排滑进芦苇荡，黄昏时水面被染成金色，安静得能听见风声。',
    img:'img/beihai.jpg'},
-  {id:'spring', name:'温泉之夜', num:'05', loc:'腾冲 · 温泉民宿或浴谷',
+  {id:'spring', name:'温泉之夜', num:'05', loc:'腾冲 · 温泉民宿或浴谷', link:'https://www.dianping.com/shop/4713213',
    tagline:'泡着温泉看星星，治愈一整年',
    txt:'找一家带私汤的小院，晚上泡进 40℃ 的温泉水里，头顶是云南的星空——这是这条线最会享受的时刻。',
    img:'img/spring.jpg'},
-  {id:'jinta', name:'勐焕大金塔', num:'06', loc:'芒市 · 雷崖让山顶',
+  {id:'jinta', name:'勐焕大金塔', num:'06', loc:'芒市 · 雷崖让山顶', link:'https://www.dianping.com/shop/11616840',
    tagline:'芒市的地标，日落时全身发光',
    txt:'亚洲最大的空心佛塔，傍晚最后一缕光打在金顶上，整座城都安静下来。比东南亚还东南亚。',
    img:'img/jinta.jpg'},
-  {id:'yinta', name:'勐焕银塔', num:'07', loc:'芒市 · 大金塔旁',
+  {id:'yinta', name:'勐焕银塔', num:'07', loc:'芒市 · 大金塔旁', link:'https://www.dianping.com/shop/G6l8ix23biEFozZl',
    tagline:'白色镜面塔，怎么拍都是大片',
    txt:'纯白塔身配玻璃镜面平台，蓝天白云倒进塔身，是这两年芒市最火的出片点，穿浅色衣服去。',
    img:'img/yinta.jpg'},
@@ -273,7 +275,7 @@ var CARDS = [
    note:['泡鲁达 + 手抓饭 + 烤五花肉配腌菜膏','百思特小食街、傣族古镇夜市都在市区','没有目的地的晚上，从第一天就会爱上'],
    txt:''
   },
-  {id:'ruili', name:'瑞丽一日 · 彩蛋', num:'10', loc:'芒市出发 · 当天往返',
+  {id:'ruili', name:'瑞丽一日 · 彩蛋', num:'10', loc:'芒市出发 · 当天往返', link:'https://www.dianping.com/shop/58566688',
    tagline:'一脚国境线，看看一寨两国',
    txt:'时间富余就开车去瑞丽：一寨两国里，秋千一荡就出了国；姐告口岸的免税街热闹得像过节。可去可不去，去了是惊喜。',
    img:'img/ruili.jpg'}
@@ -334,10 +336,15 @@ function renderCards(){
     }else{
       body = '<div class="txt">'+esc(c.txt)+'<span class="tagline">— '+esc(c.tagline)+'</span></div>';
     }
+    var open = c.link ? '<a class="jump" href="'+esc(c.link)+'" target="_blank" rel="noopener">' : '';
+    var close = c.link ? '</a>' : '';
     h += '<div class="card'+(c.note?' note-card':'')+'" data-id="'+c.id+'">'+
-         '<div class="ph">'+pic+'<span class="loc">'+esc(c.loc)+'</span>'+
-         '<button class="lbtn" data-id="'+c.id+'" aria-label="喜欢 '+esc(c.name)+'"><span class="heart">♥</span><span class="fly"></span></button></div>'+
-         '<div class="body"><h3><span class="n">'+c.num+'</span>'+esc(c.name)+'</h3>'+body+'</div></div>';
+         open+
+         '<div class="ph">'+pic+'<span class="loc">'+esc(c.loc)+'</span></div>'+
+         '<div class="body"><h3><span class="n">'+c.num+'</span>'+esc(c.name)+'</h3>'+body+
+         (c.link?'<span class="dpbadge">大众点评 ↗</span>':'')+
+         '</div>'+close+
+         '<button class="lbtn" data-id="'+c.id+'" aria-label="喜欢 '+esc(c.name)+'"><span class="heart">♥</span><span class="fly"></span></button></div>';
   });
   g.innerHTML = h;
 }
