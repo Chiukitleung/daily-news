@@ -45,6 +45,7 @@
   .phhold small{font-size:11px;letter-spacing:1px}
   .typeb{position:absolute;left:10px;top:10px;background:rgba(20,16,8,.6);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:8px;z-index:3;backdrop-filter:blur(3px)}
   .typeb.food{background:rgba(180,110,30,.85)}
+  .body h3 .picked{background:#2f9e6e;color:#fff;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:8px;flex:0 0 auto}
   .hotstar{position:absolute;right:10px;top:10px;background:rgba(230,84,70,.93);color:#fff;font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:8px;z-index:3}
   .jump{display:block;color:inherit;text-decoration:none}
   .jump .ph .loc{position:absolute;left:10px;bottom:10px;background:rgba(20,16,8,.55);color:#fff;font-size:11px;padding:2px 9px;border-radius:7px;backdrop-filter:blur(4px);z-index:3}
@@ -76,7 +77,7 @@
 <body>
 
 <div class="lovebar">
-  <div class="name">广州→昆明</div>
+  <div class="name">广州→云南</div>
   <div class="stats"><span class="lik">❤ 喜欢 <b id="cntL">0</b></span><span class="nol">👎 不喜欢 <b id="cntN">0</b></span></div>
   <button class="copybtn" id="copyTop">📋 复制</button>
 </div>
@@ -95,7 +96,7 @@
 
 <main>
   <div class="howto">
-    <b>怎么用：</b>像刷小红书一样往下滑。每一条都可以点「❤️ 喜欢」或「👎 不喜欢」,互斥、随意、不限数量。<b>刷完点右上角或底部的「📋 复制」,把结果粘贴回对话发给我</b>,我按你的口味来定稿配图。
+    <b>第一轮已筛：</b>6 个被剔除了,✓ 绿标是首轮选中的 4 个。<b>继续刷：</b>每一条都可以点「❤️ 喜欢」或「👎 不喜欢」,不限数量,刷完点「📋 复制」把结果发回来。
   </div>
 
   <div class="feed" id="feed"></div>
@@ -129,9 +130,6 @@ var CARDS = [
  txt:'黑亮弹滑,苦后回甘,是梧州人从小吃到大的清火甜。加炼奶或蜂蜜,路边老店五块钱一碗。',
  tagline:'苦中带甘,广西老味道', star:0, img:''},
 /* ===== 玉林 ===== */
-{id:'yuntian', type:'spot', name:'玉林云天文化城', det:'G80 玉林出口旁',
- txt:'一个人花 20 年建成的巨型仿古宫殿群,被网友戏称「小布达拉宫」。魔幻、争议、上镜,话题度拉满,路过拐十分钟看个稀奇。',
- tagline:'民间魔幻建筑的巅峰', star:1, link:'https://www.dianping.com/shop/58862165', img:''},
 {id:'niuba', type:'food', name:'玉林牛巴(牛干巴)', det:'玉林特产 · 服务区都能买到',
  txt:'黄牛肉切片晾晒再卤制,油亮酱色,咸甜耐嚼,越嚼越香。路上零食天花板,买一包能啃到云南。',
  tagline:'嚼着嚼着就到云南了', star:0, img:''},
@@ -143,7 +141,7 @@ var CARDS = [
  txt:'广西人的「水果腌菜」:青芒、番石榴、三华李拌上辣椒盐和酸梅粉,又酸又辣又脆。开胃神器,吃完想打包十斤。',
  tagline:'水果的另一种打开方式', star:0, img:''},
 /* ===== 河池 · 凤山 —— 第一站 ===== */
-{id:'sanmenhai', type:'spot', name:'三门海(第一站)', det:'河池凤山 · 广州约 950km 一天到',
+{id:'sanmenhai', type:'spot', name:'三门海(第一站)', det:'河池凤山 · 广州约 950km 一天到', picked:1,
  txt:'世界地质公园里的蓝宝石:7 个天窗串起的地下河,乘船穿过 3 个,水色碧蓝得像翡翠。定它为第一站,晚上住凤山或巴马。',
  tagline:'乘船穿进地心蓝洞', star:1, link:'https://www.dianping.com/shop/6186900', img:''},
 {id:'dashiwei', type:'spot', name:'大石围天坑', det:'乐业 · 与三门海同属一个地质公园',
@@ -153,7 +151,7 @@ var CARDS = [
  txt:'广西烧烤江湖的传说:烤猪眼、烤猪鞭,全是硬核食材。不敢吃也能围观,敢吃就是朋友圈战神。',
  tagline:'广西烧烤的尽头在百色', star:0, img:''},
 /* ===== 靖西(绕行) ===== */
-{id:'equan', type:'spot', name:'靖西鹅泉', det:'百色南下约 1.5h · 绕行',
+{id:'equan', type:'spot', name:'靖西鹅泉', det:'百色南下约 1.5h · 绕行', picked:1,
  txt:'鹅泉的清晨有雾,泉水清到发蓝,亭台竹影倒在水面,比桂林安静、比桂林上镜。日出档是最佳时间,错过会后悔。',
  tagline:'晨雾里的田园牧歌', star:1, link:'https://www.dianping.com/shop/9312804', img:''},
 {id:'tongling', type:'spot', name:'通灵大峡谷', det:'与鹅泉同方向',
@@ -166,14 +164,11 @@ var CARDS = [
 {id:'detian', type:'spot', name:'德天跨国瀑布', det:'崇左 · 绕行 · 高人气',
  txt:'亚洲第一跨国瀑布,归春河从中越边境三级跌落,一半中国一半越南。10 月正是丰水期最壮观的时候,竹筏能开到瀑布脚下淋一头水汽。',
  tagline:'这一路最值得绕的风景', star:1, link:'https://www.dianping.com/shop/2636149', img:''},
-{id:'mingshi', type:'spot', name:'明仕田园', det:'德天顺路 20km',
- txt:'喀斯特峰林倒进明仕河,《花千骨》的长留仙境取景地。坐竹筏慢游或租自行车晃一圈,像在山水画里穿行。',
- tagline:'小桂林,大安静', star:1, link:'https://www.dianping.com/shop/3234178', img:''},
 {id:'yuenanwei', type:'food', name:'越南卷筒粉 · 滴漏咖啡', det:'德天/边境小城',
  txt:'边境的味觉混血:米皮卷肉末木耳,蘸鱼露吃;配一杯越南滴漏咖啡,看它一滴一滴漏完,假装出了趟国。',
  tagline:'一口到越南', star:0, img:''},
 /* ===== 文山 ===== */
-{id:'puzeihei', type:'spot', name:'普者黑', det:'文山丘北 · 砚山出口下高速约 1h',
+{id:'puzeihei', type:'spot', name:'普者黑', det:'文山丘北 · 砚山出口下高速约 1h', picked:1,
  txt:'喀斯特峰林泡在万亩荷塘和湿地湖泊里,《三生三世》取景地。划柳叶舟穿行峰林,打水仗是保留节目。10 月荷花谢了,山水和清静还在。',
  tagline:'水上峰林,青丘之国', star:1, link:'https://www.dianping.com/shop/83206289', img:''},
 {id:'bamei', type:'spot', name:'坝美', det:'文山广南 · 绕行 · 时开时关',
@@ -209,19 +204,10 @@ var CARDS = [
  txt:'哈尼梯田要 11 月到次年 4 月灌水后才是镜面天堂;10 月初刚收割完,风景打七折。想去的话建议放一放,不然容易失望。',
  tagline:'灌水季才是它的高光', star:0, link:'https://www.dianping.com/shop/17635646', img:''},
 /* ===== 石林 ===== */
-{id:'shilin', type:'spot', name:'石林', det:'G80 石林出口 · 主线旁',
- txt:'世界自然遗产,石头长成森林。人会多,但「阿诗玛」还是值得亲眼看一下。建议一早进园,赶在人潮前面。',
- tagline:'教科书里的风景,亲眼见一次', star:1, link:'https://www.dianping.com/shop/9317712', img:''},
-{id:'jiuxiang', type:'spot', name:'九乡溶洞', det:'石林附近',
- txt:'石林的地下副本:溶洞、地下河、洞中瀑布发育得极其嚣张。和石林安排同一天,地上地下两重世界。',
- tagline:'地下河与洞中飞瀑', star:0, img:''},
 /* ===== 昆明 ===== */
-{id:'dounan', type:'spot', name:'斗南花市', det:'昆明呈贡 · 市区可达',
+{id:'dounan', type:'spot', name:'斗南花市', det:'昆明呈贡 · 市区可达', picked:1,
  txt:'亚洲最大的鲜切花市场,玫瑰按斤卖。晚上 8 点后是批发热闹的夜场,几十块抱走一大束,鲜花自由在此实现。',
  tagline:'按斤卖的鲜花自由', star:1, link:'https://www.dianping.com/shop/11599340', img:''},
-{id:'haigeng', type:'spot', name:'滇池海埂大坝', det:'昆明市区可达',
- txt:'昆明蓝+滇池风。红嘴鸥每年 10 月中下旬才陆续抵达,国庆能不能看到全看缘分;看不到也有大坝落日兜底。',
- tagline:'红嘴鸥要再等等', star:0, link:'https://www.dianping.com/shop/4702679', img:''},
 {id:'junzi', type:'food', name:'菌子火锅', det:'昆明 · 10月是菌季尾巴',
  txt:'云南人拿命换的鲜。10 月是菌子季的尾巴,见手青、牛肝菌、鸡枞下锅,汤鲜到眉毛掉。认准正规店,别自己上山采。',
  tagline:'一年就等这一锅', star:1, img:''},
@@ -235,9 +221,6 @@ var CARDS = [
  txt:'云南咖啡之光。10 月正好新豆上市,沿途服务区或昆明咖啡馆都能喝到一杯,顺路提神,顺便支持国产好豆。',
  tagline:'在云南喝云南咖啡', star:0, img:''},
 /* ===== 昆明周边 ===== */
-{id:'fuxian', type:'spot', name:'抚仙湖', det:'昆明东南 40 分钟 · 主线旁',
- txt:'云南最清澈的湖,湖水清到发蓝,湖底还沉着一座古城传说。环湖自驾、帆船、日落,湖边找家店发呆一下午,舒服到不想走。',
- tagline:'琉璃万顷,发呆圣地', star:1, link:'https://www.dianping.com/shop/28620409', img:''},
 {id:'hongtudi', type:'spot', name:'东川红土地', det:'昆明东北约 150km · 绕行',
  txt:'上帝打翻的调色盘。红土、麦田、荞麦花、光影,摄影师的圣地。10 月色彩正浓,值得为它拐一脚,但路有点绕。',
  tagline:'上帝打翻的调色盘', star:1, img:''},
@@ -343,7 +326,7 @@ function render(){
          '<span class="typeb '+(c.type==='food'?'food':'')+'">'+badgeTxt[c.type]+'</span>'+
          (c.star?'<span class="hotstar">★ 热门</span>':'')+
          '<span class="loc">'+esc(c.det)+'</span></div>'+
-         '<div class="body"><h3><span class="n">'+num+'</span>'+esc(c.name)+'</h3>'+
+         '<div class="body"><h3><span class="n">'+num+'</span>'+esc(c.name)+(c.picked?'<span class="picked">✓ 首轮已选</span>':'')+'</h3>'+
          '<div class="txt">'+esc(c.txt)+'<span class="tagline">— '+esc(c.tagline)+'</span>'+
          (c.link?'<span class="dpbadge">大众点评 ↗</span>':'')+
          '</div></div>';
@@ -393,7 +376,7 @@ function mark(id, kind){
 /* ---------- copy & submit ---------- */
 function snapshotText(){
   var lines = [];
-  lines.push('【广州→昆明 · 沿途征集结果】');
+  lines.push('【广州→云南 · 沿途征集结果】');
   function blk(title, list){
     if(!list.length) return;
     lines.push('');
