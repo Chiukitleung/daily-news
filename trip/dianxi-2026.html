@@ -27,7 +27,7 @@
 
   /* ---------- hero ---------- */
   .hero{position:relative;min-height:78vh;display:flex;align-items:flex-end;color:#fff;
-    background:linear-gradient(180deg,rgba(20,16,8,.18) 0%,rgba(20,16,8,.05) 40%,rgba(20,16,8,.72) 100%),url('https://upload.wikimedia.org/wikipedia/commons/0/03/The_sunset_in_Beihai_Wetland%2C_Tengchong%2C_China.jpg') center/cover no-repeat}
+    background:linear-gradient(180deg,rgba(20,16,8,.18) 0%,rgba(20,16,8,.05) 40%,rgba(20,16,8,.72) 100%),url('img/hero.jpg') center/cover no-repeat}
   .hero .inner{width:100%;max-width:760px;margin:0 auto;padding:26px 20px 30px}
   .hero .tag{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:3px 12px;font-size:12px;letter-spacing:1px;margin-bottom:12px}
   .hero h1{font-size:clamp(30px,8vw,46px);font-weight:800;line-height:1.25;text-shadow:0 2px 18px rgba(0,0,0,.35)}
@@ -87,6 +87,11 @@
   .phplace small{position:absolute;bottom:8px;font-size:10.5px;background:rgba(0,0,0,.3);padding:2px 8px;border-radius:6px}
   .phplace.gold{background:linear-gradient(135deg,#d8b456,#b08a2f 55%,#8f6f22)}
   .phplace.silver{background:linear-gradient(135deg,#cfd4d8,#9aa2a9 55%,#7c848b)}
+  .phplace.arts{background:repeating-linear-gradient(135deg,#efe6cf,#e2d4ae 20px,#efe6cf 40px);font-size:56px}
+  .card.note-card{background:linear-gradient(160deg,#fdf9ee,#f6eeda);border-style:dashed}
+  .note{border-top:1px dashed #d8c9a8;padding-top:8px;margin-top:6px;font-size:12.5px;line-height:1.95;color:#5a5346}
+  .note i{display:block;font-style:normal}
+  .note i:before{content:'· ';color:var(--gold)}
 
   /* timeline */
   .days{position:relative;margin-top:12px}
@@ -145,10 +150,10 @@
     <h1 class="serif">滇西七日<br>火山、温泉与金塔</h1>
     <p class="sub">去年我们看了大理的洱海和丽江的雪山，今年换一种云南——去国境线边上的小城，泡温泉、等晨雾、看金色的塔尖亮起来。</p>
     <div class="chips">
-      <span>🧭 广州出发 · 落地自驾</span>
+      <span>🧭 广州出发 · 自驾</span>
       <span>📅 10.1 – 10.7</span>
       <span>🌡️ 15–24℃ 不冷不热</span>
-      <span>🚗 全程约 300km 不赶路</span>
+      <span>🚗 境内约 300km 不赶路</span>
     </div>
   </div>
 </header>
@@ -193,8 +198,8 @@
       <div class="kicker">实 用 贴 士</div>
       <h2>出发前记住这几条</h2>
     </div>
-    <div class="tip"><div class="ic">✈️</div><div><b>机票：直飞能省则省</b><p>广州⇄腾冲有直飞（约3h，班次少）；返程芒市直飞广州（约2.5h，每天有）。国庆票 9 月中前订，越早越便宜；实在没有直飞就昆明中转。</p></div></div>
-    <div class="tip"><div class="ic">🚙</div><div><b>落地租车最自由</b><p>腾冲→芒市高速约 106km，1.5–2 小时，沿途会过龙江特大桥，风景很好。自驾想去瑞丽加餐也方便。</p></div></div>
+    <div class="tip"><div class="ic">🚗</div><div><b>怎么去：自驾优先</b><p>广州⇄滇西单程约 1500km，建议分两天开，中间在百色/兴义休整一晚（床车直接睡服务区）。想省时间就直飞：广州⇄腾冲约 3h、芒市直飞广州约 2.5h，国庆票越早订越便宜。</p></div></div>
+    <div class="tip"><div class="ic">🚙</div><div><b>境内段都很好开</b><p>腾冲⇄芒市高速约 106km，1.5–2 小时，沿途过龙江特大桥，风景很好；从芒市去瑞丽一日往返也轻松。</p></div></div>
     <div class="tip"><div class="ic">🎈</div><div><b>热气球只在上午</b><p>8:00–11:00 运营，下雨或风大就停飞。想坐一定一早去（8 点前到），前一晚看天气预报。</p></div></div>
     <div class="tip"><div class="ic">🧥</div><div><b>衣服怎么带</b><p>白天 20℃+ 单衣即可，早晚 12–15℃ 要薄外套；太阳很晒，帽子防晒霜别省。</p></div></div>
     <div class="tip"><div class="ic">🍜</div><div><b>吃啥不吃啥</b><p>稀豆粉、饵丝、大救驾、泡鲁达都友好；撒撇和酸辣傣味的辣度是认真的，点餐时说「广东辣」。</p></div></div>
@@ -222,8 +227,8 @@
 
 <footer>
   <p>内容整理：真实景点与公开交通信息，具体以现场/官方为准<br>
-  图片：Wikimedia Commons（CC 授权）· 部分实拍图待补<br>
-  制作：2026 国庆 · 给最可爱的人</p>
+  图片：公开网络图片（来源见各景点），仅供行程预览<br>
+  2026 国庆 · 给朋友的小旅行清单</p>
 </footer>
 
 <div class="popmsg" id="popmsg"></div>
@@ -235,47 +240,47 @@ var CARDS = [
   {id:'heshun', name:'和顺古镇', num:'01', loc:'腾冲 · 市区旁 4km',
    tagline:'清晨的稻田会起雾，像走在油画里',
    txt:'比丽江安静一百倍的中国十大魅力名镇之首。住在稻田边的民宿，推开窗就是水墨画。',
-   img:'https://upload.wikimedia.org/wikipedia/commons/e/e1/%E5%92%8C%E9%A1%BA_%E5%85%A5%E5%8F%A3%E7%89%8C%E5%9D%8A_-_panoramio.jpg'},
+   img:'img/heshun.jpg'},
   {id:'rehai', name:'热海大滚锅', num:'02', loc:'腾冲 · 城南 12km',
    tagline:'整座山谷都在冒烟',
    txt:'98℃ 的大滚锅，蒸汽冲天。温泉水煮出来的鸡蛋，蛋黄是溏心的，全世界独一份。',
-   img:'https://upload.wikimedia.org/wikipedia/commons/d/d2/%E7%83%AD%E6%B5%B7_%E5%A4%A7%E6%BB%9A%E9%94%85_-_panoramio.jpg'},
+   img:'img/rehai.jpg'},
   {id:'volcano', name:'火山 · 热气球', num:'03', loc:'腾冲 · 火山地质公园',
    tagline:'7 点起床，换 10 分钟上帝视角',
    txt:'坐上热气球俯瞰 97 座火山锥，是腾冲最出片的高光时刻。只在上午飞，能不能坐上全看天气和起床决心。',
-   img:'https://upload.wikimedia.org/wikipedia/commons/b/b1/%E4%BA%91%E5%8D%97%E8%85%BE%E5%86%B2%E7%81%AB%E5%B1%B1%E5%9C%B0%E7%83%AD%E5%9B%BD%E5%AE%B6%E5%9C%B0%E8%B4%A8%E5%85%AC%E5%9B%AD.jpg'},
+   img:'img/volcano.jpg'},
   {id:'beihai', name:'北海湿地 · 草排', num:'04', loc:'腾冲 · 城北 10km',
    tagline:'踩在浮动的草地上划船',
    txt:'整片草甸浮在水面上，踩着草排滑进芦苇荡，黄昏时水面被染成金色，安静得能听见风声。',
-   img:'https://upload.wikimedia.org/wikipedia/commons/0/03/The_sunset_in_Beihai_Wetland%2C_Tengchong%2C_China.jpg'},
+   img:'img/beihai.jpg'},
   {id:'spring', name:'温泉之夜', num:'05', loc:'腾冲 · 温泉民宿或浴谷',
    tagline:'泡着温泉看星星，治愈一整年',
    txt:'找一家带私汤的小院，晚上泡进 40℃ 的温泉水里，头顶是云南的星空——这是这条线最会享受的时刻。',
-   img:'https://upload.wikimedia.org/wikipedia/commons/a/a0/Rehai%2C_Tengchong_05.jpg'},
+   img:'img/spring.jpg'},
   {id:'jinta', name:'勐焕大金塔', num:'06', loc:'芒市 · 雷崖让山顶',
    tagline:'芒市的地标，日落时全身发光',
    txt:'亚洲最大的空心佛塔，傍晚最后一缕光打在金顶上，整座城都安静下来。比东南亚还东南亚。',
-   img:''},  /* 实拍待补 */
+   img:'img/jinta.jpg'},
   {id:'yinta', name:'勐焕银塔', num:'07', loc:'芒市 · 大金塔旁',
    tagline:'白色镜面塔，怎么拍都是大片',
    txt:'纯白塔身配玻璃镜面平台，蓝天白云倒进塔身，是这两年芒市最火的出片点，穿浅色衣服去。',
-   img:''},  /* 实拍待补 */
-  {id:'shubao', name:'树包塔', num:'08', loc:'芒市 · 市中心步行可达',
-   tagline:'榕树把佛塔吞进了怀里',
-   txt:'两百年的榕树把塔整个抱住，根须垂成门帘。就在市中心，路过五分钟去看一眼，会愣一下。',
-   img:'https://upload.wikimedia.org/wikipedia/commons/7/73/%E8%8A%92%E5%B8%82%E6%A0%91%E5%8C%85%E5%A1%94_-_%E6%95%B4%E4%BD%93_-_2025-05-14_02.jpg'},
-  {id:'night', name:'芒市夜市', num:'09', loc:'芒市 · 百思特/傣族古镇',
-   tagline:'泡鲁达，手抓饭，烧烤江湖',
-   txt:'没有目的地的晚上：泡鲁达、手抓饭、烤五花肉配腌菜膏。芒市的夜，从第一天就会爱上。',
-   img:''},
+   img:'img/yinta.jpg'},
+  {id:'shubao', name:'树包塔', num:'08', loc:'芒市 · 市中心步行可达', icon:'🌳',
+   note:['两百年的榕树把佛塔整个抱住，根须垂成门帘','就在市中心，散步顺路就到','免费，路过五分钟，会愣一下'],
+   txt:''
+  },
+  {id:'night', name:'芒市夜市', num:'09', loc:'芒市 · 百思特/傣族古镇', icon:'🍢',
+   note:['泡鲁达 + 手抓饭 + 烤五花肉配腌菜膏','百思特小食街、傣族古镇夜市都在市区','没有目的地的晚上，从第一天就会爱上'],
+   txt:''
+  },
   {id:'ruili', name:'瑞丽一日 · 彩蛋', num:'10', loc:'芒市出发 · 当天往返',
    tagline:'一脚国境线，看看一寨两国',
    txt:'时间富余就开车去瑞丽：一寨两国里，秋千一荡就出了国；姐告口岸的免税街热闹得像过节。可去可不去，去了是惊喜。',
-   img:''}
+   img:'img/ruili.jpg'}
 ];
 var DAYS = [
-  {when:'D1 · 10.1', title:'飞抵腾冲，走进和顺', meta:'✈ 广州直飞约 3h｜🚕 机场→和顺约 30min',
-   points:['上午航班，中午到，落地租车', '下午和顺古镇：和顺图书馆、洗衣亭、弯楼子，沿河走到野鸭湖',
+  {when:'D1 · 10.1', title:'抵达腾冲，走进和顺', meta:'🚗 机场/下高速 → 和顺古镇约 4km',
+   points:['按你的安排抵达腾冲（自驾或飞机都行），安顿好后出门', '下午和顺古镇：和顺图书馆、洗衣亭、弯楼子，沿河走到野鸭湖',
            '傍晚挑一家稻田边的民宿入住，推窗见田', '晚上古镇里吃饵丝+稀豆粉'],
    stay:'住和顺古镇（稻田景观民宿）'},
   {when:'D2 · 10.2', title:'晨雾拍照 + 热海泡汤', meta:'🚕 和顺→热海约 30min',
@@ -299,17 +304,16 @@ var DAYS = [
    points:['方案 A：一早去瑞丽，一寨两国、姐告口岸，傍晚回芒市', '方案 B：留在芒市睡懒觉，做套傣装写真，逛杂货铺买傣锦',
            '晚上最后再吃一顿，把想吃的都点上'],
    stay:'住芒市'},
-  {when:'D7 · 10.7', title:'慢慢回家', meta:'✈ 芒市直飞广州约 2.5h',
-   points:['上午收拾行李，机场还车前记得加满油', '中午航班回广州，7 天的回甘够回味一个月'],
+  {when:'D7 · 10.7', title:'慢慢回家', meta:'🚗 返程出发（或 ✈ 芒市直飞广州约 2.5h）',
+   points:['上午收拾行李，加满油再出发', '路上慢慢开，7 天的回甘够回味一个月'],
    stay:'到家 🏠'}
 ];
 var BUDGET = [
-  ['机票（往返，两人）','¥5,000 – 8,000','国庆浮动大，早订省 2–3k'],
-  ['租车 7 天（含油费过路费）','¥2,000 – 2,800'],
-  ['住宿 6 晚','¥3,000 – 5,000','和顺民宿/芒市酒店'],
-  ['门票与体验（热气球/温泉等）','¥1,200 – 1,800'],
-  ['吃喝','¥1,200 – 1,800'],
-  ['合计（两人）','¥12,000 – 19,000','人均 ¥6k – 9.5k']
+  ['大交通 · 自驾（往返约 3000km）','¥2,800 – 3,600','油费+路费；床车还能省住宿'],
+  ['大交通 · 飞机（与自驾二选一）','¥5,000 – 8,000','两人往返票'],
+  ['住宿 6 晚','¥2,400 – 4,000','和顺民宿/芒市酒店'],
+  ['门票与体验','¥1,200 – 1,800','热气球/温泉/北海湿地等'],
+  ['吃喝','¥1,200 – 1,800']
 ];
 
 /* ============ 渲染 ============ */
@@ -319,19 +323,21 @@ function renderCards(){
   var g = document.getElementById('lovegrid'), h = '';
   CARDS.forEach(function(c,i){
     var pic;
-    if(c.img){
-      pic = '<img src="'+esc(c.img)+'" alt="'+esc(c.name)+'" loading="lazy">';
+    if(c.note){
+      pic = '<div class="phplace arts">'+c.icon+'</div>';
     }else{
-      var style = (c.id==='jinta'||c.id==='yinta') ? (c.id==='jinta'?'gold':'silver') : 'gold';
-      pic = '<div class="phplace '+style+'">'+
-            '<svg class="pagoda" viewBox="0 0 64 64"><path d="M32 4 40 14H36v6h12l-6 10h-6v8h14l-8 22H22l-8-22h14v-8h-6l-6-10h12v-6h-4z" fill="rgba(255,255,255,.85)"/></svg>'+
-            '<small>实拍照片待补</small></div>';
+      pic = '<img src="'+esc(c.img)+'" alt="'+esc(c.name)+'" loading="lazy">';
     }
-    h += '<div class="card" data-id="'+c.id+'">'+
+    var body;
+    if(c.note){
+      body = '<div class="note">'+c.note.map(function(n){return '<i>'+esc(n)+'</i>'}).join('')+'</div>';
+    }else{
+      body = '<div class="txt">'+esc(c.txt)+'<span class="tagline">— '+esc(c.tagline)+'</span></div>';
+    }
+    h += '<div class="card'+(c.note?' note-card':'')+'" data-id="'+c.id+'">'+
          '<div class="ph">'+pic+'<span class="loc">'+esc(c.loc)+'</span>'+
          '<button class="lbtn" data-id="'+c.id+'" aria-label="喜欢 '+esc(c.name)+'"><span class="heart">♥</span><span class="fly"></span></button></div>'+
-         '<div class="body"><h3><span class="n">'+c.num+'</span>'+esc(c.name)+'</h3>'+
-         '<div class="txt">'+esc(c.txt)+'<span class="tagline">— '+esc(c.tagline)+'</span></div></div></div>';
+         '<div class="body"><h3><span class="n">'+c.num+'</span>'+esc(c.name)+'</h3>'+body+'</div></div>';
   });
   g.innerHTML = h;
 }
@@ -357,7 +363,7 @@ function renderBudget(){
     h += '<div class="row"><span>'+r[0]+'</span><b>'+r[1]+'</b></div>';
     if(r[2]) h += '<div style="font-size:11.5px;color:#98917f;text-align:right;padding:2px 2px 6px">'+r[2]+'</div>';
   });
-  h += '<div class="total">'+BUDGET[BUDGET.length-1][0]+'：<b>'+BUDGET[BUDGET.length-1][1]+'</b></div>';
+  h += '<div class="total">合计（两人 · 自驾版）：<b>¥7,600 – 11,200</b><br><span style="font-weight:400;font-size:12px">人均约 ¥3.8k – 5.6k · 飞机方案另加约 ¥3–5k</span></div>';
   el.innerHTML = h;
 }
 
@@ -447,7 +453,7 @@ document.getElementById('sendbtn').addEventListener('click', function(){
     setTimeout(function(){f.parentNode.removeChild(f); ifr.parentNode.removeChild(ifr)}, 4000);
     st.textContent = '已发送 ✓ 记得查收邮箱';
   }else{
-    st.textContent = '还在调试线路：先点爱心收藏，等老公把收件邮箱接上就能一键发送啦 ✉️';
+    st.textContent = '还没接上同步邮箱：先安心点♥收藏，接好后一点就发 ✉️';
   }
 });
 
