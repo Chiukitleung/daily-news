@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三门海 → 告庄 · 一路向南的风景预览</title>
+<style>
+  :root{
+    --paper:#f4f1e9; --ink:#26221c; --sub:#726a5b;
+    --blue:#1f6f8b; --blue-deep:#155269; --gold:#c9a227; --gold-deep:#8a6423;
+    --rose:#e2545b; --nope:#5b6472;
+    --line:#e3dac4; --card:#fffdf8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--paper);color:var(--ink);line-height:1.7}
+
+  .lovebar{position:sticky;top:0;z-index:50;background:rgba(244,241,233,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:12.5px}
+  .lovebar .name{font-weight:800;flex:0 0 auto}
+  .lovebar .stats{display:flex;gap:6px;flex:1}
+  .lovebar .lik{color:var(--rose)} .lovebar .nol{color:var(--nope)}
+  .copybtn{flex:0 0 auto;background:linear-gradient(135deg,#1f6f8b,#155269);color:#fff;border:none;border-radius:18px;padding:7px 14px;font-size:12.5px;font-weight:800;cursor:pointer}
+
+  .hero{position:relative;color:#fff;padding:48px 20px 30px;background:linear-gradient(170deg,#135a72 0%,#1f6f8b 40%,#c9a227 130%)}
+  .hero .tag{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:2px 12px;font-size:11.5px;letter-spacing:1.5px;margin-bottom:10px}
+  .hero h1{font-size:26px;font-weight:800;line-height:1.35}
+  .hero .sub{margin-top:8px;font-size:13.5px;opacity:.95;max-width:36em}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+  .chips span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);border-radius:8px;padding:3px 10px;font-size:11.5px}
+
+  main{max-width:680px;margin:0 auto;padding:0 14px 60px}
+  .notice{margin-top:16px;background:#fdf3e2;border:1px solid #ecd9b4;border-radius:14px;padding:12px 15px;font-size:12.8px;color:#7a5a1e}
+  .notice b{color:#a0680a}
+
+  .seg{margin-top:30px}
+  .seg .seghead{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+  .seg .segnum{background:var(--blue);color:#fff;font-weight:800;font-size:12px;border-radius:9px;padding:3px 10px;flex:0 0 auto}
+  .seg .seghead h2{font-size:18px;font-weight:800}
+  .seg .segmeta{font-size:12px;color:var(--sub);margin:2px 0 10px 34px}
+  .seg .picknote{display:inline-block;background:#e7f4ee;color:#1d7a52;font-size:11px;font-weight:700;padding:1px 8px;border-radius:8px;margin-left:6px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:13px;box-shadow:0 2px 7px rgba(60,45,20,.05)}
+  .card .ph{position:relative;aspect-ratio:16/9;background:#eae4d4}
+  .phhold{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    background:repeating-linear-gradient(135deg,#efe8d5,#e3dabf 14px,#efe8d5 28px);color:#a08a54}
+  .phhold .big{font-size:16px;font-weight:800;color:#8a7040}
+  .phhold small{font-size:11px;letter-spacing:1px}
+  .typeb{position:absolute;left:10px;top:10px;background:rgba(20,16,8,.6);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:8px;z-index:3}
+  .typeb.food{background:rgba(180,110,30,.85)}
+  .hotstar{position:absolute;right:10px;top:10px;background:rgba(230,84,70,.93);color:#fff;font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:8px;z-index:3}
+  .picked{position:absolute;left:10px;bottom:10px;background:rgba(31,122,82,.92);color:#fff;font-size:11px;font-weight:800;padding:3px 9px;border-radius:8px;z-index:3}
+  .jump{display:block;color:inherit;text-decoration:none}
+  .jump .ph .loc{position:absolute;right:10px;bottom:10px;background:rgba(20,16,8,.55);color:#fff;font-size:11px;padding:2px 9px;border-radius:7px;z-index:3}
+  .body{padding:12px 15px 13px}
+  .body h3{font-size:16.5px;font-weight:800;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .body h3 .n{font-size:11px;color:var(--gold-deep);background:#f3ead7;border-radius:6px;padding:1px 7px}
+  .body .txt{margin-top:6px;font-size:13.5px;color:#463f34}
+  .body .txt .tagline{display:block;margin-top:5px;font-size:12.5px;color:var(--gold-deep)}
+  .dpbadge{display:inline-block;margin-top:8px;background:#f5b50f;color:#3a2e00;font-size:11px;font-weight:800;padding:2px 10px;border-radius:9px}
+  .actions{display:flex;gap:10px;padding:0 15px 14px}
+  .actions button{flex:1;border-radius:22px;padding:8px 0;font-size:13.5px;font-weight:800;border:1.5px solid var(--line);background:#fff;cursor:pointer;color:#7a7262}
+  .actions .like.on{background:var(--rose);border-color:var(--rose);color:#fff}
+  .actions .nope.on{background:var(--nope);border-color:var(--nope);color:#fff}
+
+  .endbox{margin-top:24px;background:linear-gradient(135deg,#155269,#1f6f8b);border-radius:20px;padding:22px 18px;color:#fff}
+  .endbox h3{font-size:19px}
+  .endbox p{font-size:12.5px;opacity:.9;margin:5px 0 13px}
+
+  .sendbox{margin-top:14px;text-align:center}
+  .bigcopy{background:linear-gradient(135deg,#c9a227,#a87f16);color:#fff;border:none;border-radius:28px;padding:13px 28px;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(168,127,22,.3)}
+  .bigcopy:active{transform:scale(.97)}
+
+  .popmsg{position:fixed;left:50%;bottom:70px;transform:translateX(-50%);background:#155269;color:#fff;padding:9px 20px;border-radius:22px;font-size:13.5px;z-index:99;opacity:0;transition:opacity .3s;pointer-events:none;box-shadow:0 4px 16px rgba(0,0,0,.25);max-width:86vw;text-align:center}
+  .popmsg.show{opacity:1}
+  footer{margin-top:28px;border-top:1px solid var(--line);padding:14px 0 26px}
+  footer p{font-size:11px;color:#a09685;text-align:center;line-height:1.9}
+</style>
+</head>
+<body>
+
+<div class="lovebar">
+  <div class="name">三门海→告庄</div>
+  <div class="stats"><span class="lik">❤ 喜欢 <b id="cntL">0</b></span><span class="nol">👎 <b id="cntN">0</b></span></div>
+  <button class="copybtn" id="copyTop">📋 复制</button>
+</div>
+
+<header class="hero">
+  <div class="tag">2026 国庆 · 专属预览</div>
+  <h1>从三门海的蓝<br>到告庄的金</h1>
+  <p class="sub">广州出发 · 第一站广西凤山三门海,一路向西向南穿过云南,终点是西双版纳告庄的星光夜市。这条线把你初选的 4 个心动点全串上了。</p>
+  <div class="chips">
+    <span>🚗 单程约 2200km</span>
+    <span>🛣 广西 → 滇东南 → 版纳</span>
+    <span>🎯 终点:告庄星光夜市</span>
+    <span>✓ = 你首轮已选</span>
+  </div>
+</header>
+
+<main>
+  <div class="notice">
+    <b>⚠️ 先说交通:</b>单程 2200km,往返约 4400km,7 天全自驾会非常赶。<b>三个走法</b>:① 拼 2 天假,去程 5 天边走边玩 + 回程 2 天赶路(床车可睡服务区);② 飞昆明落地租车,只开昆明→告庄 520km;③ 去程自驾玩到昆明,车停昆明,昆明飞版纳,回程版纳飞广州(车托运或下次再取)。
+  </div>
+
+  <div id="feed"><!-- segs injected --></div>
+
+  <div class="endbox">
+    <h3>终点 · 告庄星光夜市</h3>
+    <p>金色大金塔 + 湄公河 + 傣装写真,白天赶路,夜里在告庄把一路的期待兑现。目的地压轴,值得。</p>
+  </div>
+
+  <div class="sendbox">
+    <button class="bigcopy" id="copyBottom">📋 复制我的选择</button>
+    <div class="popmsg-fallback" style="font-size:12px;color:#8a7f6a;margin-top:8px">刷完把结果复制发回来,按 ♥ 定稿配图</div>
+  </div>
+</main>
+
+<footer>
+  <p>沿途均为真实地点 · 门票与开放以现场为准<br>图片配图中 · 大众点评链接部分已附<br>2026 国庆 · 路线专属预览</p>
+</footer>
+
+<div class="popmsg" id="popmsg"></div>
+
+<script>
+var LINE = 'route1';
+var SEGS = [
+ {key:'S1', name:'第 1 站 · 广西凤山三门海', meta:'广州出发约 950km(一天),住凤山或巴马'},
+ {key:'S2', name:'第 2 站 · 靖西山水(绕百色)', meta:'凤山→靖西约 4h,住靖西'},
+ {key:'S3', name:'第 3 站 · 文山普者黑', meta:'靖西→丘北约 5h,住普者黑村'},
+ {key:'S4', name:'第 4 站 · 昆明(斗南+弥勒)', meta:'普者黑→昆明约 5h,住昆明;东风韵在弥勒,顺路停'},
+ {key:'S5', name:'第 5 站 · 普洱(可选深度)', meta:'昆明→普洱约 5h,景迈山在澜沧,下高速再走 1.5h'},
+ {key:'S6', name:'终点站 · 西双版纳告庄', meta:'普洱→景洪约 2.5h,住告庄,以夜市收官'}
+];
+var CARDS = [
+/* S1 */
+{seg:'S1', id:'sanmenhai', type:'spot', name:'三门海', det:'凤山 · 乘船穿天窗', picked:1,
+ txt:'世界地质公园的蓝宝石:地下河串起 7 个天窗,乘船穿过 3 个,水色碧蓝得像翡翠。第一站,值回票价。',
+ tagline:'乘船穿进地心蓝洞', star:1, link:'https://www.dianping.com/shop/6186900', img:''},
+{seg:'S1', id:'dashiwei', type:'spot', name:'大石围天坑(顺路)', det:'乐业 · 同属一个地质公园',
+ txt:'世界级天坑群,600 米深的坑底原始森林。和三门海是邻居,时间够就一起看了。',
+ tagline:'地球的巨型伤疤', star:1, link:'https://www.dianping.com/shop/44705011', img:''},
+{seg:'S1', id:'zhijiji', type:'food', name:'纸包鸡 · 龟苓膏', det:'梧州 · 出广东第一城',
+ txt:'去程路过梧州:纸包鸡嫩到脱骨,龟苓膏苦后回甘。歇一脚再赶路,广西从这口开始。',
+ tagline:'出广东的第一顿', star:1, img:''},
+{seg:'S1', id:'laoyoufen', type:'food', name:'老友粉(过路)', det:'南宁 · 去三门海必经',
+ txt:'南宁的魂,酸辣鲜烫。去程中午在南宁下高速吃一碗,比服务区强一百倍。',
+ tagline:'南宁人的闹钟', star:1, img:''},
+/* S2 */
+{seg:'S2', id:'equan', type:'spot', name:'靖西鹅泉', det:'百色南下 1.5h', picked:1,
+ txt:'清晨的鹅泉有雾,泉水清到发蓝,亭台竹影。日出档最美,比桂林安静、比桂林上镜。',
+ tagline:'晨雾里的田园牧歌', star:1, link:'https://www.dianping.com/shop/9312804', img:''},
+{seg:'S2', id:'tongling', type:'spot', name:'通灵大峡谷', det:'与鹅泉同方向',
+ txt:'188 米单级瀑布直落谷底,峡谷里像绿野仙踪。步道好走,两小时逛完。',
+ tagline:'瀑布、溶洞、雨林三合一', star:0, link:'https://www.dianping.com/shop/4086238', img:''},
+{seg:'S2', id:'baisebbq', type:'food', name:'百色烧烤(猎奇档)', det:'百色 · 顺路夜宵',
+ txt:'烤猪眼、烤猪鞭,广西烧烤的传说。胆子大的可以试,不敢吃也能围观。',
+ tagline:'广西烧烤的尽头在百色', star:0, img:''},
+/* S3 */
+{seg:'S3', id:'puzeihei', type:'spot', name:'普者黑', det:'砚山出口下高速约 1h', picked:1,
+ txt:'喀斯特峰林泡在湖水里,《三生三世》取景地。划柳叶舟穿行峰林,打水仗是保留节目。10 月荷花谢了,山水和清静还在。',
+ tagline:'水上峰林,青丘之国', star:1, link:'https://www.dianping.com/shop/83206289', img:''},
+{seg:'S3', id:'bamei', type:'spot', name:'坝美(方向略绕)', det:'广南 · 溶洞进村',
+ txt:'坐船穿过溶洞才能进村,陶渊明桃花源的本源。方向稍绕,时间紧可以跳过。',
+ tagline:'溶洞尽头的桃花源', star:0, link:'https://www.dianping.com/shop/58866930', img:''},
+/* S4 */
+{seg:'S4', id:'dongfengyun', type:'spot', name:'弥勒东风韵', det:'弥勒 · 顺路 1 小时',
+ txt:'红砖万花筒艺术群,云南最出片的网红地。在弥勒下高速拐一趟,不亏。',
+ tagline:'红砖万花筒', star:1, link:'https://www.dianping.com/shop/66633454', img:''},
+{seg:'S4', id:'dounan', type:'spot', name:'斗南花市', det:'昆明呈贡 · 去版纳出城顺路', picked:1,
+ txt:'亚洲最大鲜花市场,玫瑰按斤卖。晚上 8 点夜场最热闹,几十块抱一大束再南下。',
+ tagline:'按斤卖的鲜花自由', star:1, link:'https://www.dianping.com/shop/11599340', img:''},
+{seg:'S4', id:'junzi', type:'food', name:'菌子火锅', det:'昆明 · 10月菌季尾巴',
+ txt:'见手青、牛肝菌下锅,汤鲜到眉毛掉。10 月是菌子季尾巴,在昆明吃一锅再走。',
+ tagline:'一年就等这一锅', star:1, img:''},
+{seg:'S4', id:'huahuabing', type:'food', name:'鲜花饼(现烤)', det:'昆明街头',
+ txt:'现烤的玫瑰花瓣馅,酥到掉渣。路上当干粮,买几盒当手信。',
+ tagline:'玫瑰花做的点心', star:1, img:''},
+/* S5 */
+{seg:'S5', id:'jingmai', type:'spot', name:'景迈山', det:'普洱澜沧 · 下高速再 1.5h',
+ txt:'2023 年申遗的茶山:云海日出、翁基古寨、千年古茶树。10 月看云海正当时,时间够就绕进去住一晚。',
+ tagline:'云海之上的世界遗产', star:1, link:'https://www.dianping.com/shop/107557471', img:''},
+/* S6 */
+{seg:'S6', id:'gaozhuang', type:'spot', name:'告庄星光夜市', det:'景洪 · 目的地', picked:1,
+ txt:'大金塔+湄公河+傣装写真,全中国最出名的夜市。一路两千公里的期待,在这里兑现。',
+ tagline:'终点站,金色的夜', star:1, link:'https://www.dianping.com/shop/8694598', img:''},
+{seg:'S6', id:'yexianggu', type:'spot', name:'野象谷', det:'景洪以北 40 分钟',
+ txt:'亚洲象的快乐老家,高空栈道碰运气。顺路,去告庄前先会会大象。',
+ tagline:'和亚洲象碰碰运气', star:1, link:'https://www.dianping.com/shop/3050281', img:''},
+{seg:'S6', id:'manting', type:'spot', name:'曼听公园', det:'景洪市区',
+ txt:'傣王御花园+总佛寺,金碧辉煌。穿傣装去,一秒穿越。',
+ tagline:'傣王的后花园', star:0, link:'https://www.dianping.com/shop/23952851', img:''},
+{seg:'S6', id:'bannawei', type:'food', name:'泡鲁达 · 舂鸡脚', det:'告庄夜市',
+ txt:'椰奶泡面包干,酸辣舂鸡脚。版纳夜市的快乐,从这两样开始,以烤串烧烤收尾。',
+ tagline:'版纳夜市快乐两件套', star:1, img:''}
+];
+
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function load(k){try{return JSON.parse(localStorage.getItem('love_'+LINE+'_'+k)||'[]')}catch(e){return []}}
+function save(k,a){localStorage.setItem('love_'+LINE+'_'+k, JSON.stringify(a))}
+var liked = load('L'), disliked = load('N');
+var badgeTxt = {spot:'🏞 景点', food:'🍜 美食'};
+
+function render(){
+  var h='', n=0;
+  SEGS.forEach(function(sg){
+    var cards = CARDS.filter(function(c){return c.seg===sg.key});
+    if(!cards.length) return;
+    h += '<div class="seg"><div class="seghead"><span class="segnum">'+sg.key.replace('S','站 ')+'</span><h2>'+esc(sg.name)+'</h2></div><div class="segmeta">'+esc(sg.meta)+'</div>';
+    cards.forEach(function(c){
+      n++;
+      var num = String(n).padStart(2,'0');
+      var pic = '<div class="phhold"><span class="big">'+esc(c.name)+'</span><small>🖼 配图进行中</small></div>';
+      h += '<div class="card" data-id="'+c.id+'">';
+      if(c.link) h += '<a class="jump" href="'+esc(c.link)+'" target="_blank" rel="noopener">';
+      h += '<div class="ph">'+pic+
+           '<span class="typeb '+(c.type==='food'?'food':'')+'">'+badgeTxt[c.type]+'</span>'+
+           (c.star?'<span class="hotstar">★ 热门</span>':'')+
+           (c.picked?'<span class="picked">✓ 你已选</span>':'')+
+           '<span class="loc">'+esc(c.det)+'</span></div>'+
+           '<div class="body"><h3><span class="n">'+num+'</span>'+esc(c.name)+'</h3>'+
+           '<div class="txt">'+esc(c.txt)+'<span class="tagline">— '+esc(c.tagline)+'</span>'+
+           (c.link?'<span class="dpbadge">大众点评 ↗</span>':'')+'</div></div>';
+      if(c.link) h += '</a>';
+      h += '<div class="actions">'+
+           '<button class="like" data-id="'+c.id+'">❤️ 喜欢</button>'+
+           '<button class="nope" data-id="'+c.id+'">👎 不喜欢</button>'+
+           '</div></div>';
+    });
+    h += '</div>';
+  });
+  document.getElementById('feed').innerHTML = h;
+  applyState();
+}
+function refreshStats(){
+  document.getElementById('cntL').textContent = liked.length;
+  document.getElementById('cntN').textContent = disliked.length;
+}
+function applyState(){
+  document.querySelectorAll('.card').forEach(function(card){
+    var id = card.getAttribute('data-id');
+    var b1 = card.querySelector('.like'), b2 = card.querySelector('.nope');
+    if(b1) b1.classList.toggle('on', liked.indexOf(id)>-1);
+    if(b2) b2.classList.toggle('on', disliked.indexOf(id)>-1);
+  });
+  refreshStats();
+}
+function popMsg(t){
+  var m = document.getElementById('popmsg'); m.textContent = t; m.classList.add('show');
+  clearTimeout(popMsg._t); popMsg._t = setTimeout(function(){m.classList.remove('show')}, 2000);
+}
+function mark(id, kind){
+  var arr = kind==='like'?liked:disliked, other = kind==='like'?disliked:liked;
+  var i = arr.indexOf(id);
+  if(i>-1){ arr.splice(i,1); } else { arr.push(id); }
+  var j = other.indexOf(id); if(j>-1) other.splice(j,1);
+  save('L', liked); save('N', disliked); applyState();
+  var c = CARDS.filter(function(x){return x.id===id})[0];
+  var on = arr.indexOf(id)>-1;
+  if(c){
+    popMsg(kind==='like' ? (on?'❤️ 喜欢了「'+c.name+'」':'取消喜欢「'+c.name+'」')
+                        : (on?'👎 不喜欢「'+c.name+'」':'取消不喜欢「'+c.name+'」'));
+  }
+}
+function snapshotText(){
+  var L = ['【三门海→告庄 · 路线预览结果】'];
+  function blk(t, list){
+    if(!list.length) return;
+    L.push('', t+'('+list.length+'):');
+    list.forEach(function(id,i){
+      var c = CARDS.filter(function(x){return x.id===id})[0];
+      if(c) L.push((i+1)+'. '+c.name+(c.type==='food'?'(美食)':''));
+    });
+  }
+  blk('❤️ 喜欢', liked); blk('👎 不喜欢', disliked);
+  return L.join('\n')+'\n';
+}
+function doCopy(){
+  var txt = snapshotText();
+  function ok(){ popMsg('📋 已复制!粘贴到对话发给我'); }
+  function fb(){
+    var ta=document.createElement('textarea'); ta.value=txt; ta.style.cssText='position:fixed;opacity:0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); ok(); }catch(e){ popMsg('复制失败,长按手动复制'); }
+    document.body.removeChild(ta);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(ok).catch(fb); }
+  else fb();
+}
+document.getElementById('copyTop').addEventListener('click', doCopy);
+document.getElementById('copyBottom').addEventListener('click', doCopy);
+document.getElementById('feed').addEventListener('click', function(ev){
+  var b = ev.target.closest('.like') || ev.target.closest('.nope');
+  if(!b) return;
+  ev.preventDefault();
+  mark(b.getAttribute('data-id'), b.classList.contains('like')?'like':'nope');
+});
+render();
+</script>
+</body>
+</html>
