@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10 月去新疆 · 南疆 vs 北疆(纯电路费核算)</title>
+<style>
+  :root{
+    --paper:#f5f2ea; --ink:#241f18; --sub:#6f6759; --line:#e2d9c6; --card:#fffdf8;
+    --blue:#1c6b86; --blue-deep:#134f66; --gold:#c9a227; --gold-deep:#8a6423;
+    --red:#b8442f; --green:#2f7a52;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--paper);color:var(--ink);line-height:1.72}
+  .hero{position:relative;min-height:60vh;display:flex;align-items:flex-end;color:#fff;background:linear-gradient(180deg,rgba(8,12,18,.05),rgba(8,12,18,.78)),url('xj-img/hero.jpg') center/cover no-repeat}
+  .hero .inner{width:100%;max-width:720px;margin:0 auto;padding:26px 18px 30px}
+  .hero .tag{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:3px 13px;font-size:11.5px;letter-spacing:1.4px;margin-bottom:10px}
+  .hero h1{font-size:clamp(24px,6.4vw,38px);font-weight:800;line-height:1.28;text-shadow:0 2px 16px rgba(0,0,0,.45)}
+  .hero .sub{margin-top:9px;font-size:13.5px;opacity:.95;max-width:33em}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+  .chips span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:3px 10px;font-size:11.5px}
+  main{max-width:720px;margin:0 auto;padding:0 14px 60px}
+  h2.sec{font-size:19px;font-weight:800;margin:32px 0 4px;display:flex;align-items:center;gap:8px}
+  h2.sec .n{background:var(--blue);color:#fff;font-size:12px;font-weight:800;border-radius:9px;padding:2px 9px}
+  .secsub{font-size:12.5px;color:var(--sub);margin:0 0 14px 34px}
+  .verdict{margin-top:18px;background:linear-gradient(160deg,#fdf6e6,#f9edd4);border:1.5px solid #e0c47e;border-radius:16px;padding:15px 17px}
+  .verdict h3{font-size:16.5px;font-weight:800;color:var(--gold-deep);margin-bottom:6px}
+  .verdict p{font-size:13.5px;color:#5c4a1e}
+  .verdict .hl{background:#fff4d6;border-radius:6px;padding:1px 6px;font-weight:800;color:#8a6423}
+
+  .costcard{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:12px;box-shadow:0 2px 8px rgba(60,45,20,.05)}
+  .costcard .head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 15px;border-bottom:1px solid var(--line);background:#faf7f0}
+  .costcard .head b{font-size:15.5px}
+  .costcard .head .pill{font-size:11px;font-weight:800;padding:3px 9px;border-radius:8px}
+  .pill.rec{background:#e8f4ec;color:#1f6b45}
+  .pill.alt{background:#f1eee7;color:#7a7264}
+  .costcard .rows{padding:4px 15px 12px}
+  .row{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:7px 0;border-bottom:1px dashed var(--line)}
+  .row:last-child{border-bottom:none}
+  .row span{color:var(--sub)}
+  .row b{font-weight:800;white-space:nowrap}
+  .row.total{background:#f7f0e0;border-radius:10px;padding:9px 12px;margin-top:6px;font-size:14.5px}
+  .row.total b{color:var(--red)}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 17px;margin-top:14px}
+  .panel h3{font-size:15.5px;font-weight:800;margin-bottom:8px}
+  .panel .kv{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px dashed var(--line)}
+  .panel .kv:last-child{border-bottom:none}
+  .panel .kv span{color:var(--sub)}
+  .panel p.small{font-size:12px;color:#9a917f;margin-top:9px;line-height:1.7}
+  .tip{display:flex;gap:10px;font-size:13.5px;margin-top:11px}
+  .tip .ic{font-size:17px;flex:0 0 auto}
+  .tip b{color:var(--blue-deep)}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 2px 7px rgba(60,45,20,.05)}
+  .card .ph{position:relative;aspect-ratio:16/9;background:#eae4d4}
+  .card .ph img{width:100%;height:100%;object-fit:cover;display:block}
+  .typeb{position:absolute;left:10px;top:10px;background:rgba(20,16,8,.62);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:8px;z-index:3}
+  .typeb.food{background:rgba(180,110,30,.86)}
+  .typeb.north{background:rgba(30,90,120,.88)}
+  .loc{position:absolute;right:10px;bottom:10px;background:rgba(20,16,8,.55);color:#fff;font-size:11px;padding:2px 9px;border-radius:7px;z-index:3}
+  .card .body{padding:12px 15px 14px}
+  .card .body h3{font-size:16px;font-weight:800;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .card .body h3 .n{font-size:11px;color:var(--gold-deep);background:#f3ead7;border-radius:6px;padding:1px 7px}
+  .card .body .txt{margin-top:6px;font-size:13.5px;color:#453e33}
+  .card .body .tagline{display:block;margin-top:5px;font-size:12.5px;color:var(--gold-deep)}
+
+  .day{display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+  .day:last-child{border-bottom:none}
+  .day .d{flex:0 0 62px;font-weight:800;color:var(--blue-deep);font-size:13px}
+  .day .c{color:#463f34}
+  .day .c em{font-style:normal;color:var(--sub);font-size:12.5px}
+  .day.peak .d{color:var(--red)}
+  .day.peak .c b{color:var(--red)}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding:14px 0 30px}
+  footer p{font-size:11px;color:#a09685;text-align:center;line-height:1.9}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="inner">
+    <div class="tag">2026 国庆后 · 纯电车自驾</div>
+    <h1>10 月去新疆<br>南疆 还是 北疆</h1>
+    <p class="sub">10/5 出发 · 15–20 天 · 两人 · 纯电 · 广州起止。只算路费(电费+过路费,已扣国庆免费)。</p>
+    <div class="chips">
+      <span>🔋 纯电 · 只算路费</span>
+      <span>📅 10/5 出发</span>
+      <span>🛣 里程来自百度地图实测</span>
+      <span>💰 已扣 10/5–10/7 免费</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="verdict">
+    <h3>结论:选南疆</h3>
+    <p>北疆秋色的黄金期是 <b>9/20–10/10</b>。你 10/5 出发、最快 10/11 才到喀纳斯,白桦林基本掉光、还可能初雪封路。<br>
+    而南疆 <span class="hl">塔里木胡杨林 10/20–31 是全年巅峰</span>,正好落在你行程的第 16 天——<b>时间刚好对得上</b>。南疆 10 月天气也最稳,基本不受封路影响。</p>
+  </div>
+
+  <h2 class="sec"><span class="n">01</span>路费核算(重点)</h2>
+  <div class="secsub">电费 + 过路费,已扣除 10/5–10/7 国庆免费段</div>
+
+  <div class="costcard">
+    <div class="head"><b>B2 · 南疆线 · 自驾去 + 飞回</b><span class="pill rec">推荐</span></div>
+    <div class="rows">
+      <div class="row"><span>总里程</span><b>7,905 km</b></div>
+      <div class="row"><span>电费(15–18kWh/100km × 1.5–1.65 元/度)</span><b>¥1,779 – 2,348</b></div>
+      <div class="row"><span>过路费(扣免费后)</span><b>¥2,463</b></div>
+      <div class="row total"><span>路费合计</span><b>¥4,242 – 4,811</b></div>
+    </div>
+  </div>
+
+  <div class="costcard">
+    <div class="head"><b>B1 · 南疆线 · 全程自驾往返</b><span class="pill alt">不推荐</span></div>
+    <div class="rows">
+      <div class="row"><span>总里程</span><b>12,119 km</b></div>
+      <div class="row"><span>电费</span><b>¥2,727 – 3,599</b></div>
+      <div class="row"><span>过路费(扣免费后)</span><b>¥4,450</b></div>
+      <div class="row total"><span>路费合计</span><b>¥7,177 – 8,049</b></div>
+    </div>
+  </div>
+
+  <div class="costcard">
+    <div class="head"><b>A1 · 北疆线 · 全程自驾往返</b><span class="pill alt">秋色已过</span></div>
+    <div class="rows">
+      <div class="row"><span>总里程</span><b>10,718 km</b></div>
+      <div class="row"><span>电费</span><b>¥2,412 – 3,183</b></div>
+      <div class="row"><span>过路费(扣免费后)</span><b>¥3,875</b></div>
+      <div class="row total"><span>路费合计</span><b>¥6,287 – 7,058</b></div>
+    </div>
+  </div>
+
+  <div class="costcard">
+    <div class="head"><b>A2 · 北疆线 · 自驾去 + 飞回</b><span class="pill alt">秋色已过</span></div>
+    <div class="rows">
+      <div class="row"><span>总里程</span><b>6,504 km</b></div>
+      <div class="row"><span>电费</span><b>¥1,463 – 1,932</b></div>
+      <div class="row"><span>过路费(扣免费后)</span><b>¥1,888</b></div>
+      <div class="row total"><span>路费合计</span><b>¥3,351 – 3,820</b></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>🧮 算法与假设(可直接改)</h3>
+    <div class="kv"><span>电耗</span><b>15 kWh/100km(标称)→ 18(高速+空调实测)</b></div>
+    <div class="kv"><span>电价</span><b>1.5 元/度(混合)→ 1.65(高速服务区均价)</b></div>
+    <div class="kv"><span>过路费单价</span><b>出疆段 0.47 元/km(广州→乌市实测 ¥1,987/4,214km)</b></div>
+    <div class="kv"><span></span><b>新疆段 0.41 元/km(官方一类车标准)</b></div>
+    <div class="kv"><span>国庆免费</span><b>10/1 00:00–10/7 24:00,你前 3 天约 2,200km 省 ¥1,037</b></div>
+    <div class="kv"><span>里程</span><b>百度地图实测:北疆环线 2,290km / 南疆环线 3,690km</b></div>
+    <div class="kv"><span>参考单程</span><b>广州→乌市 4,214km · 电费 ¥948–1,251 · 过路费 ¥1,987(ETC ¥1,888)</b></div>
+    <p class="small">※ 飞回方案的车托运(约 ¥2,500–4,000)和机票不在“路费”里,另算。<br>
+    ※ 若家里有桩或住酒店蹭慢充,电费可再降约 30%;床车露营过夜一晚耗电 3–8 度(20 晚约 ¥90–260)。</p>
+  </div>
+
+  <h2 class="sec"><span class="n">02</span>纯电自驾要点</h2>
+  <div class="secsub">新疆能不能开纯电?能,但补能要规划</div>
+  <div class="panel">
+    <div class="tip"><div class="ic">🔌</div><div><b>覆盖率:</b>全国高速服务区充电桩覆盖率已 <b>98.8%</b>(2026年3月),平均每个服务区 8–16 个 360kW 超充,15 分钟补 200 公里。</div></div>
+    <div class="tip"><div class="ic">🛣</div><div><b>新疆实测:</b>京新高速连无人区边缘的服务区都有 180kW 桩;星星峡→哈密沿线充电站不少,大站功率快。哈密、吐鲁番、库尔勒、阿克苏、喀什主城区都不缺桩。</div></div>
+    <div class="tip"><div class="ic">⏱</div><div><b>时间成本:</b>推荐方案(南疆 7,905km)约需 <b>28 次补能</b>,每次 40 分钟 ≈ <b>19 小时</b>在路上充电。建议把充电和吃饭、休息绑定。</div></div>
+    <div class="tip"><div class="ic">⛰</div><div><b>帕米尔段注意:</b>喀什→塔什库尔干是连续爬坡山路,耗电比平地高 30%+,<b>出发前满电</b>,塔县有桩但少。</div></div>
+    <div class="tip"><div class="ic">🏕</div><div><b>床车过夜:</b>露营模式一晚 3–8 度电;10 月新疆夜里冷,暖风更费电,<b>留 20% 以上余量</b>再睡。</div></div>
+    <div class="tip"><div class="ic">💳</div><div><b>省钱:</b>服务区电费约 1.65 元/度(服务费封顶 0.5 元/度);错开 18:00–21:00 高峰电价;县城国网桩常比高速服务区便宜。</div></div>
+  </div>
+
+  <h2 class="sec"><span class="n">03</span>南疆线 · 看什么</h2>
+  <div class="secsub">乌市 → 吐鲁番 → 库尔勒 → 轮台 → 库车 → 喀什 → 帕米尔 → 胡杨 → 返乌市</div>
+  <div id="south"></div>
+
+  <h2 class="sec"><span class="n">04</span>北疆线 · 对比一下</h2>
+  <div class="secsub">乌市 → 喀纳斯 → 禾木 → 克拉玛依 → 赛里木湖 → 伊犁 → 乌市(2,290km)</div>
+  <div id="north"></div>
+
+  <h2 class="sec"><span class="n">05</span>19 天日程(南疆 · 10/5 出发)</h2>
+  <div class="secsub">含河西走廊顺路玩法;赶时间可压到 15 天(砍河西走廊)</div>
+  <div class="panel" id="plan"></div>
+
+  <h2 class="sec"><span class="n">06</span>出发前必办</h2>
+  <div class="panel">
+    <div class="tip"><div class="ic">🪪</div><div><b>边防证:</b>去帕米尔/塔什库尔干必须办(户籍地或喀什当地办),别到检查站才发现。</div></div>
+    <div class="tip"><div class="ic">🎫</div><div><b>莫高窟:</b>走河西走廊的话,A 类票旺季要提前 30 天抢(10 月上旬仍属旺季)。</div></div>
+    <div class="tip"><div class="ic">🚗</div><div><b>车托运:</b>若选飞回,提前 3–5 天预约(乌市/喀什→广州约 ¥2,500–4,000),旺季车位紧张。</div></div>
+    <div class="tip"><div class="ic">🧥</div><div><b>温差:</b>10 月北疆/帕米尔夜间可到 0℃ 以下,南疆白天 20℃+,洋葱穿衣 + 睡袋。</div></div>
+  </div>
+
+  <footer>
+    <p>里程为百度地图实测 · 路费为估算区间(电耗/电价因车因人而异)<br>
+    图片来自公开网络,仅供行程预览 · 2026 国庆后新疆自驾 · 给老大看的汇报页</p>
+  </footer>
+</main>
+
+<script>
+var SOUTH = [
+ {n:'帕米尔高原 · 卡拉库里湖', loc:'喀什→塔县 280km', img:'xj-img/pamir.jpg', type:'🏔 雪山湖泊',
+  txt:'慕士塔格峰“冰山之父”下的蓝绿湖泊,雪山倒影是南疆最震撼的一幕。沿途白沙湖、喀拉库勒湖连着看。', tag:'帕米尔的门面'},
+ {n:'盘龙古道', loc:'塔什库尔干', img:'xj-img/panlong.jpg', type:'🛣 网红公路',
+  txt:'600 多个弯道层层盘上山,路牌写着“今日走过了人生所有的弯路,从此人生尽是坦途”。拍照排队但值得。', tag:'弯道尽头是坦途'},
+ {n:'喀什古城', loc:'喀什市区', img:'xj-img/kashgar.jpg', type:'🏛 人文',
+  txt:'土黄色的维吾尔老街巷,迷宫一样的高台民居。穿条彩色围巾随手一拍就是大片,早上光线最好。', tag:'活着的千年老城'},
+ {n:'喀什大巴扎 · 百年老茶馆', loc:'喀什市区', img:'xj-img/bazaar.jpg', type:'🫖 人文',
+  txt:'中亚最大的集市,陶器、地毯、干果堆成山。逛累了进老茶馆喝碗砖茶,听老人弹都塔尔。', tag:'市井烟火'},
+ {n:'天山神秘大峡谷', loc:'库车', img:'xj-img/daxiagu.jpg', type:'🪨 地貌',
+  txt:'红褐色岩壁夹出的一线天,阳光斜射时整个峡谷像在燃烧。全程走下来 2 小时,轻装即可。', tag:'红岩一线天'},
+ {n:'博斯腾湖', loc:'库尔勒', img:'xj-img/bosten.jpg', type:'💧 湖泊',
+  txt:'中国最大的内陆淡水湖,芦苇荡 + 水鸟 + 香梨。9–10 月库尔勒香梨正甜,顺路买一箱。', tag:'芦苇荡里的水鸟'},
+ {n:'交河故城', loc:'吐鲁番', img:'xj-img/turpan.jpg', type:'🏜 遗址',
+  txt:'两千年前车师前国的都城,整座城从生土里挖出来,如今只剩断壁残垣,夕阳下最苍凉。', tag:'从土里挖出的城'},
+ {n:'塔克拉玛干沙漠公路', loc:'轮台→民丰', img:'xj-img/shamo.jpg', type:'🏜 沙漠',
+  txt:'笔直插进死亡之海的公路,两侧是防沙草方格。开着车放首歌,是这趟最有公路感的时刻。', tag:'直插沙漠腹地'},
+ {n:'塔里木胡杨林(压轴)', loc:'轮台 · 10/20–31 巅峰', img:'xj-img/huyang.jpg', type:'🍂 秋色',
+  txt:'世界最大的原始胡杨林。10 月下旬整片金黄倒映在水面,“生而千年不死”的那棵树就在这。', tag:'这趟的最强一张牌'},
+ {n:'手抓饭 · 烤包子', loc:'全疆', img:'xj-img/food_zhuafan.jpg', type:'🍜 美食',
+  txt:'羊肉手抓饭油亮喷香,烤包子掰开全是肉汁。南疆一路吃下来,人均一天 80 元能吃很好。', tag:'南疆的碳水快乐'},
+];
+var NORTH = [
+ {n:'喀纳斯湖', loc:'阿勒泰 · 布尔津', img:'xj-img/kanas.jpg', type:'🏞 湖泊',
+  txt:'蓝绿色湖水 + 金黄白桦林,观鱼台视角是经典。但黄金期在 9/20–10/10,10 月中旬基本掉叶。', tag:'秋色童话,但你赶不上'},
+ {n:'禾木村', loc:'阿勒泰', img:'xj-img/hemu.jpg', type:'🛖 村落',
+  txt:'图瓦人木屋村落,清晨炊烟配晨雾。10 月中旬可能已经开始下雪,木屋里有暖气,景是另一种味道。', tag:'木屋炊烟'},
+ {n:'赛里木湖', loc:'博尔塔拉', img:'xj-img/sailimu.jpg', type:'💧 湖泊',
+  txt:'“大西洋最后一滴眼泪”,深蓝湖水配雪山草原。10 月湖边风大且冷,环湖公路自驾很爽。', tag:'蓝得不像话'},
+ {n:'独库公路', loc:'天山 · 库车↔独山子', img:'xj-img/duku.jpg', type:'🛣 公路',
+  txt:'一天穿越四季的传奇公路。但每年 <b>10 月上旬陆续封路</b>,你 10/5 出发基本赶不上,别把它写进主计划。', tag:'封路倒计时'},
+];
+function card(c, i, cls){
+  return '<div class="card"><div class="ph"><img src="'+c.img+'" alt="'+c.n+'" loading="lazy">'+
+   '<span class="typeb '+(cls||'')+'">'+c.type+'</span><span class="loc">'+c.loc+'</span></div>'+
+   '<div class="body"><h3><span class="n">'+String(i+1).padStart(2,'0')+'</span>'+c.n+'</h3>'+
+   '<div class="txt">'+c.txt+'<span class="tagline">— '+c.tag+'</span></div></div></div>';
+}
+document.getElementById('south').innerHTML = SOUTH.map(function(c,i){return card(c,i)}).join('');
+document.getElementById('north').innerHTML = NORTH.map(function(c,i){return card(c,i,'north')}).join('');
+
+var PLAN = [
+ ['D1','10/5','广州 → 襄阳/西安一带(约 1,000km)','高速免费第 1 天'],
+ ['D2','10/6','→ 兰州(约 900km)','免费'],
+ ['D3','10/7','→ 张掖 · 七彩丹霞','免费最后一天'],
+ ['D4','10/8','→ 嘉峪关 · 敦煌(莫高窟/鸣沙山)','开始收费'],
+ ['D5','10/9','→ 哈密(约 700km)','河西走廊收尾'],
+ ['D6','10/10','哈密 → 吐鲁番 · 火焰山/交河故城','进南疆'],
+ ['D7','10/11','吐鲁番 → 库尔勒 · 博斯腾湖','香梨季'],
+ ['D8','10/12','库尔勒 → 轮台 → 库车 · 天山神秘大峡谷',''],
+ ['D9','10/13','库车 → 阿克苏(约 300km)','轻松日'],
+ ['D10','10/14','阿克苏 → 喀什(461km)· 古城/大巴扎',''],
+ ['D11','10/15','喀什 · 老城/百年老茶馆/艾提尕尔','慢一天'],
+ ['D12','10/16','喀什 → 帕米尔 · 卡拉库里湖/慕士塔格','需边防证'],
+ ['D13','10/17','塔县 · 盘龙古道 → 返喀什',''],
+ ['D14','10/18','喀什休整(洗车/充电/修整)',''],
+ ['D15','10/19','喀什 → 阿克苏 → 轮台(约 800km)','赶路日'],
+ ['D16','10/20','塔里木胡杨林 + 沙漠公路','胡杨巅峰开始'],
+ ['D17','10/21','轮台 → 库尔勒 → 乌鲁木齐',''],
+ ['D18','10/22','乌市还车/交托运 · 飞回广州','车托运约 ¥2.5–4k'],
+ ['D19','10/23','广州落地 · 收尾',''],
+];
+document.getElementById('plan').innerHTML = PLAN.map(function(r){
+  var peak = r[3].indexOf('胡杨')>-1;
+  return '<div class="day'+(peak?' peak':'')+'"><div class="d">'+r[0]+'<br><em>'+r[1]+'</em></div><div class="c">'+r[2]+(r[3]?'<br><em>'+r[3]+'</em>':'')+'</div></div>';
+}).join('');
+</script>
+</body>
+</html>
