@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北疆全攻略 · 10月自驾往返(纯电)</title>
+<style>
+  :root{
+    --paper:#f5f2ea; --ink:#241f18; --sub:#6f6759; --line:#e2d9c6; --card:#fffdf8;
+    --blue:#1c6b86; --blue-deep:#134f66; --gold:#c9a227; --gold-deep:#8a6423;
+    --red:#b8442f; --green:#2f7a52; --snow:#2b6ca3;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--paper);color:var(--ink);line-height:1.72}
+  .hero{position:relative;min-height:62vh;display:flex;align-items:flex-end;color:#fff;background:linear-gradient(180deg,rgba(8,12,18,.05),rgba(8,12,18,.78)),url('xj-img/kanas.jpg') center/cover no-repeat}
+  .hero .inner{width:100%;max-width:720px;margin:0 auto;padding:26px 18px 30px}
+  .hero .tag{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:3px 13px;font-size:11.5px;letter-spacing:1.4px;margin-bottom:10px}
+  .hero h1{font-size:clamp(24px,6.4vw,38px);font-weight:800;line-height:1.28;text-shadow:0 2px 16px rgba(0,0,0,.45)}
+  .hero .sub{margin-top:9px;font-size:13.5px;opacity:.95;max-width:33em}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+  .chips span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:3px 10px;font-size:11.5px}
+  main{max-width:720px;margin:0 auto;padding:0 14px 60px}
+  h2.sec{font-size:19px;font-weight:800;margin:32px 0 4px;display:flex;align-items:center;gap:8px}
+  h2.sec .n{background:var(--blue);color:#fff;font-size:12px;font-weight:800;border-radius:9px;padding:2px 9px}
+  .secsub{font-size:12.5px;color:var(--sub);margin:0 0 14px 34px}
+
+  .costline{margin-top:16px;background:#eef5f8;border:1px solid #cfe2ea;border-radius:14px;padding:11px 15px;font-size:13.5px;color:#155269}
+  .costline b{font-size:15px}
+
+  .alert{margin-top:14px;background:#fdf3e2;border:1px solid #ecd9b4;border-radius:14px;padding:12px 15px;font-size:13px;color:#7a5a1e}
+  .alert b{color:#a0680a}
+  .alert.warn{background:#fdeceb;border-color:#f0c8c4;color:#7d342b}
+  .alert.warn b{color:#a33b2c}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 2px 7px rgba(60,45,20,.05)}
+  .card .ph{position:relative;aspect-ratio:16/9;background:#eae4d4}
+  .card .ph img{width:100%;height:100%;object-fit:cover;display:block}
+  .typeb{position:absolute;left:10px;top:10px;background:rgba(20,16,8,.62);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:8px;z-index:3}
+  .typeb.silk{background:rgba(140,90,30,.88)}
+  .typeb.snow{background:rgba(43,108,163,.9)}
+  .typeb.ili{background:rgba(47,122,82,.88)}
+  .loc{position:absolute;right:10px;bottom:10px;background:rgba(20,16,8,.55);color:#fff;font-size:11px;padding:2px 9px;border-radius:7px;z-index:3}
+  .card .body{padding:12px 15px 14px}
+  .card .body h3{font-size:16px;font-weight:800;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .card .body h3 .n{font-size:11px;color:var(--gold-deep);background:#f3ead7;border-radius:6px;padding:1px 7px}
+  .card .body .txt{margin-top:6px;font-size:13.5px;color:#453e33}
+  .card .body .tagline{display:block;margin-top:5px;font-size:12.5px;color:var(--gold-deep)}
+  .card .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .card .meta span{font-size:11.5px;background:#f2ede1;color:#6d6455;border-radius:7px;padding:2px 8px}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 17px;margin-top:14px}
+  .panel h3{font-size:15.5px;font-weight:800;margin-bottom:9px}
+  .tip{display:flex;gap:10px;font-size:13.5px;margin-top:11px}
+  .tip .ic{font-size:17px;flex:0 0 auto}
+  .tip b{color:var(--blue-deep)}
+  .day{display:flex;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+  .day:last-child{border-bottom:none}
+  .day .d{flex:0 0 58px;font-weight:800;color:var(--blue-deep);font-size:12.5px}
+  .day .c{color:#463f34;flex:1}
+  .day .c em{font-style:normal;color:var(--sub);font-size:12.5px}
+  .day .k{flex:0 0 auto;font-size:11px;color:#8a8072;text-align:right}
+  .day.silk .d{color:#a0680a}
+  .day.snow .d{color:var(--snow)}
+  .day.ili .d{color:var(--green)}
+  .day.back .d{color:var(--red)}
+  .segtitle{font-size:13px;font-weight:800;color:#8a8072;margin:12px 0 2px;letter-spacing:1px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:520px){.grid2{grid-template-columns:1fr}}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding:14px 0 30px}
+  footer p{font-size:11px;color:#a09685;text-align:center;line-height:1.9}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="inner">
+    <div class="tag">2026 国庆后 · 北疆全攻略</div>
+    <h1>北疆环线<br>自驾往返全攻略</h1>
+    <p class="sub">10/5 广州出发 · 纯电车 · 自驾去自驾回 · 河西走廊 + 阿勒泰秋色 + 伊犁草原 + 独库公路</p>
+    <div class="chips">
+      <span>🚗 往返 10,718km</span>
+      <span>🔋 纯电</span>
+      <span>🛣 百度地图实测里程</span>
+      <span>🍂 秋末雪景季</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="costline">
+    💰 路费(一笔带过):往返 10,718km · 电费 ¥2,412–3,183 + 过路费 ¥3,875(已扣 10/5–10/7 免费)<b> ≈ ¥6,287–7,058</b>
+  </div>
+
+  <div class="alert">
+    <b>先说时机:</b>北疆秋色黄金期是 <b>9/20–10/10</b>,你 10/5 出发、到阿勒泰约 10/13。这时白桦林多半已掉叶,但<b>换成另一种美——初雪压着残秋的针叶林、人少价低、木屋炊烟配薄雪</b>,和 9 月的网红图不是一个风格,但同样出片。
+  </div>
+
+  <h2 class="sec"><span class="n">01</span>行程总览</h2>
+  <div class="secsub">自驾往返的真实天数:26 天舒服版 / 20 天紧凑版</div>
+  <div class="panel">
+    <div class="grid2">
+      <div style="background:#eef5f8;border-radius:12px;padding:11px 13px">
+        <b style="color:#155269">甲 · 26 天(推荐)</b>
+        <div style="font-size:12.8px;color:#3f5a66;margin-top:5px">去程+河西走廊 8 天 → 北疆 10 天 → 返程 8 天<br>每天 500–700km,不赶,景点都玩透</div>
+      </div>
+      <div style="background:#f7f0e0;border-radius:12px;padding:11px 13px">
+        <b style="color:#8a6423">乙 · 20 天(紧凑)</b>
+        <div style="font-size:12.8px;color:#6b5a34;margin-top:5px">去程 4 天硬赶 → 北疆 8 天 → 返程 4 天硬赶<br>每天 1,000km+,河西走廊只看张掖丹霞</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:#9a917f;margin-top:10px">※ 往返 10,718km,按 700km/天 光是开车就要 15 天。想要 15 天以内游完<b>只能单程自驾+飞回</b>(见另一份南疆汇报页);自驾往返的现实下限约 20 天。</p>
+  </div>
+
+  <h2 class="sec"><span class="n">02</span>26 天全程逐日</h2>
+  <div class="secsub">标记:🟡河西走廊 · 🔵阿勒泰 · 🟢伊犁 · 🔴返程</div>
+  <div class="panel" id="plan"></div>
+
+  <h2 class="sec"><span class="n">03</span>河西走廊段(去程顺路)</h2>
+  <div class="secsub">这条线本身就是顶级自驾路线,不算浪费路</div>
+  <div id="silk"></div>
+
+  <h2 class="sec"><span class="n">04</span>阿勒泰段 · 秋色与初雪</h2>
+  <div class="secsub">布尔津 → 五彩滩 → 喀纳斯 → 禾木 → 白哈巴 → 可可托海</div>
+  <div id="altay"></div>
+
+  <h2 class="sec"><span class="n">05</span>克拉玛依段 · 雅丹与油田</h2>
+  <div id="kala"></div>
+
+  <h2 class="sec"><span class="n">06</span>伊犁段 · 草原与花城</h2>
+  <div class="secsub">赛里木湖 → 果子沟 → 伊宁 → 特克斯 → 琼库什台 → 那拉提</div>
+  <div id="ili"></div>
+
+  <h2 class="sec"><span class="n">07</span>独库公路 · 封路应对</h2>
+  <div class="panel">
+    <div class="tip"><div class="ic">⚠️</div><div><b>每年 6 月开通、10 月上旬陆续封路</b>(视天气,常在国庆后)。你 10/21 想走独库北段,<b>大概率已封</b>,要有备选。</div></div>
+    <div class="tip"><div class="ic">🔁</div><div><b>备选方案:</b>那拉提 → 伊宁 → G30 连霍高速回乌鲁木齐(约 700km)。风景换成伊犁河谷+果子沟,也不亏。</div></div>
+    <div class="tip"><div class="ic">📞</div><div>出发前一天打 12122 或查新疆交通厅公众号确认独库通行状态,别赌。</div></div>
+  </div>
+
+  <h2 class="sec"><span class="n">08</span>纯电自驾(往返)要点</h2>
+  <div class="panel">
+    <div class="tip"><div class="ic">🔌</div><div><b>覆盖:</b>全国高速服务区充电桩覆盖率 98.8%,平均 8–16 个 360kW 超充,15 分钟补 200km。连霍高速(河西走廊)桩最密,随便充。</div></div>
+    <div class="tip"><div class="ic">🏔</div><div><b>北疆山区:</b>布尔津、喀纳斯、禾木、可可托海主镇都有桩,但<b>景区深处没有</b>——进山前在布尔津满电,禾木出来直奔克拉玛依(440km)中途在乌尔禾补一次。</div></div>
+    <div class="tip"><div class="ic">⏱</div><div><b>时间账:</b>10,718km 约需 <b>38 次补能 ≈ 26 小时</b>充电。建议每次都绑吃饭/洗澡,别干等。</div></div>
+    <div class="tip"><div class="ic">❄️</div><div><b>低温掉续航:</b>10 月北疆夜里 0℃ 以下,电池活性下降,实际续航打 8 折;<b>留 25% 余量</b>再进无人区路段。</div></div>
+    <div class="tip"><div class="ic">🏕</div><div><b>床车过夜:</b>露营模式一晚 3–8 度电,冷天开暖风更多;服务区、县城停车场、景区外停车场都能睡。</div></div>
+    <div class="tip"><div class="ic">💳</div><div><b>省钱:</b>服务区约 1.65 元/度(服务费封顶 0.5);县城国网桩常更便宜;避开 18:00–21:00 高峰电价。</div></div>
+  </div>
+
+  <h2 class="sec"><span class="n">09</span>出发前必办 & 装备</h2>
+  <div class="panel">
+    <div class="tip"><div class="ic">🪪</div><div><b>边防证:</b>白哈巴村要办(户籍地或布尔津/哈巴河当地办),不带证进不去。</div></div>
+    <div class="tip"><div class="ic">🎫</div><div><b>提前订:</b>莫高窟 A 类票要提前 30 天抢;喀纳斯、禾木住宿国庆后仍紧(禾木村内贵,可住布尔津/贾登峪)。</div></div>
+    <div class="tip"><div class="ic">🧥</div><div><b>穿衣:</b>北疆 0–15℃,伊犁 5–18℃,帕米尔式寒冷;羽绒+冲锋衣+防滑鞋,喀纳斯可能下雪。</div></div>
+    <div class="tip"><div class="ic">⛓</div><div><b>带上防滑链</b>——10 月中旬喀纳斯/禾木遇雪,山路结冰概率不小。</div></div>
+    <div class="tip"><div class="ic">💊</div><div><b>常备:</b>肠胃药、感冒药、润唇膏、防晒霜、保湿霜(北疆极干)、充电宝。</div></div>
+    <div class="tip"><div class="ic">🛰</div><div><b>信号:</b>禾木/白哈巴/独库部分路段信号弱,提前下载离线地图。</div></div>
+  </div>
+
+  <h2 class="sec"><span class="n">10</span>路上吃什么</h2>
+  <div class="secsub">北疆吃饭不贵,肉和碳水管够</div>
+  <div id="food"></div>
+
+  <footer>
+    <p>里程为百度地图实测 · 路费为估算区间(电耗/电价因车而异)<br>
+    图片来自公开网络,仅供行程预览 · 2026 国庆后北疆自驾 · 给老大看的攻略页</p>
+  </footer>
+</main>
+
+<script>
+var PLAN = [
+ ['seg','🟡 去程 · 河西走廊(10/5–10/12)'],
+ ['day','D1','10/5','广州 → 衡阳(约 600km)','silk','高速免费'],
+ ['day','D2','10/6','衡阳 → 襄阳(约 700km)','silk','免费'],
+ ['day','D3','10/7','襄阳 → 西安(约 500km)','silk','免费最后一天'],
+ ['day','D4','10/8','西安 → 中卫 → 武威(约 900km)','silk','开始收费'],
+ ['day','D5','10/9','武威 → 张掖七彩丹霞(约 500km)','silk','午后看丹霞'],
+ ['day','D6','10/10','张掖 → 嘉峪关 → 敦煌(约 680km)','silk',''],
+ ['day','D7','10/11','敦煌 · 莫高窟 + 鸣沙山月牙泉','silk','住敦煌'],
+ ['day','D8','10/12','敦煌 → 哈密(约 420km)','silk','进疆'],
+ ['seg','🔵 阿勒泰 · 秋色与初雪(10/13–10/17)'],
+ ['day','D9','10/13','哈密 → 乌鲁木齐(约 600km)','snow','乌市补给'],
+ ['day','D10','10/14','乌市 → 五彩滩 → 布尔津(约 620km)','snow','五彩滩日落'],
+ ['day','D11','10/15','布尔津 → 喀纳斯(约 160km)','snow','满电进山'],
+ ['day','D12','10/16','喀纳斯 → 禾木(约 70km)','snow','禾木住一晚'],
+ ['day','D13','10/17','禾木 → 白哈巴 → 布尔津(约 200km)','snow','需边防证'],
+ ['seg','🟢 克拉玛依 + 伊犁(10/18–10/22)'],
+ ['day','D14','10/18','布尔津 → 乌尔禾魔鬼城 → 克拉玛依(约 440km)','ili','穿雅丹'],
+ ['day','D15','10/19','克拉玛依 → 赛里木湖(约 450km)','ili','环湖日落'],
+ ['day','D16','10/20','赛里木湖 → 果子沟 → 伊宁(约 145km)','ili','大桥+河谷'],
+ ['day','D17','10/21','伊宁 → 特克斯八卦城(约 180km)','ili','登塔看八卦'],
+ ['day','D18','10/22','特克斯 → 琼库什台 → 那拉提(约 300km)','ili','草原曲线'],
+ ['seg','🔴 返程(10/23–10/28)'],
+ ['day','D19','10/23','那拉提 → 伊宁 → 乌鲁木齐(约 700km)','back','独库多已封'],
+ ['day','D20','10/24','乌市 → 哈密(约 600km)','back',''],
+ ['day','D21','10/25','哈密 → 敦煌 → 瓜州(约 420km)','back',''],
+ ['day','D22','10/26','瓜州 → 张掖 → 武威(约 600km)','back',''],
+ ['day','D23','10/27','武威 → 兰州 → 天水(约 550km)','back',''],
+ ['day','D24','10/28','天水 → 西安 → 十堰(约 700km)','back',''],
+ ['day','D25','10/29','十堰 → 长沙(约 700km)','back',''],
+ ['day','D26','10/30','长沙 → 广州(约 700km)','back','到家'],
+];
+document.getElementById('plan').innerHTML = PLAN.map(function(r){
+  if(r[0]==='seg') return '<div class="segtitle">'+r[1]+'</div>';
+  return '<div class="day '+r[4]+'"><div class="d">'+r[1]+'<br><em>'+r[2]+'</em></div><div class="c">'+r[3]+'</div><div class="k">'+r[5]+'</div></div>';
+}).join('');
+
+function card(c, i, cls){
+  return '<div class="card"><div class="ph"><img src="'+c.img+'" alt="'+c.n+'" loading="lazy">'+
+   '<span class="typeb '+(cls||'')+'">'+c.type+'</span><span class="loc">'+c.loc+'</span></div>'+
+   '<div class="body"><h3><span class="n">'+String(i+1).padStart(2,'0')+'</span>'+c.n+'</h3>'+
+   '<div class="txt">'+c.txt+'<span class="tagline">— '+c.tag+'</span></div>'+
+   (c.meta?'<div class="meta">'+c.meta.map(function(m){return '<span>'+m+'</span>'}).join('')+'</div>':'')+
+   '</div></div>';
+}
+var SILK = [
+ {n:'张掖七彩丹霞', loc:'甘肃张掖', img:'xj-img/zhangye.jpg', type:'🟡 河西走廊',
+  txt:'一层层彩色条纹铺开的丘陵,像把颜料倒进了山脊。日落前 1 小时的侧光最艳,坐景区大巴按站点停靠即可。',
+  tag:'上帝打翻的调色盘', meta:['门票+区间车 ≈ ¥75','建议 3 小时','日落最佳']},
+ {n:'嘉峪关关城', loc:'甘肃嘉峪关', img:'xj-img/jiayuguan.jpg', type:'🟡 河西走廊',
+  txt:'"天下第一雄关",戈壁上一座孤城,城墙一直伸进荒漠。登城楼看祁连雪山,风大得能吹醒人。',
+  tag:'戈壁上的雄关', meta:['门票 ≈ ¥110','建议 2 小时','傍晚光线好']},
+ {n:'敦煌 · 鸣沙山月牙泉', loc:'甘肃敦煌', img:'xj-img/dunhuang.jpg', type:'🟡 河西走廊',
+  txt:'沙丘环抱里一弯泉水,千年不枯。爬沙山看日落,下山滑沙;配莫高窟一天刚好。',
+  tag:'沙漠里的一弯月', meta:['门票 ≈ ¥110','骑骆驼 ≈ ¥100','日落必看']},
+];
+var ALTAY = [
+ {n:'五彩滩', loc:'布尔津 · 额尔齐斯河畔', img:'xj-img/wucaitan.jpg', type:'🔵 阿勒泰',
+  txt:'一河两岸:这边是彩色雅丹岩层,对岸是绿洲白桦。日落时的金色斜光把岩层照得像油画。',
+  tag:'一河两重天', meta:['门票 ≈ ¥50','日落前 1h 最佳','离布尔津 24km']},
+ {n:'喀纳斯湖', loc:'阿勒泰 · 布尔津', img:'xj-img/kanas.jpg', type:'🔵 阿勒泰',
+  txt:'蓝绿色湖水嵌在金黄针叶林里,登观鱼台俯瞰全景。10 月中旬可能已落雪,雪压黄叶是另一种绝景。',
+  tag:'湖怪的故乡', meta:['门票+区间车 ≈ ¥230','观鱼台另收费','村内住宿贵']},
+ {n:'禾木村', loc:'阿勒泰', img:'xj-img/hemu.jpg', type:'🔵 阿勒泰',
+  txt:'图瓦人木屋村落,清晨炊烟从木屋顶升起,背后是雪山和雾凇。住一晚才有晨雾,当天往返看不到。',
+  tag:'炊烟+木屋+晨雾', meta:['门票+区间车 ≈ ¥100+','村内住 1 晚','清晨 7–9 点最出片']},
+ {n:'白哈巴村', loc:'阿勒泰 · 哈巴河', img:'xj-img/baihaba.jpg', type:'🔵 阿勒泰',
+  txt:'中国西北第一村,边境线上的图瓦村落,比禾木更安静。**要边防证**,秋色+远山层次极好。',
+  tag:'西北第一村', meta:['需边防证','门票 ≈ ¥50','人少清净']},
+ {n:'可可托海', loc:'阿勒泰 · 富蕴', img:'xj-img/keketuohai.jpg', type:'🔵 阿勒泰',
+  txt:'额尔齐斯大峡谷里的神钟山,一座巨型花岗岩像口倒扣的大钟。河谷两岸金黄杨树,人比喀纳斯少得多。',
+  tag:'神钟山与额河峡谷', meta:['门票+区间车 ≈ ¥90','顺路可选','往返约 400km']},
+];
+var KALA = [
+ {n:'乌尔禾魔鬼城', loc:'克拉玛依', img:'xj-img/moguicheng.jpg', type:'🔵 雅丹',
+  txt:'风把岩层雕成城堡和怪物的样子,傍晚风声呜呜像鬼叫(所以叫魔鬼城)。坐区间车环游,日落时岩体通红。',
+  tag:'风蚀出的城堡', meta:['门票+区间车 ≈ ¥70','日落时段最佳','注意防风']},
+];
+var ILI = [
+ {n:'赛里木湖', loc:'博尔塔拉 · 天山西段', img:'xj-img/sailimu.jpg', type:'🟢 伊犁',
+  txt:'"大西洋最后一滴眼泪",湖水蓝到不真实,对岸就是雪山。环湖公路 90km,自驾一圈走走停停最爽。',
+  tag:'蓝得不像话', meta:['门票 ≈ ¥70','环湖约 90km','10 月风大很冷']},
+ {n:'果子沟大桥', loc:'伊犁 · 霍城', img:'xj-img/guozigou.jpg', type:'🟢 伊犁',
+  txt:'连霍高速在果子沟山谷里架起来的双塔斜拉桥,桥面高度惊人,开车过桥时两侧全是雪山冷杉。',
+  tag:'山谷里的超级大桥', meta:['免费(高速通行)','桥上不能停车','服务区可拍']},
+ {n:'特克斯八卦城', loc:'伊犁 · 特克斯', img:'xj-img/baguacheng.jpg', type:'🟢 伊犁',
+  txt:'全世界保存最完整的八卦形城市,8 条主街从中心辐射出去,没有红绿灯。登观光塔俯瞰,格局一眼看懂。',
+  tag:'一座八卦形状的城', meta:['登塔 ≈ ¥30','城内免费','住民宿舒服']},
+ {n:'琼库什台', loc:'伊犁 · 特克斯', img:'xj-img/qiongkushitai.jpg', type:'🟢 伊犁',
+  txt:'被《中国国家地理》点名的立体草原,草坡曲线像波浪,哈萨克木屋散在山谷里,后山有乌孙古道起点。',
+  tag:'最美立体草原', meta:['免费入场','拼车往返约 ¥100','住 1 晚更有味道']},
+ {n:'那拉提草原', loc:'伊犁 · 新源', img:'xj-img/nalati.jpg', type:'🟢 伊犁',
+  txt:'空中草原+河谷草原两片,雪山、河流、毡房、马群一次全给。10 月草已转黄,但河谷的层次反而更好看。',
+  tag:'雪山下的草原', meta:['门票+区间车 ≈ ¥75+','空中草原另收费','骑马可体验']},
+];
+var FOOD = [
+ {n:'布尔津烤鱼', loc:'布尔津河堤夜市', img:'xj-img/kaoyu.jpg', type:'🍜 美食',
+  txt:'额尔齐斯河的冷水鱼(狗鱼/五道黑),剖开摊平烤,撒辣子孜然。河堤夜市一溜排档,配格瓦斯最爽。',
+  tag:'夜市的第一口', meta:['人均 ¥60–100','夜市 18:00 开','冷水鱼必点']},
+ {n:'新疆硬菜', loc:'全疆', img:'xj-img/food_zhuafan.jpg', type:'🍜 美食',
+  txt:'手抓饭油亮喷香,烤包子掰开流肉汁,再加一份大盘鸡拌面。北疆路上吃饭不贵,人均一天 80 元能吃到位。',
+  tag:'碳水+羊肉的快乐', meta:['烤包子 ¥5/个','手抓饭 ¥25–35','奶疙瘩当零食']},
+];
+function render(id, arr, cls){ document.getElementById(id).innerHTML = arr.map(function(c,i){return card(c,i,cls)}).join(''); }
+render('silk', SILK, 'silk');
+render('altay', ALTAY, 'snow');
+render('kala', KALA, 'snow');
+render('ili', ILI, 'ili');
+document.getElementById('food').innerHTML = FOOD.map(function(c,i){return card(c,i,'')}).join('');
+</script>
+</body>
+</html>
