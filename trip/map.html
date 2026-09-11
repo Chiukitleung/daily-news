@@ -546,7 +546,7 @@ var layersEl = document.getElementById('layers'), sbTxt = document.getElementByI
 var tx = 0, ty = 0, k = 1, s = 0.4;
 var cw = 0, ch = 0, filter = 'all', active = -1;
 var kMin = 0.6, kMax = 40;
-var nodes = {}, labs = {}, peaks = [], badges = [], legLbls = [];
+var nodes = {}, labs = {}, geo = [], peaks = [], badges = [], legLbls = [];
 var layer = {terr:true, mtn:true, road:true, leg:true, alt:false, grat:true};
 var rafPending = false;
 
@@ -558,7 +558,7 @@ var TAIL_KM = 380;
 function totalKm(){
   var t = TAIL_KM;
   S.forEach(function(p){ if (p.leg && p.leg.km) t += p.leg.km; });
-  return Math.round(t / 10) * 10;
+  return Math.round(t);
 }
 function f1(n){ return Number(n).toFixed(2); }
 function joinPts(a){ return a.map(function(p){ return f1(p[0]) + ',' + f1(p[1]); }).join(' '); }
@@ -747,8 +747,8 @@ function render(){
     el.setAttribute('stroke', 'rgba(255,255,255,.9)');
     el.setAttribute('stroke-width', String(fgl * 0.3));
   }
-  /* 地理名称标签：按重要度依次落位，撞车就隐藏 */
-  var rects = [], rt;
+  /* 地理名称标签：彼此避让（不与里程标签互斥，里程信息优先） */
+  var rects = [], geoRects = [], rt;
   var gStyle = {
     r:{fs:Math.max(9.5, 8 * px), fill:'#9b9382', ls:'0.08em', on:showR},
     t:{fs:Math.max(9.5, 8 * px), fill:'#b3a992', ls:'0.14em', on:showT},
@@ -759,8 +759,8 @@ function render(){
     if (!st.on){ G.el.setAttribute('display', 'none'); continue; }
     var gx = SX(G.x), gy = SY(G.y), gw = estW(G.el.textContent, st.fs);
     rt = {x0:gx - gw / 2, x1:gx + gw / 2, y0:gy - st.fs * 0.72, y1:gy + st.fs * 0.72};
-    if (hits(rects, rt)){ G.el.setAttribute('display', 'none'); continue; }
-    rects.push(rt);
+    if (hits(geoRects, rt)){ G.el.setAttribute('display', 'none'); continue; }
+    geoRects.push(rt);
     G.el.removeAttribute('display');
     G.el.setAttribute('transform', 'translate(' + f1(gx) + ',' + f1(gy) + ')');
     G.el.setAttribute('text-anchor', 'middle');
@@ -799,13 +799,20 @@ function render(){
     var on = showL && (isAll || Number(filter) === L.g);
     if (!on){ el.setAttribute('display', 'none'); continue; }
     var mid = arcPoint(FULL[L.g], L.a, L.b, 0.5);
-    var x = SX(mid[0]), y = SY(mid[1]) - 8;
+    /* 沿路径法线上下交替偏移，减少相邻里程标签互撞 */
+    var q1 = arcPoint(FULL[L.g], L.a, L.b, 0.40), q2 = arcPoint(FULL[L.g], L.a, L.b, 0.60);
+    var ddx = SX(q2[0]) - SX(q1[0]), ddy = SY(q2[1]) - SY(q1[1]);
+    var dl = Math.hypot(ddx, ddy) || 1;
+    var off = (i % 2 ? 12 : -12);
+    var x = SX(mid[0]) + (-ddy / dl) * off;
+    var y = SY(mid[1]) + (ddx / dl) * off;
     var txt = p.leg.km + ' km · ' + p.leg.h + ' h';
-    var lw = estW(txt, fll);
-    if (hits(rects, {x0:x - lw / 2, x1:x + lw / 2, y0:y - fll * 0.7, y1:y + fll * 0.7})){
+    var lw = estW(txt, fll) * (isAll ? 1 : 0.62);
+    var lh = fll * (isAll ? 0.7 : 0.5);
+    if (hits(rects, {x0:x - lw / 2, x1:x + lw / 2, y0:y - lh, y1:y + lh})){
       el.setAttribute('display', 'none'); continue;
     }
-    rects.push({x0:x - lw / 2, x1:x + lw / 2, y0:y - fll * 0.7, y1:y + fll * 0.7});
+    rects.push({x0:x - lw / 2, x1:x + lw / 2, y0:y - lh, y1:y + lh});
     el.removeAttribute('display');
     el.setAttribute('transform', 'translate(' + f1(x) + ',' + f1(y) + ')');
     el.setAttribute('text-anchor', 'middle');
@@ -831,30 +838,28 @@ function render(){
   var fs = Math.max(10, 8 * px);
   var lf = Math.max(10.5, 8 * px);
 
-  /* 全景时按屏幕距离自动避让：太近的点位只保留权重高的一个，放大后自然全部露出 */
+  /* 按屏幕距离自动避让：太近的点位只保留权重高的一个，放大后自然全部露出 */
   var dThr = 17 / (k * s);
-  var declut = {};
-  if (isAll){
-    var cand = [], placedP = [];
-    for (i = 0; i < S.length; i++){
-      var P0 = S[i];
-      if (P0.lv === 1 || (P0.lv === 2 && show2) || (P0.lv === 3 && show3)) cand.push(i);
+  var declut = {}, placedP = [], cand = [];
+  for (i = 0; i < S.length; i++){
+    var P0 = S[i];
+    if (!(isAll || P0.g === Number(filter))) continue;
+    if (P0.lv === 1 || (P0.lv === 2 && show2) || (P0.lv === 3 && show3)) cand.push(i);
+  }
+  cand.sort(function(a, b){ return (S[b].w || 0) - (S[a].w || 0) || a - b; });
+  for (i = 0; i < cand.length; i++){
+    var ci = cand[i], keep = true;
+    for (j = 0; j < placedP.length; j++){
+      if (Math.hypot(S[ci].X - placedP[j][0], S[ci].Y - placedP[j][1]) < dThr){ keep = false; break; }
     }
-    cand.sort(function(a, b){ return (S[b].w || 0) - (S[a].w || 0) || a - b; });
-    for (i = 0; i < cand.length; i++){
-      var ci = cand[i], keep = true;
-      for (j = 0; j < placedP.length; j++){
-        if (Math.hypot(S[ci].X - placedP[j][0], S[ci].Y - placedP[j][1]) < dThr){ keep = false; break; }
-      }
-      declut[ci] = keep;
-      if (keep) placedP.push([S[ci].X, S[ci].Y]);
-    }
+    declut[ci] = keep;
+    if (keep) placedP.push([S[ci].X, S[ci].Y]);
   }
   for (i = 0; i < S.length; i++){
     var P = S[i], nd = nodes[i];
     var vis = (isAll || P.g === Number(filter)) &&
               (P.lv === 1 || (P.lv === 2 && show2) || (P.lv === 3 && show3));
-    if (vis && isAll && i !== active && declut[i] === false) vis = false;
+    if (vis && i !== active && declut[i] === false) vis = false;
     if (!vis){ nd.g.setAttribute('display', 'none'); continue; }
     nd.g.removeAttribute('display');
     nd.g.setAttribute('transform', 'translate(' + f1(SX(P.X)) + ',' + f1(SY(P.Y)) + ')');
@@ -902,7 +907,7 @@ function updateScale(){
   var cands = [20, 50, 100, 200, 300, 500, 1000], best = cands[0], bw = 0;
   for (var i = 0; i < cands.length; i++){
     var w = cands[i] / kmPerPx;
-    if (w <= 88){ best = cands[i]; bw = w; }
+    if (w <= 104){ best = cands[i]; bw = w; }
   }
   sbTxt.textContent = best + ' km';
   sbBar.style.width = Math.max(24, bw).toFixed(0) + 'px';
