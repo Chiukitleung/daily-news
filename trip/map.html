@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#16181d">
+<meta name="description" content="黔川 + 新疆 30 天自驾路线图：地形、山脉、水系、公路编号、49 个景点标注，手机可交互缩放">
+<title>路线图 · 黔川 + 新疆 30 天自驾 · 详细景点标注</title>
+<style>
+:root{
+  --bg:#eef0f3; --card:#fff; --line:#e2e4e9; --line2:#cfd3da;
+  --t1:#16181d; --t2:#5a5f6a; --t3:#8b909a;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--t1);
+  font:14px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+
+#app{display:flex;flex-direction:column;height:100vh;height:100dvh}
+
+#top{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:8px 12px;
+  padding-top:calc(8px + env(safe-area-inset-top));background:var(--card);border-bottom:1px solid var(--line)}
+#top a{font-size:13px;color:#1a5fb4;text-decoration:none;font-weight:600;flex:0 0 auto}
+#top .t{flex:1 1 auto;font-size:13.5px;font-weight:600;text-align:center;letter-spacing:-.2px}
+#top button{flex:0 0 auto;font:inherit;font-size:12.5px;font-weight:600;color:var(--t2);
+  background:var(--bg);border:1px solid var(--line2);border-radius:8px;padding:5px 10px;cursor:pointer}
+#top button.on{background:var(--t1);color:#fff;border-color:var(--t1)}
+
+#stage{position:relative;flex:1 1 auto;min-height:0;background:#f7f8fa;overflow:hidden;touch-action:none}
+#map{display:block;width:100%;height:100%;cursor:grab}
+#map.grabbing{cursor:grabbing}
+#map text{font-family:inherit}
+
+#hud{position:absolute;left:10px;top:10px;z-index:6;pointer-events:none;
+  display:flex;flex-direction:column;gap:7px;max-width:calc(100% - 66px)}
+#hud .box{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:10px;
+  padding:7px 10px;box-shadow:0 2px 8px rgba(0,0,0,.07);pointer-events:auto}
+#hud .ttl{font-size:12.5px;font-weight:600;line-height:1.35}
+#hud .sub{font-size:11px;color:var(--t2);margin-top:1px}
+#legend{display:flex;flex-direction:column;gap:3px}
+#legend div{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--t1)}
+#legend i{width:12px;height:3px;border-radius:2px;display:block;flex:0 0 12px}
+
+#zoombar{position:absolute;right:10px;top:10px;z-index:6;display:flex;flex-direction:column;gap:7px}
+#zoombar button{width:38px;height:38px;border:1px solid var(--line2);border-radius:10px;
+  background:rgba(255,255,255,.96);color:var(--t1);font-size:17px;line-height:1;
+  box-shadow:0 2px 8px rgba(0,0,0,.07);cursor:pointer;padding:0}
+#zoombar button.sm{font-size:11px;font-weight:600}
+#zoombar button:active{background:#eef2f8}
+
+#scalebar{position:absolute;right:10px;z-index:6;background:rgba(255,255,255,.92);
+  border:1px solid var(--line);border-radius:7px;padding:3px 7px 4px;box-shadow:0 1px 5px rgba(0,0,0,.06);
+  font-size:10px;color:var(--t2);text-align:center;line-height:1.25}
+#scalebar .bar{height:6px;border-left:1.5px solid var(--t2);border-right:1.5px solid var(--t2);
+  border-bottom:1.5px solid var(--t2);margin:2px auto 1px}
+
+#layers{position:absolute;right:10px;z-index:14;display:none;background:rgba(255,255,255,.98);
+  border:1px solid var(--line2);border-radius:11px;padding:9px 11px;box-shadow:0 6px 22px rgba(0,0,0,.16);
+  min-width:150px}
+#layers.on{display:block}
+#layers .lt{font-size:11px;color:var(--t3);margin-bottom:6px;letter-spacing:.04em}
+#layers label{display:flex;align-items:center;gap:8px;font-size:12.5px;padding:4px 0;cursor:pointer}
+#layers input{width:15px;height:15px;accent-color:#1a5fb4;margin:0}
+
+#tip{position:absolute;left:10px;right:10px;bottom:10px;z-index:8;display:none;
+  background:rgba(255,255,255,.98);border:1px solid var(--line2);border-radius:12px;
+  padding:12px 13px;box-shadow:0 6px 24px rgba(0,0,0,.16);max-height:62%;overflow-y:auto}
+#tip.on{display:block}
+#tip .h{display:flex;align-items:flex-start;gap:8px;margin-bottom:4px}
+#tip .badge{flex:0 0 auto;width:21px;height:21px;border-radius:50%;color:#fff;font-size:11px;
+  font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:2px}
+#tip .nm{font-size:15px;font-weight:600;flex:1 1 auto;line-height:1.35}
+#tip .cls{flex:0 0 auto;font-size:19px;line-height:1;color:var(--t3);padding:0 2px;cursor:pointer;background:none;border:0}
+#tip .dt{font-size:11.5px;color:var(--t3);margin:0 0 6px}
+#tip .tx{font-size:12.5px;color:var(--t2);margin:0;line-height:1.62}
+#tip .mt{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+#tip .mt span{font-size:11px;background:var(--bg);border-radius:6px;padding:3px 8px;color:var(--t2)}
+#tip .mt span b{color:var(--t1);font-weight:600}
+
+#toast{position:absolute;left:50%;top:14px;transform:translateX(-50%);z-index:20;
+  background:rgba(22,24,29,.88);color:#fff;font-size:12px;padding:7px 14px;border-radius:999px;
+  display:none;max-width:86%;text-align:center}
+#toast.on{display:block}
+
+#sheet{flex:0 0 auto;background:var(--card);border-top:1px solid var(--line);
+  border-radius:16px 16px 0 0;box-shadow:0 -3px 16px rgba(0,0,0,.09);
+  display:flex;flex-direction:column;max-height:52vh;margin-top:-14px;z-index:9}
+#grab{padding:9px 0 3px;display:flex;justify-content:center;cursor:pointer}
+#grab i{width:36px;height:4px;border-radius:2px;background:var(--line2);display:block}
+#chips{display:flex;gap:6px;padding:3px 12px 9px;overflow-x:auto;scrollbar-width:none}
+#chips::-webkit-scrollbar{display:none}
+#chips button{flex:0 0 auto;font:inherit;font-size:12px;padding:5px 10px;border-radius:999px;
+  border:1px solid var(--line2);background:var(--card);color:var(--t2);cursor:pointer;white-space:nowrap}
+#chips button.on{color:#fff;border-color:transparent}
+#plist{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 0 14px;
+  border-top:1px solid var(--line)}
+#sheet.collapsed #plist{display:none}
+#plist .grp{padding:10px 14px 4px;font-size:11.5px;color:var(--t3);display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+#plist .grp i{width:8px;height:8px;border-radius:50%;display:block;flex:0 0 8px}
+#plist .it{display:flex;align-items:flex-start;gap:10px;padding:9px 14px;cursor:pointer;
+  border-bottom:1px solid #f2f3f5}
+#plist .it:active,#plist .it.act{background:#eff3fa}
+#plist .bd{flex:0 0 auto;width:24px;height:24px;border-radius:50%;color:#fff;font-size:11.5px;
+  font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:1px}
+#plist .bd.city{background:#fff;color:var(--t2);border:1.5px solid var(--line2)}
+#plist .nm{font-size:13.5px;font-weight:500;line-height:1.4}
+#plist .dt{font-size:11.5px;color:var(--t3);margin-top:1px}
+#plist .lg{font-size:11px;color:#8a8f99;margin-top:2px}
+#plist .tx{font-size:11.5px;color:var(--t2);margin-top:3px;line-height:1.55}
+#sheet .hint{font-size:10.5px;color:var(--t3);text-align:center;padding:0 12px 7px;line-height:1.5}
+@media(min-width:760px){ #sheet{max-height:46vh} }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div id="top">
+    <a href="index.html">← 攻略</a>
+    <span class="t">黔川 + 新疆 30 天自驾路线图</span>
+    <button id="bLayers">图层 ▾</button>
+  </div>
+
+  <div id="stage">
+    <svg id="map" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <g id="world">
+        <g id="gTerr"></g>
+        <g id="gWater"></g>
+        <g id="gGrat"></g>
+        <g id="gRidge"></g>
+        <g id="gAlt"></g>
+        <g id="gRoad"></g>
+      </g>
+      <g id="oLab"></g>
+      <g id="oPoi"></g>
+    </svg>
+
+    <div id="hud">
+      <div class="box">
+        <div class="ttl">黔川 + 新疆 30 天自驾</div>
+        <div class="sub" id="hudSub"></div>
+      </div>
+      <div class="box" id="legend"></div>
+    </div>
+
+    <div id="zoombar">
+      <button id="bIn" aria-label="放大">＋</button>
+      <button id="bOut" aria-label="缩小">－</button>
+      <button id="bFit" class="sm">全景</button>
+    </div>
+
+    <div id="layers">
+      <div class="lt">图层</div>
+      <label><input type="checkbox" id="ckT" checked> 地形 · 水系</label>
+      <label><input type="checkbox" id="ckM" checked> 山脉 · 高峰</label>
+      <label><input type="checkbox" id="ckR" checked> 公路编号</label>
+      <label><input type="checkbox" id="ckL" checked> 里程 · 时长</label>
+      <label><input type="checkbox" id="ckA"> 独库备选线</label>
+      <label><input type="checkbox" id="ckG" checked> 经纬网</label>
+    </div>
+
+    <div id="scalebar"><div id="sbTxt">—</div><div class="bar" id="sbBar"></div></div>
+    <div id="tip"></div>
+    <div id="toast"></div>
+  </div>
+
+  <div id="sheet">
+    <div id="grab"><i></i></div>
+    <div id="chips"></div>
+    <div class="hint">双指缩放 · 拖动平移 · 点图钉看详情　|　示意路线图（自绘矢量），非测绘地图，不用于导航</div>
+    <div id="plist"></div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+'use strict';
+
+/* ================= 分段 ================= */
+var SEG = [
+  {n:'黔川纵游',    full:'① 黔川纵游',    d:'9/30 – 10/5',   c:'#3f6ea8'},
+  {n:'西行入疆',    full:'② 西行入疆',    d:'10/6 – 10/11',  c:'#0f7b7d'},
+  {n:'北疆·独库',   full:'③ 北疆·独库',   d:'10/12 – 10/16', c:'#2f7d55'},
+  {n:'南疆·帕米尔', full:'④ 南疆·帕米尔', d:'10/17 – 10/22', c:'#c0392b'},
+  {n:'沙漠·胡杨',   full:'⑤ 沙漠·胡杨',   d:'10/23 – 10/26', c:'#b9761a'},
+  {n:'收尾出疆',    full:'⑥ 收尾出疆',    d:'10/27 – 10/29', c:'#6b4fa3',
+   note:'终点乌鲁木齐与第 23 号点位同城，不重复标注；末段博斯腾湖 → 乌鲁木齐 380 km 计入总里程；10/29 飞回广州'}
+];
+
+/* ================= 点位 =================
+   c:1 途经城市 / c:0 景点   lv:1 常显 · lv:2 放大显示 · lv:3 再放大
+   leg: 自上一站 {km,h,rd}   alt: 海拔(米)   tk: 门票   spur: 支线锚点下标   */
+var S = [
+  {n:'广州', lng:113.2644, lat:23.1291, g:0, c:1, lv:1, alt:20, d:'D1 · 9/30 出发',
+   t:'国庆前一天是出行峰值，建议 4:30–5:00 出城，走 G80 广昆高速西行。今天不以赶路为目标，安全出广东就算赢。'},
+
+  {n:'桂林', lng:110.2900, lat:25.2736, g:0, c:1, lv:2, alt:150, d:'D1 夜', leg:{km:560,h:6.5,rd:'G80 广昆'},
+   t:'只住一晚。象鼻山、两江四湖夜景可顺路，桂林米粉当晚饭正好。'},
+
+  {n:'阳朔 · 遇龙河', lng:110.4600, lat:24.7800, g:0, c:0, lv:1, alt:110, tk:'竹筏 240–300 / 筏', d:'D2 · 10/1', leg:{km:80,h:1.3,rd:'G65 包茂'},
+   t:'遇龙河竹筏是阳朔真正的精华（比漓江大船好得多）。国庆筏工紧张，提前 1–2 天线上订筏，早上第一班人最少。'},
+
+  {n:'荔波小七孔', lng:107.6719, lat:25.2616, g:0, c:0, lv:1, alt:420, tk:'120 + 观光车 40–50', d:'D3 · 10/2 全天', leg:{km:430,h:5.5,rd:'G78 汕昆'},
+   t:'东门进全程下坡，省一半体力。路线：卧龙潭 → 68 级跌水瀑布 → 水上森林 → 小七孔古桥。门票 5 日内可重复入园，玩不完第二天再来。国庆必须提前线上预约。'},
+
+  {n:'西江千户苗寨', lng:108.1780, lat:26.4945, g:0, c:0, lv:1, alt:850, tk:'90 + 观光车 20', d:'D4 · 10/3', leg:{km:250,h:3.5,rd:'G75 兰海 + G60'},
+   t:'走北门（比西门少 2 km 山路，索道也排队少）。19:30 全寨灯光点亮，建议住半山腰民宿，从阳台看夜景。'},
+
+  {n:'黄果树瀑布群', lng:105.6665, lat:25.9904, g:0, c:0, lv:1, alt:700, tk:'旺季 160 + 观光车 50', d:'D5 · 10/4 下午', leg:{km:330,h:4.2,rd:'G60 沪昆'},
+   t:'陡坡塘、天星桥、大瀑布三片区相距 3–6 km，观光车必购。顺序：陡坡塘 → 天星桥下半段（银链坠潭）→ 大瀑布 + 水帘洞。水帘洞要在「安旅通」小程序单独预约，早 7 点放名额。'},
+
+  {n:'安顺', lng:105.9470, lat:26.2530, g:0, c:1, lv:3, alt:1300, d:'D5 夜', leg:{km:45,h:0.8},
+   t:'住安顺比住景区便宜且吃饭方便。龙宫景区就在附近，多一天的话可以加。'},
+
+  {n:'乐山大佛', lng:103.7700, lat:29.5450, g:0, c:0, lv:2, alt:400, tk:'80（游船 70）', d:'D6 · 10/5 可选', leg:{km:640,h:7.5,rd:'G60 + G4215'},
+   t:'安顺→成都正好路过，完全不绕路。栈道排队久，旺季乘船远观更省时，还能拍到全貌。'},
+
+  {n:'成都', lng:104.0668, lat:30.5728, g:0, c:1, lv:1, alt:500, d:'D6 夜 · D7 晨', leg:{km:150,h:2.0,rd:'G93 成渝环线'},
+   t:'10/5 晚到成都。10/6 上午可去熊猫基地（7:30 开园，越早越活跃）或宽窄巷子，中午出发去天水。这是最后一晚大城市，之后一直到乌鲁木齐都是中小城市。'},
+
+  {n:'剑门关', lng:105.5700, lat:32.2800, g:1, c:0, lv:3, alt:800, tk:'约 100', d:'D7 · 10/6', leg:{km:300,h:3.5,rd:'G5 京昆'},
+   t:'「剑门天下险」。鸟道 + 关楼 2.5 h，和 G5 几乎零绕路。赶时间可只到关楼拍照。'},
+
+  {n:'天水', lng:105.7249, lat:34.5809, g:1, c:1, lv:2, alt:1100, d:'D7 夜', leg:{km:390,h:4.5,rd:'G7011 十天'},
+   t:'天水麻辣烫是本地招牌，值得当晚饭。麦积山在市区东南 45 km，明早顺路。'},
+
+  {n:'麦积山石窟', lng:106.0070, lat:34.3520, g:1, c:0, lv:2, alt:1400, tk:'约 80 + 观光车 15', d:'D8 · 10/7 晨可选', leg:{km:45,h:1.0},
+   t:'中国四大石窟之一，栈道贴在丹霞崖壁上。加 2 h 可以，但 D8 是 750 km 转场日，加了晚上会很赶——取舍看当天体力。'},
+
+  {n:'兰州', lng:103.8340, lat:36.0610, g:1, c:1, lv:3, alt:1520, d:'D8', leg:{km:320,h:3.8,rd:'G30 连霍'},
+   t:'只停一碗牛肉面。这里是河西走廊前最后一个补给齐全的大城市。'},
+
+  {n:'武威', lng:102.6380, lat:37.9280, g:1, c:1, lv:3, alt:1500, d:'D8', leg:{km:260,h:3.0,rd:'G30'},
+   t:'雷台汉墓（马踏飞燕出土地）在城里。多数情况只是服务区打卡补给。'},
+
+  {n:'张掖七彩丹霞', lng:100.4498, lat:38.9257, g:1, c:0, lv:1, alt:1500, tk:'54 + 区间车 20', d:'D8 · 10/7 傍晚', leg:{km:240,h:2.8,rd:'G30'},
+   t:'10/7 日落约 18:50，17:00 前必须到景区。1–4 号观景台，斜射光下色彩最饱和。太累就把丹霞挪到 D9 一早（但逆光）。'},
+
+  {n:'嘉峪关关城', lng:98.2900, lat:39.7724, g:1, c:0, lv:1, alt:1600, tk:'通票约 110', d:'D9 · 10/8 上午', leg:{km:225,h:2.5,rd:'G30'},
+   t:'「天下第一雄关」。通票含关城、悬壁长城、长城第一墩。关城本身留 2.5 h，另两处各 40 min。'},
+
+  {n:'鸣沙山 · 月牙泉', lng:94.6700, lat:40.0800, g:1, c:0, lv:2, alt:1140, tk:'约 120（3 日有效）', d:'D9 · 10/8 傍晚', leg:{km:380,h:4.2,rd:'G30 + S314'},
+   t:'16:00 后进最合适，避开暴晒与爬沙山最耗体力的时段。骑骆驼要排 40 min，看日落请留足时间。'},
+
+  {n:'敦煌 · 莫高窟', lng:94.8100, lat:40.0400, g:1, c:0, lv:1, alt:1140, tk:'A 类票 238', d:'D10 · 10/9 上午', leg:{km:25,h:0.5},
+   t:'实名预约 + 每日限流，A 类票含 8 窟 + 2 部数字电影，全程约 4 h。现在就要抢票——国庆段基本一放就空。'},
+
+  {n:'星星峡', lng:95.8500, lat:42.0500, g:1, c:0, lv:3, alt:1500, d:'D10', leg:{km:300,h:3.6,rd:'G30'},
+   t:'甘肃与新疆的分界。过这里就算正式入疆，之后加油站要刷身份证登记，服务区间距也明显变大。'},
+
+  {n:'哈密', lng:93.5134, lat:42.8332, g:1, c:1, lv:2, alt:700, d:'D10 · 10/9 夜', leg:{km:200,h:2.3,rd:'G30'},
+   t:'入疆第一晚。哈密瓜产地，路边瓜摊比景区里便宜。见到加油站就加满，不要赌下一个服务区。'},
+
+  {n:'火焰山', lng:89.5000, lat:42.9500, g:1, c:0, lv:2, alt:300, tk:'约 40', d:'D11 · 10/10 下午', leg:{km:420,h:4.6,rd:'G30'},
+   t:'10 月才敢来，夏天地表 70℃+。1.5 h 足够，主要是打卡那条红色山脊和巨型温度计。'},
+
+  {n:'交河故城', lng:89.0711, lat:42.9558, g:1, c:0, lv:1, alt:100, tk:'约 70', d:'D11 · 10/10 傍晚', leg:{km:45,h:0.9},
+   t:'世界最大、最古老的生土建筑城市。闭园前 1.5 h 进，夕照把土墙染成蜜色，是这一站唯一正确的打开方式。'},
+
+  {n:'乌鲁木齐（整备 / 交车）', lng:87.6168, lat:43.8256, g:1, c:0, lv:1, w:3, alt:800, d:'D12 · 10/11 整备 · D28–D29 交车', leg:{km:190,h:2.2,rd:'G30'},
+   t:'进疆整备日：车辆保养、大采购，并办电子边防证（微信搜「移民局12367」，勾选塔什库尔干塔吉克自治县，10–30 分钟出证、免费）。回程 D28–D29 在同一城交车托运：约 4,200 km / 6 天 / 5,600–6,500 元。交车前全车拍照（四周 + 里程表 + 油量表）、清空贵重物品、合同写明里程与油量，当晚或次日飞回广州。'},
+
+  {n:'天山天池', lng:88.1300, lat:43.8800, g:1, c:0, lv:3, alt:1910, tk:'约 155（含区间车）', d:'D12 · 10/11 可选', spur:22,
+   t:'支线：自乌鲁木齐往返约 220 km。10 月山上已冷，带厚外套。整备日时间紧就砍掉，它不影响主线。'},
+
+  {n:'赛里木湖', lng:81.1900, lat:44.6050, g:2, c:0, lv:1, alt:2070, tk:'约 70', d:'D13 · 10/12', leg:{km:560,h:6.5,rd:'G30'},
+   t:'海拔约 2,070 m，夜里接近 0℃，厚外套必备。环湖公路约 90 km，傍晚顺光看日落、水色最蓝。'},
+
+  {n:'果子沟大桥', lng:81.0500, lat:44.4300, g:2, c:0, lv:2, alt:1600, d:'D14 · 10/13', leg:{km:60,h:1.0},
+   t:'横跨果子沟的高架桥，桥面距谷底约 200 m。观景台就在高速旁，停 40 min 足够。'},
+
+  {n:'霍尔果斯口岸', lng:80.4100, lat:44.2100, g:2, c:0, lv:3, alt:700, tk:'合作中心约 30', d:'D14', leg:{km:90,h:1.2,rd:'G30'},
+   t:'中哈国际边境合作中心属边境管控区，需电子边防证 + 身份证。无人机禁飞，别带。'},
+
+  {n:'伊宁 · 六星街', lng:81.3240, lat:43.9160, g:2, c:0, lv:1, alt:640, d:'D14 · 10/13 傍晚', leg:{km:100,h:1.5},
+   t:'六边形放射街区，俄式木屋与蓝色民居混在一起。喀赞其民俗区可坐马车穿巷子，傍晚光线最好，也最容易遇到当地人邀请你喝茶。'},
+
+  {n:'昭苏', lng:81.1200, lat:43.1600, g:2, c:0, lv:3, alt:1900, d:'D15', leg:{km:130,h:2.5,rd:'伊昭公路'},
+   t:'伊昭公路（白石峰段）是新疆最美山路之一，10 月中旬已有降雪可能。一旦管制就改走 G218 经特克斯，多约 60 km。'},
+
+  {n:'特克斯八卦城', lng:81.8360, lat:43.2165, g:2, c:0, lv:2, alt:1200, d:'D15', leg:{km:60,h:1.0},
+   t:'世界最大的八卦城，全城没有一盏红绿灯。登城中心的观景塔才看得出八条放射街。'},
+
+  {n:'那拉提草原', lng:84.0100, lat:43.3200, g:2, c:0, lv:1, alt:1800, tk:'95 + 区间车约 100', d:'D15 · 10/14 傍晚', leg:{km:230,h:3.5,rd:'G218'},
+   t:'10 月中旬草原已枯黄，但雪山 + 河谷林带的层次反而比夏天更好。空中草原与河谷草原选一个，别都去。'},
+
+  {n:'巴音布鲁克', lng:84.1500, lat:42.9000, g:2, c:0, lv:1, w:1, alt:2500, tk:'65 + 区间车约 90', d:'D16 · 10/15 日落', leg:{km:90,h:1.8,rd:'G217 独库'},
+   t:'九曲十八弯，日落时水面能数出「九个太阳」。观景台提前 1 h 占位。海拔 2,500 m，夜里很冷，是全程第一个真正的高海拔夜。'},
+
+  {n:'天山神秘大峡谷', lng:83.1500, lat:41.7500, g:3, c:0, lv:1, alt:1600, tk:'约 45', d:'D17 · 10/16', leg:{km:320,h:5.5,rd:'G217 独库'},
+   t:'独库公路南段的红岩窄缝峡谷，阳光斜射时整条沟像在燃烧。来回 2.5 h。走这里说明独库南段没有封闭——这是全程最大的一个不确定项。'},
+
+  {n:'库车', lng:82.9620, lat:41.7170, g:3, c:1, lv:2, alt:1000, d:'D17 夜', leg:{km:70,h:1.2},
+   t:'独库公路南端终点。库车老城 + 库车王府放 D17 傍晚，老城的色彩和质感比很多收费景点好。'},
+
+  {n:'克孜尔千佛洞', lng:82.5000, lat:41.7800, g:3, c:0, lv:2, alt:1200, tk:'约 70', d:'D18 · 10/17 上午', leg:{km:70,h:1.3},
+   t:'中国开凿最早的大型石窟群，比敦煌早约 300 年。距库车 70 km，与西行方向基本顺路。洞内禁止拍照。'},
+
+  {n:'阿克苏', lng:80.2600, lat:41.1700, g:3, c:1, lv:3, alt:1100, d:'D18', leg:{km:270,h:3.2,rd:'G314'},
+   t:'苹果产地，纯过路。加油、吃饭、休息。'},
+
+  {n:'巴楚', lng:78.5500, lat:39.7850, g:3, c:1, lv:3, alt:1100, d:'D18 夜', leg:{km:240,h:2.8,rd:'G314'},
+   t:'红海湾胡杨林景区在附近，时间够可以加 2 h。今夜是南疆西段的落脚点。'},
+
+  {n:'喀什（老城 · 大巴扎）', lng:75.9900, lat:39.4700, g:3, c:0, lv:1, w:3, alt:1290, tk:'老城 45 / 香妃园 30', d:'D19–D20 · 10/18–10/19', leg:{km:270,h:3.2,rd:'G314'},
+   t:'老城、艾提尕尔清真寺、百年老茶馆、香妃园、高台民居、大巴扎。它不只是景区，更是真实居民区——拍人物先征得同意。周日的大巴扎（牲畜巴扎）最值得看。'},
+
+  {n:'白沙湖', lng:74.9800, lat:38.7200, g:3, c:0, lv:2, alt:3300, d:'D21 · 10/20', leg:{km:290,h:4.2,rd:'G314 中巴公路'},
+   t:'约 3,300 m。白沙山 + 湖面 + 雪山三层叠加，是上塔县途中第一个震撼点。风极大，注意帽子和车门。'},
+
+  {n:'卡拉库里湖 · 慕士塔格峰', lng:75.0500, lat:38.4400, g:3, c:0, lv:1, alt:3600, tk:'约 50', d:'D21 · 10/20', leg:{km:50,h:1.0},
+   t:'湖面约 3,600 m，慕士塔格峰 7,546 m 倒影。全天高反风险最高的一站——不要在湖区过夜，当天折返塔县住宿。'},
+
+  {n:'塔什库尔干 · 石头城', lng:75.2290, lat:37.7730, g:3, c:0, lv:1, alt:3100, tk:'石头城 30 + 金草滩 25', d:'D22 · 10/21 晨', leg:{km:110,h:2.0},
+   t:'海拔 3,100 m。晨光下金草滩 + 雪山 + 古城同框最出片。去红其拉甫需在「帕米尔旅游景区」公众号预约。'},
+
+  {n:'红其拉甫国门', lng:75.4200, lat:36.8500, g:3, c:0, lv:3, alt:4700, tk:'需换乘区间车', d:'D22 可选', leg:{km:130,h:2.5},
+   t:'约 4,700 m，全程海拔最高点。私家车不能直达国门，须换乘区间车。无人机禁带，禁止拍摄军事设施与边防检查。'},
+
+  {n:'和田', lng:79.9220, lat:37.1140, g:3, c:1, lv:1, alt:1370, d:'D23 · 10/22 夜', leg:{km:800,h:10.5,rd:'G314 + G315'},
+   t:'从塔县经喀什南下，是全程最长的转场日（约 800 km / 10.5 h）。建议 6:30 出发，中途在叶城补给。和田夜市的烤蛋、酸奶粽子、红柳烤肉值得专门留一顿晚饭。'},
+
+  {n:'民丰', lng:82.6920, lat:37.0650, g:4, c:1, lv:2, alt:1400, d:'D24 · 10/23 夜', leg:{km:300,h:3.5,rd:'G315'},
+   t:'G315 沿沙漠南缘。这段空旷、加油站间距大、部分路段无信号——出发前加满油、下好离线地图。'},
+
+  {n:'塔中', lng:83.6500, lat:38.9800, g:4, c:0, lv:1, alt:1100, d:'D25 · 10/24', leg:{km:250,h:4.0,rd:'沙漠公路'},
+   t:'塔克拉玛干沙漠公路纵穿途中唯一的补给点。全长约 560 km，中间没有其他加油点，不赶夜路。'},
+
+  {n:'塔里木胡杨林', lng:84.3500, lat:41.0800, g:4, c:0, lv:1, w:2, alt:950, tk:'40–45 + 区间车 30，小火车 100', d:'D26–D27 · 10/25–10/26', leg:{km:330,h:5.0,rd:'沙漠公路'},
+   t:'全程压轴。盛黄期 10/20–11/5，黄透率 95%–100%。早晨 8 点前后金色最饱和、水面倒影最清。'},
+
+  {n:'轮台', lng:84.2500, lat:41.7780, g:4, c:1, lv:3, alt:950, d:'D27 夜', leg:{km:70,h:1.2},
+   t:'住轮台县城，第二天走 G3012 回库尔勒。'},
+
+  {n:'库尔勒', lng:86.1740, lat:41.7260, g:5, c:1, lv:2, alt:950, d:'D28 · 10/27', leg:{km:180,h:2.2,rd:'G3012'},
+   t:'走 G3012 转 G30 回乌鲁木齐，全程高速。可顺路看一眼铁门关。'},
+
+  {n:'博斯腾湖', lng:86.9000, lat:41.9500, g:5, c:0, lv:3, alt:1050, tk:'约 45', d:'D28 可选', leg:{km:60,h:1.0},
+   t:'中国最大的内陆淡水湖。顺路，加 2 h 够。之后是回乌鲁木齐的最后 380 km / 4.5 h 高速。'}
+];
+
+/* ================= 路线（数字=点位下标，数组=途经坐标） ================= */
+var RT = [
+  [0,
+   [113.10,23.20],[112.70,23.55],[112.20,23.95],[111.50,24.35],[110.95,24.85],
+   1, [110.60,24.85],[110.55,24.95],
+   2, [110.15,24.95],[109.60,25.15],[109.00,25.35],[108.55,25.50],[108.10,25.40],
+   3, [107.90,25.55],[108.05,25.95],[108.10,26.30],
+   4, [107.85,26.60],[107.30,26.55],[106.80,26.60],[106.30,26.40],[105.95,26.20],
+   5, [105.80,26.12],
+   6, [106.30,26.55],[106.63,26.90],[106.10,27.45],[105.45,28.00],[105.42,28.87],[105.00,29.25],[104.35,29.42],
+   7, [103.95,29.80],[104.05,30.20],
+   8],
+
+  [[104.15,30.85],[104.68,31.47],[105.30,31.95],[105.84,32.44],
+   9, [104.93,33.40],[105.20,34.00],
+   10, [105.95,34.48],
+   11, [105.85,34.55],[105.30,35.10],[104.70,35.65],[104.20,35.95],
+   12, [103.30,36.35],[102.90,36.75],[102.60,37.20],[102.55,37.60],
+   13, [102.20,38.20],[101.60,38.55],[101.00,38.80],[100.70,38.90],
+   14, [100.00,39.05],[99.50,39.30],[99.00,39.55],[98.60,39.70],
+   15, [97.90,39.90],[97.00,40.20],[96.00,40.40],[95.30,40.30],[94.90,40.10],
+   16, [94.75,40.05],
+   17, [95.20,40.30],[95.60,41.00],[95.85,41.85],
+   18, [95.20,42.30],[94.50,42.60],[94.00,42.75],
+   19, [92.60,42.90],[91.50,43.00],[90.50,42.95],[89.90,42.93],
+   20, [89.30,42.98],
+   21, [88.90,43.05],[88.55,43.20],[88.31,43.36],[87.95,43.60],
+   22],
+
+  [[87.00,44.10],[86.20,44.35],[85.30,44.55],[84.20,44.60],[83.20,44.65],[82.20,44.70],[81.60,44.68],
+   24, [81.08,44.50],
+   25, [80.85,44.35],[80.55,44.28],
+   26, [80.70,44.15],[81.00,44.05],
+   27, [81.20,43.70],[81.05,43.40],
+   28, [81.50,43.15],[81.75,43.18],
+   29, [82.15,43.45],[82.45,43.50],[82.85,43.48],[83.26,43.43],[83.70,43.40],
+   30, [84.30,43.15],[84.32,43.00],
+   31],
+
+  [[83.85,42.65],[83.55,42.40],[83.28,42.10],[83.20,41.90],
+   32, [83.05,41.73],
+   33, [82.75,41.75],
+   34, [82.20,41.65],[81.80,41.50],[81.40,41.35],[80.90,41.25],
+   35, [79.80,40.90],[79.30,40.55],[78.90,40.20],
+   36, [78.10,39.70],[77.50,39.65],[76.90,39.60],[76.40,39.55],
+   37, [75.60,39.22],[75.35,39.00],[75.15,38.85],
+   38, [75.05,38.60],
+   39, [75.10,38.20],[75.05,37.95],
+   40, [75.35,37.45],[75.40,37.15],
+   41, [75.40,37.15],[75.32,37.50],[75.20,37.80],[75.10,38.20],[75.05,38.44],[75.15,38.85],[75.35,39.00],[75.60,39.22],[76.00,39.10],[76.17,38.93],[76.70,38.70],[77.24,38.42],[77.42,37.88],[78.28,37.62],[79.10,37.40],[79.73,37.27],
+   42],
+
+  [[80.20,37.08],[80.80,37.00],[81.60,36.90],[82.20,36.95],
+   43, [82.95,37.40],[83.15,38.00],[83.40,38.55],
+   44, [83.80,39.60],[83.95,40.30],[84.05,40.80],
+   45, [84.30,41.35],[84.28,41.55],
+   46],
+
+  [[84.90,41.90],[85.60,41.85],[86.05,41.80],
+   47, [86.60,41.90],
+   48, [87.30,42.35],[87.90,42.60],[88.65,42.79],[88.31,43.36],[87.95,43.60],[87.6168,43.8256]]
+];
+
+/* ================= 地形 / 水系 / 山脉 ================= */
+var TERR = [
+  {n:'塔里木盆地', k:'basin', p:[[75.6,39.6],[77.5,41.3],[80,41.9],[83,42.1],[86,42.2],[89,41.8],[91,41.0],[91.5,39.3],[89,38.0],[86,37.6],[82.5,37.4],[79,37.5],[76.5,38.2]], lp:[84.6,39.3]},
+  {n:'准噶尔盆地', k:'basin', p:[[79.8,45.6],[82.5,46.3],[86,46.4],[89,45.9],[90.5,45.0],[90,43.9],[86.5,43.6],[83,43.8],[80.2,44.5]], lp:[85.4,45.2]},
+  {n:'吐鲁番—哈密盆地', k:'basin', p:[[87.6,43.3],[90.5,43.4],[93.5,43.2],[94.6,42.6],[92.5,42.0],[89.5,42.2],[87.9,42.6]], lp:[91.4,43.0]},
+  {n:'柴达木盆地', k:'basin', p:[[90.5,38.6],[93.5,39.0],[96.5,38.0],[98.2,36.6],[95.5,36.0],[92.0,36.6],[90.5,37.4]], lp:[94.0,37.6]},
+  {n:'四川盆地', k:'basin', p:[[103.6,32.4],[107.0,32.0],[108.6,30.6],[107.2,28.9],[104.6,28.6],[103.0,29.6],[103.2,31.3]], lp:[105.7,30.5]},
+  {n:'河西走廊', k:'plain', p:[[103.2,37.2],[102.6,38.6],[101.2,39.6],[99.0,40.3],[96.5,40.9],[95.6,40.2],[97.4,39.2],[99.6,38.4],[101.8,37.6]], lp:[99.4,39.7]},
+  {n:'塔克拉玛干沙漠', k:'desert', p:[[78.6,39.9],[80.5,40.7],[83,41.0],[86,40.8],[88,40.2],[88.5,39.0],[86.5,37.9],[83,37.7],[80,38.2],[78.6,39.0]], lp:[83.4,39.2]},
+  {n:'古尔班通古特沙漠', k:'desert', p:[[84.5,45.6],[86.5,45.8],[88.8,45.3],[89.6,44.6],[88.2,44.0],[85.6,44.1],[84.4,44.9]], lp:[87.1,44.85]},
+  {n:'库姆塔格沙漠', k:'desert', p:[[91.5,40.4],[93.5,40.6],[94.6,40.2],[93.4,39.4],[91.6,39.6]], lp:[93.1,40.05]}
+];
+
+var LAKES = [
+  {n:'赛里木湖',   lng:81.19,  lat:44.605, rw:0.17, rh:0.09},
+  {n:'博斯腾湖',   lng:86.90,  lat:41.950, rw:0.32, rh:0.19},
+  {n:'艾比湖',     lng:82.95,  lat:44.950, rw:0.28, rh:0.13},
+  {n:'艾丁湖',     lng:89.30,  lat:42.660, rw:0.15, rh:0.07},
+  {n:'青海湖',     lng:100.20, lat:36.900, rw:0.46, rh:0.32},
+  {n:'乌伦古湖',   lng:87.30,  lat:47.050, rw:0.36, rh:0.18},
+  {n:'卡拉库里湖', lng:75.05,  lat:38.440, rw:0.09, rh:0.04},
+  {n:'白沙湖',     lng:74.98,  lat:38.720, rw:0.07, rh:0.03}
+];
+
+var RIVERS = [
+  {p:[[78.4,39.8],[80.4,40.5],[82.8,40.9],[85.2,41.1],[87.2,40.9],[88.4,40.4]]},
+  {p:[[76.8,37.9],[78.0,38.5],[79.4,39.15],[80.6,40.0]]},
+  {p:[[81.35,43.92],[80.90,44.02],[80.58,44.16]]},
+  {p:[[103.80,36.06],[104.70,36.60],[105.30,37.50],[106.30,38.50],[106.80,39.30]]},
+  {p:[[104.60,28.80],[105.40,28.90],[106.50,29.60],[107.50,30.60]]}
+];
+
+var RIDGE = [
+  {n:'天山山脉',   p:[[77.0,42.0],[79.5,42.4],[82.0,43.1],[84.0,43.4],[86.5,43.4],[88.5,43.2],[90.5,43.4],[92.0,43.6]], lp:[84.6,43.66]},
+  {n:'昆仑山脉',   p:[[75.5,36.6],[78.0,36.2],[81.0,35.9],[84.0,35.8],[87.0,36.0],[90.0,36.3],[93.0,36.6],[96.0,36.4]], lp:[86.0,36.14]},
+  {n:'喀喇昆仑山', p:[[74.8,37.0],[76.0,36.3],[77.3,35.9]], lp:[76.2,36.66]},
+  {n:'阿尔金山',   p:[[89.0,38.6],[91.5,38.2],[94.0,37.4],[95.6,36.9]], lp:[92.0,38.16]},
+  {n:'祁连山',     p:[[94.8,39.2],[97.0,38.7],[99.5,38.0],[101.5,37.2],[103.0,36.6]], lp:[98.8,38.26]},
+  {n:'阿尔泰山',   p:[[85.6,47.2],[87.8,47.5],[89.6,47.2],[91.0,46.4]], lp:[87.8,47.74]},
+  {n:'秦岭',       p:[[104.8,33.9],[107.0,33.8],[109.5,33.9],[111.5,34.0]], lp:[107.0,34.18]},
+  {n:'六盘山',     p:[[105.2,34.5],[105.7,35.3],[106.2,36.1]], lp:[106.08,35.55]},
+  {n:'贺兰山',     p:[[105.9,38.2],[106.0,39.0]], lp:[106.30,38.60]},
+  {n:'苗岭',       p:[[105.5,26.4],[107.0,26.5],[108.5,26.4]], lp:[107.0,26.72]},
+  {n:'帕米尔高原', p:[[73.6,38.4],[74.6,37.9],[75.4,37.5]], lp:[74.4,38.16]}
+];
+
+var PEAKS = [
+  {n:'乔戈里峰',   h:8611, lng:76.51, lat:35.88},
+  {n:'公格尔峰',   h:7649, lng:75.30, lat:38.60},
+  {n:'托木尔峰',   h:7443, lng:80.10, lat:42.05},
+  {n:'木孜塔格峰', h:6973, lng:87.30, lat:36.40},
+  {n:'团结峰',     h:5826, lng:98.02, lat:38.92},
+  {n:'博格达峰',   h:5445, lng:88.12, lat:43.79}
+];
+
+var BADGES = [
+  {t:'G80',   lng:112.20, lat:23.90},
+  {t:'G65',   lng:110.55, lat:24.99},
+  {t:'G78',   lng:109.00, lat:25.38},
+  {t:'G60',   lng:106.30, lat:26.44},
+  {t:'G4215', lng:105.00, lat:29.28},
+  {t:'G5',    lng:105.30, lat:31.98},
+  {t:'G7011', lng:104.93, lat:33.44},
+  {t:'G30',   lng:101.00, lat:38.84},
+  {t:'G30',   lng:97.00,  lat:40.24},
+  {t:'G30',   lng:92.60,  lat:42.94},
+  {t:'G217',  lng:83.55,  lat:42.44},
+  {t:'G218',  lng:82.85,  lat:43.52},
+  {t:'伊昭',  lng:81.05,  lat:43.44},
+  {t:'G314',  lng:77.50,  lat:39.69},
+  {t:'G315',  lng:77.42,  lat:37.92},
+  {t:'沙漠公路', lng:83.95, lat:40.34},
+  {t:'G3012', lng:85.60,  lat:41.89}
+];
+
+var ALT = [[84.15,42.90],[85.00,42.75],[85.90,42.50],[86.40,42.32],[86.174,41.726],[85.00,41.50],[84.00,41.50],[82.962,41.717]];
+
+/* ================= 投影 ================= */
+var LNG0 = 72.0, LNG1 = 116.0, LAT0 = 21.0, LAT1 = 46.8;
+var KC = Math.cos(35 * Math.PI / 180);
+var GEO_W = (LNG1 - LNG0) * KC;
+var SC = 1000 / GEO_W;
+var VH = Math.round((LAT1 - LAT0) * SC);
+var KMU = 111.32 / SC;
+
+function PX(lng){ return (lng - LNG0) * KC * SC; }
+function PY(lat){ return (LAT1 - lat) * SC; }
+
+S.forEach(function(p, i){ p.no = i + 1; p.X = PX(p.lng); p.Y = PY(p.lat); });
+
+/* ================= 路线展开 ================= */
+var FLAT = [], FULL = [], IN_FULL = {};
+RT.forEach(function(seg, g){
+  var arr = [];
+  seg.forEach(function(it){
+    if (typeof it === 'number') arr.push([S[it].X, S[it].Y]);
+    else arr.push([PX(it[0]), PY(it[1])]);
+  });
+  FLAT.push(arr);
+});
+FLAT.forEach(function(arr, g){
+  var pre = (g > 0 && FLAT[g - 1].length) ? [FLAT[g - 1][FLAT[g - 1].length - 1]] : [];
+  FULL.push(pre.concat(arr));
+  var m = {}, n = 0;
+  RT[g].forEach(function(it){
+    if (typeof it !== 'number') return;
+    m[it] = (typeof it === 'number' ? 0 : 0) + n + pre.length;
+    n++;
+  });
+  IN_FULL[g] = m;
+});
+/* 上一段的末点在本段 FULL 中的位置为 0 */
+S.forEach(function(p, i){
+  if (i === 0) return;
+  if (S[i - 1].g !== p.g) IN_FULL[p.g][i - 1] = 0;
+});
+
+var SPURS = [];
+S.forEach(function(p, i){ if (p.spur !== undefined && p.spur !== null) SPURS.push({i:i, from:p.spur}); });
+
+var LEGLBL = [];
+S.forEach(function(p, i){
+  if (!p.leg || p.spur !== undefined || !p.leg.km || p.leg.km < 180) return;
+  var m = IN_FULL[p.g];
+  var a = m[i - 1], b = m[i];
+  if (a === undefined || b === undefined || b <= a) return;
+  LEGLBL.push({i:i, g:p.g, a:a, b:b});
+});
+
+/* ================= 状态 ================= */
+var svg = document.getElementById('map');
+var world = document.getElementById('world');
+var gTerr = document.getElementById('gTerr'), gWater = document.getElementById('gWater');
+var gGrat = document.getElementById('gGrat'), gRidge = document.getElementById('gRidge');
+var gAlt = document.getElementById('gAlt'), gRoad = document.getElementById('gRoad');
+var oLab = document.getElementById('oLab'), oPoi = document.getElementById('oPoi');
+var stage = document.getElementById('stage'), plist = document.getElementById('plist');
+var chipsEl = document.getElementById('chips'), tipEl = document.getElementById('tip');
+var toastEl = document.getElementById('toast'), sheet = document.getElementById('sheet');
+var layersEl = document.getElementById('layers'), sbTxt = document.getElementById('sbTxt'), sbBar = document.getElementById('sbBar');
+
+var tx = 0, ty = 0, k = 1, s = 0.4;
+var cw = 0, ch = 0, filter = 'all', active = -1;
+var kMin = 0.6, kMax = 40;
+var nodes = {}, labs = {}, peaks = [], badges = [], legLbls = [];
+var layer = {terr:true, mtn:true, road:true, leg:true, alt:false, grat:true};
+var rafPending = false;
+
+svg.setAttribute('viewBox', '0 0 1000 ' + VH);
+
+/* ⑥ 段末程：博斯腾湖 → 乌鲁木齐（终点与第 23 号点位同城，故不再单列点位） */
+var TAIL_KM = 380;
+
+function totalKm(){
+  var t = TAIL_KM;
+  S.forEach(function(p){ if (p.leg && p.leg.km) t += p.leg.km; });
+  return Math.round(t / 10) * 10;
+}
+function f1(n){ return Number(n).toFixed(2); }
+function joinPts(a){ return a.map(function(p){ return f1(p[0]) + ',' + f1(p[1]); }).join(' '); }
+
+/* ================= 构建 ================= */
+function build(){
+  var h = '', i, a, ang, L, ring;
+  var fill = {basin:'#f3eee3', plain:'#f1f3ea', desert:'#eae0c9'};
+
+  h = '';
+  for (i = 0; i < TERR.length; i++){
+    h += '<polygon points="' + joinPts(TERR[i].p.map(function(c){ return [PX(c[0]), PY(c[1])]; })) + '" fill="' + fill[TERR[i].k] + '"/>';
+  }
+  gTerr.innerHTML = h;
+
+  h = '';
+  for (i = 0; i < LAKES.length; i++){
+    L = LAKES[i]; ring = [];
+    for (a = 0; a < 12; a++){
+      ang = a / 12 * Math.PI * 2;
+      ring.push([PX(L.lng + Math.cos(ang) * L.rw), PY(L.lat + Math.sin(ang) * L.rh)]);
+    }
+    h += '<polygon points="' + joinPts(ring) + '" fill="#cfe3f2" stroke="#a9c9e4"/>';
+  }
+  for (i = 0; i < RIVERS.length; i++){
+    h += '<polyline points="' + joinPts(RIVERS[i].p.map(function(c){ return [PX(c[0]), PY(c[1])]; })) + '" fill="none" stroke="#a9c9e4" stroke-linecap="round"/>';
+  }
+  gWater.innerHTML = h;
+
+  h = '';
+  var g;
+  for (g = 75; g <= 115; g += 5) h += '<line x1="' + PX(g) + '" y1="' + PY(LAT1) + '" x2="' + PX(g) + '" y2="' + PY(LAT0) + '" stroke="#e4e8ee"/>';
+  for (g = 25; g <= 45; g += 5) h += '<line x1="' + PX(LNG0) + '" y1="' + PY(g) + '" x2="' + PX(LNG1) + '" y2="' + PY(g) + '" stroke="#e4e8ee"/>';
+  gGrat.innerHTML = h;
+
+  h = '';
+  for (i = 0; i < RIDGE.length; i++){
+    h += '<polyline points="' + joinPts(RIDGE[i].p.map(function(c){ return [PX(c[0]), PY(c[1])]; })) + '" fill="none" stroke="#cfc7b6" stroke-linecap="round" stroke-dasharray="1 3"/>';
+  }
+  gRidge.innerHTML = h;
+
+  gAlt.innerHTML = '<polyline points="' + joinPts(ALT.map(function(c){ return [PX(c[0]), PY(c[1])]; })) + '" fill="none" stroke="#9aa1ac" stroke-dasharray="7 5" stroke-linecap="round"/>';
+
+  h = '';
+  FULL.forEach(function(arr, gi){
+    h += '<polyline data-g="' + gi + '" points="' + joinPts(arr) + '" fill="none" stroke="' + SEG[gi].c + '" stroke-linecap="round" stroke-linejoin="round"/>';
+  });
+  SPURS.forEach(function(sp){
+    var A = S[sp.from], B = S[sp.i];
+    h += '<polyline data-g="' + B.g + '" data-spur="1" points="' + f1(A.X) + ',' + f1(A.Y) + ' ' + f1(B.X) + ',' + f1(B.Y) + '" fill="none" stroke="' + SEG[B.g].c + '" stroke-dasharray="4 4" stroke-linecap="round"/>';
+  });
+  gRoad.innerHTML = h;
+
+  /* ---------- 叠加文字层 ---------- */
+  h = '';
+  for (g = 75; g <= 115; g += 5) h += '<text class="gl" data-x="' + PX(g) + '" data-y="' + (PY(LAT0) - 10) + '">' + g + '\u00B0E</text>';
+  for (g = 25; g <= 45; g += 5) h += '<text class="gl" data-a="1" data-x="' + (PX(LNG0) + 56) + '" data-y="' + PY(g) + '">' + g + '\u00B0N</text>';
+  for (i = 0; i < TERR.length; i++) h += '<text class="tl" data-x="' + PX(TERR[i].lp[0]) + '" data-y="' + PY(TERR[i].lp[1]) + '">' + TERR[i].n + '</text>';
+  for (i = 0; i < RIDGE.length; i++) h += '<text class="rl" data-x="' + PX(RIDGE[i].lp[0]) + '" data-y="' + PY(RIDGE[i].lp[1]) + '">' + RIDGE[i].n + '</text>';
+  for (i = 0; i < LAKES.length; i++) h += '<text class="wl" data-x="' + PX(LAKES[i].lng) + '" data-y="' + PY(LAKES[i].lat + LAKES[i].rh * 1.9) + '">' + LAKES[i].n + '</text>';
+  for (i = 0; i < PEAKS.length; i++){
+    h += '<g class="pk" data-x="' + PX(PEAKS[i].lng) + '" data-y="' + PY(PEAKS[i].lat) + '">'
+       +   '<path d="M0,0 L-5.5,9 L5.5,9 Z" fill="#8d8574"/>'
+       +   '<text class="pn" x="8" y="9">' + PEAKS[i].n + '</text>'
+       +   '<text class="ph" x="8" y="19">' + PEAKS[i].h + ' m</text>'
+       + '</g>';
+  }
+  for (i = 0; i < BADGES.length; i++){
+    h += '<g class="bd" data-x="' + PX(BADGES[i].lng) + '" data-y="' + PY(BADGES[i].lat) + '">'
+       +   '<rect x="-17" y="-8.5" width="34" height="17" rx="4.5" fill="rgba(255,255,255,.93)" stroke="#c6cad2"/>'
+       +   '<text class="bt" x="0" y="0.5">' + BADGES[i].t + '</text></g>';
+  }
+  for (i = 0; i < LEGLBL.length; i++) h += '<text class="ll" data-i="' + i + '"></text>';
+  oLab.innerHTML = h;
+
+  labs.g = [].slice.call(oLab.querySelectorAll('text.gl'));
+  /* 地理名称标签：先按重要度排序，渲染时逐个避让 */
+  geo = [];
+  [].forEach.call(oLab.querySelectorAll('text.rl'), function(t){ geo.push({el:t, k:'r', x:Number(t.dataset.x), y:Number(t.dataset.y), pri:1}); });
+  [].forEach.call(oLab.querySelectorAll('text.tl'), function(t){ geo.push({el:t, k:'t', x:Number(t.dataset.x), y:Number(t.dataset.y), pri:2}); });
+  [].forEach.call(oLab.querySelectorAll('text.wl'), function(t){ geo.push({el:t, k:'w', x:Number(t.dataset.x), y:Number(t.dataset.y), pri:3}); });
+  geo.sort(function(a, b){ return a.pri - b.pri || a.y - b.y; });
+  peaks  = [].slice.call(oLab.querySelectorAll('g.pk'));
+  badges = [].slice.call(oLab.querySelectorAll('g.bd'));
+  legLbls = [].slice.call(oLab.querySelectorAll('text.ll'));
+
+  /* ---------- 点位 ---------- */
+  h = '';
+  S.forEach(function(p, i){
+    h += '<g class="poi" data-i="' + i + '">'
+       +   '<circle class="hit" r="10"/>'
+       +   '<circle class="ring" r="6"/>'
+       +   '<text class="num"></text>'
+       +   '<text class="lbl"></text>'
+       + '</g>';
+  });
+  oPoi.innerHTML = h;
+  [].forEach.call(oPoi.querySelectorAll('.poi'), function(el){
+    var idx = Number(el.dataset.i);
+    nodes[idx] = {g:el, ring:el.querySelector('.ring'), hit:el.querySelector('.hit'), num:el.querySelector('.num'), lbl:el.querySelector('.lbl')};
+    el.addEventListener('click', function(ev){ ev.stopPropagation(); openTip(idx, true); });
+  });
+}
+
+/* ================= 布局 / 坐标 ================= */
+function layout(){ cw = stage.clientWidth || 360; ch = stage.clientHeight || 500; s = Math.min(cw / 1000, ch / VH); }
+function SX(X){ return tx + k * X; }
+function SY(Y){ return ty + k * Y; }
+
+function arcPoint(arr, a, b, t){
+  var tot = 0, segs = [], i, dx, dy, d;
+  for (i = a; i < b; i++){
+    dx = arr[i + 1][0] - arr[i][0]; dy = arr[i + 1][1] - arr[i][1]; d = Math.hypot(dx, dy);
+    segs.push(d); tot += d;
+  }
+  if (!tot) return arr[a];
+  var want = tot * t, acc = 0;
+  for (i = 0; i < segs.length; i++){
+    if (acc + segs[i] >= want){
+      var r = segs[i] ? (want - acc) / segs[i] : 0;
+      return [arr[a + i][0] + (arr[a + i + 1][0] - arr[a + i][0]) * r,
+              arr[a + i][1] + (arr[a + i + 1][1] - arr[a + i][1]) * r];
+    }
+    acc += segs[i];
+  }
+  return arr[b];
+}
+/* 估算文字屏幕宽度（中日韩全角按 1em、其余按 0.56em） */
+function estW(txt, fs){
+  var w = 0, i, c;
+  for (i = 0; i < txt.length; i++){
+    c = txt.charCodeAt(i);
+    w += (c > 0x2E80) ? 1 : 0.56;
+  }
+  return w * fs;
+}
+function hits(list, r){
+  for (var i = 0; i < list.length; i++){
+    var a = list[i];
+    if (r.x0 < a.x1 && r.x1 > a.x0 && r.y0 < a.y1 && r.y1 > a.y0) return true;
+  }
+  return false;
+}
+
+/* ================= 渲染 ================= */
+function render(){
+  var u = k * s, px = 1 / s, i, el, j;
+
+  world.setAttribute('transform', 'translate(' + tx.toFixed(2) + ',' + ty.toFixed(2) + ') scale(' + k.toFixed(4) + ')');
+  gGrat.setAttribute('stroke-width', String(1 / u));
+  gWater.setAttribute('stroke-width', String(1.5 / u));
+  gRidge.setAttribute('stroke-width', String(1.7 / u));
+  gRoad.setAttribute('stroke-width', String(3 / u));
+  gAlt.setAttribute('stroke-width', String(2 / u));
+
+  gTerr.setAttribute('display', layer.terr ? '' : 'none');
+  gWater.setAttribute('display', layer.terr ? '' : 'none');
+  gRidge.setAttribute('display', layer.mtn ? '' : 'none');
+  gGrat.setAttribute('display', layer.grat ? '' : 'none');
+  gAlt.setAttribute('display', layer.alt ? '' : 'none');
+
+  [].forEach.call(gRoad.querySelectorAll('polyline'), function(pl){
+    var gi = Number(pl.dataset.g);
+    var on = (filter === 'all' || Number(filter) === gi);
+    pl.setAttribute('opacity', pl.dataset.spur ? (on ? '0.55' : '0.06') : (on ? '0.95' : '0.10'));
+  });
+
+  var isAll = (filter === 'all');
+  var showT = layer.terr && (!isAll || k >= 1.35);
+  var showR = layer.mtn  && (!isAll || k >= 1.12);
+  var showP = layer.mtn  && (!isAll || k >= 1.55);
+  var showB = layer.road && (!isAll || k >= 2.4);
+
+  var fgl = Math.max(8.5, 7.2 * px), ftl = Math.max(9.5, 8 * px), frl = Math.max(9.5, 8 * px),
+      fwl = Math.max(9, 7.5 * px), fpn = Math.max(9, 7.6 * px), fph = Math.max(8, 6.8 * px),
+      fbt = Math.max(9, 7.6 * px), fll = Math.max(9, 7.4 * px);
+
+  for (i = 0; i < labs.g.length; i++){
+    el = labs.g[i];
+    el.setAttribute('x', f1(SX(Number(el.dataset.x))));
+    el.setAttribute('y', f1(SY(Number(el.dataset.y))));
+    el.setAttribute('font-size', fgl);
+    el.setAttribute('text-anchor', el.dataset.a ? 'start' : 'middle');
+    el.setAttribute('dominant-baseline', 'middle');
+    el.setAttribute('fill', '#a8aeb8');
+    el.setAttribute('stroke', 'rgba(255,255,255,.9)');
+    el.setAttribute('stroke-width', String(fgl * 0.3));
+  }
+  /* 地理名称标签：按重要度依次落位，撞车就隐藏 */
+  var rects = [], rt;
+  var gStyle = {
+    r:{fs:Math.max(9.5, 8 * px), fill:'#9b9382', ls:'0.08em', on:showR},
+    t:{fs:Math.max(9.5, 8 * px), fill:'#b3a992', ls:'0.14em', on:showT},
+    w:{fs:Math.max(9, 7.5 * px),  fill:'#7d9cbd', ls:'0',      on:showT}
+  };
+  for (i = 0; i < geo.length; i++){
+    var G = geo[i], st = gStyle[G.k];
+    if (!st.on){ G.el.setAttribute('display', 'none'); continue; }
+    var gx = SX(G.x), gy = SY(G.y), gw = estW(G.el.textContent, st.fs);
+    rt = {x0:gx - gw / 2, x1:gx + gw / 2, y0:gy - st.fs * 0.72, y1:gy + st.fs * 0.72};
+    if (hits(rects, rt)){ G.el.setAttribute('display', 'none'); continue; }
+    rects.push(rt);
+    G.el.removeAttribute('display');
+    G.el.setAttribute('transform', 'translate(' + f1(gx) + ',' + f1(gy) + ')');
+    G.el.setAttribute('text-anchor', 'middle');
+    G.el.setAttribute('dominant-baseline', 'middle');
+    G.el.setAttribute('font-size', st.fs);
+    G.el.setAttribute('fill', st.fill);
+    G.el.setAttribute('letter-spacing', st.ls);
+    G.el.setAttribute('pointer-events', 'none');
+  }
+  for (i = 0; i < peaks.length; i++){
+    el = peaks[i];
+    el.setAttribute('display', showP ? '' : 'none');
+    el.setAttribute('transform', 'translate(' + f1(SX(Number(el.dataset.x))) + ',' + f1(SY(Number(el.dataset.y))) + ')');
+    el.querySelector('.pn').setAttribute('font-size', fpn);
+    el.querySelector('.ph').setAttribute('font-size', fph);
+    el.querySelector('.pn').setAttribute('fill', '#6d6557');
+    el.querySelector('.ph').setAttribute('fill', '#9a917f');
+    el.setAttribute('pointer-events', 'none');
+  }
+  for (i = 0; i < badges.length; i++){
+    el = badges[i];
+    el.setAttribute('display', showB ? '' : 'none');
+    el.setAttribute('transform', 'translate(' + f1(SX(Number(el.dataset.x))) + ',' + f1(SY(Number(el.dataset.y))) + ')');
+    var bt = el.querySelector('.bt');
+    bt.setAttribute('font-size', fbt);
+    bt.setAttribute('text-anchor', 'middle');
+    bt.setAttribute('dominant-baseline', 'central');
+    bt.setAttribute('fill', '#5a5f6a');
+    el.setAttribute('pointer-events', 'none');
+  }
+  /* 里程标签 */
+  var showL = layer.leg && (!isAll || k >= 1.3);
+  for (i = 0; i < legLbls.length; i++){
+    el = legLbls[i];
+    var L = LEGLBL[i], p = S[L.i];
+    var on = showL && (isAll || Number(filter) === L.g);
+    if (!on){ el.setAttribute('display', 'none'); continue; }
+    var mid = arcPoint(FULL[L.g], L.a, L.b, 0.5);
+    var x = SX(mid[0]), y = SY(mid[1]) - 8;
+    var txt = p.leg.km + ' km · ' + p.leg.h + ' h';
+    var lw = estW(txt, fll);
+    if (hits(rects, {x0:x - lw / 2, x1:x + lw / 2, y0:y - fll * 0.7, y1:y + fll * 0.7})){
+      el.setAttribute('display', 'none'); continue;
+    }
+    rects.push({x0:x - lw / 2, x1:x + lw / 2, y0:y - fll * 0.7, y1:y + fll * 0.7});
+    el.removeAttribute('display');
+    el.setAttribute('transform', 'translate(' + f1(x) + ',' + f1(y) + ')');
+    el.setAttribute('text-anchor', 'middle');
+    el.setAttribute('dominant-baseline', 'middle');
+    el.setAttribute('font-size', fll);
+    el.setAttribute('font-weight', '600');
+    el.setAttribute('fill', '#7c828c');
+    el.setAttribute('stroke', 'rgba(255,255,255,.95)');
+    el.setAttribute('stroke-width', String(fll * 0.34));
+    el.setAttribute('paint-order', 'stroke');
+    el.setAttribute('pointer-events', 'none');
+    if (el.textContent !== txt) el.textContent = txt;
+  }
+
+  /* 点位 */
+  var show2 = !isAll || k >= 1.9;
+  var show3 = !isAll || k >= 3.4;
+  var lab1 = !isAll || k >= 1.45;
+  var lab2 = !isAll || k >= 2.6;
+  var lab3 = !isAll || k >= 4.2;
+  var R  = Math.max(11, 8 * px);
+  var R2 = Math.max(18, 18 * px);
+  var fs = Math.max(10, 8 * px);
+  var lf = Math.max(10.5, 8 * px);
+
+  /* 全景时按屏幕距离自动避让：太近的点位只保留权重高的一个，放大后自然全部露出 */
+  var dThr = 17 / (k * s);
+  var declut = {};
+  if (isAll){
+    var cand = [], placedP = [];
+    for (i = 0; i < S.length; i++){
+      var P0 = S[i];
+      if (P0.lv === 1 || (P0.lv === 2 && show2) || (P0.lv === 3 && show3)) cand.push(i);
+    }
+    cand.sort(function(a, b){ return (S[b].w || 0) - (S[a].w || 0) || a - b; });
+    for (i = 0; i < cand.length; i++){
+      var ci = cand[i], keep = true;
+      for (j = 0; j < placedP.length; j++){
+        if (Math.hypot(S[ci].X - placedP[j][0], S[ci].Y - placedP[j][1]) < dThr){ keep = false; break; }
+      }
+      declut[ci] = keep;
+      if (keep) placedP.push([S[ci].X, S[ci].Y]);
+    }
+  }
+  for (i = 0; i < S.length; i++){
+    var P = S[i], nd = nodes[i];
+    var vis = (isAll || P.g === Number(filter)) &&
+              (P.lv === 1 || (P.lv === 2 && show2) || (P.lv === 3 && show3));
+    if (vis && isAll && i !== active && declut[i] === false) vis = false;
+    if (!vis){ nd.g.setAttribute('display', 'none'); continue; }
+    nd.g.removeAttribute('display');
+    nd.g.setAttribute('transform', 'translate(' + f1(SX(P.X)) + ',' + f1(SY(P.Y)) + ')');
+
+    var col = SEG[P.g].c;
+    nd.hit.setAttribute('r', String(R2));
+    nd.hit.setAttribute('fill', 'transparent');
+    nd.ring.setAttribute('r', String(P.c ? R * 0.74 : R));
+    nd.ring.setAttribute('fill', P.c ? '#ffffff' : col);
+    nd.ring.setAttribute('stroke', (i === active) ? '#1a5fb4' : (P.c ? '#b6bcc6' : '#ffffff'));
+    nd.ring.setAttribute('stroke-width', String(i === active ? Math.max(2.4, 2.8 * px) : Math.max(1.6, 1.9 * px)));
+
+    nd.num.setAttribute('text-anchor', 'middle');
+    nd.num.setAttribute('dominant-baseline', 'central');
+    nd.num.setAttribute('y', '0.5');
+    nd.num.setAttribute('font-size', String(P.c ? fs * 0.9 : fs));
+    nd.num.setAttribute('font-weight', '600');
+    nd.num.setAttribute('fill', P.c ? '#5a5f6a' : '#ffffff');
+    nd.num.setAttribute('pointer-events', 'none');
+    if (nd.num.textContent !== String(P.no)) nd.num.textContent = String(P.no);
+
+    var labOn = (P.lv === 1 && lab1) || (P.lv === 2 && lab2) || (P.lv === 3 && lab3);
+    if (labOn){
+      nd.lbl.removeAttribute('display');
+      nd.lbl.setAttribute('text-anchor', 'middle');
+      nd.lbl.setAttribute('y', String(-(R + lf * 0.55)));
+      nd.lbl.setAttribute('font-size', String(lf));
+      nd.lbl.setAttribute('font-weight', P.c ? '400' : '600');
+      nd.lbl.setAttribute('fill', P.c ? '#7b818b' : '#16181d');
+      nd.lbl.setAttribute('stroke', 'rgba(255,255,255,.94)');
+      nd.lbl.setAttribute('stroke-width', String(lf * 0.3));
+      nd.lbl.setAttribute('paint-order', 'stroke');
+      nd.lbl.setAttribute('pointer-events', 'none');
+      if (nd.lbl.textContent !== P.n) nd.lbl.textContent = P.n;
+    } else {
+      nd.lbl.setAttribute('display', 'none');
+    }
+  }
+
+  updateScale();
+}
+
+function updateScale(){
+  var kmPerPx = KMU / (k * s);
+  var cands = [20, 50, 100, 200, 300, 500, 1000], best = cands[0], bw = 0;
+  for (var i = 0; i < cands.length; i++){
+    var w = cands[i] / kmPerPx;
+    if (w <= 88){ best = cands[i]; bw = w; }
+  }
+  sbTxt.textContent = best + ' km';
+  sbBar.style.width = Math.max(24, bw).toFixed(0) + 'px';
+}
+
+/* ================= 视图 ================= */
+function bboxOf(list){
+  var xs = list.map(function(p){ return p.X; }), ys = list.map(function(p){ return p.Y; });
+  return {x0:Math.min.apply(null, xs), x1:Math.max.apply(null, xs), y0:Math.min.apply(null, ys), y1:Math.max.apply(null, ys)};
+}
+function fitList(list, padPx){
+  if (!list.length) return;
+  var pad = (padPx === undefined ? 26 : padPx) / s;
+  var b = bboxOf(list);
+  var w = Math.max(b.x1 - b.x0, 4), hh = Math.max(b.y1 - b.y0, 4);
+  var kk = Math.min((1000 - pad * 2) / w, (VH - pad * 2) / hh);
+  kk = Math.max(kMin, Math.min(kMax, kk));
+  k = kk;
+  tx = 500 - k * (b.x0 + b.x1) / 2;
+  ty = VH / 2 - k * (b.y0 + b.y1) / 2;
+  clampView();
+  schedule();
+}
+function clampView(){
+  var spanX = 1000 * k, spanY = VH * k;
+  tx = Math.max(1000 - spanX - 1000 * 0.4, Math.min(1000 * 0.4, tx));
+  ty = Math.max(VH - spanY - VH * 0.4, Math.min(VH * 0.4, ty));
+}
+function zoomAt(pxx, pyy, factor){
+  var nk = Math.max(kMin, Math.min(kMax, k * factor));
+  if (nk === k) return;
+  var ux = pxx / s, uy = pyy / s;
+  var X = (ux - tx) / k, Y = (uy - ty) / k;
+  k = nk; tx = ux - k * X; ty = uy - k * Y;
+  clampView(); schedule();
+}
+function resetView(){
+  if (filter === 'all'){
+    fitList(S, 26);
+    kMin = Math.max(0.5, k * 0.72);
+  } else {
+    var gi = Number(filter);
+    var idx = S.filter(function(p){ return p.g === gi; });
+    var first = S[S.indexOf(idx[0]) - 1];
+    fitList(first ? [first].concat(idx) : idx, 32);
+  }
+  schedule();
+}
+
+/* ================= 交互 ================= */
+var ptrs = {}, lastDist = 0, lastMid = null;
+function ptPos(e){ var r = svg.getBoundingClientRect(); return {x:e.clientX - r.left, y:e.clientY - r.top}; }
+function actPtrs(){ return Object.keys(ptrs).map(function(id){ return ptrs[id]; }); }
+
+svg.addEventListener('pointerdown', function(e){
+  svg.setPointerCapture(e.pointerId);
+  ptrs[e.pointerId] = ptPos(e);
+  svg.classList.add('grabbing');
+  if (actPtrs().length === 2){
+    var a = actPtrs();
+    lastDist = Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y);
+    lastMid = {x:(a[0].x + a[1].x) / 2, y:(a[0].y + a[1].y) / 2};
+  }
+});
+svg.addEventListener('pointermove', function(e){
+  if (!ptrs[e.pointerId]) return;
+  var prev = ptrs[e.pointerId], now = ptPos(e);
+  ptrs[e.pointerId] = now;
+  var list = actPtrs();
+  if (list.length === 1){
+    tx += (now.x - prev.x) / s; ty += (now.y - prev.y) / s;
+    clampView(); schedule();
+  } else if (list.length === 2){
+    var dist = Math.hypot(list[0].x - list[1].x, list[0].y - list[1].y);
+    var mid = {x:(list[0].x + list[1].x) / 2, y:(list[0].y + list[1].y) / 2};
+    if (lastDist > 0) zoomAt(mid.x, mid.y, dist / lastDist);
+    tx += (mid.x - lastMid.x) / s; ty += (mid.y - lastMid.y) / s;
+    lastDist = dist; lastMid = mid;
+    clampView(); schedule();
+  }
+});
+function endPtr(e){
+  delete ptrs[e.pointerId];
+  if (!actPtrs().length){ svg.classList.remove('grabbing'); lastDist = 0; }
+}
+svg.addEventListener('pointerup', endPtr);
+svg.addEventListener('pointercancel', endPtr);
+svg.addEventListener('wheel', function(e){
+  e.preventDefault();
+  var p = ptPos(e);
+  zoomAt(p.x, p.y, e.deltaY < 0 ? 1.2 : 1 / 1.2);
+}, {passive:false});
+
+document.getElementById('bIn').onclick = function(){ zoomAt(cw / 2, ch / 2, 1.5); };
+document.getElementById('bOut').onclick = function(){ zoomAt(cw / 2, ch / 2, 1 / 1.5); };
+document.getElementById('bFit').onclick = function(){ filter = 'all'; syncChips(); resetView(); buildList(); say('已回到全景'); };
+
+svg.addEventListener('click', function(){ closeTip(); });
+
+/* ================= 详情卡 ================= */
+function openTip(i, fly){
+  var p = S[i];
+  active = i;
+  if (fly){
+    k = Math.max(k, Math.min(kMax, 4.2));
+    tx = 500 - k * p.X; ty = VH / 2 - k * p.Y;
+    clampView();
+  }
+  schedule();
+  var col = SEG[p.g].c;
+  var meta = [];
+  if (p.alt) meta.push('<span>海拔 <b>' + p.alt + ' m</b></span>');
+  if (p.tk)  meta.push('<span>门票 <b>' + p.tk + '</b></span>');
+  if (p.leg) meta.push('<span>自上一站 <b>' + p.leg.km + ' km · ' + p.leg.h + ' h</b>' + (p.leg.rd ? ' · ' + p.leg.rd : '') + '</span>');
+  if (p.spur !== undefined) meta.push('<span>支线（不在主线上）</span>');
+  if (p.c) meta.push('<span>途经城市</span>');
+  meta.push('<span>' + p.lat.toFixed(3) + '\u00B0N, ' + p.lng.toFixed(3) + '\u00B0E</span>');
+
+  tipEl.innerHTML =
+      '<button class="cls" aria-label="关闭">×</button>'
+    + '<div class="h"><span class="badge" style="background:' + (p.c ? '#8b909a' : col) + '">' + p.no + '</span>'
+    +   '<span class="nm">' + p.n + '</span></div>'
+    + '<p class="dt">' + p.d + ' &nbsp;·&nbsp; ' + SEG[p.g].full + ' ' + SEG[p.g].d + '</p>'
+    + (p.t ? '<p class="tx">' + p.t + '</p>' : '')
+    + '<div class="mt">' + meta.join('') + '</div>';
+  tipEl.classList.add('on');
+  tipEl.querySelector('.cls').onclick = function(){ closeTip(); };
+  [].forEach.call(document.querySelectorAll('#plist .it'), function(el){
+    el.classList.toggle('act', Number(el.dataset.i) === i);
+  });
+}
+function closeTip(){
+  tipEl.classList.remove('on');
+  active = -1;
+  [].forEach.call(document.querySelectorAll('#plist .it'), function(el){ el.classList.remove('act'); });
+  schedule();
+}
+
+/* ================= 列表 / 分段 ================= */
+function syncChips(){
+  [].forEach.call(chipsEl.querySelectorAll('button'), function(x){
+    var f = x.dataset.f, on = (f === filter);
+    x.classList.toggle('on', on);
+    x.style.background = (on && f !== 'all') ? SEG[Number(f)].c : (on ? '#16181d' : '');
+  });
+}
+function buildChips(){
+  var h = '<button data-f="all" class="on">全部 ' + S.length + ' 个点位</button>';
+  SEG.forEach(function(sg, i){ h += '<button data-f="' + i + '">' + sg.n + '</button>'; });
+  chipsEl.innerHTML = h;
+  [].forEach.call(chipsEl.querySelectorAll('button'), function(b){
+    b.onclick = function(){
+      filter = b.dataset.f;
+      syncChips();
+      closeTip();
+      resetView();
+      buildList();
+      if (filter !== 'all') say('已聚焦「' + SEG[Number(filter)].full + '」 ' + SEG[Number(filter)].d);
+    };
+  });
+}
+function buildList(){
+  var h = '';
+  SEG.forEach(function(sg, gi){
+    if (filter !== 'all' && gi !== Number(filter)) return;
+    var items = S.filter(function(p){ return p.g === gi; });
+    if (!items.length && !sg.note) return;
+    h += '<div class="grp"><i style="background:' + sg.c + '"></i>' + sg.full + ' · ' + sg.d
+       + (sg.note ? '<span style="color:#96a0ac">｜' + sg.note + '</span>' : '') + '</div>';
+    items.forEach(function(p){
+      var i = S.indexOf(p);
+      h += '<div class="it" data-i="' + i + '">'
+         +   '<span class="bd' + (p.c ? ' city' : '') + '" style="' + (p.c ? '' : 'background:' + sg.c) + '">' + p.no + '</span>'
+         +   '<span style="flex:1;min-width:0">'
+         +     '<div class="nm">' + p.n + (p.spur !== undefined ? ' <span style="font-size:10.5px;color:#96a0ac">（支线）</span>' : '') + '</div>'
+         +     '<div class="dt">' + p.d + (p.alt ? ' · 海拔 ' + p.alt + ' m' : '') + '</div>'
+         +     (p.leg ? '<div class="lg">↳ 自上一站 ' + p.leg.km + ' km · ' + p.leg.h + ' h' + (p.leg.rd ? ' · ' + p.leg.rd : '') + '</div>' : '')
+         +     (p.t ? '<div class="tx">' + p.t + '</div>' : '')
+         +   '</span></div>';
+    });
+  });
+  plist.innerHTML = h;
+  [].forEach.call(plist.querySelectorAll('.it'), function(el){
+    el.onclick = function(){
+      sheet.classList.add('collapsed');
+      openTip(Number(el.dataset.i), true);
+    };
+  });
+}
+
+/* ================= 图层开关 ================= */
+document.getElementById('grab').onclick = function(){ sheet.classList.toggle('collapsed'); };
+document.getElementById('bLayers').onclick = function(){
+  layersEl.classList.toggle('on');
+  this.classList.toggle('on', layersEl.classList.contains('on'));
+};
+document.getElementById('layers').addEventListener('click', function(e){ e.stopPropagation(); });
+svg.addEventListener('pointerdown', function(){ layersEl.classList.remove('on'); document.getElementById('bLayers').classList.remove('on'); });
+
+var CK = {ckT:'terr', ckM:'mtn', ckR:'road', ckL:'leg', ckA:'alt', ckG:'grat'};
+Object.keys(CK).forEach(function(id){
+  document.getElementById(id).onchange = function(){
+    layer[CK[id]] = this.checked;
+    schedule();
+  };
+});
+
+function say(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('on');
+  clearTimeout(toastEl._t);
+  toastEl._t = setTimeout(function(){ toastEl.classList.remove('on'); }, 2200);
+}
+
+document.getElementById('legend').innerHTML = SEG.map(function(sg){
+  return '<div><i style="background:' + sg.c + '"></i>' + sg.full + '</div>';
+}).join('');
+
+/* ================= 启动 ================= */
+function schedule(){
+  if (rafPending) return;
+  rafPending = true;
+  var run = function(){ rafPending = false; render(); };
+  if (window.requestAnimationFrame) requestAnimationFrame(run); else setTimeout(run, 16);
+}
+
+function start(){
+  layout();
+  build();
+  buildChips();
+  syncChips();
+  buildList();
+  fitList(S, 26);
+  kMin = Math.max(0.5, k * 0.72);
+  render();
+  document.getElementById('hudSub').textContent =
+    '9/30 广州出发 · 10/29 返程 · ' + S.length + ' 个点位 · 约 ' + totalKm().toLocaleString('en-US') + ' km';
+}
+window.addEventListener('resize', function(){ layout(); schedule(); });
+window.addEventListener('load', start);
+if (document.readyState === 'complete') start();
+
+})();
+</script>
+</body>
+</html>
