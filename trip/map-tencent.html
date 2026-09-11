@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#16181d">
+<meta name="description" content="黔川 + 新疆 30 天自驾路线图：腾讯矢量底图 + 6 段分色路线 + 49 个景点标注，手机可交互缩放">
+<title>路线图 · 黔川 + 新疆 30 天自驾 · 真实底图版</title>
+<style>
+:root{
+  --bg:#eef0f3; --card:#fff; --line:#e2e4e9; --line2:#cfd3da;
+  --t1:#16181d; --t2:#5a5f6a; --t3:#8b909a;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--t1);
+  font:14px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+
+#app{display:flex;flex-direction:column;height:100vh;height:100dvh}
+
+#top{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:8px 12px;
+  padding-top:calc(8px + env(safe-area-inset-top));background:var(--card);border-bottom:1px solid var(--line);z-index:12}
+#top a{font-size:13px;color:#1a5fb4;text-decoration:none;font-weight:600;flex:0 0 auto}
+#top .t{flex:1 1 auto;font-size:13.5px;font-weight:600;text-align:center;letter-spacing:-.2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#top button{flex:0 0 auto;font:inherit;font-size:12.5px;font-weight:600;color:var(--t2);
+  background:var(--bg);border:1px solid var(--line2);border-radius:8px;padding:5px 10px;cursor:pointer}
+#top button.on{background:var(--t1);color:#fff;border-color:var(--t1)}
+
+#stage{position:relative;flex:1 1 auto;min-height:0;background:#e8ebef;overflow:hidden}
+#gmap{position:absolute;inset:0;width:100%;height:100%}
+
+#hud{position:absolute;left:10px;top:10px;z-index:6;pointer-events:none;
+  display:flex;flex-direction:column;gap:7px;max-width:calc(100% - 66px)}
+#hud .box{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:10px;
+  padding:7px 10px;box-shadow:0 2px 8px rgba(0,0,0,.07);pointer-events:auto}
+#hud .ttl{font-size:12.5px;font-weight:600;line-height:1.35}
+#hud .sub{font-size:11px;color:var(--t2);margin-top:1px}
+#legend{display:flex;flex-direction:column;gap:3px}
+#legend div{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--t1)}
+#legend i{width:12px;height:3px;border-radius:2px;display:block;flex:0 0 12px}
+
+#zoombar{position:absolute;right:10px;bottom:14px;z-index:6;display:flex;flex-direction:column;gap:7px}
+#zoombar button{width:38px;height:38px;border:1px solid var(--line2);border-radius:10px;
+  background:rgba(255,255,255,.96);color:var(--t1);font-size:17px;line-height:1;
+  box-shadow:0 2px 8px rgba(0,0,0,.07);cursor:pointer;padding:0}
+#zoombar button.sm{font-size:11px;font-weight:600}
+#zoombar button:active{background:#eef2f8}
+
+#scalebar{position:absolute;right:56px;bottom:14px;z-index:6;background:rgba(255,255,255,.9);
+  border:1px solid var(--line);border-radius:6px;padding:2px 6px 3px;box-shadow:0 1px 5px rgba(0,0,0,.06);
+  font-size:10px;color:var(--t2);text-align:center;line-height:1.2}
+#scalebar .bar{height:5px;border-left:1.5px solid var(--t2);border-right:1.5px solid var(--t2);
+  border-bottom:1.5px solid var(--t2);margin:2px auto 1px}
+
+#layers{position:absolute;right:10px;bottom:62px;z-index:14;display:none;background:rgba(255,255,255,.98);
+  border:1px solid var(--line2);border-radius:11px;padding:9px 11px;box-shadow:0 6px 22px rgba(0,0,0,.16);
+  min-width:168px}
+#layers.on{display:block}
+#layers .lt{font-size:11px;color:var(--t3);margin-bottom:6px;letter-spacing:.04em}
+#layers label{display:flex;align-items:center;gap:8px;font-size:12.5px;padding:4px 0;cursor:pointer}
+#layers input{width:15px;height:15px;accent-color:#1a5fb4;margin:0}
+#layers .sep{height:1px;background:var(--line);margin:7px 0}
+#layers .btn{width:100%;font:inherit;font-size:12.5px;font-weight:600;padding:7px 8px;border-radius:8px;
+  border:1px solid var(--line2);background:#f7f8fa;color:var(--t1);cursor:pointer}
+#layers .btn:active{background:#eef2f8}
+#layers .note{font-size:10.5px;color:var(--t3);margin-top:6px;line-height:1.5}
+
+#toast{position:absolute;left:50%;top:14px;transform:translateX(-50%);z-index:20;
+  background:rgba(22,24,29,.88);color:#fff;font-size:12px;padding:7px 14px;border-radius:999px;
+  display:none;max-width:86%;text-align:center}
+#toast.on{display:block}
+
+#credit{position:absolute;left:10px;bottom:4px;z-index:5;font-size:9.5px;color:#6b7280;
+  background:rgba(255,255,255,.72);padding:1px 6px;border-radius:4px;pointer-events:none}
+
+#sheet{flex:0 0 auto;background:var(--card);border-top:1px solid var(--line);
+  border-radius:16px 16px 0 0;box-shadow:0 -3px 16px rgba(0,0,0,.09);
+  display:flex;flex-direction:column;max-height:50vh;margin-top:-14px;z-index:9}
+#grab{padding:9px 0 3px;display:flex;justify-content:center;cursor:pointer}
+#grab i{width:36px;height:4px;border-radius:2px;background:var(--line2);display:block}
+#chips{display:flex;gap:6px;padding:3px 12px 9px;overflow-x:auto;scrollbar-width:none}
+#chips::-webkit-scrollbar{display:none}
+#chips button{flex:0 0 auto;font:inherit;font-size:12px;padding:5px 10px;border-radius:999px;
+  border:1px solid var(--line2);background:var(--card);color:var(--t2);cursor:pointer;white-space:nowrap}
+#chips button.on{color:#fff;border-color:transparent}
+#plist{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 0 14px;
+  border-top:1px solid var(--line)}
+#sheet.collapsed #plist{display:none}
+#plist .grp{padding:10px 14px 4px;font-size:11.5px;color:var(--t3);display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+#plist .grp i{width:8px;height:8px;border-radius:50%;display:block;flex:0 0 8px}
+#plist .it{display:flex;align-items:flex-start;gap:10px;padding:9px 14px;cursor:pointer;
+  border-bottom:1px solid #f2f3f5}
+#plist .it:active,#plist .it.act{background:#eff3fa}
+#plist .bd{flex:0 0 auto;width:24px;height:24px;border-radius:50%;color:#fff;font-size:11.5px;
+  font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:1px}
+#plist .bd.city{background:#fff;color:var(--t2);border:1.5px solid var(--line2)}
+#plist .nm{font-size:13.5px;font-weight:500;line-height:1.4}
+#plist .dt{font-size:11.5px;color:var(--t3);margin-top:1px}
+#plist .lg{font-size:11px;color:#8a8f99;margin-top:2px}
+#plist .tx{font-size:11.5px;color:var(--t2);margin-top:3px;line-height:1.55}
+#sheet .hint{font-size:10.5px;color:var(--t3);text-align:center;padding:0 12px 7px;line-height:1.5}
+
+#notice{padding:34px 22px;max-width:560px;margin:0 auto;color:var(--t1)}
+#notice h1{font-size:17px;margin:0 0 10px}
+#notice p{font-size:13px;color:var(--t2);line-height:1.75;margin:0 0 12px}
+#notice ol{font-size:13px;color:var(--t2);line-height:1.9;padding-left:20px;margin:0 0 14px}
+#notice code{background:#f2f3f5;border-radius:4px;padding:1px 5px;font-size:12px}
+#notice .go{display:inline-block;margin-top:6px;font-size:13px;font-weight:600;color:#fff;
+  background:#1a5fb4;border-radius:8px;padding:9px 16px;text-decoration:none}
+#notice .krow{display:flex;gap:8px;margin:4px 0 10px;flex-wrap:wrap}
+#notice .krow input{flex:1 1 240px;min-width:0;font-size:13px;padding:10px 12px;
+  border:1.5px solid var(--line2);border-radius:8px;background:#fff;color:var(--t1);outline:none}
+#notice .krow input:focus{border-color:#1a5fb4;box-shadow:0 0 0 3px rgba(26,95,180,.12)}
+#notice .krow button{font-size:13px;font-weight:600;color:#fff;background:#1a5fb4;border:0;
+  border-radius:8px;padding:10px 18px;cursor:pointer}
+#notice .krow button[disabled]{opacity:.62;cursor:default}
+#notice .khint{font-size:12px;color:var(--t3);line-height:1.7;background:#f6f7f9;
+  border-radius:8px;padding:10px 12px}
+#notice .ksub{font-size:12.5px;color:var(--t3);margin:-4px 0 12px}
+#notice .kmini{font-size:12.5px;color:var(--t3)}
+#notice .kmini a{color:#1a5fb4}
+
+/* 底图没渲染出来时的浮动提示（不遮挡地图） */
+#tip{position:absolute;left:12px;right:12px;bottom:12px;z-index:40;max-width:400px;
+  margin:0 auto;font-size:12px;line-height:1.7;color:#6b5a20;background:#fffdf3;
+  border:1px solid #e8d9a4;border-radius:10px;padding:10px 12px;
+  box-shadow:0 8px 22px rgba(0,0,0,.14)}
+#tip b{color:#8a6d10}
+#tip a{color:#1a5fb4;font-weight:600}
+
+@media(min-width:760px){
+  #app{display:grid;grid-template-columns:342px 1fr;grid-template-rows:auto 1fr;
+       grid-template-areas:"top top" "sheet stage"}
+  #top{grid-area:top}
+  #stage{grid-area:stage}
+  #sheet{grid-area:sheet;max-height:none;margin-top:0;border-radius:0;border-top:0;
+         border-right:1px solid var(--line);box-shadow:none}
+  #grab{display:none}
+  #chips{padding-top:10px}
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div id="top">
+    <a href="index.html">← 攻略</a>
+    <span class="t">黔川 + 新疆 30 天自驾路线图</span>
+    <button id="bLayers">图层 ▾</button>
+  </div>
+
+  <div id="stage">
+    <div id="gmap"></div>
+
+    <div id="hud">
+      <div class="box">
+        <div class="ttl">黔川 + 新疆 30 天自驾</div>
+        <div class="sub" id="hudSub"></div>
+      </div>
+      <div class="box" id="legend"></div>
+    </div>
+
+    <div id="zoombar">
+      <button id="bIn" aria-label="放大">＋</button>
+      <button id="bOut" aria-label="缩小">－</button>
+      <button id="bFit" class="sm">全景</button>
+    </div>
+
+    <div id="scalebar"><div id="sbTxt">—</div><div class="bar" id="sbBar"></div></div>
+
+    <div id="layers">
+      <div class="lt">图层</div>
+      <label><input type="checkbox" id="ckRoute" checked> 分段路线</label>
+      <label><input type="checkbox" id="ckCity" checked> 途经城市</label>
+      <label><input type="checkbox" id="ckPoi" checked> 景点标注</label>
+      <label><input type="checkbox" id="ckLeg" checked> 里程 · 时长</label>
+      <label><input type="checkbox" id="ckAlt"> 独库备选线（G218）</label>
+      <label><input type="checkbox" id="ckPeak"> 雪山高峰</label>
+      <div class="sep"></div>
+      <button class="btn" id="bRoad">按真实路网重算</button>
+      <div class="note">示意折线按主要公路走向绘制。点上面按钮逐段请求真实路网，约 48 段、需 10–40 秒。</div>
+    </div>
+
+    <div id="toast"></div>
+    <div id="credit">底图 © 腾讯位置服务 · 路线为行程示意，实际以导航为准</div>
+  </div>
+
+  <div id="sheet">
+    <div id="grab"><i></i></div>
+    <div id="chips"></div>
+    <div class="hint">双指缩放 · 拖动平移 · 点图钉看详情　|　底图由腾讯位置服务提供</div>
+    <div id="plist"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   底图模式判定（按优先级三条路）
+   ① 本页有 key  → 地址栏 ?key=xxx  / 浏览器里存过的 key  / 下面 TMAP_KEY 内置
+   ② 本机预览    → 自动走免密钥代理（WorkBuddy 预览服务注入），无需 key
+   ③ 公网且无 key → 显示「填 key」页，粘贴后立即生效并记住
+   ⚠️ 内置 key 对任何访客都是明文可读的，请务必在腾讯位置服务控制台
+      给该 key 配好 Referer（域名）白名单，例如 chiukitleung.github.io
+   ============================================================ */
+var TMAP_KEY = '';                      /* ← 想硬编码 key 就填这里（记得配域名白名单） */
+var KEY_STORE = 'xj_trip_tmap_key';
+
+try { if (/[?&]nokey=1/.test(location.search)) localStorage.removeItem(KEY_STORE); } catch (e) {}
+
+function readKey(){
+  var m = location.search.match(/[?&]key=([^&]*)/);
+  var k = '';
+  if (m && m[1]) {
+    try { k = decodeURIComponent(m[1]); } catch (e) { k = m[1]; }
+    try { localStorage.setItem(KEY_STORE, k); } catch (e) {}
+  } else {
+    try { k = localStorage.getItem(KEY_STORE) || ''; } catch (e) { k = ''; }
+  }
+  return (k || TMAP_KEY || '').replace(/^\s+|\s+$/g, '');
+}
+
+var MODE = (function(){
+  var key = readKey();
+  if (key) return { mode: 'key', key: key };
+
+  var host = location.hostname;
+  /* 免密钥代理只存在于 WorkBuddy 预览服务里：它会把下面两个占位符换成真实端口与密钥。
+     普通本机服务器（python -m http.server 等）不会替换，所以要判断一下再用。 */
+  var isLocal = (host === 'localhost' || host === '127.0.0.1' || host === '::1') &&
+                /^https?:$/.test(location.protocol);
+  if (isLocal) {
+    var sh = 'http://127.0.0.1:__WB_HTTP_PORT__/_TMapService/_wbt/__WB_TMAP_SECRET__';
+    if (sh.indexOf('__WB_') === -1) {
+      window._TMapSecurityConfig = { serviceHost: sh };
+      return { mode: 'proxy' };
+    }
+  }
+  return { mode: 'none' };
+})();
+
+if (MODE.mode === 'none') {
+  document.getElementById('stage').innerHTML =
+    '<div id="notice">' +
+      '<h1>填入腾讯地图 key，真实底图立刻出现</h1>' +
+      '<p>整张路线图（6 段分色路线 · 49 个景点 · 28 段里程时长）都已经画好了，'
+      + '只差一把「合规底图的钥匙」——浏览器限制底图必须由合规地图服务商提供，且 key 不能由页面自带。</p>' +
+      '<div class="krow">' +
+        '<input id="kin" type="text" spellcheck="false" autocomplete="off" ' +
+        'placeholder="粘贴腾讯地图 key，形如 XXXX-XXXX-XXXX-XXXX-XXXX-XXXX">' +
+        '<button id="kgo" type="button">用这个 key</button>' +
+      '</div>' +
+      '<p class="ksub">key 只保存在你这台设备的浏览器里，不会上传到任何服务器；也可以直接在网址后加 <code>?key=你的key</code>。</p>' +
+      '<p class="khint">还没申请？约 3 分钟：打开 <b>lbs.qq.com</b> → 控制台（个人实名即可）→ 应用管理 → 创建应用 → '
+      + '添加 Key，勾选 <b>JavaScript API GL</b> 与 <b>WebServiceAPI</b>；'
+      + '再到该 key 的「域名白名单」里填 <code>chiukitleung.github.io</code>。</p>' +
+      '<p>不想申请 key，可以先看自绘示意版：<br>' +
+      '<a class="go" href="map-svg.html">打开示意版路线图 →</a></p>' +
+    '</div>';
+
+  (function(){
+    var kin = document.getElementById('kin'), kgo = document.getElementById('kgo');
+    function submit(){
+      var v = (kin.value || '').replace(/^\s+|\s+$/g, '');
+      if (!v) { kin.focus(); return; }
+      try { localStorage.setItem(KEY_STORE, v); } catch (e) {}
+      kgo.disabled = true;
+      kgo.textContent = '正在加载底图…';
+      /* 同时写进地址栏：某些隐私模式下 localStorage 不可用，URL 里的 key 兜底 */
+      location.replace(location.pathname + '?key=' + encodeURIComponent(v));
+    }
+    kgo.addEventListener('click', submit);
+    kin.addEventListener('keydown', function(e){ if (e.key === 'Enter') submit(); });
+    kin.focus();
+  })();
+}
+
+var SEG = [
+  {n:'黔川纵游',    full:'① 黔川纵游',    d:'9/30 – 10/5',   c:'#3f6ea8'},
+  {n:'西行入疆',    full:'② 西行入疆',    d:'10/6 – 10/11',  c:'#0f7b7d'},
+  {n:'北疆·独库',   full:'③ 北疆·独库',   d:'10/12 – 10/16', c:'#2f7d55'},
+  {n:'南疆·帕米尔', full:'④ 南疆·帕米尔', d:'10/17 – 10/22', c:'#c0392b'},
+  {n:'沙漠·胡杨',   full:'⑤ 沙漠·胡杨',   d:'10/23 – 10/26', c:'#b9761a'},
+  {n:'收尾出疆',    full:'⑥ 收尾出疆',    d:'10/27 – 10/29', c:'#6b4fa3',
+   note:'终点乌鲁木齐与第 23 号点位同城，不重复标注；末段博斯腾湖 → 乌鲁木齐 380 km 计入总里程；10/29 飞回广州'}
+];
+
+/* c:1 途经城市 / c:0 景点   lv:1 常显 · lv:2 中距 · lv:3 近距   hub:1 全国概览时显示 */
+var S = [
+  {n:'广州', lng:113.2644, lat:23.1291, g:0, c:1, lv:1, hub:1, alt:20, d:'D1 · 9/30 出发',
+   t:'国庆前一天是出行峰值，建议 4:30–5:00 出城，走 G80 广昆高速西行。今天不以赶路为目标，安全出广东就算赢。'},
+
+  {n:'桂林', lng:110.2900, lat:25.2736, g:0, c:1, lv:2, alt:150, d:'D1 夜', leg:{km:560,h:6.5,rd:'G80 广昆'},
+   t:'只住一晚。象鼻山、两江四湖夜景可顺路，桂林米粉当晚饭正好。'},
+
+  {n:'阳朔 · 遇龙河', lng:110.4600, lat:24.7800, g:0, c:0, lv:1, alt:110, tk:'竹筏 240–300 / 筏', d:'D2 · 10/1', leg:{km:80,h:1.3,rd:'G65 包茂'},
+   t:'遇龙河竹筏是阳朔真正的精华（比漓江大船好得多）。国庆筏工紧张，提前 1–2 天线上订筏，早上第一班人最少。'},
+
+  {n:'荔波小七孔', lng:107.6719, lat:25.2616, g:0, c:0, lv:1, hub:1, alt:420, tk:'120 + 观光车 40–50', d:'D3 · 10/2 全天', leg:{km:430,h:5.5,rd:'G78 汕昆'},
+   t:'东门进全程下坡，省一半体力。路线：卧龙潭 → 68 级跌水瀑布 → 水上森林 → 小七孔古桥。门票 5 日内可重复入园，玩不完第二天再来。国庆必须提前线上预约。'},
+
+  {n:'西江千户苗寨', lng:108.1780, lat:26.4945, g:0, c:0, lv:1, alt:850, tk:'90 + 观光车 20', d:'D4 · 10/3', leg:{km:250,h:3.5,rd:'G75 兰海 + G60'},
+   t:'走北门（比西门少 2 km 山路，索道也排队少）。19:30 全寨灯光点亮，建议住半山腰民宿，从阳台看夜景。'},
+
+  {n:'黄果树瀑布群', lng:105.6665, lat:25.9904, g:0, c:0, lv:1, hub:1, alt:700, tk:'旺季 160 + 观光车 50', d:'D5 · 10/4 下午', leg:{km:330,h:4.2,rd:'G60 沪昆'},
+   t:'陡坡塘、天星桥、大瀑布三片区相距 3–6 km，观光车必购。顺序：陡坡塘 → 天星桥下半段（银链坠潭）→ 大瀑布 + 水帘洞。水帘洞要在「安旅通」小程序单独预约，早 7 点放名额。'},
+
+  {n:'安顺', lng:105.9470, lat:26.2530, g:0, c:1, lv:3, alt:1300, d:'D5 夜', leg:{km:45,h:0.8},
+   t:'住安顺比住景区便宜且吃饭方便。龙宫景区就在附近，多一天的话可以加。'},
+
+  {n:'乐山大佛', lng:103.7700, lat:29.5450, g:0, c:0, lv:2, alt:400, tk:'80（游船 70）', d:'D6 · 10/5 可选', leg:{km:640,h:7.5,rd:'G60 + G4215'},
+   t:'安顺→成都正好路过，完全不绕路。栈道排队久，旺季乘船远观更省时，还能拍到全貌。'},
+
+  {n:'成都', lng:104.0668, lat:30.5728, g:0, c:1, lv:1, hub:1, alt:500, d:'D6 夜 · D7 晨', leg:{km:150,h:2.0,rd:'G93 成渝环线'},
+   t:'10/5 晚到成都。10/6 上午可去熊猫基地（7:30 开园，越早越活跃）或宽窄巷子，中午出发去天水。这是最后一晚大城市，之后一直到乌鲁木齐都是中小城市。'},
+
+  {n:'剑门关', lng:105.5700, lat:32.2800, g:1, c:0, lv:3, alt:800, tk:'约 100', d:'D7 · 10/6', leg:{km:300,h:3.5,rd:'G5 京昆'},
+   t:'「剑门天下险」。鸟道 + 关楼 2.5 h，和 G5 几乎零绕路。赶时间可只到关楼拍照。'},
+
+  {n:'天水', lng:105.7249, lat:34.5809, g:1, c:1, lv:2, alt:1100, d:'D7 夜', leg:{km:390,h:4.5,rd:'G7011 十天'},
+   t:'天水麻辣烫是本地招牌，值得当晚饭。麦积山在市区东南 45 km，明早顺路。'},
+
+  {n:'麦积山石窟', lng:106.0070, lat:34.3520, g:1, c:0, lv:2, alt:1400, tk:'约 80 + 观光车 15', d:'D8 · 10/7 晨可选', leg:{km:45,h:1.0},
+   t:'中国四大石窟之一，栈道贴在丹霞崖壁上。加 2 h 可以，但 D8 是 750 km 转场日，加了晚上会很赶——取舍看当天体力。'},
+
+  {n:'兰州', lng:103.8340, lat:36.0610, g:1, c:1, lv:3, alt:1520, d:'D8', leg:{km:320,h:3.8,rd:'G30 连霍'},
+   t:'只停一碗牛肉面。这里是河西走廊前最后一个补给齐全的大城市。'},
+
+  {n:'武威', lng:102.6380, lat:37.9280, g:1, c:1, lv:3, alt:1500, d:'D8', leg:{km:260,h:3.0,rd:'G30'},
+   t:'雷台汉墓（马踏飞燕出土地）在城里。多数情况只是服务区打卡补给。'},
+
+  {n:'张掖七彩丹霞', lng:100.4498, lat:38.9257, g:1, c:0, lv:1, hub:1, alt:1500, tk:'54 + 区间车 20', d:'D8 · 10/7 傍晚', leg:{km:240,h:2.8,rd:'G30'},
+   t:'10/7 日落约 18:50，17:00 前必须到景区。1–4 号观景台，斜射光下色彩最饱和。太累就把丹霞挪到 D9 一早（但逆光）。'},
+
+  {n:'嘉峪关关城', lng:98.2900, lat:39.7724, g:1, c:0, lv:1, hub:1, alt:1600, tk:'通票约 110', d:'D9 · 10/8 上午', leg:{km:225,h:2.5,rd:'G30'},
+   t:'「天下第一雄关」。通票含关城、悬壁长城、长城第一墩。关城本身留 2.5 h，另两处各 40 min。'},
+
+  {n:'鸣沙山 · 月牙泉', lng:94.6700, lat:40.0800, g:1, c:0, lv:2, alt:1140, tk:'约 120（3 日有效）', d:'D9 · 10/8 傍晚', leg:{km:380,h:4.2,rd:'G30 + S314'},
+   t:'16:00 后进最合适，避开暴晒与爬沙山最耗体力的时段。骑骆驼要排 40 min，看日落请留足时间。'},
+
+  {n:'敦煌 · 莫高窟', lng:94.8100, lat:40.0400, g:1, c:0, lv:1, hub:1, alt:1140, tk:'A 类票 238', d:'D10 · 10/9 上午', leg:{km:25,h:0.5},
+   t:'实名预约 + 每日限流，A 类票含 8 窟 + 2 部数字电影，全程约 4 h。现在就要抢票——国庆段基本一放就空。'},
+
+  {n:'星星峡', lng:95.8500, lat:42.0500, g:1, c:0, lv:3, alt:1500, d:'D10', leg:{km:300,h:3.6,rd:'G30'},
+   t:'甘肃与新疆的分界。过这里就算正式入疆，之后加油站要刷身份证登记，服务区间距也明显变大。'},
+
+  {n:'哈密', lng:93.5134, lat:42.8332, g:1, c:1, lv:2, hub:1, alt:700, d:'D10 · 10/9 夜', leg:{km:200,h:2.3,rd:'G30'},
+   t:'入疆第一晚。哈密瓜产地，路边瓜摊比景区里便宜。见到加油站就加满，不要赌下一个服务区。'},
+
+  {n:'火焰山', lng:89.5000, lat:42.9500, g:1, c:0, lv:2, alt:300, tk:'约 40', d:'D11 · 10/10 下午', leg:{km:420,h:4.6,rd:'G30'},
+   t:'10 月才敢来，夏天地表 70℃+。1.5 h 足够，主要是打卡那条红色山脊和巨型温度计。'},
+
+  {n:'交河故城', lng:89.0711, lat:42.9558, g:1, c:0, lv:1, alt:100, tk:'约 70', d:'D11 · 10/10 傍晚', leg:{km:45,h:0.9},
+   t:'世界最大、最古老的生土建筑城市。闭园前 1.5 h 进，夕照把土墙染成蜜色，是这一站唯一正确的打开方式。'},
+
+  {n:'乌鲁木齐（整备 / 交车）', lng:87.6168, lat:43.8256, g:1, c:0, lv:1, hub:1, w:3, alt:800, d:'D12 · 10/11 整备 · D28–D29 交车', leg:{km:190,h:2.2,rd:'G30'},
+   t:'进疆整备日：车辆保养、大采购，并办电子边防证（微信搜「移民局12367」，勾选塔什库尔干塔吉克自治县，10–30 分钟出证、免费）。回程 D28–D29 在同一城交车托运：约 4,200 km / 6 天 / 5,600–6,500 元。交车前全车拍照（四周 + 里程表 + 油量表）、清空贵重物品、合同写明里程与油量，当晚或次日飞回广州。'},
+
+  {n:'天山天池', lng:88.1300, lat:43.8800, g:1, c:0, lv:3, alt:1910, tk:'约 155（含区间车）', d:'D12 · 10/11 可选', spur:22,
+   t:'支线：自乌鲁木齐往返约 220 km。10 月山上已冷，带厚外套。整备日时间紧就砍掉，它不影响主线。'},
+
+  {n:'赛里木湖', lng:81.1900, lat:44.6050, g:2, c:0, lv:1, hub:1, alt:2070, tk:'约 70', d:'D13 · 10/12', leg:{km:560,h:6.5,rd:'G30'},
+   t:'海拔约 2,070 m，夜里接近 0℃，厚外套必备。环湖公路约 90 km，傍晚顺光看日落、水色最蓝。'},
+
+  {n:'果子沟大桥', lng:81.0500, lat:44.4300, g:2, c:0, lv:2, alt:1600, d:'D14 · 10/13', leg:{km:60,h:1.0},
+   t:'横跨果子沟的高架桥，桥面距谷底约 200 m。观景台就在高速旁，停 40 min 足够。'},
+
+  {n:'霍尔果斯口岸', lng:80.4100, lat:44.2100, g:2, c:0, lv:3, alt:700, tk:'合作中心约 30', d:'D14', leg:{km:90,h:1.2,rd:'G30'},
+   t:'中哈国际边境合作中心属边境管控区，需电子边防证 + 身份证。无人机禁飞，别带。'},
+
+  {n:'伊宁 · 六星街', lng:81.3240, lat:43.9160, g:2, c:0, lv:1, alt:640, d:'D14 · 10/13 傍晚', leg:{km:100,h:1.5},
+   t:'六边形放射街区，俄式木屋与蓝色民居混在一起。喀赞其民俗区可坐马车穿巷子，傍晚光线最好，也最容易遇到当地人邀请你喝茶。'},
+
+  {n:'昭苏', lng:81.1200, lat:43.1600, g:2, c:0, lv:3, alt:1900, d:'D15', leg:{km:130,h:2.5,rd:'伊昭公路'},
+   t:'伊昭公路（白石峰段）是新疆最美山路之一，10 月中旬已有降雪可能。一旦管制就改走 G218 经特克斯，多约 60 km。'},
+
+  {n:'特克斯八卦城', lng:81.8360, lat:43.2165, g:2, c:0, lv:2, alt:1200, d:'D15', leg:{km:60,h:1.0},
+   t:'世界最大的八卦城，全城没有一盏红绿灯。登城中心的观景塔才看得出八条放射街。'},
+
+  {n:'那拉提草原', lng:84.0100, lat:43.3200, g:2, c:0, lv:1, hub:1, alt:1800, tk:'95 + 区间车约 100', d:'D15 · 10/14 傍晚', leg:{km:230,h:3.5,rd:'G218'},
+   t:'10 月中旬草原已枯黄，但雪山 + 河谷林带的层次反而比夏天更好。空中草原与河谷草原选一个，别都去。'},
+
+  {n:'巴音布鲁克', lng:84.1500, lat:42.9000, g:2, c:0, lv:1, w:1, alt:2500, tk:'65 + 区间车约 90', d:'D16 · 10/15 日落', leg:{km:90,h:1.8,rd:'G217 独库'},
+   t:'九曲十八弯，日落时水面能数出「九个太阳」。观景台提前 1 h 占位。海拔 2,500 m，夜里很冷，是全程第一个真正的高海拔夜。'},
+
+  {n:'天山神秘大峡谷', lng:83.1500, lat:41.7500, g:3, c:0, lv:1, alt:1600, tk:'约 45', d:'D17 · 10/16', leg:{km:320,h:5.5,rd:'G217 独库'},
+   t:'独库公路南段的红岩窄缝峡谷，阳光斜射时整条沟像在燃烧。来回 2.5 h。走这里说明独库南段没有封闭——这是全程最大的一个不确定项。'},
+
+  {n:'库车', lng:82.9620, lat:41.7170, g:3, c:1, lv:2, alt:1000, d:'D17 夜', leg:{km:70,h:1.2},
+   t:'独库公路南端终点。库车老城 + 库车王府放 D17 傍晚，老城的色彩和质感比很多收费景点好。'},
+
+  {n:'克孜尔千佛洞', lng:82.5000, lat:41.7800, g:3, c:0, lv:2, alt:1200, tk:'约 70', d:'D18 · 10/17 上午', leg:{km:70,h:1.3},
+   t:'中国开凿最早的大型石窟群，比敦煌早约 300 年。距库车 70 km，与西行方向基本顺路。洞内禁止拍照。'},
+
+  {n:'阿克苏', lng:80.2600, lat:41.1700, g:3, c:1, lv:3, alt:1100, d:'D18', leg:{km:270,h:3.2,rd:'G314'},
+   t:'苹果产地，纯过路。加油、吃饭、休息。'},
+
+  {n:'巴楚', lng:78.5500, lat:39.7850, g:3, c:1, lv:3, alt:1100, d:'D18 夜', leg:{km:240,h:2.8,rd:'G314'},
+   t:'红海湾胡杨林景区在附近，时间够可以加 2 h。今夜是南疆西段的落脚点。'},
+
+  {n:'喀什（老城 · 大巴扎）', lng:75.9900, lat:39.4700, g:3, c:0, lv:1, hub:1, w:3, alt:1290, tk:'老城 45 / 香妃园 30', d:'D19–D20 · 10/18–10/19', leg:{km:270,h:3.2,rd:'G314'},
+   t:'老城、艾提尕尔清真寺、百年老茶馆、香妃园、高台民居、大巴扎。它不只是景区，更是真实居民区——拍人物先征得同意。周日的大巴扎（牲畜巴扎）最值得看。'},
+
+  {n:'白沙湖', lng:74.9800, lat:38.7200, g:3, c:0, lv:2, alt:3300, d:'D21 · 10/20', leg:{km:290,h:4.2,rd:'G314 中巴公路'},
+   t:'约 3,300 m。白沙山 + 湖面 + 雪山三层叠加，是上塔县途中第一个震撼点。风极大，注意帽子和车门。'},
+
+  {n:'卡拉库里湖 · 慕士塔格峰', lng:75.0500, lat:38.4400, g:3, c:0, lv:1, alt:3600, tk:'约 50', d:'D21 · 10/20', leg:{km:50,h:1.0},
+   t:'湖面约 3,600 m，慕士塔格峰 7,546 m 倒影。全天高反风险最高的一站——不要在湖区过夜，当天折返塔县住宿。'},
+
+  {n:'塔什库尔干 · 石头城', lng:75.2290, lat:37.7730, g:3, c:0, lv:1, hub:1, alt:3100, tk:'石头城 30 + 金草滩 25', d:'D22 · 10/21 晨', leg:{km:110,h:2.0},
+   t:'海拔 3,100 m。晨光下金草滩 + 雪山 + 古城同框最出片。去红其拉甫需在「帕米尔旅游景区」公众号预约。'},
+
+  {n:'红其拉甫国门', lng:75.4200, lat:36.8500, g:3, c:0, lv:3, alt:4700, tk:'需换乘区间车', d:'D22 可选', leg:{km:130,h:2.5},
+   t:'约 4,700 m，全程海拔最高点。私家车不能直达国门，须换乘区间车。无人机禁带，禁止拍摄军事设施与边防检查。'},
+
+  {n:'和田', lng:79.9220, lat:37.1140, g:3, c:1, lv:1, hub:1, alt:1370, d:'D23 · 10/22 夜', leg:{km:800,h:10.5,rd:'G314 + G315'},
+   t:'从塔县经喀什南下，是全程最长的转场日（约 800 km / 10.5 h）。建议 6:30 出发，中途在叶城补给。和田夜市的烤蛋、酸奶粽子、红柳烤肉值得专门留一顿晚饭。'},
+
+  {n:'民丰', lng:82.6920, lat:37.0650, g:4, c:1, lv:2, alt:1400, d:'D24 · 10/23 夜', leg:{km:300,h:3.5,rd:'G315'},
+   t:'G315 沿沙漠南缘。这段空旷、加油站间距大、部分路段无信号——出发前加满油、下好离线地图。'},
+
+  {n:'塔中', lng:83.6500, lat:38.9800, g:4, c:0, lv:1, alt:1100, d:'D25 · 10/24', leg:{km:250,h:4.0,rd:'沙漠公路'},
+   t:'塔克拉玛干沙漠公路纵穿途中唯一的补给点。全长约 560 km，中间没有其他加油点，不赶夜路。'},
+
+  {n:'塔里木胡杨林', lng:84.3500, lat:41.0800, g:4, c:0, lv:1, hub:1, w:2, alt:950, tk:'40–45 + 区间车 30，小火车 100', d:'D26–D27 · 10/25–10/26', leg:{km:330,h:5.0,rd:'沙漠公路'},
+   t:'全程压轴。盛黄期 10/20–11/5，黄透率 95%–100%。早晨 8 点前后金色最饱和、水面倒影最清。'},
+
+  {n:'轮台', lng:84.2500, lat:41.7780, g:4, c:1, lv:3, alt:950, d:'D27 夜', leg:{km:70,h:1.2},
+   t:'住轮台县城，第二天走 G3012 回库尔勒。'},
+
+  {n:'库尔勒', lng:86.1740, lat:41.7260, g:5, c:1, lv:2, hub:1, alt:950, d:'D28 · 10/27', leg:{km:180,h:2.2,rd:'G3012'},
+   t:'走 G3012 转 G30 回乌鲁木齐，全程高速。可顺路看一眼铁门关。'},
+
+  {n:'博斯腾湖', lng:86.9000, lat:41.9500, g:5, c:0, lv:3, alt:1050, tk:'约 45', d:'D28 可选', leg:{km:60,h:1.0},
+   t:'中国最大的内陆淡水湖。顺路，加 2 h 够。之后是回乌鲁木齐的最后 380 km / 4.5 h 高速。'}
+];
+
+/* 路线：数字=点位下标，数组=[lng,lat] 途经坐标 */
+var RT = [
+  [0, [113.10,23.20],[112.70,23.55],[112.20,23.95],[111.50,24.35],[110.95,24.85],
+   1, [110.60,24.85],[110.55,24.95],
+   2, [110.15,24.95],[109.60,25.15],[109.00,25.35],[108.55,25.50],[108.10,25.40],
+   3, [107.90,25.55],[108.05,25.95],[108.10,26.30],
+   4, [107.85,26.60],[107.30,26.55],[106.80,26.60],[106.30,26.40],[105.95,26.20],
+   5, [105.80,26.12],
+   6, [106.30,26.55],[106.63,26.90],[106.10,27.45],[105.45,28.00],[105.42,28.87],[105.00,29.25],[104.35,29.42],
+   7, [103.95,29.80],[104.05,30.20],
+   8],
+
+  [[104.15,30.85],[104.68,31.47],[105.30,31.95],[105.84,32.44],
+   9, [104.93,33.40],[105.20,34.00],
+   10, [105.95,34.48],
+   11, [105.85,34.55],[105.30,35.10],[104.70,35.65],[104.20,35.95],
+   12, [103.30,36.35],[102.90,36.75],[102.60,37.20],[102.55,37.60],
+   13, [102.20,38.20],[101.60,38.55],[101.00,38.80],[100.70,38.90],
+   14, [100.00,39.05],[99.50,39.30],[99.00,39.55],[98.60,39.70],
+   15, [97.90,39.90],[97.00,40.20],[96.00,40.40],[95.30,40.30],[94.90,40.10],
+   16, [94.75,40.05],
+   17, [95.20,40.30],[95.60,41.00],[95.85,41.85],
+   18, [95.20,42.30],[94.50,42.60],[94.00,42.75],
+   19, [92.60,42.90],[91.50,43.00],[90.50,42.95],[89.90,42.93],
+   20, [89.30,42.98],
+   21, [88.90,43.05],[88.55,43.20],[88.31,43.36],[87.95,43.60],
+   22],
+
+  [[87.00,44.10],[86.20,44.35],[85.30,44.55],[84.20,44.60],[83.20,44.65],[82.20,44.70],[81.60,44.68],
+   24, [81.08,44.50],
+   25, [80.85,44.35],[80.55,44.28],
+   26, [80.70,44.15],[81.00,44.05],
+   27, [81.20,43.70],[81.05,43.40],
+   28, [81.50,43.15],[81.75,43.18],
+   29, [82.15,43.45],[82.45,43.50],[82.85,43.48],[83.26,43.43],[83.70,43.40],
+   30, [84.30,43.15],[84.32,43.00],
+   31],
+
+  [[83.85,42.65],[83.55,42.40],[83.28,42.10],[83.20,41.90],
+   32, [83.05,41.73],
+   33, [82.75,41.75],
+   34, [82.20,41.65],[81.80,41.50],[81.40,41.35],[80.90,41.25],
+   35, [79.80,40.90],[79.30,40.55],[78.90,40.20],
+   36, [78.10,39.70],[77.50,39.65],[76.90,39.60],[76.40,39.55],
+   37, [75.60,39.22],[75.35,39.00],[75.15,38.85],
+   38, [75.05,38.60],
+   39, [75.10,38.20],[75.05,37.95],
+   40, [75.35,37.45],[75.40,37.15],
+   41, [75.40,37.15],[75.32,37.50],[75.20,37.80],[75.10,38.20],[75.05,38.44],[75.15,38.85],[75.35,39.00],[75.60,39.22],[76.00,39.10],[76.17,38.93],[76.70,38.70],[77.24,38.42],[77.42,37.88],[78.28,37.62],[79.10,37.40],[79.73,37.27],
+   42],
+
+  [[80.20,37.08],[80.80,37.00],[81.60,36.90],[82.20,36.95],
+   43, [82.95,37.40],[83.15,38.00],[83.40,38.55],
+   44, [83.80,39.60],[83.95,40.30],[84.05,40.80],
+   45, [84.30,41.35],[84.28,41.55],
+   46],
+
+  [[84.90,41.90],[85.60,41.85],[86.05,41.80],
+   47, [86.60,41.90],
+   48, [87.30,42.35],[87.90,42.60],[88.65,42.79],[88.31,43.36],[87.95,43.60],[87.6168,43.8256]]
+];
+
+/* 独库封闭时的绕行线：巴音布鲁克 → 和静 → 库尔勒 → 轮台 → 库车 */
+var ALT = [[84.15,42.90],[85.00,42.75],[85.90,42.50],[86.40,42.32],[86.174,41.726],
+           [85.00,41.50],[84.00,41.50],[82.962,41.717]];
+
+var PEAKS = [
+  {n:'乔戈里峰',   h:8611, lng:76.51, lat:35.88},
+  {n:'公格尔峰',   h:7649, lng:75.30, lat:38.60},
+  {n:'托木尔峰',   h:7443, lng:80.10, lat:42.05},
+  {n:'木孜塔格峰', h:6973, lng:87.30, lat:36.40},
+  {n:'团结峰',     h:5826, lng:98.02, lat:38.92},
+  {n:'博格达峰',   h:5445, lng:88.12, lat:43.79}
+];
+
+var TAIL_KM = 380;
+
+S.forEach(function(p, i){ p.no = i + 1; });
+function totalKm(){ var t = TAIL_KM; S.forEach(function(p){ if (p.leg && p.leg.km) t += p.leg.km; }); return Math.round(t); }
+
+/* ---------- 展开路线为 [lng,lat] 序列，并记录每个点位在序列中的真实下标 ---------- */
+function expand(seg){
+  var pts = [], mark = {};
+  for (var i = 0; i < seg.length; i++){
+    var it = seg[i];
+    if (typeof it === 'number'){ mark[it] = pts.length; pts.push([S[it].lng, S[it].lat]); }
+    else pts.push([it[0], it[1]]);
+  }
+  return { pts: pts, mark: mark };
+}
+var GEO = [], MARK = [];
+RT.forEach(function(seg, g){
+  var e = expand(seg);
+  if (g > 0 && GEO[g - 1].length){ e.pts.unshift(GEO[g - 1][GEO[g - 1].length - 1].slice()); e.mark = (function(m){ var o = {}; for (var k in m) o[k] = m[k] + 1; return o; })(e.mark); }
+  GEO.push(e.pts); MARK.push(e.mark);
+});
+/* 跨段的那一站：上一段末点被前置到本段路径的第 0 位 */
+S.forEach(function(p, i){
+  if (i === 0) return;
+  if (S[i - 1].g !== p.g) MARK[p.g][i - 1] = 0;
+});
+
+/* 里程标签：锚定在两站之间的路径中点 */
+var LEGLBL = [];
+S.forEach(function(p, i){
+  if (!p.leg || p.spur !== undefined || !p.leg.km || p.leg.km < 180) return;
+  var m = MARK[p.g];
+  var a = m[i - 1], b = m[i];
+  if (a === undefined || b === undefined || b <= a) return;
+  var arr = GEO[p.g];
+  var mid = (b - a >= 2)
+    ? arr[Math.floor((a + b) / 2)]
+    : [(arr[a][0] + arr[b][0]) / 2, (arr[a][1] + arr[b][1]) / 2];
+  LEGLBL.push({ g: p.g, lng: mid[0], lat: mid[1], txt: p.leg.km + ' km · ' + p.leg.h + ' h' });
+});
+
+/* ============================================================
+   以下为地图逻辑（无 key / 非本机时不执行）
+   ============================================================ */
+window.__initMap = function(){
+
+var gmapEl = document.getElementById('gmap');
+var plistEl = document.getElementById('plist');
+var chipsEl = document.getElementById('chips');
+var hudSub = document.getElementById('hudSub');
+var legendEl = document.getElementById('legend');
+var toastEl = document.getElementById('toast');
+var sheetEl = document.getElementById('sheet');
+var layersEl = document.getElementById('layers');
+var sbTxt = document.getElementById('sbTxt'), sbBar = document.getElementById('sbBar');
+
+var map = null, iw = null;
+var filter = 'all', active = -1;
+var useRealRoad = false;
+var roadCache = {};
+var layer = { route:true, city:true, poi:true, leg:true, alt:false, peak:false };
+var lvShown = -1;
+
+function enc(s){ return encodeURIComponent(s).replace(/'/g, '%27').replace(/"/g, '%22'); }
+function pinSrc(color, w, h){
+  var s = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="0 0 24 32">'
+    + '<path d="M12 1C6.2 1 1.5 5.7 1.5 11.5c0 8.4 10.5 19 10.5 19s10.5-10.6 10.5-19C22.5 5.7 17.8 1 12 1z" fill="' + color + '" stroke="#ffffff" stroke-width="1.8"/>'
+    + '<circle cx="12" cy="11.5" r="4.3" fill="#ffffff"/></svg>';
+  return 'data:image/svg+xml;charset=utf-8,' + enc(s);
+}
+function dotSrc(color, d){
+  var s = '<svg xmlns="http://www.w3.org/2000/svg" width="' + d + '" height="' + d + '" viewBox="0 0 20 20">'
+    + '<circle cx="10" cy="10" r="6.6" fill="#ffffff" stroke="' + color + '" stroke-width="3.6"/></svg>';
+  return 'data:image/svg+xml;charset=utf-8,' + enc(s);
+}
+var toastTimer = null;
+function toast(msg, ms){
+  toastEl.textContent = msg; toastEl.classList.add('on');
+  clearTimeout(toastTimer);
+  if (ms) toastTimer = setTimeout(function(){ toastEl.classList.remove('on'); }, ms);
+}
+function hideToast(){ toastEl.classList.remove('on'); }
+
+/* ---------- HUD / 图例 / chips / 列表 ---------- */
+hudSub.textContent = '9/30 广州出发 · 10/29 返程 · ' + S.length + ' 个点位 · 约 ' + totalKm().toLocaleString() + ' km';
+SEG.forEach(function(sg){
+  var d = document.createElement('div');
+  d.innerHTML = '<i style="background:' + sg.c + '"></i>' + sg.full;
+  legendEl.appendChild(d);
+});
+
+function segColor(g){ return SEG[Math.min(g, SEG.length - 1)].c; }
+
+function buildChips(){
+  var h = '<button data-g="all" class="on">全程 · ' + S.length + ' 点</button>';
+  SEG.forEach(function(sg, g){
+    var n = S.filter(function(p){ return p.g === g; }).length;
+    h += '<button data-g="' + g + '" style="--c:' + sg.c + '">' + sg.full + ' · ' + n + '</button>';
+  });
+  chipsEl.innerHTML = h;
+  Array.prototype.forEach.call(chipsEl.querySelectorAll('button'), function(b){
+    b.addEventListener('click', function(){
+      var g = b.getAttribute('data-g');
+      setFilter(g === 'all' ? 'all' : (g | 0));
+    });
+  });
+}
+function syncChips(){
+  Array.prototype.forEach.call(chipsEl.querySelectorAll('button'), function(b){
+    var g = b.getAttribute('data-g');
+    var on = (g === 'all' && filter === 'all') || (filter !== 'all' && (g | 0) === filter);
+    b.classList.toggle('on', on);
+    b.style.background = on ? (g === 'all' ? '#16181d' : segColor(g | 0)) : '';
+    b.style.color = on ? '#fff' : '';
+  });
+}
+
+function buildList(){
+  var h = '', cur = -1;
+  S.forEach(function(p, i){
+    if (p.g !== cur){
+      cur = p.g;
+      h += '<div class="grp"><i style="background:' + segColor(p.g) + '"></i>' + SEG[p.g].full + ' · ' + SEG[p.g].d;
+      if (SEG[p.g].note) h += '<span style="color:#b0b4bc;font-size:10.5px">（' + SEG[p.g].note + '）</span>';
+      h += '</div>';
+    }
+    var leg = p.leg ? p.leg.km + ' km · ' + p.leg.h + ' h' + (p.leg.rd ? ' · ' + p.leg.rd : '') : (p.spur !== undefined ? '支线 · 往返约 220 km' : '');
+    h += '<div class="it" data-i="' + i + '" data-g="' + p.g + '">'
+      + '<span class="bd' + (p.c === 1 ? ' city' : '') + '" style="' + (p.c === 1 ? '' : 'background:' + segColor(p.g)) + '">' + p.no + '</span>'
+      + '<span style="flex:1 1 auto;min-width:0">'
+      +   '<span class="nm">' + p.n + '</span>'
+      +   '<div class="dt">' + p.d + (p.alt ? ' · 海拔 ' + p.alt + ' m' : '') + '</div>'
+      +   (leg ? '<div class="lg">' + leg + (p.tk ? ' ｜ 门票 ' + p.tk : '') + '</div>' : (p.tk ? '<div class="lg">门票 ' + p.tk + '</div>' : ''))
+      +   '<div class="tx">' + p.t + '</div>'
+      + '</span>'
+      + '</div>';
+  });
+  plistEl.innerHTML = h;
+  Array.prototype.forEach.call(plistEl.querySelectorAll('.it'), function(it){
+    it.addEventListener('click', function(){ focusPoint(it.getAttribute('data-i') | 0); });
+  });
+}
+function syncListActive(){
+  Array.prototype.forEach.call(plistEl.querySelectorAll('.it'), function(it){
+    it.classList.toggle('act', (it.getAttribute('data-i') | 0) === active);
+  });
+}
+function applyListFilter(){
+  Array.prototype.forEach.call(plistEl.querySelectorAll('.it, .grp'), function(el){
+    var g = el.getAttribute('data-g');
+    el.style.display = (filter === 'all' || (g !== null && (g | 0) === filter)) ? '' : 'none';
+  });
+}
+
+/* ---------- 地图 ---------- */
+  map = new TMap.Map(gmapEl, {
+    center: new TMap.LatLng(35.5, 94.0),
+    zoom: 4,
+    pitch: 0,
+    rotation: 0
+  });
+
+  /* 路线：白色描边层 + 彩色主线层（双层，白边一定渲染） */
+  var haloStyles = {}, lineStyles = {}, polyGeo = [];
+  SEG.forEach(function(sg, g){
+    haloStyles['h' + g] = new TMap.PolylineStyle({ color: '#ffffff', width: 9, lineCap: 'round' });
+    lineStyles['s' + g] = new TMap.PolylineStyle({ color: sg.c, width: 5, lineCap: 'round' });
+  });
+  haloStyles.halt = new TMap.PolylineStyle({ color: '#ffffff', width: 8, lineCap: 'round' });
+  lineStyles.alt = new TMap.PolylineStyle({ color: '#8b909a', width: 3.5, lineCap: 'round', dashArray: [7, 6] });
+
+  GEO.forEach(function(pts, g){
+    polyGeo.push({ id: 'seg' + g, styleId: 's' + g, paths: pts.map(function(p){ return new TMap.LatLng(p[1], p[0]); }) });
+  });
+  polyGeo.push({ id: 'alt', styleId: 'alt', visible: false,
+    paths: ALT.map(function(p){ return new TMap.LatLng(p[1], p[0]); }) });
+
+  function polyFor(halo){
+    return polyGeo.map(function(g0){
+      var isAlt = g0.id === 'alt';
+      var vis = isAlt ? layer.alt : (layer.route && inFilter(+g0.id.slice(3)));
+      var sid = isAlt ? (halo ? 'halt' : 'alt') : (halo ? 'h' : 's') + g0.id.slice(3);
+      return { id: g0.id, styleId: sid, visible: vis, paths: g0.paths };
+    });
+  }
+
+  var halos = new TMap.MultiPolyline({ map: map, styles: haloStyles, geometries: polyFor(true) });
+  var lines = new TMap.MultiPolyline({ map: map, styles: lineStyles, geometries: polyFor(false) });
+
+  /* 点位 */
+  var mkStyles = {}, mkGeo = [];
+  SEG.forEach(function(sg, g){
+    mkStyles['p' + g] = new TMap.MarkerStyle({ width: 24, height: 32, anchor: { x: 12, y: 32 }, src: pinSrc(sg.c, 24, 32) });
+    mkStyles['c' + g] = new TMap.MarkerStyle({ width: 17, height: 17, anchor: { x: 8.5, y: 8.5 }, src: dotSrc(sg.c, 17) });
+  });
+  mkStyles.act = new TMap.MarkerStyle({ width: 30, height: 40, anchor: { x: 15, y: 40 }, src: pinSrc('#16181d', 30, 40) });
+
+  S.forEach(function(p, i){
+    mkGeo.push({
+      id: 'm' + i,
+      styleId: (p.c === 1 ? 'c' : 'p') + p.g,
+      position: new TMap.LatLng(p.lat, p.lng)
+    });
+  });
+  var markers = new TMap.MultiMarker({ map: map, styles: mkStyles, geometries: mkGeo });
+
+  /* 地名标注 */
+  var lbStyles = {
+    poi: new TMap.LabelStyle({ color: '#12151b', size: 12, offset: { x: 0, y: 4 }, strokeColor: '#ffffff', strokeWidth: 3 }),
+    leg: new TMap.LabelStyle({ color: '#1f4e79', size: 11, offset: { x: 0, y: 0 }, strokeColor: '#ffffff', strokeWidth: 3.5, backgroundColor: 'rgba(255,255,255,0.86)', padding: '2px 5px', borderRadius: 4 }),
+    peak: new TMap.LabelStyle({ color: '#6b7280', size: 10.5, offset: { x: 0, y: 0 }, strokeColor: '#ffffff', strokeWidth: 3 })
+  };
+  var lbGeo = [];
+  S.forEach(function(p, i){
+    lbGeo.push({ id: 'l' + i, styleId: 'poi', position: new TMap.LatLng(p.lat, p.lng), content: p.n, _kind: 'poi', _g: p.g, _lv: p.lv, _hub: p.hub ? 1 : 0 });
+  });
+  LEGLBL.forEach(function(L, i){
+    lbGeo.push({ id: 'g' + i, styleId: 'leg', position: new TMap.LatLng(L.lat, L.lng), content: L.txt, _kind: 'leg', _g: L.g });
+  });
+  PEAKS.forEach(function(k, i){
+    lbGeo.push({ id: 'k' + i, styleId: 'peak', position: new TMap.LatLng(k.lat, k.lng), content: k.n + ' ' + k.h + ' m', _kind: 'peak' });
+  });
+  var labels = new TMap.MultiLabel({ map: map, styles: lbStyles, geometries: lbGeo });
+
+  iw = new TMap.InfoWindow({ map: map, position: new TMap.LatLng(35.5, 94.0), offset: { x: 0, y: -38 } });
+  iw.close();
+
+  map.on('click', function(){ iw.close(); });
+  map.on('zoom', refresh);
+  map.on('dragend', refresh);
+
+  /* ---------- 可见性刷新 ---------- */
+  function zoom(){ return map.getZoom(); }
+  function inFilter(g){ return filter === 'all' || g === filter; }
+
+  function zoomLvMax(z){
+    if (filter !== 'all') return 3;
+    if (z >= 6.5) return 3;
+    if (z >= 4.8) return 2;
+    return 0;                       /* 0 = 全国概览，只显示 hub 大节点 */
+  }
+  function passLevel(p, lvMax){
+    if (filter !== 'all') return true;
+    if (lvMax >= 3) return true;
+    if (p.hub) return true;
+    if (lvMax === 0) return false;
+    if (lvMax === 1) return p.lv <= 1;
+    return p.lv <= 2;
+  }
+
+  function refresh(){
+    var z = zoom(), lvMax = zoomLvMax(z);
+    lvShown = lvMax;
+
+    var shown = [];
+    S.forEach(function(p, i){
+      if (!inFilter(p.g)) return;
+      if (!passLevel(p, lvMax)) return;
+      if (p.c === 1 && !layer.city) return;
+      if (p.c === 0 && !layer.poi && filter === 'all') return;
+      shown.push({
+        id: 'm' + i,
+        styleId: (i === active ? 'act' : (p.c === 1 ? 'c' : 'p') + p.g),
+        position: new TMap.LatLng(p.lat, p.lng)
+      });
+    });
+    markers.setGeometries(shown);
+
+    var lg = [];
+    lbGeo.forEach(function(g0){
+      if (g0._kind === 'poi'){
+        var p = S[+g0.id.slice(1)];
+        if (!inFilter(p.g)) return;
+        if (!passLevel(p, lvMax)) return;
+        if (p.c === 1 && !layer.city) return;
+        if (p.c === 0 && !layer.poi) return;
+      } else if (g0._kind === 'leg'){
+        if (!layer.leg || z < 5.2) return;
+        if (!inFilter(g0._g)) return;
+      } else {
+        if (!layer.peak || z < 5) return;
+      }
+      lg.push(g0);
+    });
+    labels.setGeometries(lg);
+
+    halos.setGeometries(polyFor(true));
+    lines.setGeometries(polyFor(false));
+
+    syncScale();
+  }
+
+  function syncScale(){
+    var z = zoom(), lat = map.getCenter().getLat();
+    var mPerPx = 111320 * Math.cos(lat * Math.PI / 180) * 360 / (256 * Math.pow(2, z));
+    var target = 72 * mPerPx;
+    var nice = [0.5,1,2,5,10,20,50,100,200,500,1000];
+    var km = nice[0];
+    for (var i = 0; i < nice.length; i++){ if (nice[i] * 1000 <= target * 1.35) km = nice[i]; }
+    var wpx = (km * 1000 / mPerPx);
+    sbTxt.textContent = km < 1 ? (km * 1000) + ' m' : km + ' km';
+    sbBar.style.width = Math.max(24, Math.min(120, wpx)).toFixed(0) + 'px';
+  }
+
+  /* ---------- 视窗 ---------- */
+  function normY(lat){
+    var r = lat * Math.PI / 180;
+    return (1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2;
+  }
+  function fit(pts, padPx){
+    if (!pts.length) return;
+    var lngs = pts.map(function(p){ return p[0]; }), lats = pts.map(function(p){ return p[1]; });
+    var minLng = Math.min.apply(null, lngs), maxLng = Math.max.apply(null, lngs);
+    var minLat = Math.min.apply(null, lats), maxLat = Math.max.apply(null, lats);
+    var cLng = (minLng + maxLng) / 2, cLat = (minLat + maxLat) / 2;
+    var w = Math.max(120, gmapEl.clientWidth - padPx * 2);
+    var h = Math.max(120, gmapEl.clientHeight - padPx * 2);
+    var zLng = Math.log2(w / 256 * 360 / Math.max(0.02, maxLng - minLng));
+    var zLat = Math.log2(h / 256 / Math.max(0.0002, normY(minLat) - normY(maxLat)));
+    map.setCenter(new TMap.LatLng(cLat, cLng));
+    map.setZoom(Math.max(2.5, Math.min(16, Math.min(zLng, zLat))));
+  }
+  function fitAll(){
+    var pts = [];
+    GEO.forEach(function(a){ a.forEach(function(p){ pts.push(p); }); });
+    pts.push([74.98, 38.72]);
+    fit(pts, 26);
+  }
+  function fitSeg(g){
+    var pts = GEO[g] ? GEO[g].slice() : [];
+    S.forEach(function(p){ if (p.g === g) pts.push([p.lng, p.lat]); });
+    fit(pts, 34);
+  }
+
+  /* ---------- 交互 ---------- */
+  function setFilter(g){
+    filter = g;
+    syncChips(); applyListFilter(); lvShown = -1;
+    if (g === 'all'){ iw.close(); active = -1; syncListActive(); fitAll(); }
+    else { iw.close(); active = -1; syncListActive(); fitSeg(g); }
+    refresh();
+    if (g !== 'all') toast(SEG[g].full + ' · ' + SEG[g].d, 1800);
+  }
+  function focusPoint(i){
+    var p = S[i];
+    active = i; syncListActive(); lvShown = -1;
+    if (filter !== 'all' && p.g !== filter) { filter = p.g; syncChips(); applyListFilter(); }
+    map.setCenter(new TMap.LatLng(p.lat, p.lng));
+    map.setZoom(Math.max(9.5, zoom()));
+    var leg = p.leg ? ('<div style="font-size:11px;color:#8b909a;margin-top:5px">上一站 → 本站：' + p.leg.km + ' km · ' + p.leg.h + ' h' + (p.leg.rd ? ' · ' + p.leg.rd : '') + '</div>') : '';
+    var tk = p.tk ? ('<div style="font-size:11px;color:#8b909a;margin-top:3px">门票：' + p.tk + '</div>') : '';
+    iw.setContent('<div style="max-width:250px;font:13px/1.6 -apple-system,\'PingFang SC\',sans-serif">'
+      + '<b style="font-size:14px">' + p.n + '</b>'
+      + '<div style="font-size:11px;color:#8b909a;margin-top:2px">' + p.d + (p.alt ? ' · 海拔 ' + p.alt + ' m' : '') + '</div>'
+      + '<div style="font-size:12px;color:#5a5f6a;margin-top:6px">' + p.t + '</div>'
+      + leg + tk + '</div>');
+    iw.setPosition(new TMap.LatLng(p.lat, p.lng));
+    iw.open();
+    refresh();
+  }
+
+  document.getElementById('bIn').addEventListener('click', function(){ map.setZoom(zoom() + 1); });
+  document.getElementById('bOut').addEventListener('click', function(){ map.setZoom(zoom() - 1); });
+  document.getElementById('bFit').addEventListener('click', function(){ setFilter('all'); });
+
+  document.getElementById('grab').addEventListener('click', function(){ sheetEl.classList.toggle('collapsed'); });
+
+  document.getElementById('bLayers').addEventListener('click', function(e){
+    e.stopPropagation();
+    layersEl.classList.toggle('on');
+  });
+  document.addEventListener('click', function(e){
+    if (!layersEl.contains(e.target) && e.target.id !== 'bLayers') layersEl.classList.remove('on');
+  });
+  function onCk(id, key, fn){
+    document.getElementById(id).addEventListener('change', function(){
+      layer[key] = this.checked; if (fn) fn(); refresh();
+    });
+  }
+  onCk('ckRoute', 'route');
+  onCk('ckCity', 'city');
+  onCk('ckPoi', 'poi');
+  onCk('ckLeg', 'leg');
+  onCk('ckAlt', 'alt');
+  onCk('ckPeak', 'peak');
+
+  /* ---------- 真实路网重算 ---------- */
+  document.getElementById('bRoad').addEventListener('click', function(){
+    if (!window.TMap || !TMap.service || !TMap.service.Driving){ toast('当前底图未开放路网服务', 2400); return; }
+    var jobs = [];
+    var chain = [];
+    S.forEach(function(p, i){ if (p.spur === undefined) chain.push(i); });
+    for (var i = 1; i < chain.length; i++) jobs.push([chain[i - 1], chain[i]]);
+
+    var done = 0, fail = 0, dr = new TMap.service.Driving({ policy: 'LEAST_TIME' });
+    toast('路网重算中 0/' + jobs.length);
+    var acc = {}, order = {};
+    jobs.forEach(function(j, n){
+      var a = S[j[0]], b = S[j[1]];
+      setTimeout(function(){
+        dr.search({ from: new TMap.LatLng(a.lat, a.lng), to: new TMap.LatLng(b.lat, b.lng) })
+          .then(function(res){
+            var r = res && res.result && res.result.routes && res.result.routes[0];
+            var pl = r && (r.polyline || r.path);
+            if (pl){
+              var pts = [];
+              if (typeof pl === 'string'){
+                var arr = pl.split(';');
+                for (var k = 0; k < arr.length; k++){
+                  var xy = arr[k].split(',');
+                  if (xy.length >= 2) pts.push([parseFloat(xy[0]), parseFloat(xy[1])]);
+                }
+              } else if (Array.isArray(pl)){
+                for (var m = 0; m < pl.length; m++){
+                  var it = pl[m];
+                  if (it && typeof it.getLng === 'function') pts.push([it.getLng(), it.getLat()]);
+                  else if (Array.isArray(it)) pts.push([it[0], it[1]]);
+                }
+              }
+              if (pts.length > 1){ acc[b.no] = pts; order[b.no] = n; }
+              else fail++;
+            } else fail++;
+          })
+          .catch(function(){ fail++; })
+          .then(function(){
+            done++;
+            if (done === jobs.length) finish();
+            else if (done % 4 === 0) toast('路网重算中 ' + done + '/' + jobs.length);
+          });
+      }, n * 150);
+    });
+
+    function finish(){
+      if (!Object.keys(acc).length){ toast('路网请求全部失败（key 可能未开通 WebServiceAPI），已保留示意线', 4200); return; }
+      var newGeo = [[]];
+      S.forEach(function(p, i){
+        if (i === 0) return;
+        if (p.spur !== undefined) return;
+        var g = p.g;
+        while (newGeo.length <= g) newGeo.push([]);
+        if (acc[p.no]){
+          if (newGeo[g].length === 0 && i > 1) newGeo[g].push([S[i - 1].lng, S[i - 1].lat]);
+          acc[p.no].forEach(function(q){ newGeo[g].push(q); });
+        }
+      });
+      for (var g = 0; g < newGeo.length; g++) if (newGeo[g].length > 1) GEO[g] = newGeo[g];
+      polyGeo = GEO.map(function(pts, g){
+        return { id: 'seg' + g, styleId: 's' + g, paths: pts.map(function(p){ return new TMap.LatLng(p[1], p[0]); }) };
+      });
+      polyGeo.push({ id: 'alt', styleId: 'alt', visible: layer.alt, paths: ALT.map(function(p){ return new TMap.LatLng(p[1], p[0]); }) });
+      useRealRoad = true;
+      refresh();
+      toast('已完成真实路网重算' + (fail ? '（' + fail + ' 段失败，保留示意线）' : ''), 3000);
+    }
+  });
+
+  /* ---------- 启动 ---------- */
+  buildChips(); syncChips();
+  buildList();
+  fitAll();
+  refresh();
+  window.addEventListener('resize', function(){ lvShown = -1; refresh(); });
+  setTimeout(function(){ lvShown = -1; refresh(); }, 280);
+  window.__mapReady = true;
+
+};
+
+/* ---------- SDK 加载 ---------- */
+(function(){
+  if (MODE.mode === 'none') return;
+
+  function tip(html){
+    var old = document.getElementById('tip');
+    if (old) old.parentNode.removeChild(old);
+    var d = document.createElement('div');
+    d.id = 'tip';
+    d.innerHTML = html;
+    document.getElementById('stage').appendChild(d);
+  }
+
+  var s = document.createElement('script');
+  s.src = 'https://map.qq.com/api/gljs?v=1.exp&libraries=service'
+        + (MODE.mode === 'key' ? '&key=' + encodeURIComponent(MODE.key) : '');
+  s.onerror = function(){
+    document.getElementById('stage').innerHTML =
+      '<div id="notice"><h1>底图加载失败</h1>' +
+      '<p>腾讯地图 SDK 没能加载。多半是网络被挡，或这枚 key 没开通「JavaScript API GL」。</p>' +
+      '<p class="kmini"><a href="?nokey=1">重新填写 key →</a>　·　' +
+      '<a href="map-svg.html">先用自绘示意版 →</a></p></div>';
+  };
+  s.onload = function(){
+    try {
+      if (typeof window.__initMap === 'function') window.__initMap();
+    } catch (e) {
+      tip('<b>地图初始化出错</b>：' + e.message +
+          '<br><a href="?nokey=1">换一枚 key</a>　或　<a href="map-svg.html">看示意版</a>');
+      return;
+    }
+    /* 看门狗：8 秒后仍没把地图跑起来，多半是 key 鉴权没过（页面会是一片灰） */
+    setTimeout(function(){
+      if (window.__mapReady) return;
+      var msg = MODE.mode === 'key'
+        ? '底图没出来：这枚 key 可能没开通 <b>JavaScript API GL</b>，或「域名白名单」没包含当前站点。'
+        : '底图没出来：免密钥预览通道可能被占用，请重新打开预览。';
+      tip(msg + '<br><a href="?nokey=1">换一枚 key</a>　或　<a href="map-svg.html">看示意版</a>');
+    }, 8000);
+  };
+  document.head.appendChild(s);
+})();
+</script>
+</body>
+</html>
