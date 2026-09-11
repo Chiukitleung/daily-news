@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f6f8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="广州出发 · 黔川纵游 + 30 天新疆自驾完整攻略：逐日行程、景点详解、风险预案、预算与行前清单">
+<title>黔川 + 新疆 30 天自驾攻略 · 2026.9.30 广州出发</title>
+<style>
+:root{
+  --bg:#f5f6f8; --card:#ffffff; --line:#e4e6ea; --line2:#d3d6dc;
+  --t1:#16181d; --t2:#5a5f6a; --t3:#8b909a;
+  --blue:#1a5fb4; --blue-bg:#eaf1fb;
+  --red:#c1392b; --red-bg:#fceceb;
+  --amber:#8a5a08; --amber-bg:#fdf3e0;
+  --green:#256b45; --green-bg:#e9f5ee;
+  --s1:#3f6ea8; --s2:#0f7b7d; --s3:#2f7d55; --s4:#c0392b; --s5:#b9761a; --s6:#6b4fa3;
+  --radius:12px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--t1);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:15px;line-height:1.7;
+}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px 90px}
+
+header{background:var(--card);border-bottom:1px solid var(--line);padding:26px 16px 20px}
+header .inner{max-width:900px;margin:0 auto}
+h1{font-size:21px;line-height:1.4;margin:0 0 8px;font-weight:600;letter-spacing:-.2px}
+.sub{font-size:13px;color:var(--t2);margin:0 0 16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px}
+.kpi{background:var(--bg);border-radius:var(--radius);padding:11px 12px}
+.kpi .v{font-size:18px;font-weight:600;letter-spacing:-.3px;display:block}
+.kpi .v small{font-size:11px;font-weight:400;color:var(--t2);margin-left:1px}
+.kpi .l{font-size:11.5px;color:var(--t2);margin-top:2px;display:block}
+.cta{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.cta a{flex:1 1 auto;text-align:center;text-decoration:none;font-size:13.5px;font-weight:600;
+  padding:10px 14px;border-radius:10px;background:var(--t1);color:#fff}
+.cta a.alt{background:var(--card);color:var(--t1);border:1px solid var(--line2)}
+
+nav{position:sticky;top:0;z-index:20;background:rgba(245,246,248,.95);backdrop-filter:blur(8px);
+  padding:9px 0;border-bottom:1px solid var(--line)}
+nav .inner{max-width:900px;margin:0 auto;padding:0 16px;display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}
+nav .inner::-webkit-scrollbar{display:none}
+nav a{flex:0 0 auto;font-size:12.5px;color:var(--t2);text-decoration:none;
+  padding:6px 11px;border:1px solid var(--line2);border-radius:999px;background:var(--card);white-space:nowrap}
+nav a:active{background:var(--blue-bg);color:var(--blue)}
+
+h2{font-size:17px;font-weight:600;margin:32px 0 12px;padding-left:11px;border-left:3px solid var(--t1);line-height:1.3}
+h3{font-size:15px;font-weight:600;margin:20px 0 9px}
+p{margin:0 0 12px}
+.muted{color:var(--t2);font-size:13px}
+
+.callout{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:13px 15px;margin:0 0 12px}
+.callout.warn{background:var(--amber-bg);border-color:#f0dcb4}
+.callout.danger{background:var(--red-bg);border-color:#f2cdc9}
+.callout.info{background:var(--blue-bg);border-color:#cfe0f5}
+.callout.ok{background:var(--green-bg);border-color:#c9e5d6}
+.callout .h{font-weight:600;font-size:14px;margin:0 0 6px}
+.callout p:last-child,.callout ul:last-child{margin-bottom:0}
+
+.dec{display:grid;gap:11px}
+.dec .d{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:15px}
+.dec .d .tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;
+  background:var(--blue-bg);color:var(--blue);margin-bottom:7px;letter-spacing:.3px}
+.dec .d h3{margin:0 0 6px;font-size:15px}
+.dec .d p{margin:0 0 8px;font-size:14px;color:var(--t2)}
+.dec .d p:last-child{margin-bottom:0}
+.dec .d .why{font-size:13px;color:var(--t1);background:var(--bg);border-radius:8px;padding:9px 11px;margin-top:9px}
+
+.phase{margin:24px 0 0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)}
+.phase .ph{color:#fff;padding:11px 15px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.phase .ph .n{font-size:14.5px;font-weight:600}
+.phase .ph .m{font-size:11.5px;opacity:.8}
+.phase .pbody{background:var(--card)}
+
+.day{display:flex;gap:0;border-bottom:1px solid var(--line);padding:13px 15px}
+.day:last-child{border-bottom:0}
+.day .dnum{flex:0 0 50px;font-size:11.5px;color:var(--t3);line-height:1.5;padding-top:2px}
+.day .dnum b{display:block;font-size:15.5px;color:var(--t1);font-weight:600;letter-spacing:-.3px}
+.day .dbody{flex:1;min-width:0}
+.day .route{font-size:14.5px;font-weight:600;margin:0 0 5px;line-height:1.45}
+.day .meta{font-size:12px;color:var(--t2);margin:0 0 6px;display:flex;flex-wrap:wrap;gap:3px 11px}
+.day .meta span{white-space:nowrap}
+.day .note{font-size:13px;color:var(--t2);margin:0}
+.day .stop{font-size:13px;margin:5px 0 0;color:var(--t1);background:#f8f9fb;border-radius:8px;padding:7px 9px}
+.day .stop em{font-style:normal;color:var(--t2)}
+.pill{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:999px;vertical-align:1px}
+.pill.key{background:var(--red-bg);color:var(--red)}
+.pill.free{background:var(--green-bg);color:var(--green)}
+.pill.flex{background:var(--amber-bg);color:var(--amber)}
+.pill.new{background:#e9e3f7;color:#5b45a0}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin:0 0 14px}
+th,td{padding:10px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--bg);font-weight:600;font-size:12.5px;color:var(--t2);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
+tr.total td{font-weight:600;background:var(--bg)}
+
+ul,ol{margin:0 0 12px;padding-left:20px}
+li{margin-bottom:5px}
+li:last-child{margin-bottom:0}
+.chk{list-style:none;padding-left:0}
+.chk li{position:relative;padding-left:25px;margin-bottom:7px}
+.chk li::before{content:"";position:absolute;left:0;top:6px;width:14px;height:14px;
+  border:1.5px solid var(--line2);border-radius:4px}
+
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:11px}
+.spots{display:grid;gap:11px}
+.spot{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 15px}
+.spot .top{display:flex;align-items:baseline;gap:8px;margin-bottom:5px;flex-wrap:wrap}
+.spot .idx{flex:0 0 auto;width:22px;height:22px;border-radius:50%;color:#fff;font-size:11.5px;font-weight:600;
+  display:inline-flex;align-items:center;justify-content:center;line-height:1}
+.spot h3{margin:0;font-size:14.5px;flex:1 1 auto}
+.spot .day{font-size:11.5px;color:var(--t3);font-weight:400}
+.spot .locs{font-size:12px;color:var(--t2);margin:0 0 7px}
+.spot .desc{font-size:13.5px;color:var(--t2);margin:0 0 8px}
+.spot .facts{display:flex;flex-wrap:wrap;gap:5px}
+.fact{font-size:11.5px;background:var(--bg);border-radius:6px;padding:3px 8px;color:var(--t2)}
+.fact b{color:var(--t1);font-weight:600}
+.fact.hot{background:var(--red-bg);color:var(--red)}
+.fact.hot b{color:var(--red)}
+.seghtml{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;margin:24px 0 10px}
+.seghtml i{width:10px;height:10px;border-radius:3px;display:block;flex:0 0 10px}
+
+footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--t3)}
+footer p{margin:0 0 8px}
+
+@media(max-width:620px){
+  h1{font-size:19px}
+  .day{flex-direction:column;gap:5px;padding:12px 13px}
+  .day .dnum{flex:none;padding-top:0;display:flex;gap:8px;align-items:baseline}
+  .day .dnum b{font-size:14px}
+  .kpi .v{font-size:16.5px}
+  table{font-size:12.5px}
+  th,td{padding:8px 9px}
+  .spots{gap:10px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <h1>广州 → 贵州 · 四川 → 新疆<br>30 天自驾全攻略</h1>
+    <p class="sub">2026 年 9 月 30 日出发 &nbsp;·&nbsp; 10 月 28 日飞回广州 &nbsp;·&nbsp; 按 2 人 1 车估算</p>
+    <div class="kpis">
+      <div class="kpi"><span class="v">30<small>天</small></span><span class="l">总行程</span></div>
+      <div class="kpi"><span class="v">11,335<small>km</small></span><span class="l">自驾里程</span></div>
+      <div class="kpi"><span class="v">6<small>段</small></span><span class="l">行程骨架</span></div>
+      <div class="kpi"><span class="v">2.2<small>万/人</small></span><span class="l">总预算（2人）</span></div>
+    </div>
+    <div class="cta">
+      <a href="map.html">打开路线图（含景点标注）</a>
+      <a class="alt" href="#budget">直接看预算</a>
+    </div>
+  </div>
+</header>
+
+<nav><div class="inner">
+  <a href="#dec">关键判断</a>
+  <a href="#overview">总览</a>
+  <a href="#seg1">① 黔川纵游</a>
+  <a href="#seg2">② 西行入疆</a>
+  <a href="#seg3">③ 北疆·独库</a>
+  <a href="#seg4">④ 南疆·帕米尔</a>
+  <a href="#seg5">⑤ 沙漠·胡杨</a>
+  <a href="#seg6">⑥ 收尾</a>
+  <a href="#spots">景点详解</a>
+  <a href="#risk">风险预案</a>
+  <a href="#budget">预算</a>
+  <a href="#pack">行前清单</a>
+  <a href="#more">其它行程</a>
+</div></nav>
+
+<div class="wrap">
+
+<h2 id="dec">先说四个关键判断</h2>
+<p class="muted">这四条决定了整份行程的骨架。不同意任何一条，后面的日期要整体重排——告诉我，我改。</p>
+
+<div class="dec">
+
+  <div class="d">
+    <span class="tag">判断一 · 新增段</span>
+    <h3>黔川段排在最前，9/30–10/5 走完贵州到四川</h3>
+    <p>你 10 月 1–5 日在贵州到四川这一段玩，这条线正好卡在"广州 → 成都"的必经路线上——<b>桂林 → 荔波 → 西江 → 黄果树 → 成都</b>，几乎不绕路，等于多赚一整段。</p>
+    <p class="why">代价是：多出约 740 km 里程 + 6 天时间，新疆境内因此从 19 天压到 15 天。所以第四条判断（吐鲁番前移）不是可选项，是必需品。</p>
+  </div>
+
+  <div class="d">
+    <span class="tag">判断二 · 关键优化</span>
+    <h3>吐鲁番"由尾改头"——进疆路上顺路玩掉，省出 2 天</h3>
+    <p>原方案里吐鲁番放在收尾（10/25–10/26，占 2 天）。但你现在从敦煌经哈密入疆，<b>哈密 → 吐鲁番 → 乌鲁木齐本来就是必经路线</b>。把吐鲁番挪到进疆当天和次日早上，收尾段直接省掉 2 天。</p>
+    <p class="why">这 2 天正好补上黔川段吃掉的时间。10 月下旬的吐鲁番是一年中最舒服的时候（夏天 40℃+ 完全没法玩），挪到 10/10 反而更合适。</p>
+  </div>
+
+  <div class="d">
+    <span class="tag">判断三 · 省时间</span>
+    <h3>返程车托运、人飞回（不硬开车回广州）</h3>
+    <p>广州 ↔ 乌鲁木齐单程约 4,650 km。往返都自驾 = <b>14 天耗在高速上</b>。改成 <b>乌鲁木齐交车托运（约 4,200 km / 6 天 / 5,600–6,500 元）+ 2 人飞回（1,500–2,500 元/人）</b>，一次省出 6 天。</p>
+    <p class="why">多花约 9,000 元买 6 天深度。这是全程唯一"用钱买时间"的地方，也是最值的一处。车比人晚到广州约 5–6 天。</p>
+  </div>
+
+  <div class="d">
+    <span class="tag">判断四 · 卡时间</span>
+    <h3>南疆押后，把轮台胡杨卡在 10/25–10/26</h3>
+    <p>轮台塔里木胡杨林的变色节律：<b>初黄 9 月底–10 月上旬（还是绿的）、较佳 10/10–10/20、盛黄 10/20–11/5（黄透率 95%–100%）</b>。国庆期间去轮台，看到的是绿树。</p>
+    <p class="why">所以顺序必须是"先北疆、后南疆"，胡杨林落在 <b>10/25–10/26</b>。这一条把整个行程的先后次序锁死了——整份计划里最不能动的一颗钉子。</p>
+  </div>
+
+</div>
+
+<div class="callout ok" style="margin-top:12px">
+  <p class="h">顺带一个好消息：国庆高速免费正好盖住你最贵的一段</p>
+  <p><b>2026 年国庆 10 月 1 日 — 10 月 7 日，7 座及以下小客车免费</b>（中秋 9/25–9/27 不免费）。免费以<b>驶离出口收费车道的时间</b>为准，所以你 9 月 30 日晚上上高速、10 月 1 日 0 点后下高速，这一段就是免费的。10/1–10/7 你正好在黔川段，广昆、兰海高速的通行费能省下约 1,100 元。</p>
+</div>
+
+<h2 id="overview">六段总览</h2>
+<table>
+  <thead><tr><th>段</th><th>日期</th><th class="n">里程</th><th>主线</th></tr></thead>
+  <tbody>
+    <tr><td><b style="color:var(--s1)">① 黔川纵游</b></td><td class="n">9/30 – 10/5<br><span class="muted">6 天</span></td><td class="n">2,485 km</td><td>广州 → 桂林 · 阳朔 → 荔波小七孔 → 西江千户苗寨 → 黄果树 → 成都</td></tr>
+    <tr><td><b style="color:var(--s2)">② 西行入疆</b></td><td class="n">10/6 – 10/11<br><span class="muted">6 天</span></td><td class="n">3,340 km</td><td>成都 → 天水 → 张掖丹霞 → 嘉峪关 → 敦煌 → 哈密 → 吐鲁番 → 乌鲁木齐</td></tr>
+    <tr><td><b style="color:var(--s3)">③ 北疆·独库</b></td><td class="n">10/12 – 10/16<br><span class="muted">5 天</span></td><td class="n">1,320 km</td><td>乌鲁木齐 → 赛里木湖 → 伊宁 → 特克斯 → 那拉提 → 巴音布鲁克 →（独库）→ 库车</td></tr>
+    <tr><td><b style="color:var(--s4)">④ 南疆·帕米尔</b></td><td class="n">10/17 – 10/22<br><span class="muted">6 天</span></td><td class="n">2,620 km</td><td>库车 → 巴楚 → 喀什 → 塔什库尔干（帕米尔）→ 和田</td></tr>
+    <tr><td><b style="color:var(--s5)">⑤ 沙漠·胡杨</b></td><td class="n">10/23 – 10/26<br><span class="muted">4 天</span></td><td class="n">950 km</td><td>和田 → 民丰 → 塔克拉玛干沙漠公路 → 轮台塔里木胡杨林</td></tr>
+    <tr><td><b style="color:var(--s6)">⑥ 收尾出疆</b></td><td class="n">10/27 – 10/29<br><span class="muted">3 天</span></td><td class="n">620 km</td><td>轮台 → 库尔勒 → 博斯腾湖 → 乌鲁木齐交车托运 → 飞回广州</td></tr>
+    <tr class="total"><td>合计</td><td class="n">30 天</td><td class="n">11,335 km</td><td>自驾 11,335 km + 返程车辆托运 4,200 km</td></tr>
+  </tbody>
+</table>
+
+<!-- ================= 段 1 ================= -->
+<h2 id="seg1"><span style="color:var(--s1)">①</span> 黔川纵游：广州 → 桂林 → 贵州 → 成都（6 天）</h2>
+<div class="phase">
+  <div class="ph" style="background:var(--s1)"><span class="n">9/30 – 10/5 · 2,360 km</span><span class="m">贵州四大金牌 + 黔川过渡</span></div>
+  <div class="pbody">
+
+    <div class="day"><div class="dnum"><b>D1</b>9/30</div><div class="dbody">
+      <p class="route">广州 → 桂林 · 阳朔</p>
+      <div class="meta"><span>560 km</span><span>约 6.5 h</span></div>
+      <p class="note"><span class="pill key">最堵的一天</span> 国庆前一天，广深及珠三角出城方向下午起进入高峰。<b>建议凌晨 4:30–5:00 出城</b>，走 G80 广昆高速 / G55 二广高速。下午到阳朔，晚上逛西街。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D2</b>10/1</div><div class="dbody">
+      <p class="route">阳朔（遇龙河）→ 荔波</p>
+      <div class="meta"><span>430 km</span><span>约 5 h</span></div>
+      <p class="stop">停：<b>遇龙河竹筏漂流</b>（上午，2–3 h）</p>
+      <p class="note"><span class="pill free">0:00 后下高速免费</span> 遇龙河是阳朔真正的精华，比漓江游船更松弛。国庆筏工紧张，<b>务必提前 1–2 天线上订筏</b>。中午出发，傍晚到荔波县城，晚上逛荔波古镇。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D3</b>10/2</div><div class="dbody">
+      <p class="route">荔波小七孔｜全天</p>
+      <div class="meta"><span>60 km</span><span>全天在景区</span></div>
+      <p class="stop">停：<b>小七孔景区</b>（卧龙潭 → 68 级跌水瀑布 → 拉雅瀑布 → 水上森林 → 小七孔古桥）<em>· 有时间可加半天大七孔</em></p>
+      <p class="note"><span class="pill key">建议东门进</span> 东门进全程下坡，省一半体力。门票 <b>120 元 + 观光车 40–50 元（刚需）</b>，<b>5 日内可重复入园</b>。国庆必须提前在「荔波小七孔景区」公众号预约。防滑鞋必穿，水上森林会湿脚。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D4</b>10/3</div><div class="dbody">
+      <p class="route">荔波 → 西江千户苗寨</p>
+      <div class="meta"><span>280 km</span><span>约 4 h</span></div>
+      <p class="stop">停：<b>西江千户苗寨</b>（观景台、风雨桥、芦笙场、长桌宴）<em>· 19:30 全寨灯光点亮</em></p>
+      <p class="note"><span class="pill key">走北门</span> 北门比西门少约 2 km 山路。门票 <b>90 元 + 观光车 20 元</b>（含 4 程，上下观景台必须用）。<b>住半山腰民宿</b>——开窗就是万家灯火，还不用在观景台挤。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D5</b>10/4</div><div class="dbody">
+      <p class="route">西江 → 黄果树瀑布 → 安顺</p>
+      <div class="meta"><span>330 km</span><span>约 4.5 h</span></div>
+      <p class="stop">停：<b>黄果树三大片区</b>——陡坡塘 → 天星桥（下半段）→ 大瀑布 + 水帘洞</p>
+      <p class="note">门票 <b>旺季 160 元 + 观光车 50 元（必购）</b>，三片区相距 3–6 km 无法步行互通。<b>水帘洞要在「安旅通」小程序单独预约</b>，早 7 点放名额，每日限流。天星桥 90% 的人只走上半段就折返——直接走二层入口去下半段的<b>银链坠潭</b>，那才是王牌。夜宿安顺，吃安顺烤小肠、裹卷。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D6</b>10/5</div><div class="dbody">
+      <p class="route">安顺 → 成都</p>
+      <div class="meta"><span>700 km</span><span>约 8 h</span></div>
+      <p class="stop">停（可选）：<b>乐山大佛</b><em> · 安顺→成都 正好路过乐山，完全顺路</em></p>
+      <p class="note">本段最长的一个转场日。<b>如果想看乐山大佛，7:00 前出发</b>，下午到乐山留 3 h，晚上 20:00 前进成都。不看就直接一路到成都，傍晚到，晚上逛宽窄巷子 / 太古里。</p>
+    </div></div>
+
+  </div>
+</div>
+
+<div class="callout info" style="margin-top:12px">
+  <p class="h">贵州省钱提示</p>
+  <p>2026 年贵州对<b>全国 6 周岁以下儿童、65 周岁以上老人、现役/退役军人、警察、教师、医护、残疾人、全日制在校学生</b>实行国有 A 级景区门票免费（观光车仍需自购）。符合的话，黄果树 160 + 小七孔 120 + 西江 90 全省下，2 人最多省 740 元。出发前在「一码游贵州」核实当年政策。</p>
+</div>
+
+<!-- ================= 段 2 ================= -->
+<h2 id="seg2"><span style="color:var(--s2)">②</span> 西行入疆：成都 → 河西走廊 → 乌鲁木齐（6 天）</h2>
+<div class="phase">
+  <div class="ph" style="background:var(--s2)"><span class="n">10/6 – 10/11 · 3,030 km</span><span class="m">河西走廊 + 吐鲁番前移</span></div>
+  <div class="pbody">
+
+    <div class="day"><div class="dnum"><b>D7</b>10/6</div><div class="dbody">
+      <p class="route">成都 → 天水</p>
+      <div class="meta"><span>640 km</span><span>约 7.5 h</span></div>
+      <p class="note">上午可在成都补一站：<b>熊猫基地</b>（7:30 开园，熊猫最活跃）或宽窄巷子，中午出发走 G75 兰海高速北上。进秦岭后隧道群密集。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D8</b>10/7</div><div class="dbody">
+      <p class="route">天水 → 张掖</p>
+      <div class="meta"><span>750 km</span><span>约 8.5 h</span></div>
+      <p class="stop">停（可选）：<b>麦积山石窟</b>（晨，2 h）&nbsp;|&nbsp;停：<b>张掖七彩丹霞</b>（傍晚）</p>
+      <p class="note">过兰州后河西走廊展开，路直、车少、风大。10/7 张掖日落约 18:50，<b>17:00 前必须到丹霞景区</b>；太累的话把丹霞挪到 D9 一早。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D9</b>10/8</div><div class="dbody">
+      <p class="route">张掖 → 嘉峪关 → 敦煌</p>
+      <div class="meta"><span>620 km</span><span>约 7 h</span></div>
+      <p class="stop">停：<b>嘉峪关关城</b>（上午）&nbsp;|&nbsp;<b>鸣沙山 · 月牙泉</b>（傍晚）</p>
+      <p class="note">7:00 出发 → 10:00 到嘉峪关，关城 2.5 h（门票 110，含关城 + 悬壁长城 + 长城第一墩）。13:00 出发 → 17:00 到敦煌，正好赶上鸣沙山日落（<b>16:00 后进最合适</b>）。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D10</b>10/9</div><div class="dbody">
+      <p class="route">敦煌（莫高窟）→ 哈密</p>
+      <div class="meta"><span>420 km</span><span>约 5 h</span></div>
+      <p class="stop">停：<b>莫高窟</b>（上午）</p>
+      <p class="note"><span class="pill key">务必提前预约</span> 实名预约 + 每日限流，A 类票含 8 窟 + 2 部数字电影，约 4 h。<b>现在就去官网抢 10/9 的票</b>。约不到改应急票（看 4 窟），或改玉门关 + 雅丹魔鬼城。下午出发，过星星峡即正式入疆。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D11</b>10/10</div><div class="dbody">
+      <p class="route">哈密 → 吐鲁番</p>
+      <div class="meta"><span>400 km</span><span>约 4.5 h</span></div>
+      <p class="stop">停：<b>火焰山</b>（下午）&nbsp;|&nbsp;<b>交河故城</b>（傍晚）</p>
+      <p class="note">中午到吐鲁番，下午火焰山（门票 40），<b>交河故城闭园前 1.5 h 进</b>——世界上最大最古老的生土建筑城市，日落打在土墙上最好看。10 月的吐鲁番是一年中最舒服的时候。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D12</b>10/11</div><div class="dbody">
+      <p class="route">吐鲁番（坎儿井 / 葡萄沟）→ 乌鲁木齐</p>
+      <div class="meta"><span>200 km</span><span>约 3 h</span></div>
+      <p class="stop">办：<b>车辆保养</b>（机油、刹车片、防冻液、轮胎、备胎）&nbsp;|&nbsp;<b>补物资</b>&nbsp;|&nbsp;<b>电子边防证</b></p>
+      <p class="note"><span class="pill key">今天必办</span> 2026 年 4 月起边防证已全面电子化，纸质证停发。微信或支付宝搜 <b>「移民局12367」</b> 小程序 →「电子边境管理区通行证申办」→ 事由填"旅游"、有效期 3 个月 → 前往地区勾选 <b>塔什库尔干塔吉克自治县</b>。10–30 分钟出证，<b>全程免费，任何收费代办都是违规</b>。电子证必须与实体身份证同时出示。</p>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- ================= 段 3 ================= -->
+<h2 id="seg3"><span style="color:var(--s3)">③</span> 北疆西线 + 独库公路（5 天）</h2>
+<div class="phase">
+  <div class="ph" style="background:var(--s3)"><span class="n">10/12 – 10/16 · 1,680 km</span><span class="m">本段最高风险点在 D17，见风险预案</span></div>
+  <div class="pbody">
+
+    <div class="day"><div class="dnum"><b>D13</b>10/12</div><div class="dbody">
+      <p class="route">乌鲁木齐 → 独山子 → 赛里木湖</p>
+      <div class="meta"><span>550 km</span><span>约 7 h</span></div>
+      <p class="stop">停：<b>赛里木湖</b>（傍晚环湖，看日落）</p>
+      <p class="note">走 G30 连霍高速，途经独山子（独库公路北端起点）。赛里木湖海拔约 2,070 m，夜里已经很冷，厚外套放车上。当晚住湖区或清水河镇。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D14</b>10/13</div><div class="dbody">
+      <p class="route">赛里木湖 → 果子沟大桥 → 霍尔果斯 → 伊宁</p>
+      <div class="meta"><span>200 km</span><span>约 3 h</span></div>
+      <p class="stop">停：<b>赛里木湖环湖</b>（上午，约 90 km）&nbsp;|&nbsp;<b>果子沟大桥观景</b>&nbsp;|&nbsp;<b>霍尔果斯口岸</b>&nbsp;|&nbsp;<b>伊宁六星街 · 喀赞其</b></p>
+      <p class="note">霍尔果斯中哈国际边境合作中心属边境管控区，需持电子边防证。伊宁六星街、喀赞其民俗区的蓝色房子傍晚最好拍。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D15</b>10/14</div><div class="dbody">
+      <p class="route">伊宁 → 特克斯八卦城 → 那拉提</p>
+      <div class="meta"><span>380 km</span><span>约 6.5 h</span></div>
+      <p class="stop">停：<b>特克斯八卦城</b>&nbsp;|&nbsp;<b>那拉提草原</b>（傍晚）</p>
+      <p class="note"><b>本段替代方案：</b>原计划的伊昭公路（伊宁 → 昭苏）10 月中旬若已降雪会临时管制。改走 G218 经特克斯更稳——顺路还能看世界最大八卦城（全城无红绿灯）。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D16</b>10/15</div><div class="dbody">
+      <p class="route">那拉提 → 巴音布鲁克</p>
+      <div class="meta"><span>150 km</span><span>约 4 h</span></div>
+      <p class="stop">停：<b>巴音布鲁克草原 · 九曲十八弯</b>（傍晚日落）</p>
+      <p class="note">只有 150 km 但全是山路，开 4 小时很正常。九曲十八弯的落日是这条线的招牌，观景台要提前占位。海拔约 2,400 m。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D17</b>10/16</div><div class="dbody">
+      <p class="route">巴音布鲁克 →（独库公路南段）→ 天山神秘大峡谷 → 库车</p>
+      <div class="meta"><span>400 km</span><span>约 8 h</span><span class="pill key">最高风险日</span></div>
+      <p class="note"><b>这是全程唯一"赌一把"的一天。</b>独库公路每年仅 6–10 月开放，往年 10 月中旬就会因降雪封闭。<br>2026 年独库实行 <b>"昼保通行、夜保施工"</b>：乌苏驿至库如力段 <b>每日 8:00–19:00 通行</b>，<b>19:00 后那拉提、乔尔玛入口禁止社会车辆驶入</b>；允许 7 座及以下小客车通行。</p>
+      <p class="note" style="margin-top:8px">→ 若封闭，走官方指定绕行：<b>G218 线和静段 + G3012 线库车至和静段</b>，多约 350 km、多半天。<b>D17–D18 留了机动。</b></p>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- ================= 段 4 ================= -->
+<h2 id="seg4"><span style="color:var(--s4)">④</span> 南疆 · 帕米尔高原（6 天）</h2>
+<div class="phase">
+  <div class="ph" style="background:var(--s4)"><span class="n">10/17 – 10/22 · 1,980 km</span><span class="m">喀什古城 + 帕米尔 + 全程高原风险最集中处</span></div>
+  <div class="pbody">
+
+    <div class="day"><div class="dnum"><b>D18</b>10/17</div><div class="dbody">
+      <p class="route">库车 → 阿克苏 → 巴楚</p>
+      <div class="meta"><span>550 km</span><span>约 7 h</span></div>
+      <p class="stop">停（可选）：<b>克孜尔千佛洞</b>（上午，库车西 70 km，完全顺路）</p>
+      <p class="note">G314 一段，路况好、限速严。<b>区间测速很多</b>，导航提示的限速值照做，不要图快。库车老城 + 库车王府建议放在 D17 傍晚。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D19</b>10/18</div><div class="dbody">
+      <p class="route">巴楚 → 喀什</p>
+      <div class="meta"><span>350 km</span><span>约 4.5 h</span></div>
+      <p class="stop">停：<b>喀什老城</b>（下午漫游）&nbsp;|&nbsp;<b>艾提尕尔清真寺</b>&nbsp;|&nbsp;<b>百年老茶馆</b></p>
+      <p class="note">喀什老城有真实居民生活，不是景区布景。拍人物先征得同意。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D20</b>10/19</div><div class="dbody">
+      <p class="route">喀什｜深度日</p>
+      <div class="meta"><span>0 km</span><span class="pill flex">弹性日</span></div>
+      <p class="stop">停：<b>香妃园</b>&nbsp;|&nbsp;<b>高台民居</b>&nbsp;|&nbsp;<b>喀什大巴扎</b>&nbsp;|&nbsp;<b>职人街</b></p>
+      <p class="note">如果边防证是落地办的，今天在喀什补办也来得及——喀什机场一楼（10:00–20:00，中午不休）、新城南路警务站、喀什市移民事务服务中心、喀什政务大厅均可，带身份证原件。<b>景区门口已取消现场办证点</b>，别到检查站才想起来。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D21</b>10/20</div><div class="dbody">
+      <p class="route">喀什 → 塔什库尔干（G314 中巴友谊公路）</p>
+      <div class="meta"><span>290 km</span><span>约 6 h</span><span class="pill key">海拔骤升</span></div>
+      <p class="stop">停：<b>盖孜峡谷</b>&nbsp;|&nbsp;<b>白沙湖</b>（约 3,300 m）&nbsp;|&nbsp;<b>卡拉库里湖</b>（3,600 m，慕士塔格峰倒影）</p>
+      <p class="note"><b>今天从喀什（约 1,300 m）半天爬升到 3,600 m，是全程高原反应风险最高的一天。</b>过检查站查边防证 + 身份证。到塔县（3,100 m）后不要洗澡、不要喝酒、不要剧烈活动，早点睡。红景天提前一周开始吃，便携氧气备一瓶。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D22</b>10/21</div><div class="dbody">
+      <p class="route">塔县 → 喀什</p>
+      <div class="meta"><span>290 km</span><span>约 6 h</span><span class="pill key">天气风险</span></div>
+      <p class="stop">停：<b>石头城 + 金草滩</b>（晨）&nbsp;|&nbsp;<b>红其拉甫国门</b>（需预约 + 换区间车）</p>
+      <p class="note"><b>风险提示：</b>帕米尔高原从 10 月起进入入冬边缘，风雪封山随时可能发生。若出发前查到 G314 盖孜峡谷段管制，<b>果断放弃塔县</b>，把这两天补给喀什周边（阿图什天门、乌恰）——不要硬闯。<br>红其拉甫在「帕米尔旅游景区」公众号预约，私家车不能直达国门；无人机禁带，禁止直播和拍摄军事设施。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D23</b>10/22</div><div class="dbody">
+      <p class="route">喀什 → 和田</p>
+      <div class="meta"><span>500 km</span><span>约 6 h</span></div>
+      <p class="note">沿昆仑山北麓东行。和田夜市的烤蛋、酸奶粽子、红柳烤肉值得专门留出晚饭。</p>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- ================= 段 5 ================= -->
+<h2 id="seg5"><span style="color:var(--s5)">⑤</span> 塔克拉玛干沙漠公路 + 轮台胡杨林（4 天）</h2>
+<div class="phase">
+  <div class="ph" style="background:var(--s5)"><span class="n">10/23 – 10/26 · 1,370 km</span><span class="m">全程压轴 · 无人区路段</span></div>
+  <div class="pbody">
+
+    <div class="day"><div class="dnum"><b>D24</b>10/23</div><div class="dbody">
+      <p class="route">和田 → 民丰</p>
+      <div class="meta"><span>400 km</span><span>约 5 h</span></div>
+      <p class="note">G315 沿沙漠南缘。这段路<b>空旷、加油站间距大、部分路段无信号</b>——民丰出发前把油加满，备水和干粮，下离线地图。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D25</b>10/24</div><div class="dbody">
+      <p class="route">民丰 → 塔克拉玛干沙漠公路 → 塔中</p>
+      <div class="meta"><span>560 km</span><span>约 8 h</span><span class="pill key">无人区路段</span></div>
+      <p class="stop">停：<b>塔克拉玛干沙漠公路</b>（纵穿世界第二大流动沙漠）</p>
+      <p class="note">全程无补给点，只在塔中有加油。<b>不赶夜路</b>，沙漠公路夜间的侧风与野生动物是真实风险。塔中是这条路上唯一的补给点。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D26</b>10/25</div><div class="dbody">
+      <p class="route">塔中 → 轮台 → 塔里木胡杨林（傍晚日落）</p>
+      <div class="meta"><span>340 km</span><span>约 5 h</span></div>
+      <p class="stop">停：<b>塔里木胡杨林公园</b>（傍晚先探一次光）</p>
+      <p class="note">中午到轮台，下午进胡杨林。公园在轮台县南沙漠公路约 70 km 处，距库尔勒约 250 km。今天住轮台或轮南镇，为明早的晨光留位置。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D27</b>10/26</div><div class="dbody">
+      <p class="route">轮台｜塔里木胡杨林全天</p>
+      <div class="meta"><span>0–70 km</span><span class="pill key">全程压轴</span></div>
+      <p class="stop">停：<b>塔里木胡杨林公园</b>（门票约 40–45 + 区间车 30，小火车 100；10:00–19:00）</p>
+      <p class="note"><b>整份行程的压轴，也是唯一"卡着时间点"安排的一天。</b>10/20–11/5 是盛黄期，黄的透度 95%–100%。<b>赶早进园</b>——早晨 8 点前后光线斜射，胡杨金色饱和度最高、倒影最清，人还少。园内 13 km 环形小火车串起几处林中湖泊，倒影是主打。</p>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- ================= 段 6 ================= -->
+<h2 id="seg6"><span style="color:var(--s6)">⑥</span> 收尾出疆 + 交车（3 天）</h2>
+<div class="phase">
+  <div class="ph" style="background:var(--s6)"><span class="n">10/27 – 10/29 · 750 km</span><span class="m">自驾到此为止，车走物流</span></div>
+  <div class="pbody">
+
+    <div class="day"><div class="dnum"><b>D28</b>10/27</div><div class="dbody">
+      <p class="route">轮台 → 库尔勒 → 乌鲁木齐</p>
+      <div class="meta"><span>750 km</span><span>约 9 h</span></div>
+      <p class="note">走 G3012 转 G30，全程高速。<b>交车前最后一程，也是全程单日里程最长的一天</b>——早点出发，别赶夜路。途经库尔勒可顺路看一眼铁门关或博斯腾湖。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D29</b>10/28</div><div class="dbody">
+      <p class="route">乌鲁木齐｜交车托运 + 飞回广州</p>
+      <div class="meta"><span>0 km</span><span>飞 约 5.5 h</span></div>
+      <p class="note"><b>交车前必做三件事：</b>① 全车拍照（车身四周 + 里程表 + 油量表），留存原图；② 车内清空贵重物品；③ 合同中写明里程数、油量、送达地址和预计到达日。<br>乌鲁木齐 → 广州约 4,200 km，<b>正常 6 天左右送达</b>，普通轿车参考价 <b>5,600–6,500 元/辆</b>。问清上门费、停车费、车型/新能源加价、保险费是否另计，选带 GPS 可实时查位的公司。<br>白天还能逛新疆博物馆或国际大巴扎，订当天晚班机回广州。</p>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>D30</b>10/29</div><div class="dbody">
+      <p class="route">广州｜机动缓冲</p>
+      <div class="meta"><span>0 km</span><span class="pill flex">机动</span></div>
+      <p class="note">车预计 11 月 2–3 日到广州，到时按合同验车提车。<br>这一天的真正用途是<b>吸收路上的延误</b>——独库封闭绕行、塔县天气、国庆堵车，任何一项发生都会吃掉半天到一天。本方案在 D8、D18、D20 各留了弹性，加上 D30，共约 1.5 天净缓冲。</p>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- ================= 景点详解 ================= -->
+<h2 id="spots">景点详解（按段）</h2>
+<p class="muted">每一处标注了建议时长、门票口径和"什么时候去最值"。门票为 2026 年公开参考价，出行前以官方为准。</p>
+
+<div class="seghtml"><i style="background:var(--s1)"></i>① 黔川纵游</div>
+<div class="spots">
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s1)">1</span><h3>遇龙河竹筏</h3><span class="day">D2 · 10/1 上午</span></div>
+    <p class="locs">广西阳朔 · 全长约 16 km，精华段在工农桥—朝阳码头</p>
+    <p class="desc">比漓江游船更松弛的打开方式：两人一筏，筏工撑篙，全程 1.5–2 h 漂在稻田与峰林之间。国庆筏工极度紧张，<b>提前 1–2 天线上订</b>，别到码头现找。</p>
+    <div class="facts"><span class="fact">建议 <b>2–3 h</b></span><span class="fact">竹筏 <b>约 200 元/筏</b></span><span class="fact hot">国庆必须预订</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s1)">2</span><h3>荔波小七孔</h3><span class="day">D3 · 10/2 全天</span></div>
+    <p class="locs">贵州黔南 · 荔波县，距县城约 30 km</p>
+    <p class="desc">"地球腰带上的绿宝石"。核心顺序：<b>卧龙潭 → 68 级跌水瀑布 → 拉雅瀑布 → 水上森林 → 小七孔古桥</b>。东门进全程下坡，省一半体力。<b>鸳鸯湖泛舟</b>是加分项（30–50 元）。</p>
+    <div class="facts"><span class="fact">建议 <b>5–6 h</b></span><span class="fact">门票 <b>120</b> + 观光车 <b>40–50</b></span><span class="fact">5 日内可重复入园</span><span class="fact hot">旺季需预约</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s1)">3</span><h3>大七孔</h3><span class="day">D3 · 可选加半天</span></div>
+    <p class="locs">贵州黔南 · 与小七孔同一景区群，东门相邻</p>
+    <p class="desc">峡谷型景观，天生桥、恐怖峡、地峨宫。走完全程来回约 2 h，体力够就加；不够就跳过，小七孔才是主角。</p>
+    <div class="facts"><span class="fact">建议 <b>2–3 h</b></span><span class="fact">游船 <b>18–20 元</b></span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s1)">4</span><h3>西江千户苗寨</h3><span class="day">D4 · 10/3</span></div>
+    <p class="locs">贵州黔东南 · 雷山县，<b>走北门</b>（比西门少约 2 km 山路）</p>
+    <p class="desc">世界最大苗族聚居村寨。<b>19:30 全寨灯光同步点亮</b>，层层吊脚楼铺满山谷，这是苗寨的灵魂时刻。下午芦笙场有免费歌舞，拦门酒可浅尝。晚宴选长桌宴（人均 60–80，含高山流水敬酒）。<b>住半山腰民宿</b>——开窗就是夜景，不用在观景台排队。</p>
+    <div class="facts"><span class="fact">建议 <b>半天 + 一晚</b></span><span class="fact">门票 <b>90</b> + 观光车 <b>20</b></span><span class="fact">《美丽西江》演出 130–150</span><span class="fact hot">住景区内</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s1)">5</span><h3>黄果树瀑布群</h3><span class="day">D5 · 10/4 下午</span></div>
+    <p class="locs">贵州安顺 · 镇宁县。私家车停黄果树新城一号游客中心（10 元/天）</p>
+    <p class="desc">一张通票覆盖三个独立片区：<b>陡坡塘</b>（86 版《西游记》片尾取景地，1 h）→ <b>天星桥</b>（<b>只走下半段</b>，银链坠潭是全场最秀美的一处）→ <b>大瀑布 + 水帘洞</b>（77.8 m 落差，丰水期晴日常见彩虹）。</p>
+    <div class="facts"><span class="fact">建议 <b>5–6 h</b></span><span class="fact">门票 <b>160</b> + 观光车 <b>50</b></span><span class="fact">扶梯 单程30 / 双程50</span><span class="fact hot">水帘洞需单独预约</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s1)">6</span><h3>乐山大佛</h3><span class="day">D6 · 10/5 可选</span></div>
+    <p class="locs">四川乐山 · 岷江、青衣江、大渡河三江汇流处</p>
+    <p class="desc">安顺 → 成都正好路过乐山，<b>完全不绕路</b>。唐代弥勒坐像，通高 71 m。栈道排队久，旺季建议乘船远观（约 1 h）比下栈道省时。</p>
+    <div class="facts"><span class="fact">建议 <b>2–3 h</b></span><span class="fact">门票 约 <b>80</b></span><span class="fact">游船另计</span></div>
+  </div>
+
+</div>
+
+<div class="seghtml"><i style="background:var(--s2)"></i>② 西行入疆</div>
+<div class="spots">
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s2)">7</span><h3>麦积山石窟</h3><span class="day">D8 · 10/7 晨（可选）</span></div>
+    <p class="locs">甘肃天水 · 麦积区，距市区约 45 km</p>
+    <p class="desc">中国四大石窟之一，"东方雕塑馆"。洞窟凿在悬崖上，栈道层层盘旋。想加就留 2 h，但 D8 本来就是 750 km 的转场日，加了晚上会很赶。</p>
+    <div class="facts"><span class="fact">建议 <b>2–3 h</b></span><span class="fact">门票 约 <b>80</b></span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s2)">8</span><h3>张掖七彩丹霞</h3><span class="day">D8 · 10/7 傍晚</span></div>
+    <p class="locs">甘肃张掖 · 临泽县南台村，距市区约 40 km</p>
+    <p class="desc">彩色丘陵地貌的顶级样本。1–4 号观景台里，<b>4 号是全景台</b>。10/7 日落约 18:50，<b>17:00 前必须到</b>，斜射光下色彩饱和度最高。景区需换乘区间车。</p>
+    <div class="facts"><span class="fact">建议 <b>3 h</b></span><span class="fact">门票 54 + 区间车 20</span><span class="fact hot">抢日落时间窗</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s2)">9</span><h3>嘉峪关关城</h3><span class="day">D9 · 10/8 上午</span></div>
+    <p class="locs">甘肃嘉峪关 · 市区西约 6 km</p>
+    <p class="desc">"天下第一雄关"，明长城西端起点。通票含三处：<b>关城</b>（主体）、<b>悬壁长城</b>、<b>长城第一墩</b>。关城 2.5 h 足够，另两处各需 40 min，时间紧就只看关城。</p>
+    <div class="facts"><span class="fact">建议 <b>2.5 h</b></span><span class="fact">通票 约 <b>110</b></span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s2)">10</span><h3>鸣沙山 · 月牙泉</h3><span class="day">D9 · 10/8 傍晚</span></div>
+    <p class="locs">甘肃敦煌 · 市区南 5 km</p>
+    <p class="desc"><b>16:00 后进最合适</b>——避开正午暴晒，也避开爬沙山最耗体力的时段。日落 + 沙脊线 + 月牙泉同框。骑骆驼、滑沙另计。门票多日有效，第二天想再看一次日出可以刷脸进。</p>
+    <div class="facts"><span class="fact">建议 <b>3 h</b></span><span class="fact">门票 约 <b>120</b></span><span class="fact">3 日有效</span><span class="fact hot">16:00 后进</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s2)">11</span><h3>莫高窟</h3><span class="day">D10 · 10/9 上午</span></div>
+    <p class="locs">甘肃敦煌 · 市区东南 25 km</p>
+    <p class="desc"><b>全程最需要提前抢的一站。</b>实名预约制、每日限流。A 类票含 8 个洞窟 + 2 部数字电影，约 4 h（含往返与摆渡）。约不到改应急票（看 4 窟），或把这一天改成玉门关 + 雅丹魔鬼城。</p>
+    <div class="facts"><span class="fact">建议 <b>4 h</b></span><span class="fact">A 类票 约 <b>238</b></span><span class="fact hot">现在就抢票</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s2)">12</span><h3>火焰山</h3><span class="day">D11 · 10/10 下午</span></div>
+    <p class="locs">新疆吐鲁番 · 市区东约 30 km，G30 旁</p>
+    <p class="desc">《西游记》里的火焰山。地表温度夏天能到 70℃+，<b>10 月才敢来</b>。核心看点是那条金红色的褶皱山体 + 巨型温度计。1.5 h 足够，不必久留。</p>
+    <div class="facts"><span class="fact">建议 <b>1.5 h</b></span><span class="fact">门票 约 <b>40</b></span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s2)">13</span><h3>交河故城</h3><span class="day">D11 · 10/10 傍晚</span></div>
+    <p class="locs">新疆吐鲁番 · 市区西 10 km，雅尔乃孜沟</p>
+    <p class="desc">世界上最大、最古老、保存最完整的生土建筑城市，唐代安西都护府最早的治所。<b>闭园前 1.5 h 进</b>——夕照把土墙染成蜜色，整座废墟像被点亮。</p>
+    <div class="facts"><span class="fact">建议 <b>1.5 h</b></span><span class="fact">门票 约 <b>70</b></span><span class="fact hot">日落前 1.5 h 进</span></div>
+  </div>
+
+</div>
+
+<div class="seghtml"><i style="background:var(--s3)"></i>③ 北疆西线 · 独库</div>
+<div class="spots">
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s3)">14</span><h3>赛里木湖</h3><span class="day">D13–D14 · 10/12–10/13</span></div>
+    <p class="locs">新疆博州 · 博乐市西南，G30 旁，海拔约 2,070 m</p>
+    <p class="desc">大西洋最后一滴眼泪。环湖公路约 90 km，<b>傍晚看日落、次日晨看湖面起雾</b>都值得。10 月湖边夜里接近 0℃，厚外套必备。</p>
+    <div class="facts"><span class="fact">建议 <b>半天 + 日落</b></span><span class="fact">门票 约 <b>70</b></span><span class="fact">环湖 90 km</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s3)">15</span><h3>果子沟大桥</h3><span class="day">D14 · 10/13</span></div>
+    <p class="locs">新疆伊犁 · 霍城县，连霍高速果子沟段</p>
+    <p class="desc">横跨果子沟的高架桥，桥面距谷底约 200 m。观景台就在高速旁（有停车区），俯瞰桥体与峡谷。顺路停 40 min 即可。</p>
+    <div class="facts"><span class="fact">建议 <b>40 min</b></span><span class="fact">免费（高速通行费内）</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s3)">16</span><h3>霍尔果斯口岸</h3><span class="day">D14 · 10/13</span></div>
+    <p class="locs">新疆伊犁 · 霍城县，距伊宁约 90 km</p>
+    <p class="desc">中哈国际边境合作中心属边境管控区，<b>需持电子边防证 + 身份证</b>。可以走到国门界碑区域，自贸区里能买到哈萨克斯坦商品。无人机禁飞。</p>
+    <div class="facts"><span class="fact">建议 <b>2 h</b></span><span class="fact hot">需边防证</span><span class="fact hot">禁飞无人机</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s3)">17</span><h3>伊宁 · 六星街 / 喀赞其</h3><span class="day">D14 · 10/13 傍晚</span></div>
+    <p class="locs">新疆伊犁 · 伊宁市区</p>
+    <p class="desc">六边形放射状街区，俄式木屋与蓝色民居混在一起，手风琴博物馆就在街上。喀赞其民俗区是更大的维吾尔聚居区，坐马车穿巷子是标准玩法。<b>傍晚光线最好拍。</b></p>
+    <div class="facts"><span class="fact">建议 <b>2–3 h</b></span><span class="fact">街区免费</span><span class="fact hot">傍晚光线最好</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s3)">18</span><h3>特克斯八卦城</h3><span class="day">D15 · 10/14</span></div>
+    <p class="locs">新疆伊犁 · 特克斯县</p>
+    <p class="desc">世界最大八卦城，全城按八卦方位放射铺开，<b>全城没有一盏红绿灯</b>。想看清八卦格局得上城中心的八卦摩天轮或观景塔。1–2 h 顺路看完。</p>
+    <div class="facts"><span class="fact">建议 <b>1–2 h</b></span><span class="fact">观景塔另计</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s3)">19</span><h3>那拉提草原</h3><span class="day">D15 · 10/14 傍晚</span></div>
+    <p class="locs">新疆伊犁 · 新源县，G218 旁</p>
+    <p class="desc">10 月中旬草原已枯黄转褐，但<b>雪山 + 河谷林带的层次感反而是旺季看不到的</b>。空中草原 + 河谷草原两条线，区间车穿梭。</p>
+    <div class="facts"><span class="fact">建议 <b>半天</b></span><span class="fact">门票 95 + 区间车 约 100</span><span class="fact">10 月已是深秋</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s3)">20</span><h3>巴音布鲁克 · 九曲十八弯</h3><span class="day">D16 · 10/15 日落</span></div>
+    <p class="locs">新疆巴州 · 和静县，海拔约 2,400 m</p>
+    <p class="desc">开都河在草原上甩出十几道回弯，<b>日落时水面上能数出"九个太阳"的倒影</b>——这条线的招牌画面。观景台要提前 1 h 占位，山风很硬，带厚外套。</p>
+    <div class="facts"><span class="fact">建议 <b>3–4 h</b></span><span class="fact">门票 65 + 区间车 约 90</span><span class="fact hot">日落必看</span></div>
+  </div>
+
+</div>
+
+<div class="seghtml"><i style="background:var(--s4)"></i>④ 南疆 · 帕米尔</div>
+<div class="spots">
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s4)">21</span><h3>天山神秘大峡谷</h3><span class="day">D17 · 10/16</span></div>
+    <p class="locs">新疆阿克苏 · 库车市北，独库公路南段 G217 旁</p>
+    <p class="desc">红褐色砂岩被水切成一条条窄缝，阳光斜射时整条峡谷像在燃烧。走主沟来回约 2.5 h，路面有碎石和湿滑段，穿防滑鞋。</p>
+    <div class="facts"><span class="fact">建议 <b>2.5 h</b></span><span class="fact">门票 约 <b>45</b></span><span class="fact">独库南段顺路</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s4)">22</span><h3>克孜尔千佛洞</h3><span class="day">D18 · 10/17 上午（可选）</span></div>
+    <p class="locs">新疆阿克苏 · 拜城县，距库车约 70 km</p>
+    <p class="desc">中国开凿最早的大型石窟群，比敦煌早约 300 年。重点看菱格画与"本生故事"。<b>与 D18 的西行方向基本顺路</b>，加 2 h 即可。</p>
+    <div class="facts"><span class="fact">建议 <b>2 h</b></span><span class="fact">门票 约 <b>70</b></span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s4)">23</span><h3>喀什老城</h3><span class="day">D19–D20 · 10/18–10/19</span></div>
+    <p class="locs">新疆喀什 · 市中心，5A 级景区</p>
+    <p class="desc">生土建筑的迷城，巷子像树杈一样分叉。是景区，但更是<b>真实的居民生活区</b>——拍人物先征得同意。<b>百年老茶馆</b>坐一下午、听一段热瓦普，比任何打卡都有价值。</p>
+    <div class="facts"><span class="fact">建议 <b>1.5 天</b></span><span class="fact">老城免费</span><span class="fact hot">尊重居民隐私</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s4)">24</span><h3>艾提尕尔清真寺</h3><span class="day">D19 · 10/18</span></div>
+    <p class="locs">新疆喀什 · 老城西侧，艾提尕尔广场</p>
+    <p class="desc">新疆最大的清真寺，也是喀什的地标。非礼拜时间可入内参观院落与礼拜殿。<b>着装保守，女性备头巾；礼拜时段不对外开放参观。</b></p>
+    <div class="facts"><span class="fact">建议 <b>1 h</b></span><span class="fact">门票 约 <b>45</b></span><span class="fact hot">礼拜时段勿扰</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s4)">25</span><h3>香妃园 · 高台民居 · 喀什大巴扎</h3><span class="day">D20 · 10/19</span></div>
+    <p class="locs">新疆喀什 · 市区，三处相距不远</p>
+    <p class="desc">香妃园（阿帕霍加麻扎）看维式陵墓与园林；高台民居是建在黄土台地上的老民居群；大巴扎买干果、艾德莱斯绸与手鼓。<b>一天刚好串完。</b></p>
+    <div class="facts"><span class="fact">建议 <b>全天</b></span><span class="fact">香妃园 约 <b>30</b></span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s4)">26</span><h3>白沙湖</h3><span class="day">D21 · 10/20</span></div>
+    <p class="locs">新疆克州 · 阿克陶县，G314 中巴友谊公路旁，约 3,300 m</p>
+    <p class="desc">上塔县途中的第一个震撼点：白沙山 + 湖面 + 雪山三层叠加。路边即有观景台，停 40 min，风很大。</p>
+    <div class="facts"><span class="fact">建议 <b>40 min</b></span><span class="fact">海拔约 <b>3,300 m</b></span><span class="fact hot">风极大</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s4)">27</span><h3>卡拉库里湖 · 慕士塔格峰</h3><span class="day">D21 · 10/20</span></div>
+    <p class="locs">新疆克州 · 阿克陶县，G314 旁，湖面约 3,600 m</p>
+    <p class="desc">"黑湖"，晴天时慕士塔格峰（7,546 m）完整倒映在湖里。<b>全天高反风险最高的一站——不要在湖区过夜，拍完当天折返塔县住。</b>到塔县后当晚不洗澡、不饮酒、不剧烈活动。</p>
+    <div class="facts"><span class="fact">建议 <b>1.5 h</b></span><span class="fact">海拔 <b>3,600 m</b></span><span class="fact hot">不要在此过夜</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s4)">28</span><h3>塔什库尔干 · 石头城 / 金草滩</h3><span class="day">D22 · 10/21 晨</span></div>
+    <p class="locs">新疆喀什地区 · 塔什库尔干塔吉克自治县，海拔约 3,100 m</p>
+    <p class="desc">石头城是唐代朅盘陀国的遗址，建在丘顶，<b>晨光下金草滩 + 雪山 + 古城同框</b>最出片。红其拉甫国门需在「帕米尔旅游景区」公众号预约，<b>私家车不能直达，须换乘区间车</b>。</p>
+    <div class="facts"><span class="fact">建议 <b>半天</b></span><span class="fact">石头城 + 区间车 约 <b>40</b></span><span class="fact hot">红其拉甫需预约</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s4)">29</span><h3>和田夜市</h3><span class="day">D23 · 10/22 晚</span></div>
+    <p class="locs">新疆和田 · 市区</p>
+    <p class="desc">南疆最有烟火气的夜市。烤蛋、酸奶粽子、红柳烤肉、胡辣羊蹄、手工冰淇淋。<b>值得专门留出一顿晚饭</b>，早点去占位。</p>
+    <div class="facts"><span class="fact">建议 <b>2 h</b></span><span class="fact">人均 50–80</span><span class="fact hot">留出晚饭</span></div>
+  </div>
+
+</div>
+
+<div class="seghtml"><i style="background:var(--s5)"></i>⑤ 沙漠公路 · 胡杨</div>
+<div class="spots">
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s5)">30</span><h3>塔克拉玛干沙漠公路</h3><span class="day">D25 · 10/24</span></div>
+    <p class="locs">新疆 · 民丰 → 塔中，约 560 km</p>
+    <p class="desc">纵穿世界第二大流动沙漠。两侧是连绵沙丘和固沙草方格，路上几乎没有车。<b>出发前加满油、带足水、下离线地图</b>，全程只在塔中有补给。<b>不赶夜路</b>。</p>
+    <div class="facts"><span class="fact">全程 <b>560 km</b></span><span class="fact hot">无信号路段</span><span class="fact hot">只在塔中加油</span></div>
+  </div>
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s5)">31</span><h3>塔里木胡杨林公园</h3><span class="day">D26–D27 · 10/25–10/26</span></div>
+    <p class="locs">新疆巴州 · 轮台县南，沙漠公路约 70 km 处；距库尔勒约 250 km</p>
+    <p class="desc"><b>整份行程的压轴。</b>世界最大的原始胡杨林之一。园内 13 km 环形小火车串起几处林中湖泊，倒影是主打。<b>盛黄期 10/20–11/5，黄透率 95%–100%</b>；早晨 8 点前后斜射光下金色饱和度和倒影最好，人还少。</p>
+    <div class="facts"><span class="fact">建议 <b>全天</b></span><span class="fact">门票 40–45 + 区间车 30</span><span class="fact">小火车 100</span><span class="fact hot">8:00 前后进园</span></div>
+  </div>
+
+</div>
+
+<div class="seghtml"><i style="background:var(--s6)"></i>⑥ 收尾</div>
+<div class="spots">
+
+  <div class="spot">
+    <div class="top"><span class="idx" style="background:var(--s6)">32</span><h3>新疆博物馆 / 国际大巴扎</h3><span class="day">D29 · 10/28</span></div>
+    <p class="locs">新疆乌鲁木齐 · 市区</p>
+    <p class="desc">交车当天的白天填补选项。博物馆看"五星出东方利中国"锦护膊与干尸陈列；国际大巴扎买干果、地毯、乐器。都离市区不远，晚上直接去机场。</p>
+    <div class="facts"><span class="fact">建议 <b>半天</b></span><span class="fact">博物馆免费</span><span class="fact">提前预约</span></div>
+  </div>
+
+</div>
+
+<!-- ================= 风险 ================= -->
+<h2 id="risk">风险与预案</h2>
+
+<div class="callout danger">
+  <p class="h">风险一｜独库公路可能已经封了（概率最高）</p>
+  <p>独库公路每年只开 6–10 月，2019 年以来封闭时间多在 10 月 10 日前后，遇早雪更早。你走独库的日期是 <b>10 月 16 日</b>，已在封闭窗口边缘。<b>出发前一天和当天早上都要查一次官方通告</b>，不要凭"往年能走"就上。</p>
+  <p><b>绕行方案：</b>那拉提 → G218 线和静段 → G3012 线库车至和静段 → 库车。多约 350 km、多半天。2026 年独库限行车辆官方指定的绕行线路就是这两条。</p>
+</div>
+
+<div class="callout warn">
+  <p class="h">风险二｜帕米尔（塔县）10 月已入冬边缘</p>
+  <p>塔县海拔 3,100 m、卡拉库里湖 3,600 m、红其拉甫约 4,700 m。帕米尔 10 月起进入入冬期，<b>G314 盖孜峡谷段风雪封路并不罕见</b>。你的日期是 10/20–10/21，属于"能走但要看运气"。</p>
+  <p><b>判断规则：</b>出发前查喀什交警 / G314 路况。只要盖孜峡谷段管制，立刻放弃塔县，改走喀什周边（阿图什天门、乌恰西极、英吉沙），不要赌。</p>
+</div>
+
+<div class="callout warn">
+  <p class="h">风险三｜10/1–10/2 会撞在出行峰值上</p>
+  <p>9 月 28–30 日是"请 3 休 13"的假期首波出行高峰（拼假出游人数同比涨约 52%）。你的 D1（9/30）和 D2（10/1）会撞在最挤的窗口，广深出城、广昆高速广东段尤其。</p>
+  <p><b>对策：</b>D1 提前到凌晨 4:30–5:00 出城；这两天都不要排"必须到达"的硬目标，多留 1–2 小时；服务区加油排队就往前一站。贵州景区本身也限流，<b>小七孔、黄果树、水帘洞、西江都要提前线上预约</b>。</p>
+</div>
+
+<div class="callout">
+  <p class="h">风险四｜高原反应（不是小事）</p>
+  <p>从喀什一天爬升 2,300 m 到卡拉库里湖，是全程高反风险最集中的环节。<b>提前一周服红景天</b>；到塔县头两天不剧烈活动、不饮酒、不洗热水澡、多喝水；卡拉库里湖<b>不要在湖区过夜</b>，当天折返塔县住。有严重心肺疾病者建议整段跳过帕米尔。</p>
+</div>
+
+<div class="callout">
+  <p class="h">风险五｜新疆自驾的几条硬规矩</p>
+  <ul>
+    <li><b>加油要身份证</b>：全疆加油站实名登记，且服务区间距大，油箱过半就补。G315、沙漠公路段尤甚。</li>
+    <li><b>限速严、区间测速密</b>：G314、G315、G217 都有长距离区间测速，导航提示照做。</li>
+    <li><b>无人机</b>：边境管理区（塔县全域、霍尔果斯、红其拉甫等）禁飞；部分口岸和军事设施连拍照都禁止，见提示牌就收。</li>
+    <li><b>不赶夜路</b>：昼夜温差大、山区夜间降温剧烈、野生动物（骆驼、羊群）夜晚上路。</li>
+    <li><b>时差错觉</b>：新疆用北京时间但实际日落比广州晚约 2 小时，10 月上旬日落约 19:45–20:05，很容易开过头。</li>
+    <li><b>车辆</b>：SUV 或底盘较高的车更稳；备胎、拖车绳、充气泵、搭电宝、防滑链必带。</li>
+  </ul>
+</div>
+
+<!-- ================= 预算 ================= -->
+<h2 id="budget">预算（2 人 1 车）</h2>
+<table>
+  <thead><tr><th>科目</th><th>口径</th><th class="n">估算</th><th>说明</th></tr></thead>
+  <tbody>
+    <tr><td>燃油</td><td class="n">11,335 km</td><td class="n">约 6,700 元</td><td>按 8 L/100 km、7.5 元/L；新疆油价比内地略低</td></tr>
+    <tr><td>高速通行费</td><td class="n">去程约 5,390 km</td><td class="n">约 2,200 元</td><td>10/1–10/7 免费段省约 1,100 元；新疆境内多为免费一级路</td></tr>
+    <tr><td><b>汽车托运</b></td><td class="n">乌鲁木齐 → 广州</td><td class="n">5,600–6,500 元</td><td>约 4,200 km、6 天；普通轿车参考价，务必确认附加费</td></tr>
+    <tr><td><b>返程机票</b></td><td class="n">2 人</td><td class="n">3,000–5,000 元</td><td>国庆后为全年低价段</td></tr>
+    <tr><td>住宿</td><td class="n">29 晚 × 1 间</td><td class="n">约 9,300 元</td><td>按均价 320 元/间；贵州苗寨/黄果树旺季偏高，南疆便宜</td></tr>
+    <tr><td>餐饮</td><td class="n">2 人 × 30 天</td><td class="n">约 7,200 元</td><td>按 120 元/人/天；贵州、新疆餐饮量足价实</td></tr>
+    <tr><td>门票 · 区间车</td><td class="n">2 人</td><td class="n">约 5,500–6,500 元</td><td>黔川段约 900；河西走廊约 1,000；新疆约 3,600–4,600</td></tr>
+    <tr><td>车辆养护与耗材</td><td class="n">整备 + 途中</td><td class="n">约 1,500 元</td><td>出发前保养、机油、玻璃水、备件</td></tr>
+    <tr><td>机动 / 应急</td><td class="n">—</td><td class="n">约 2,000 元</td><td>拖车、绕行多出的油费、临时改签等</td></tr>
+    <tr class="total"><td>合计</td><td class="n">整组</td><td class="n">约 43,000–46,800 元</td><td>—</td></tr>
+    <tr class="total"><td>人均</td><td class="n">2 人</td><td class="n">约 21,500–23,400 元</td><td>—</td></tr>
+  </tbody>
+</table>
+<p class="muted">比原方案（不含黔川段）贵约 3,500 元、多约 1,370 km —— 这是黔川段 6 天的成本。<b>若改为全程自驾往返</b>（不托运、不飞），省掉托运 6,000 + 机票 4,000，多出返程燃油约 2,600 + 通行费约 900 + 6 晚住宿约 1,900，<b>净省约 4,500 元，但要多开 6 天、多耗 4,200 km</b>。这笔账怎么算，取决于你的时间单价。<br>若实际是 3–4 人出行，住宿和托运分摊后人均可再降 3,000–5,000 元。</p>
+
+<!-- ================= 清单 ================= -->
+<h2 id="pack">行前清单</h2>
+<div class="two">
+  <div class="callout">
+    <p class="h">证件（缺一不可）</p>
+    <ul class="chk">
+      <li>身份证原件（全疆加油、住宿、检查站都要）</li>
+      <li>驾驶证原件 + 行驶证原件</li>
+      <li><b>电子边防证</b>：勾选塔什库尔干塔吉克自治县</li>
+      <li>车辆保险单（含商业险、道路救援）</li>
+      <li>莫高窟预约凭证</li>
+      <li>黄果树水帘洞预约（「安旅通」小程序）</li>
+      <li>荔波小七孔 / 西江千户苗寨预约凭证</li>
+      <li>红其拉甫预约（帕米尔旅游景区公众号）</li>
+    </ul>
+  </div>
+  <div class="callout">
+    <p class="h">车（这段路对车不客气）</p>
+    <ul class="chk">
+      <li>出发前全车保养：机油、刹车片、防冻液、电瓶</li>
+      <li>备胎 ×2（至少 1 条全尺寸）+ 拖车绳 + 搭电宝</li>
+      <li>充气泵 + 胎压表，每 2 天查一次胎压</li>
+      <li>防滑链（北疆 / 帕米尔随时用得上）</li>
+      <li>玻璃水换 -25℃ 规格；柴油车确认低温标号</li>
+      <li>行车记录仪 + 离线地图（全疆预下载）</li>
+    </ul>
+  </div>
+  <div class="callout">
+    <p class="h">衣物（一天跨两季）</p>
+    <ul class="chk">
+      <li>薄羽绒 / 抓绒 + 冲锋衣（山区早晚可到 0℃）</li>
+      <li>帕米尔段：厚羽绒、手套、毛线帽</li>
+      <li>防滑鞋（贵州湿滑石阶、沙漠栈道清晨结霜）</li>
+      <li>一次性雨衣（黄果树水帘洞会全身打湿）</li>
+      <li>高倍防晒 + 墨镜 + 唇膏（高原紫外线极强）</li>
+      <li>保温杯、润喉糖（新疆极干）</li>
+    </ul>
+  </div>
+  <div class="callout">
+    <p class="h">药品与其他</p>
+    <ul class="chk">
+      <li>红景天（<b>出发前 1 周</b>开始服）+ 便携氧气 1–2 瓶</li>
+      <li>感冒药、肠胃药、创可贴、高反药、晕车药</li>
+      <li>常用药双份：一份放车里，一份随身</li>
+      <li>适量现金（偏远路段无网络支付）</li>
+      <li>车载充电 + 大容量充电宝（无人区无信号）</li>
+      <li>保温箱 + 备水备粮（沙漠公路段）</li>
+    </ul>
+  </div>
+</div>
+
+<h2>出发前 7 天必须再确认的 6 件事</h2>
+<ol>
+  <li><b>独库公路</b>是否仍开放、有无临时管制 → 新疆交通运输厅 / 当地交警通告</li>
+  <li><b>G314 帕米尔段</b>路况与天气 → 喀什交警；同时确认塔县能否进</li>
+  <li><b>轮台胡杨</b>当日黄叶指数 → 公众号「轮台塔里木胡杨林景区」、轮台县文旅局</li>
+  <li><b>电子边防证</b>是否已出证、勾选地区是否完整（缺一个县会在检查站被劝返）</li>
+  <li><b>贵州景区预约</b>：小七孔、黄果树 + 水帘洞、西江是否都已约到 → 「一码游贵州」/「安旅通」</li>
+  <li><b>莫高窟门票</b>是否抢到 10/9 的 A 类票</li>
+</ol>
+
+<h2 id="more">同一目录下的其它行程</h2>
+<ul style="list-style:none;padding:0;margin:0 0 6px">
+  <li style="border-bottom:1px solid var(--line)"><a href="map.html" style="display:flex;gap:10px;align-items:baseline;text-decoration:none;color:inherit;padding:11px 2px"><span style="flex:1"><b style="font-size:14px;color:var(--blue)">🗺 本次路线图 · 黔川 + 新疆 30 天自驾</b><br><span class="muted">交互地图：地形、山脉水系、公路编号、49 个景点标注，可缩放筛选</span></span><span style="color:var(--t3)">→</span></a></li>
+  <li style="border-bottom:1px solid var(--line)"><a href="beijiang-guide-2026.html" style="display:flex;gap:10px;align-items:baseline;text-decoration:none;color:inherit;padding:11px 2px"><span style="flex:1"><b style="font-size:14px">北疆全攻略 · 10 月自驾往返（纯电）</b></span><span style="color:var(--t3)">→</span></a></li>
+  <li style="border-bottom:1px solid var(--line)"><a href="dianxi-2026.html" style="display:flex;gap:10px;align-items:baseline;text-decoration:none;color:inherit;padding:11px 2px"><span style="flex:1"><b style="font-size:14px">滇西七日 · 火山、温泉与金塔</b></span><span style="color:var(--t3)">→</span></a></li>
+  <li style="border-bottom:1px solid var(--line)"><a href="gz-kunming-2026.html" style="display:flex;gap:10px;align-items:baseline;text-decoration:none;color:inherit;padding:11px 2px"><span style="flex:1"><b style="font-size:14px">广州 → 云南全境 · 沿途心动征集</b></span><span style="color:var(--t3)">→</span></a></li>
+  <li style="border-bottom:1px solid var(--line)"><a href="xinjiang-2026.html" style="display:flex;gap:10px;align-items:baseline;text-decoration:none;color:inherit;padding:11px 2px"><span style="flex:1"><b style="font-size:14px">10 月去新疆 · 南疆 vs 北疆（纯电路费核算）</b></span><span style="color:var(--t3)">→</span></a></li>
+  <li style="border-bottom:1px solid var(--line)"><a href="route-sanmenhai-gaozhuang.html" style="display:flex;gap:10px;align-items:baseline;text-decoration:none;color:inherit;padding:11px 2px"><span style="flex:1"><b style="font-size:14px">三门海 → 告庄 · 完整版行程报告</b></span><span style="color:var(--t3)">→</span></a></li>
+</ul>
+
+<footer>
+  <p><b>核验日期：2026 年 9 月 11 日。</b>价格与政策为公开来源参考值，出行前请以官方最新通告为准。</p>
+  <p>主要依据：国务院办公厅《关于 2026 年部分节假日安排的通知》；《重大节假日免收小型客车通行费实施方案》；新疆交通运输厅 · G217 独库公路 2026 年通行公告（昼保通行、夜保施工，乌苏驿至库如力 8:00–19:00）；轮台县塔里木胡杨林公园官方简介（盛黄期 10/20–11/5）；国家移民管理局 12367 电子边境管理区通行证办理规则（2026 年 4 月起电子证）；黄果树景区票务公示（旺季门票 160 + 观光车 50，水帘洞需「安旅通」单独预约）；荔波小七孔景区票务公示（门票 120 + 观光车）；西江千户苗寨景区票务公示（门票 90 + 观光车 20）；贵州省 2026 年国有 A 级景区门票优惠政策；红其拉甫国门景区预约规定；乌鲁木齐—广州轿车托运专线公开报价。</p>
+  <p>本攻略由 WorkBuddy 生成，行程骨架基于公开信息与目的地季节窗口设计，不构成代订、代付或安全担保。里程与驾驶时长按高速优先、正常路况估算，实际受天气与管制影响。</p>
+</footer>
+
+</div>
+</body>
+</html>
