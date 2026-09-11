@@ -505,11 +505,10 @@ RT.forEach(function(seg, g){
 FLAT.forEach(function(arr, g){
   var pre = (g > 0 && FLAT[g - 1].length) ? [FLAT[g - 1][FLAT[g - 1].length - 1]] : [];
   FULL.push(pre.concat(arr));
-  var m = {}, n = 0;
+  var m = {}, pos = pre.length;
   RT[g].forEach(function(it){
-    if (typeof it !== 'number') return;
-    m[it] = (typeof it === 'number' ? 0 : 0) + n + pre.length;
-    n++;
+    if (typeof it === 'number') m[it] = pos;
+    pos++;
   });
   IN_FULL[g] = m;
 });
